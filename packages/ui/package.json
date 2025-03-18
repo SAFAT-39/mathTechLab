@@ -1,0 +1,38 @@
+{
+  "name": "@mathtechlab/ui",
+  "version": "0.0.0",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    "./styles.css": "./dist/styles.css",
+    "./*": "./src/*.tsx"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "tailwindcss -i ./src/styles.css -o ./dist/styles.css",
+    "lint": "eslint src/",
+    "dev": "tailwindcss -i ./src/styles.css -o ./dist/styles.css --watch",
+    "type-check": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@mathtechlab/eslint-config": "workspace:*",
+    "@mathtechlab/typescript-config": "workspace:*",
+    "@types/react": "^19.0.10",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.0.12",
+    "@tailwindcss/postcss": "^4.0.12",
+    "@mathtechlab/design-system": "workspace:*",
+    "@mathtechlab/utils": "workspace:*",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.0.12"
+  }
+}
