@@ -1,0 +1,151 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { generateGame } from "./utils";
+import NumberBox from "./NumberBox";
+import { GoNumber } from "react-icons/go";
+import Fraction from "./Fraction";
+import { useTimer } from "./useTimer";
+
+export const infinity = 999999999999999;
+
+interface BoardState {
+  board: Fraction[];
+  selectedIndex: number;
+}
+
+const Math24Game = () => {
+  const [numbers, setNumbers] = useState(generateGame());
+  // const [gameState, setGameState] = useState<Fraction[]>([]);
+  // const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [boardStates, setBoardStates] = useState<BoardState[]>([]);
+  const [curStateIndex, setCurStateIndex] = useState(-1);
+
+  const operators = ["+", "-", "×", "÷"];
+  const [selectedOperator, setSelectedOperator] = useState("");
+
+  const { time, resetTimer } = useTimer();
+
+  useEffect(() => {
+    // setGameState(numbers.map((num: number) => new Fraction(num)));
+    setBoardStates((prevStates) => {
+      const newState: BoardState = {
+        board: numbers.map((num: number) => new Fraction(num)),
+        selectedIndex: -1,
+      };
+      return [...prevStates, newState];
+    });
+    setCurStateIndex(0);
+  }, []);
+
+  const calculate = (num1: Fraction, op: string, num2: Fraction) => {
+    switch (op) {
+      case "+":
+        return num1.add(num2);
+      case "-":
+        return num1.subtract(num2);
+      case "×":
+        return num1.multiply(num2);
+      case "÷":
+        return num1.divide(num2);
+      default:
+        return new Fraction(infinity);
+    }
+  };
+
+  const isGameComplete = () => {};
+
+  const handleNumberClick = (index: number, num: Fraction) => {
+    console.log(index, num);
+    const state = boardStates[curStateIndex];
+
+    if (state.selectedIndex === index) return;
+
+    if (state.selectedIndex !== -1 && selectedOperator !== "") {
+      const newBoard = [...state.board];
+      newBoard[index] = calculate(
+        state.board[state.selectedIndex],
+        selectedOperator,
+        num
+      );
+      newBoard[state.selectedIndex] = new Fraction(infinity);
+
+      const newState: BoardState = {
+        board: newBoard,
+        selectedIndex: index,
+      };
+      setBoardStates((prevStates) => [
+        ...prevStates.slice(0, curStateIndex + 1),
+        newState,
+      ]);
+      setCurStateIndex((value) => value + 1);
+      setSelectedOperator("");
+    } else {
+      setBoardStates((prevStates) => {
+        const newStates = [...prevStates];
+        newStates[curStateIndex] = { ...state, selectedIndex: index };
+        return newStates;
+      });
+      setSelectedOperator("");
+    }
+  };
+
+  const handleOperatorClick = (op: string) => {
+    console.log(op);
+    if (boardStates[curStateIndex].selectedIndex != -1) setSelectedOperator(op);
+  };
+
+  const handleBack = () => {
+    if (curStateIndex > 0) {
+      setCurStateIndex((prev) => prev - 1);
+    }
+  };
+
+  const handleForward = () => {
+    if (curStateIndex + 1 < boardStates.length) {
+      setCurStateIndex((prev) => prev + 1);
+    }
+  };
+
+  return (
+    <div className="w-[400px] h-[500px] border p-4 bg-gray-200">
+      <div className="flex justify-between pb-4">
+        <p className="font-bold">Score: 123</p>
+        <p className="font-bold">Solved: 1234</p>
+        <p className="font-bold">Time: {time}</p>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4 w-[250px] h-[250px]">
+        {boardStates.length > 0 &&
+          boardStates[curStateIndex].board.map(
+            (num: Fraction, index: number) => (
+              <NumberBox
+                key={index}
+                index={index}
+                num={num}
+                selected={index === boardStates[curStateIndex].selectedIndex}
+                onClick={handleNumberClick}
+              />
+            )
+          )}
+      </div>
+      <div className="flex justify-between w-[250px]">
+        {operators.map((op: string, index: number) => (
+          <button
+            className={`text-8xl font-bold ${selectedOperator === op ? "text-green-800" : ""}`}
+            key={index}
+            onClick={() => handleOperatorClick(op)}
+          >
+            {op}
+          </button>
+        ))}
+      </div>
+      <div className="w-[250px] flex justify-between">
+        <button onClick={handleBack}>back</button>
+        <button onClick={handleForward}>forward</button>
+      </div>
+    </div>
+  );
+};
+
+export default Math24Game;
