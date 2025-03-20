@@ -109,19 +109,21 @@ const Math24Game = () => {
 
   const handleSkip = () => {};
 
+  const handleRestart = () => {};
+
   const arrowActive = "green";
   const arrowDisabled = "black";
 
   return (
-    <div className="flex flex-col justify-center items-center border ">
-      <div className="flex flex-col justify-center  items-center gap-3 w-[360px] px-2 py-4 bg-gray-200">
+    <div className="flex flex-col justify-center items-center border rounded-lg  bg-gray-200">
+      <div className="flex flex-col justify-center  items-center gap-2 w-[340px] px-2 py-2">
         <div className="flex w-full justify-between border-b">
           <p className="font-bold">Score: 123</p>
           <p className="font-bold">Solved: 1234</p>
           <p className="font-bold">Time: {time}</p>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 w-[250px] h-[250px]">
+        <div className="grid grid-cols-2 gap-4 w-[250px] h-[240px]">
           {boardStates.length > 0 &&
             boardStates[curStateIndex].board.map(
               (num: Fraction, index: number) => (
@@ -172,7 +174,10 @@ const Math24Game = () => {
           </button>
         </div>
       </div>
-      <button className="w-full bg-green-600 hover:bg-green-500 active:bg-green-500 border-2 py-1 text-center text-2xl font-bold">
+      <button
+        className="w-full bg-green-600 hover:bg-green-500 active:bg-green-500 border-2 py-1 text-center text-2xl font-bold rounded-lg"
+        onClick={handleRestart}
+      >
         Restart
       </button>
     </div>
