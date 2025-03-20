@@ -8,6 +8,7 @@ import {
   ArrowLeftCircleIcon,
   ArrowRightCircle,
   ArrowRightCircleIcon,
+  Circle,
 } from "lucide-react";
 import Fraction from "./Fraction";
 import { useTimer } from "./useTimer";
@@ -116,7 +117,7 @@ const Math24Game = () => {
   const arrowDisabled = "black";
 
   return (
-    <div className="w-[400px] h-[500px] border p-4 bg-gray-200">
+    <div className="flex flex-col gap-4 w-[400px] h-[500px] border p-4 bg-gray-200">
       <div className="flex justify-between pb-4">
         <p className="font-bold">Score: 123</p>
         <p className="font-bold">Solved: 1234</p>
@@ -137,11 +138,15 @@ const Math24Game = () => {
             )
           )}
       </div>
-      <div className="flex justify-between w-[250px]">
+      <div className="flex justify-between w-[250px] mt-1">
         {operators.map((op: string, index: number) => (
           <button
-            className={`text-8xl font-bold ${selectedOperator === op ? "text-green-800" : ""}`}
             key={index}
+            className={`border-2 h-[50px] w-[50px] flex items-center justify-center text-5xl font-bold leading-none ${
+              selectedOperator === op
+                ? "text-green-800 border-6 border-green-800"
+                : ""
+            }`}
             onClick={() => handleOperatorClick(op)}
           >
             {op}
