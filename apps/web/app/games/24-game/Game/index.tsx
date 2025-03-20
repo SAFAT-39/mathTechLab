@@ -3,7 +3,12 @@
 import { useEffect, useState } from "react";
 import { generateGame } from "./utils";
 import NumberBox from "./NumberBox";
-import { GoNumber } from "react-icons/go";
+import {
+  ArrowLeftCircle,
+  ArrowLeftCircleIcon,
+  ArrowRightCircle,
+  ArrowRightCircleIcon,
+} from "lucide-react";
 import Fraction from "./Fraction";
 import { useTimer } from "./useTimer";
 
@@ -107,6 +112,9 @@ const Math24Game = () => {
     }
   };
 
+  const arrowActive = "green";
+  const arrowDisabled = "black";
+
   return (
     <div className="w-[400px] h-[500px] border p-4 bg-gray-200">
       <div className="flex justify-between pb-4">
@@ -141,8 +149,22 @@ const Math24Game = () => {
         ))}
       </div>
       <div className="w-[250px] flex justify-between">
-        <button onClick={handleBack}>back</button>
-        <button onClick={handleForward}>forward</button>
+        <button onClick={handleBack}>
+          <ArrowLeftCircleIcon
+            size={50}
+            color={curStateIndex > 0 ? arrowActive : arrowDisabled}
+          />
+        </button>
+        <button onClick={handleForward}>
+          <ArrowRightCircleIcon
+            size={50}
+            color={
+              curStateIndex + 1 < boardStates.length
+                ? arrowActive
+                : arrowDisabled
+            }
+          />
+        </button>
       </div>
     </div>
   );
