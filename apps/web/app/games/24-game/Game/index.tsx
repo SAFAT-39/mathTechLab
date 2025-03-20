@@ -3,13 +3,7 @@
 import { useEffect, useState } from "react";
 import { generateGame } from "./utils";
 import NumberBox from "./NumberBox";
-import {
-  ArrowLeftCircle,
-  ArrowLeftCircleIcon,
-  ArrowRightCircle,
-  ArrowRightCircleIcon,
-  Circle,
-} from "lucide-react";
+import { ArrowLeftCircleIcon, ArrowRightCircleIcon } from "lucide-react";
 import Fraction from "./Fraction";
 import { useTimer } from "./useTimer";
 
@@ -113,64 +107,74 @@ const Math24Game = () => {
     }
   };
 
+  const handleSkip = () => {};
+
   const arrowActive = "green";
   const arrowDisabled = "black";
 
   return (
-    <div className="flex flex-col gap-4 w-[400px] h-[500px] border p-4 bg-gray-200">
-      <div className="flex justify-between pb-4">
-        <p className="font-bold">Score: 123</p>
-        <p className="font-bold">Solved: 1234</p>
-        <p className="font-bold">Time: {time}</p>
-      </div>
+    <div className="flex flex-col justify-center items-center border ">
+      <div className="flex flex-col justify-center  items-center gap-3 w-[360px] px-2 py-4 bg-gray-200">
+        <div className="flex w-full justify-between border-b">
+          <p className="font-bold">Score: 123</p>
+          <p className="font-bold">Solved: 1234</p>
+          <p className="font-bold">Time: {time}</p>
+        </div>
 
-      <div className="grid grid-cols-2 gap-4 w-[250px] h-[250px]">
-        {boardStates.length > 0 &&
-          boardStates[curStateIndex].board.map(
-            (num: Fraction, index: number) => (
-              <NumberBox
-                key={index}
-                index={index}
-                num={num}
-                selected={index === boardStates[curStateIndex].selectedIndex}
-                onClick={handleNumberClick}
-              />
-            )
-          )}
-      </div>
-      <div className="flex justify-between w-[250px] mt-1">
-        {operators.map((op: string, index: number) => (
-          <button
-            key={index}
-            className={`border-2 h-[50px] w-[50px] flex items-center justify-center text-5xl font-bold leading-none ${
-              selectedOperator === op
-                ? "text-green-800 border-6 border-green-800"
-                : ""
-            }`}
-            onClick={() => handleOperatorClick(op)}
-          >
-            {op}
+        <div className="grid grid-cols-2 gap-4 w-[250px] h-[250px]">
+          {boardStates.length > 0 &&
+            boardStates[curStateIndex].board.map(
+              (num: Fraction, index: number) => (
+                <NumberBox
+                  key={index}
+                  index={index}
+                  num={num}
+                  selected={index === boardStates[curStateIndex].selectedIndex}
+                  onClick={handleNumberClick}
+                />
+              )
+            )}
+        </div>
+        <div className="flex justify-between w-[250px] mt-1">
+          {operators.map((op: string, index: number) => (
+            <button
+              key={index}
+              className={`border-2 h-[50px] w-[50px] flex items-center justify-center text-5xl font-bold leading-none ${
+                selectedOperator === op
+                  ? "text-green-800 border-6 border-green-800"
+                  : ""
+              }`}
+              onClick={() => handleOperatorClick(op)}
+            >
+              {op}
+            </button>
+          ))}
+        </div>
+        <div className="w-[250px] flex justify-between items-center">
+          <button onClick={handleBack}>
+            <ArrowLeftCircleIcon
+              size={50}
+              color={curStateIndex > 0 ? arrowActive : arrowDisabled}
+            />
           </button>
-        ))}
+          <button className="border-2 px-3 rounded" onClick={handleSkip}>
+            Skip
+          </button>
+          <button onClick={handleForward}>
+            <ArrowRightCircleIcon
+              size={50}
+              color={
+                curStateIndex + 1 < boardStates.length
+                  ? arrowActive
+                  : arrowDisabled
+              }
+            />
+          </button>
+        </div>
       </div>
-      <div className="w-[250px] flex justify-between">
-        <button onClick={handleBack}>
-          <ArrowLeftCircleIcon
-            size={50}
-            color={curStateIndex > 0 ? arrowActive : arrowDisabled}
-          />
-        </button>
-        <button onClick={handleForward}>
-          <ArrowRightCircleIcon
-            size={50}
-            color={
-              curStateIndex + 1 < boardStates.length
-                ? arrowActive
-                : arrowDisabled
-            }
-          />
-        </button>
-      </div>
+      <button className="w-full bg-green-600 hover:bg-green-500 active:bg-green-500 border-2 py-1 text-center text-2xl font-bold">
+        Restart
+      </button>
     </div>
   );
 };

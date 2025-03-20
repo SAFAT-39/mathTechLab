@@ -32,7 +32,7 @@ const NumberBox = ({ index, num, selected, onClick }: NumberBoxProps) => {
 
   return (
     <button
-      className={`${getStyle()} flex flex-col items-center justify-center h-[120px] font-extrabold text-[40px] rounded`}
+      className={`${getStyle()} flex flex-col items-center justify-center h-[110px] font-extrabold text-[40px] rounded`}
       onClick={handleClick}
     >
       <p>{getValue()}</p>
