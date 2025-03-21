@@ -23,7 +23,10 @@ const Math24Game = () => {
   const operators = ["+", "-", "×", "÷"];
   const [selectedOperator, setSelectedOperator] = useState("");
 
-  const { time, resetTimer } = useTimer();
+  const [score, setScore] = useState(0);
+  const [solved, setSolved] = useState(0);
+
+  const { time, reset: resetTimer } = useTimer();
   const { game, nextGame } = useGameGenerator();
 
   useEffect(() => {
@@ -36,6 +39,7 @@ const Math24Game = () => {
       return [newState];
     });
     setCurStateIndex(0);
+    resetTimer();
   }, [game]);
 
   const calculate = (num1: Fraction, op: string, num2: Fraction) => {
@@ -74,6 +78,8 @@ const Math24Game = () => {
       }, 1000);
     };
     if (isGameComplete()) {
+      setSolved((prev) => prev + 1);
+      setScore((prev) => prev + 24 * (game?.solutions.length || 1));
       nextLevel();
     }
   }, [boardStates]);
@@ -136,6 +142,8 @@ const Math24Game = () => {
 
   const handleRestart = () => {
     nextGame();
+    setScore(0);
+    setSolved(0);
   };
 
   const arrowActive = "green";
@@ -145,8 +153,8 @@ const Math24Game = () => {
     <div className="flex flex-col justify-center items-center border rounded-lg  bg-gray-200">
       <div className="flex flex-col justify-center  items-center gap-2 w-[340px] px-2 py-2">
         <div className="flex w-full justify-between border-b pb-1 mb-1">
-          <p className="font-bold">Score: 123</p>
-          <p className="font-bold">Solved: 1234</p>
+          <p className="font-bold">Solved: {solved}</p>
+          <p className="font-bold">Score: {score}</p>
           <p className="font-bold">Time: {time}</p>
         </div>
 
