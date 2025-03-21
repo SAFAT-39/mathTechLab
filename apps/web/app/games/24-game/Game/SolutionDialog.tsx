@@ -11,12 +11,12 @@ const SolutionDialog: React.FC<DialogProps> = ({ isOpen, onClose, items }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-transparent bg-opacity-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-        <div className="mt-4 flex justify-between">
+      <div className="bg-white p-2 rounded-lg shadow-lg w-60">
+        <div className="mt-4 flex justify-between items-center">
           <h2 className="text-xl font-bold"> Solutions</h2>
           <button
             onClick={onClose}
-            className="px-4 py-2 bg-gray-600 text-white rounded-md"
+            className="px-2 py-1 bg-gray-600 text-white rounded-md"
           >
             Close
           </button>
