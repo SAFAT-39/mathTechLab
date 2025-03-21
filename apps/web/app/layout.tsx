@@ -1,8 +1,8 @@
-import "./globals.css"
-import "@mathtechlab/design-system/styles.css"
-import "@mathtechlab/ui/styles.css"
-import type { Metadata } from "next"
-import { ReactNode } from 'react';
+import "./globals.css";
+import "@mathtechlab/design-system/styles.css";
+import "@mathtechlab/ui/styles.css";
+import type { Metadata } from "next";
+import { ReactNode } from "react";
 import Header from "./components/Header";
 
 export const metadata: Metadata = {
@@ -44,13 +44,11 @@ export const metadata: Metadata = {
   },
 };
 
-
 type LayoutProps = {
   children: ReactNode;
 };
 
 export default function Layout({ children }: LayoutProps) {
-
   return (
     <html lang="en">
       <body>
@@ -62,12 +60,14 @@ export default function Layout({ children }: LayoutProps) {
           <main className="flex-grow container mx-auto p-4">{children}</main>
 
           {/* Footer */}
-          <footer className="bg-gray-900 text-white text-center p-4 mt-8">
-            <p>&copy; {new Date().getFullYear()} MathTechLab. All rights reserved.</p>
+          <footer className="bg-gray-900 text-center p-4 mt-8 text-white">
+            <p>
+              &copy; {new Date().getFullYear()} MathTechLab. All rights
+              reserved.
+            </p>
           </footer>
         </div>
       </body>
     </html>
   );
 }
-
