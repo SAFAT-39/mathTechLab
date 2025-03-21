@@ -11,7 +11,7 @@ const SolutionDialog: React.FC<DialogProps> = ({ isOpen, onClose, items }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-transparent bg-opacity-50">
-      <div className="bg-white p-2 rounded-lg shadow-lg w-60">
+      <div className="bg-white p-2 rounded-lg shadow-lg w-70">
         <div className="mt-4 flex justify-between items-center">
           <h2 className="text-xl font-bold"> Solutions</h2>
           <button
