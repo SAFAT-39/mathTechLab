@@ -6,6 +6,7 @@ import NumberBox from "./NumberBox";
 import { ArrowLeftCircleIcon, ArrowRightCircleIcon } from "lucide-react";
 import Fraction from "./Fraction";
 import { useTimer } from "./useTimer";
+import useGameGenerator from "./useGameGenerator";
 
 export const infinity = 999999999999999;
 
@@ -16,8 +17,6 @@ interface BoardState {
 
 const Math24Game = () => {
   const [numbers, setNumbers] = useState(generateGame());
-  // const [gameState, setGameState] = useState<Fraction[]>([]);
-  // const [selectedIndex, setSelectedIndex] = useState(-1);
   const [boardStates, setBoardStates] = useState<BoardState[]>([]);
   const [curStateIndex, setCurStateIndex] = useState(-1);
 
@@ -25,18 +24,19 @@ const Math24Game = () => {
   const [selectedOperator, setSelectedOperator] = useState("");
 
   const { time, resetTimer } = useTimer();
+  const { game, nextGame } = useGameGenerator();
 
   useEffect(() => {
-    // setGameState(numbers.map((num: number) => new Fraction(num)));
+    if (!game) return;
     setBoardStates((prevStates) => {
       const newState: BoardState = {
-        board: numbers.map((num: number) => new Fraction(num)),
+        board: game.problem.map((num: number) => new Fraction(num)),
         selectedIndex: -1,
       };
-      return [...prevStates, newState];
+      return [newState];
     });
     setCurStateIndex(0);
-  }, []);
+  }, [game]);
 
   const calculate = (num1: Fraction, op: string, num2: Fraction) => {
     switch (op) {
@@ -53,7 +53,30 @@ const Math24Game = () => {
     }
   };
 
-  const isGameComplete = () => {};
+  useEffect(() => {
+    if (curStateIndex === -1 || !boardStates[curStateIndex]) return;
+    const isGameComplete = () => {
+      const count = boardStates[curStateIndex].board.filter(
+        (value) => value.numerator === infinity
+      ).length;
+      console.log({ count }, { boardStates });
+      if (count === 3) {
+        const finalValue = boardStates[curStateIndex].board.find(
+          (value) => value.numerator !== infinity
+        );
+        if (!finalValue || finalValue.numerator !== 24) return false;
+        return true;
+      } else return false;
+    };
+    const nextLevel = () => {
+      setTimeout(() => {
+        nextGame();
+      }, 1000);
+    };
+    if (isGameComplete()) {
+      nextLevel();
+    }
+  }, [boardStates]);
 
   const handleNumberClick = (index: number, num: Fraction) => {
     console.log(index, num);
@@ -107,9 +130,13 @@ const Math24Game = () => {
     }
   };
 
-  const handleSkip = () => {};
+  const handleSkip = () => {
+    nextGame();
+  };
 
-  const handleRestart = () => {};
+  const handleRestart = () => {
+    nextGame();
+  };
 
   const arrowActive = "green";
   const arrowDisabled = "black";
