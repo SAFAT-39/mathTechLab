@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	<url>
+		<loc>https://mathtechlab.com/</loc>
+		<lastmod>2025-03-14</lastmod>
+		<priority>1.00</priority>
+	</url>
+  <url>
+		<loc>https://mathtechlab.com/games</loc>
+		<lastmod>2025-03-14</lastmod>
+		<priority>0.80</priority>
+	</url>
+  <url>
+		<loc>https://mathtechlab.com/games/24-game</loc>
+		<lastmod>2025-03-14</lastmod>
+		<priority>0.80</priority>
+	</url>
+  <url>
+		<loc>https://mathtechlab.com/times-table</loc>
+		<lastmod>2025-03-14</lastmod>
+		<priority>0.80</priority>
+	</url>
+</urlset>
