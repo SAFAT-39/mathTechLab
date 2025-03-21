@@ -7,6 +7,7 @@ import { ArrowLeftCircleIcon, ArrowRightCircleIcon } from "lucide-react";
 import Fraction from "./Fraction";
 import { useTimer } from "./useTimer";
 import useGameGenerator from "./useGameGenerator";
+import SolutionDialog from "./SolutionDialog";
 
 export const infinity = 999999999999999;
 
@@ -25,6 +26,8 @@ const Math24Game = () => {
 
   const [score, setScore] = useState(0);
   const [solved, setSolved] = useState(0);
+
+  const [openSolution, setOpenSolution] = useState<boolean>(false);
 
   const { time, reset: resetTimer } = useTimer();
   const { game, nextGame } = useGameGenerator();
@@ -63,7 +66,6 @@ const Math24Game = () => {
       const count = boardStates[curStateIndex].board.filter(
         (value) => value.numerator === infinity
       ).length;
-      console.log({ count }, { boardStates });
       if (count === 3) {
         const finalValue = boardStates[curStateIndex].board.find(
           (value) => value.numerator !== infinity
@@ -85,7 +87,6 @@ const Math24Game = () => {
   }, [boardStates]);
 
   const handleNumberClick = (index: number, num: Fraction) => {
-    console.log(index, num);
     const state = boardStates[curStateIndex];
 
     if (state.selectedIndex === index) return;
@@ -120,7 +121,6 @@ const Math24Game = () => {
   };
 
   const handleOperatorClick = (op: string) => {
-    console.log(op);
     if (boardStates[curStateIndex].selectedIndex != -1) setSelectedOperator(op);
   };
 
@@ -137,6 +137,11 @@ const Math24Game = () => {
   };
 
   const handleSkip = () => {
+    setOpenSolution(true);
+  };
+
+  const handleSolutionClose = () => {
+    setOpenSolution(false);
     nextGame();
   };
 
@@ -215,6 +220,11 @@ const Math24Game = () => {
       >
         Restart
       </button>
+      <SolutionDialog
+        isOpen={openSolution}
+        onClose={handleSolutionClose}
+        items={game?.solutions || []}
+      />
     </div>
   );
 };
