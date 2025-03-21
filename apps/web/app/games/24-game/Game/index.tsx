@@ -144,7 +144,7 @@ const Math24Game = () => {
   return (
     <div className="flex flex-col justify-center items-center border rounded-lg  bg-gray-200">
       <div className="flex flex-col justify-center  items-center gap-2 w-[340px] px-2 py-2">
-        <div className="flex w-full justify-between border-b">
+        <div className="flex w-full justify-between border-b pb-1 mb-1">
           <p className="font-bold">Score: 123</p>
           <p className="font-bold">Solved: 1234</p>
           <p className="font-bold">Time: {time}</p>
