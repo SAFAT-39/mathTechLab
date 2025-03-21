@@ -151,7 +151,7 @@ const Math24Game = () => {
     setSolved(0);
   };
 
-  const arrowActive = "green";
+  const arrowActive = "#05df72";
   const arrowDisabled = "black";
 
   return (
@@ -181,10 +181,10 @@ const Math24Game = () => {
           {operators.map((op: string, index: number) => (
             <button
               key={index}
-              className={`border-2 h-[50px] w-[50px] flex items-center justify-center text-5xl font-bold leading-none ${
+              className={`border-2 border-green-400  h-[50px] w-[50px] flex items-center justify-center text-5xl text-green-400 font-bold leading-none ${
                 selectedOperator === op
                   ? "text-green-800 border-6 border-green-800"
-                  : ""
+                  : "hover:border-green-600 active:border-green-600"
               }`}
               onClick={() => handleOperatorClick(op)}
             >
@@ -199,7 +199,10 @@ const Math24Game = () => {
               color={curStateIndex > 0 ? arrowActive : arrowDisabled}
             />
           </button>
-          <button className="border-2 px-3 rounded" onClick={handleSkip}>
+          <button
+            className="border-2 border-red-500 hover:border-red-400 active:border-red-400 text-red-500 hover:text-red-400 active:text-red-400 px-3 rounded"
+            onClick={handleSkip}
+          >
             Skip
           </button>
           <button onClick={handleForward}>
@@ -215,7 +218,7 @@ const Math24Game = () => {
         </div>
       </div>
       <button
-        className="w-full bg-green-600 hover:bg-green-500 active:bg-green-500 border-2 py-1 text-center text-2xl font-bold rounded-lg"
+        className="w-full bg-green-600 hover:bg-green-500 active:bg-green-500 border-2 py-1 text-center text-2xl text-gray-100 font-bold rounded-lg"
         onClick={handleRestart}
       >
         Restart

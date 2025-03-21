@@ -27,7 +27,7 @@ const NumberBox = ({ index, num, selected, onClick }: NumberBoxProps) => {
     if (num.numerator === infinity) return "";
     return selected
       ? "border-6 border-green-800 text-green-800"
-      : "border-2 border-green-400 text-green-400";
+      : "border-2 border-green-400 hover:border-green-600 active:border-green-600 text-green-400";
   };
 
   return (
