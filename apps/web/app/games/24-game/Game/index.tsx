@@ -182,10 +182,10 @@ const Math24Game = () => {
           {operators.map((op: string, index: number) => (
             <button
               key={index}
-              className={`border-2 border-green-400  h-[50px] w-[50px] flex items-center justify-center text-5xl text-green-400 font-bold leading-none ${
+              className={`border-2 border-green-600  h-[50px] w-[50px] flex items-center justify-center text-5xl text-green-600 font-bold leading-none ${
                 selectedOperator === op
                   ? "text-green-800 border-6 border-green-800"
-                  : "hover:border-green-600 active:border-green-600"
+                  : "hover:border-green-800 active:border-green-800"
               }`}
               onClick={() => handleOperatorClick(op)}
             >
