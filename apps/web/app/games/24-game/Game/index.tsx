@@ -42,6 +42,7 @@ const Math24Game = () => {
       return [newState];
     });
     setCurStateIndex(0);
+    setSelectedOperator("");
     resetTimer();
   }, [game]);
 
