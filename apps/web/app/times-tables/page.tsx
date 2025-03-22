@@ -1,4 +1,4 @@
-import TimesTableCard from "./content/TimesTableCard";
+import Content from "./content";
 const Page = () => {
   return (
     <>
@@ -15,7 +15,7 @@ const Page = () => {
         </div>
       </div>
 
-      <div className="text-left md:w-[700px] mt-2">
+      <div className="font-medium  mt-2">
         Welcome to MathTechLab Times Table, where numbers multiply, and minds
         grow! Our interactive platform makes mastering multiplication easy and
         fun. Whether you're a student, parent, or educator, you'll find engaging
@@ -24,7 +24,7 @@ const Page = () => {
         sharpen your skills. Start your multiplication journey today and unlock
         the power of numbers with MathTechLab!
       </div>
-      <TimesTableCard />
+      <Content />
     </>
   );
 };
