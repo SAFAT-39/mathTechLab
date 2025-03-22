@@ -129,8 +129,8 @@ const Page = () => {
               (PEMDAS).
             </li>
             <li>
-              Practice with <strong>common number sets</strong> like (8, 3, 3,
-              1) → <code>(8 ÷ (3 - 1) × 3 = 24)</code>.
+              Practice with <strong>common number sets</strong> like (12, 3, 4,
+              1) → <code>(12 ÷ (3 - 1) × 4 = 24)</code>.
             </li>
           </ul>
         </div>
