@@ -2,7 +2,7 @@ import Game from "./Game";
 
 const Page = () => {
   return (
-    <section>
+    <>
       <div className="flex flex-col justify-center items-center gap-2">
         <h1 className="text-2xl">24 Game – A Fun Math Challenge</h1>
         <h2 className="text-center md:w-[600px] font-semibold">
@@ -14,7 +14,7 @@ const Page = () => {
       <div className="flex flex-col justify-center items-center px-2 py-5">
         <Game />
       </div>
-    </section>
+    </>
   );
 };
 
