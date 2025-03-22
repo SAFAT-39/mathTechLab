@@ -11,7 +11,7 @@ const Page = () => {
         name: "Is there always a solution?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Not always! Some sets of numbers don’t form 24. If you get stuck, refresh for a new challenge.",
+          text: "Yes always! The choosen sets of numbers always form 24.",
         },
       },
       {
@@ -141,10 +141,7 @@ const Page = () => {
           <div className="mt-2 space-y-4">
             <div>
               <h3 className="font-semibold">Q: Is there always a solution?</h3>
-              <p>
-                A: Not always! Some sets of numbers don’t form 24. If you get
-                stuck, refresh for a new challenge.
-              </p>
+              <p>A: Yes always! The choosen sets of numbers always form 24.</p>
             </div>
             <div>
               <h3 className="font-semibold">
