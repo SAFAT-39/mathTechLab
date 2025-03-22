@@ -219,7 +219,7 @@ const Math24Game = () => {
         </div>
       </div>
       <button
-        className="w-full bg-green-600 hover:bg-green-500 active:bg-green-500 border-2 py-1 text-center text-2xl text-gray-100 font-bold rounded-lg"
+        className="w-full bg-green-600 hover:bg-green-500 active:bg-green-500 py-1 text-center text-2xl text-gray-100 font-bold rounded-b-lg"
         onClick={handleRestart}
       >
         Restart
