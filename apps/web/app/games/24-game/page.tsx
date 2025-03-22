@@ -42,7 +42,7 @@ const Page = () => {
     step: [
       {
         "@type": "HowToStep",
-        name: "Get four random numbers",
+        name: "Get four numbers",
         text: "You will be given four numbers to use in the game.",
       },
       {
@@ -91,7 +91,7 @@ const Page = () => {
           <h2 className="text-2xl font-bold text-primary">🎮 How to Play</h2>
           <ol className="list-decimal list-inside space-y-2 mt-2">
             <li>
-              You will get <strong>four random numbers</strong>.
+              You will get <strong>four numbers</strong>.
             </li>
             <li>
               Use{" "}
