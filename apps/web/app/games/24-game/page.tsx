@@ -80,7 +80,7 @@ const Page = () => {
         />
       </Head>
       <div className="flex flex-col justify-center items-center gap-2">
-        <h1 className="text-2xl">24 Game – A Fun Math Challenge</h1>
+        <h1 className="text-2xl text-center">24 Game – A Fun Math Challenge</h1>
         <h2 className="text-center md:w-[600px] font-semibold">
           The 24 Game is a fun and challenging math puzzle where you use four
           numbers and basic arithmetic operations (+, −, ×, ÷) to make 24. Test
