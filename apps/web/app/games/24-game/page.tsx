@@ -47,18 +47,23 @@ const Page = () => {
       },
       {
         "@type": "HowToStep",
+        name: "Tap or click numbsers and operations",
+        text: "Tap or click numbers and operations to form an expression and two numbers will be combined",
+      },
+      {
+        "@type": "HowToStep",
+        name: "Revert an operation",
+        text: "Revert an operation by clicking left arrow button.",
+      },
+      {
+        "@type": "HowToStep",
         name: "Make 24 with arithmetic operations",
         text: "Use addition, subtraction, multiplication, and division to make 24.",
       },
       {
         "@type": "HowToStep",
-        name: "Use all numbers exactly once",
-        text: "Ensure that you use all four numbers exactly once in the solution.",
-      },
-      {
-        "@type": "HowToStep",
         name: "Solve it as fast as possible",
-        text: "Try to solve the equation as quickly as you can.",
+        text: "Try to solve the puzzle as quickly as you can.",
       },
     ],
   };
@@ -94,6 +99,18 @@ const Page = () => {
               You will get <strong>four numbers</strong>.
             </li>
             <li>
+              Tap or click numbers and operations to form an{" "}
+              <strong>expression</strong>.
+            </li>
+            <li>
+              Two number will be <strong>combined</strong> once an operation is
+              applied.
+            </li>
+            <li>
+              You can <strong>revert</strong> an operation by clicking the left
+              arrow button.
+            </li>
+            <li>
               Use{" "}
               <strong>
                 addition, subtraction, multiplication, and division
@@ -101,12 +118,8 @@ const Page = () => {
               to make <strong>24</strong>.
             </li>
             <li>
-              You <strong>must use all four numbers exactly once</strong>.
-            </li>
-            <li>Tap or click numbers and operations to form an expression.</li>
-            <li>
               If you get <strong>24</strong>, you win! Try to solve it as
-              quickly as possible.
+              quickly as possible to get highest score.
             </li>
           </ol>
         </div>
