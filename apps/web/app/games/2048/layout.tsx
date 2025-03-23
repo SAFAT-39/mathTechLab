@@ -75,10 +75,10 @@ export const jsonLd = {
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <section>
-      <script
+      {/* <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      /> */}
       {children}
     </section>
   );
