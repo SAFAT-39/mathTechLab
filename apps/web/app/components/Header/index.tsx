@@ -6,12 +6,20 @@ import { Menu, X } from "lucide-react";
 
 const navUrls = [
   {
-    title: "Games",
-    url: "/games",
+    title: "Times Tables",
+    url: "/times-tables",
   },
   {
     title: "24 Game",
     url: "/games/24-game",
+  },
+  {
+    title: "2048 Game",
+    url: "/games/2048",
+  },
+  {
+    title: "Math Sprint",
+    url: "/games/math-sprint",
   },
 ];
 
