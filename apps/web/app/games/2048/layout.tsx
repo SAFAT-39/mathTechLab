@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Play 2048 Game Online – Free, Fun, and Addictive | MathTechLab",
+  title: "Play 2048 Game Online – Free, Fun, and Challenging | MathTechLab",
   description:
     "Play the classic 2048 game online for free! Merge tiles strategically to reach 2048. Challenge your brain and improve number skills. No downloads required.",
   keywords: [
@@ -15,7 +15,7 @@ export const metadata = {
     "best 2048 game",
   ],
   openGraph: {
-    title: "Play 2048 Game Online – Free, Fun, and Addictive | MathTechLab",
+    title: "Play 2048 Game Online – Free, Fun, and Challenging | MathTechLab",
     description:
       "Enjoy the classic 2048 puzzle game for free. Merge numbers strategically to reach 2048. Play online with no downloads required!",
     url: "https://mathtechlab.com/games/2048",
@@ -31,7 +31,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Play 2048 Game Online – Free, Fun, and Addictive | MathTechLab",
+    title: "Play 2048 Game Online – Free, Fun, and Challenging | MathTechLab",
     description:
       "Challenge yourself with the 2048 game! Merge tiles, strategize, and reach 2048. Play online for free at MathTechLab!",
     images: ["https://mathtechlab.com/images/2048-game-thumbnail.png"],
