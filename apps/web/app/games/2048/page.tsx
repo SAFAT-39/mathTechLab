@@ -14,6 +14,11 @@ const Page = () => {
         "Use arrow keys (or swipe on mobile) to move tiles. When two tiles with the same number touch, they merge into one with double the value. The goal is to reach the 2048 tile.",
     },
     {
+      question: "Does the game save my progress if I close the tab?",
+      answer:
+        "Yes! Your game data is automatically stored in your browser. If you close the tab and come back later, you can pick up right where you left off.",
+    },
+    {
       question: "Is 2048 a strategy game?",
       answer:
         "Yes, 2048 requires strategic thinking to avoid getting stuck and to efficiently merge tiles to reach the highest score possible.",
@@ -57,10 +62,14 @@ const Page = () => {
           Why Play 2048 on MathTechLab?
         </h2>
         <ul className="list-disc list-inside mt-2 text-gray-700">
-          <li>💡 Fun and addictive gameplay</li>
+          <li>💡 Fun and strategic gameplay</li>
           <li>🎓 Improves problem-solving and math skills</li>
-          <li>📱 Play anywhere – mobile & desktop friendly</li>
+          <li>📱 Play anywhere – mobile, tab & desktop friendly</li>
           <li>🚀 No downloads or sign-ups required</li>
+          <li>
+            📌 <strong>Auto-Save </strong>– Close the tab? No worries! Your
+            progress is saved, so you can continue anytime.
+          </li>
         </ul>
       </section>
       {/* FAQ Section */}
