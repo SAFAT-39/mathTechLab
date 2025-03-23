@@ -10,8 +10,8 @@ const Game2048 = () => {
   return (
     <div className="container-root">
       <div className="flex justify-between">
-        <a className="restart-button mt-2">New Game</a>
-        <div className="scores-container flex gap-2">
+        <a className="restart-button sm:mt-2">New Game</a>
+        <div className="scores-container flex gap-1">
           <div className="score-container">0</div>
           <div className="best-container">0</div>
         </div>
