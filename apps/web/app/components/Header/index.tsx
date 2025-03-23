@@ -45,13 +45,11 @@ const Header = () => {
       </div>
       {menuOpen && (
         <nav className="md:hidden bg-primary p-4">
-          <nav className="hidden md:flex space-x-4">
-            {navUrls.map((item, index: number) => (
-              <Link key={index} href={item.url} className="block py-2">
-                {item.title}
-              </Link>
-            ))}
-          </nav>
+          {navUrls.map((item, index: number) => (
+            <Link key={index} href={item.url} className="block py-2">
+              {item.title}
+            </Link>
+          ))}
         </nav>
       )}
     </header>
