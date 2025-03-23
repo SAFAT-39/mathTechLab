@@ -9,9 +9,15 @@ const Content = () => {
         title="Games"
         items={[
           {
-            title: "24 Game",
+            title: "🧩 24 Game",
             description: "Solve math puzzles by making 24 using four numbers.",
             link: "/games/24-game",
+          },
+          {
+            title: "🧩 2048",
+            description:
+              "Slide, merge, and strategize your way to 2048! Play this addictive number puzzle online for free. 🎯 No downloads, just pure fun!",
+            link: "/games/2048",
           },
         ]}
         seeMoreLink="/games"
