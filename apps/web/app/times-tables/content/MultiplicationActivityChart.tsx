@@ -216,6 +216,27 @@ export default function MultiplicationActivityChart() {
           </div>
         </div>
       </div>
+
+      {/* Why Our Multiplication Table Chart Work */}
+      <div className="mt-8">
+        <h2 className="text-xl font-bold text-blue-600 mb-3">
+          Why Our Multiplication Table Chart Work
+        </h2>
+        <ul className="list-inside list-disc pl-5  text-gray-00">
+          <li>
+            <strong>Visually engaging - </strong> Color-coded for better memory.
+          </li>
+          <li>
+            <strong>Interactive learning -</strong> Click to reveal products.
+          </li>
+          <li>
+            <strong>Comprehensive -</strong> Covers all facts from 0×0 to 12×12.
+          </li>
+          <li>
+            <strong>Perfect for all ages -</strong> lementary to adult learners.
+          </li>
+        </ul>
+      </div>
     </>
   );
 }
