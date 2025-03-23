@@ -7,7 +7,7 @@ const MultiplicationTable = () => {
       <div className="flex justify-center items-center mb-8">
         <Image
           src={multiplicationTable}
-          alt="Multiplication Table"
+          alt="Times Table"
           className="rounded-lg shadow-md"
         />
       </div>
