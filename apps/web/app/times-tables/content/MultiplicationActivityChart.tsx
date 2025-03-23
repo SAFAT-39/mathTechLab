@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-export default function MultiplicationActivityChart() {
+const MultiplicationActivityChart = () => {
   // State to track which cells have been clicked
   const [revealedCells, setRevealedCells] = useState<Record<string, boolean>>(
     {}
@@ -239,4 +239,5 @@ export default function MultiplicationActivityChart() {
       </div>
     </>
   );
-}
+};
+export default MultiplicationActivityChart;
