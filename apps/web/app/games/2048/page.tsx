@@ -11,7 +11,7 @@ const Page = () => {
     {
       question: "How do you play 2048?",
       answer:
-        "Use arrow keys (or swipe on mobile) to move tiles. When two tiles with the same number touch, they merge into one with double the value. The goal is to reach the 2048 tile.",
+        "Use arrow keys  to move tiles (use swipe on touch devices). When two tiles with the same number touch, they merge into one with double the value. Reaching maximum 2048 tile is the goal.",
     },
     {
       question: "Does the game save my progress if I close the tab?",
@@ -49,7 +49,7 @@ const Page = () => {
       <section className="mt-[100px]">
         <h2 className="text-2xl font-semibold">How to Play 2048</h2>
         <ul className="list-disc list-inside mt-2 text-gray-700">
-          <li>Use arrow keys (or swipe) to move tiles.</li>
+          <li>Use arrow keys to move tiles (use swipe in touch devices).</li>
           <li>Merge two identical tiles to create a larger number.</li>
           <li>Keep merging until you reach 2048!</li>
           <li>Game ends when no moves are left.</li>
