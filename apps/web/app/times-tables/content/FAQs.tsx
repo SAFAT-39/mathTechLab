@@ -75,7 +75,7 @@ const FAQs = () => {
               className="border border-gray-300 rounded-lg p-6 shadow-md hover:bg-gray-50 hover:scale-101 transition duration-200"
             >
               <h3 className="text-xl font-semibold ">{faq.question}</h3>
-              <p className="mt-2 text-gray-700">{faq.answer}</p>
+              <div className="mt-2 text-gray-700">{faq.answer}</div>
             </div>
           ))}
         </section>
