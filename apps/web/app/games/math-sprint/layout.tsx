@@ -15,6 +15,9 @@ export const metadata: Metadata = {
     "online math games",
     "math learning",
   ],
+  alternates: {
+    canonical: "https://mathtechlab.com/games/math-sprint",
+  },
   openGraph: {
     title: "Math Sprint Game - Test Your Speed and Accuracy!",
     description:
