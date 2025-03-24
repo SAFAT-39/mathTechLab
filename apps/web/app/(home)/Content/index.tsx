@@ -1,5 +1,6 @@
 import Section from "./Section";
 import TitleSubtitle from "./TitleSubtitle";
+import WhyUse from "./WhyUse";
 
 const Content = () => {
   return (
@@ -41,6 +42,7 @@ const Content = () => {
         ]}
         seeMoreLink="/times-tables"
       />
+      <WhyUse />
     </>
   );
 };
