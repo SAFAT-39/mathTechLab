@@ -36,11 +36,10 @@ const WhyUse = () => {
       </h2>
       <p className="mb-8">
         <strong>MathTechLab</strong> is the ultimate destination for anyone
-        passionate about mastering mathematics in a fun and engaging way.
-        Whether you're a student looking to strengthen your math skills or a
-        professional seeking to explore how mathematics powers technology,
-        MathTechLab offers something for everyone. Here's why you should choose
-        MathTechLab:
+        passionate about mastering mathematics in a fun and engaging way. You
+        are a student looking to strengthen your math skills or a professional
+        seeking to explore the power of Mathematics in technology, MathTechLab
+        offers something for everyone. Here's why you should choose MathTechLab:
       </p>
       <div className="space-y-6">
         {points.map((point, index) => (
