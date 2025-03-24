@@ -7,7 +7,7 @@ const Content = () => {
     <>
       <TitleSubtitle />
       <Section
-        title="Games"
+        title="Interactive Math Games"
         items={[
           {
             title: "🧩 24 Game",
