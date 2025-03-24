@@ -16,7 +16,10 @@ const Section: React.FC<SectionProps> = ({ title, items, seeMoreLink }) => (
       ))}
     </div>
     <div className="mt-4">
-      <Link href={seeMoreLink} className="text-primary hover:underline">
+      <Link
+        href={seeMoreLink}
+        className="hover:underline active:underline text-blue-800"
+      >
         See More →
       </Link>
     </div>
