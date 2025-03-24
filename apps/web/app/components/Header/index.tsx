@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 
 const navUrls = [
   {
@@ -27,10 +28,16 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="bg-primary sticky text-white p-4 shadow-md">
-      <div className="container mx-auto flex justify-between items-center">
+    <header className="bg-white sticky text-white p-1 shadow-md">
+      <div className="container mx-auto flex justify-between items-center text-blue-800 font-semibold">
         <Link href="/" className="text-xl font-bold">
-          MathTechLab
+          <Image
+            alt="MathTechLab – Math Games and Learning"
+            src="/logo.svg"
+            width={100}
+            height={50}
+            className="w-[120px] h-[60px]"
+          ></Image>
         </Link>
         <nav className="hidden md:flex space-x-4">
           {navUrls.map((item, index: number) => (
@@ -44,7 +51,7 @@ const Header = () => {
         </button>
       </div>
       {menuOpen && (
-        <nav className="md:hidden bg-primary p-4">
+        <nav className="md:hidden bg-white p-4 text-blue-800 font-semibold">
           {navUrls.map((item, index: number) => (
             <Link key={index} href={item.url} className="block py-2">
               {item.title}

@@ -3,7 +3,7 @@
 @theme {
   /* Color Paletts with https://www.colorpalett.es/ */
   /* Primary Color */
-  --color-primary: var(--theme-color-primary);
+  --color-primary: var(--color-black);
   --color-primary-50: oklch(91.45% 0.023 264);
   --color-primary-100: oklch(84% 0.053 263);
   --color-primary-200: oklch(76.41% 0.089 264);
