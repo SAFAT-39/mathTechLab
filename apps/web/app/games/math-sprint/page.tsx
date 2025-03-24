@@ -20,7 +20,7 @@ const Page = () => {
         </h2>
         <ul className="list-disc list-inside mt-2 space-y-2">
           <li>A math expression appears on the screen.</li>
-          <li>Type the correct answer and submit it.</li>
+          <li>Select the correct answer from multiple choices.</li>
           <li>Solve as many expressions as possible before time runs out.</li>
           <li>Your score is the total number of correct answers.</li>
           <li>Try to beat your high score!</li>
