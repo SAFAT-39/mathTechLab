@@ -19,7 +19,7 @@ const Page = () => {
         name: "Can I play this game on mobile?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes! The game is fully responsive and works on all devices.",
+          text: "Yes! The 2048 game on MathTechLab is fully responsive, mobile-friendly and works on all devices.",
         },
       },
       {
@@ -161,7 +161,8 @@ const Page = () => {
                 Q: Can I play this game on mobile?
               </h3>
               <p>
-                A: Yes! The game is fully responsive and works on all devices.
+                A: Yes! The 2048 game on MathTechLab is fully responsive,
+                mobile-friendly and works on all devices.
               </p>
             </div>
             <div>
