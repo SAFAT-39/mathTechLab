@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface MulPracticeProps {
   timesTable?: number;
@@ -9,9 +9,18 @@ interface MulPracticeProps {
   buttonGradient?: string;
 }
 
-const MulPracticeInSequence: React.FC<MulPracticeProps> = ({
-  timesTable = 1, // Default value
-  bgGradient = "from-purple-600 to-indigo-600", // Default gradient
+const shuffleArray = (array: number[]) => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
+const MulPracticeShuffled: React.FC<MulPracticeProps> = ({
+  timesTable = 1,
+  bgGradient = "from-purple-600 to-indigo-600",
   buttonGradient = "from-indigo-600 to-purple-600",
 }) => {
   const [answers, setAnswers] = useState<Record<number, string>>({});
@@ -20,9 +29,11 @@ const MulPracticeInSequence: React.FC<MulPracticeProps> = ({
   const [allCorrect, setAllCorrect] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [shuffledProblems, setShuffledProblems] = useState<number[]>([]);
 
-  const firstColumnProblems = [1, 2, 3, 4, 5, 6];
-  const secondColumnProblems = [7, 8, 9, 10, 11, 12];
+  useEffect(() => {
+    setShuffledProblems(shuffleArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]));
+  }, []);
 
   const handleChange = (problem: number, value: string) => {
     if (value !== "" && !/^\d+$/.test(value)) return;
@@ -38,9 +49,8 @@ const MulPracticeInSequence: React.FC<MulPracticeProps> = ({
 
   const checkAnswers = (e: React.FormEvent) => {
     e.preventDefault();
-    const allProblems = [...firstColumnProblems, ...secondColumnProblems];
+    const unanswered = shuffledProblems.filter((problem) => !answers[problem]);
 
-    const unanswered = allProblems.filter((problem) => !answers[problem]);
     if (unanswered.length > 0) {
       setAlertMessage(
         `Please fill in all answers. You missed ${unanswered.length} question${unanswered.length > 1 ? "s" : ""}.`
@@ -52,7 +62,7 @@ const MulPracticeInSequence: React.FC<MulPracticeProps> = ({
     const results: Record<number, boolean> = {};
     let correct = true;
 
-    allProblems.forEach((problem) => {
+    shuffledProblems.forEach((problem) => {
       const userAnswer = Number.parseInt(answers[problem]);
       const correctAnswer = problem * timesTable;
       results[problem] = userAnswer === correctAnswer;
@@ -70,6 +80,7 @@ const MulPracticeInSequence: React.FC<MulPracticeProps> = ({
     setShowResults(false);
     setAllCorrect(false);
     setShowAlert(false);
+    setShuffledProblems(shuffleArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]));
   };
 
   const renderProblem = (problem: number) => (
@@ -120,27 +131,22 @@ const MulPracticeInSequence: React.FC<MulPracticeProps> = ({
 
   return (
     <>
-      <div className="mt-10 ">
+      <div className="mt-10">
         <h2 className="text-lg md:text-xl font-bold mb-1 text-gray-800">
-          {timesTable} Times Table Practic In Sequence
+          {timesTable} Times Table Practice (Shuffled)
         </h2>
 
         <p className="text-gray-600 font-medium md:w-[700px]">
           Fill in your answers and test your multiplication skills! Click
           <b className="text-zinc-800"> Check Answers</b> to see how you did! If
-          you get everything right, challenge yourself with the {timesTable}{" "}
-          times table in a shuffled order!
+          you get everything right, keep practicing with different tables!
         </p>
       </div>
-      <div className="flex flex-col items-center w-full max-w-3xl mx-auto p-6 rounded-xl shadow-lg mt-7">
+
+      <div className="flex flex-col items-center w-full max-w-3xl mx-auto p-6 rounded-xl border border-gray-300 mt-7">
         <form onSubmit={checkAnswers}>
-          <div className="grid grid-cols-2 gap-x-12 gap-y-2">
-            <div className="space-y-3 md:border-r border-gray-300 pr-[70px]">
-              {firstColumnProblems.map(renderProblem)}
-            </div>
-            <div className="space-y-3">
-              {secondColumnProblems.map(renderProblem)}
-            </div>
+          <div className="grid grid-cols-2 md:gap-x-20 gap-x-8 gap-y-2">
+            {shuffledProblems.map(renderProblem)}
           </div>
 
           {showResults && (
@@ -161,8 +167,8 @@ const MulPracticeInSequence: React.FC<MulPracticeProps> = ({
             </div>
           )}
 
-          <div className="mt-8 flex flex-col items-center">
-            <div className="flex flex-wrap gap-4 justify-center">
+          <div className="mt-8 flex flex-col items-end">
+            <div className="flex flex-wrap gap-4 justify-right">
               <button
                 type="submit"
                 className={`px-8 py-3 bg-gradient-to-r ${buttonGradient} text-white font-bold rounded-lg shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0`}
@@ -193,4 +199,4 @@ const MulPracticeInSequence: React.FC<MulPracticeProps> = ({
   );
 };
 
-export default MulPracticeInSequence;
+export default MulPracticeShuffled;
