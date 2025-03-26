@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://mathtechlab.com/images/math-sprint-banner.png", // Update with actual image URL
+        url: "https://mathtechlab.com/images/math-sprint-thumbnail.png", // Update with actual image URL
         width: 1200,
         height: 630,
         alt: "Math Sprint Game Banner",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     title: "Math Sprint Game - Test Your Speed and Accuracy!",
     description:
       "Challenge your mental math skills with the Math Sprint Game. Solve as many expressions as possible before time runs out!",
-    images: ["https://mathtechlab.com/images/math-sprint-banner.png"], // Update with actual image URL
+    images: ["https://mathtechlab.com/images/math-sprint-thumbnail.png"], // Update with actual image URL
   },
 };
 
