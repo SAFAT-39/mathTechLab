@@ -44,8 +44,7 @@ export const metadata = {
     follow: true,
   },
 };
-
-export const jsonLd = {
+const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebPage",
   name: "Play 2048 Game Online",
