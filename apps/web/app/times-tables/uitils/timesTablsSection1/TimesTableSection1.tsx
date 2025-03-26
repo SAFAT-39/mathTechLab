@@ -104,7 +104,7 @@ const TimesTableSection: React.FC<TimesTableProps> = ({
                   </button>
                 </h3>
 
-                <div className="space-y-3">
+                <div className="space-y-0">
                   {facts.map((fact) => (
                     <div
                       key={fact.id}
@@ -115,10 +115,12 @@ const TimesTableSection: React.FC<TimesTableProps> = ({
                       }`}
                     >
                       <div className="flex justify-between items-center ">
-                        <span className="text-lg font-medium ">
+                        <span className="text-2xl font-medium ">
                           {fact.equation}
                         </span>
-                        <span className="text-xl font-bold">{fact.result}</span>
+                        <span className="text-3xl font-bold">
+                          {fact.result}
+                        </span>
                       </div>
                     </div>
                   ))}
