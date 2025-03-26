@@ -22,7 +22,7 @@ const RelatedGames = ({ relatedGames }: RelatedGamesProps) => {
               <img
                 src={game.image}
                 alt={game.title}
-                className="w-24 h-24 object-cover rounded-md mr-4"
+                className="w-24 h-24 object-contain rounded-md mr-4"
               />
               <div>
                 <h3 className="text-lg font-semibold">{game.title}</h3>
