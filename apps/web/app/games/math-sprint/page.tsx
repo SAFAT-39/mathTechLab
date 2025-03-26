@@ -12,7 +12,7 @@ const Page = () => {
     {
       title: "2048 Game",
       description: "Combine tiles to reach 2048!",
-      href: "/games/2048-game",
+      href: "/games/2048",
       image: "/images/2048-thumbnail.png",
     },
   ];
