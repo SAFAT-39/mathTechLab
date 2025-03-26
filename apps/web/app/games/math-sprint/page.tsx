@@ -1,6 +1,21 @@
+import RelatedGames from "../../components/RelatedGames";
 import MathSprint from "./Game";
 
 const Page = () => {
+  const relatedGames = [
+    {
+      title: "24 Game",
+      description: "Use four numbers to make 24!",
+      href: "/games/24-game",
+      image: "/images/24-game-thumbnail.png",
+    },
+    {
+      title: "2048 Game",
+      description: "Combine tiles to reach 2048!",
+      href: "/games/2048-game",
+      image: "/images/2048-thumbnail.png",
+    },
+  ];
   return (
     <>
       <MathSprint />
@@ -41,6 +56,7 @@ const Page = () => {
           record?
         </p>
       </div>
+      <RelatedGames relatedGames={relatedGames} />
     </>
   );
 };
