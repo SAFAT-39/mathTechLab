@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Game from "./Game";
+import RelatedGames from "../../components/RelatedGames";
 
 const Page = () => {
   const faqSchema = {
@@ -67,6 +68,21 @@ const Page = () => {
       },
     ],
   };
+
+  const relatedGames = [
+    {
+      title: "2048 Game",
+      description: "Combine tiles to reach 2048!",
+      href: "/games/2048-game",
+      image: "/images/2048-thumbnail.png",
+    },
+    {
+      title: "Math Sprint",
+      description: "Solve math problems quickly!",
+      href: "/games/math-sprint",
+      image: "/images/math-sprint-thumbnail.png",
+    },
+  ];
   return (
     <>
       <Head>
@@ -174,6 +190,7 @@ const Page = () => {
           </div>
         </div>
       </section>
+      <RelatedGames relatedGames={relatedGames} />
     </>
   );
 };
