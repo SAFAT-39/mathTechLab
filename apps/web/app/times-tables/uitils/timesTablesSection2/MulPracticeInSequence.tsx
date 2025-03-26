@@ -134,7 +134,7 @@ return (
     <div className="flex flex-col items-center w-full max-w-3xl mx-auto p-6 rounded-xl shadow-lg mt-7">
       <form onSubmit={checkAnswers}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-2 ">
-          <div className="space-y-3 md:border-r border-gray-300 pr-[70px]">
+          <div className="space-y-3 md:border-r border-gray-300 md:pr-[70px]">
             {firstColumnProblems.map(renderProblem)}
           </div>
           <div className="space-y-3">
