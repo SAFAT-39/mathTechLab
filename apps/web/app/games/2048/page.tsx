@@ -1,3 +1,4 @@
+import RelatedGames from "../../components/RelatedGames";
 import Game2048 from "./Game";
 import Script from "next/script";
 
@@ -34,6 +35,22 @@ const Page = () => {
         "While there's no guaranteed win, using a strategy like keeping your highest number in a corner and avoiding random moves can help you get better scores consistently.",
     },
   ];
+
+  const relatedGames = [
+    {
+      title: "24 Game",
+      description: "Use four numbers to make 24!",
+      href: "/games/24-game",
+      image: "/images/24-game-thumbnail.png",
+    },
+    {
+      title: "Math Sprint",
+      description: "Solve math problems quickly!",
+      href: "/games/math-sprint",
+      image: "/images/math-sprint-thumbnail.png",
+    },
+  ];
+
   return (
     <>
       <h1 className="text-3xl font-bold text-center mb-1">
@@ -84,6 +101,7 @@ const Page = () => {
           ))}
         </div>
       </section>
+      <RelatedGames relatedGames={relatedGames} />
       <Script
         id="json-ld"
         type="application/ld+json"
