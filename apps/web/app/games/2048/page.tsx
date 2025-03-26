@@ -111,7 +111,7 @@ const Page = () => {
             "@type": "VideoGame",
             name: "2048",
             url: "https://mathtechlab.com/games/2048",
-            image: "https://mathtechlab.com/images/2048-game-thumbnail.png",
+            image: "https://mathtechlab.com/images/2048-thumbnail.png",
             description:
               "Play the 2048 game online for free. Merge tiles, strategize, and reach 2048 in this fun and addictive number puzzle game!",
             author: {

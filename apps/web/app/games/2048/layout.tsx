@@ -22,7 +22,7 @@ export const metadata = {
     type: "website",
     images: [
       {
-        url: "https://mathtechlab.com/images/2048-game-thumbnail.png",
+        url: "https://mathtechlab.com/images/2048-thumbnail.png",
         width: 1200,
         height: 630,
         alt: "Play 2048 Game Online - Merge Tiles to 2048",
@@ -34,7 +34,7 @@ export const metadata = {
     title: "Play 2048 Game Online – Free, Fun, and Challenging | MathTechLab",
     description:
       "Challenge yourself with the 2048 game! Merge tiles, strategize, and reach 2048. Play online for free at MathTechLab!",
-    images: ["https://mathtechlab.com/images/2048-game-thumbnail.png"],
+    images: ["https://mathtechlab.com/images/2048-thumbnail.png"],
   },
   alternates: {
     canonical: "https://mathtechlab.com/games/2048",
