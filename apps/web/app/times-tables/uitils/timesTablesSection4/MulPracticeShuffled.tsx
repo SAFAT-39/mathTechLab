@@ -166,7 +166,7 @@ return (
           </div>
         )}
 
-        <div className="mt-8 flex flex-col items-end">
+        <div className="mt-8 flex flex-col items-center">
           <div className="flex flex-wrap gap-4 justify-right">
             <button
               type="submit"
