@@ -480,7 +480,7 @@ const DragAndDropStep: React.FC<DragAndDropStepProps> = ({
               {gameCompleted && !showResults ? (
                 <motion.button
                   onClick={checkAnswers}
-                  className="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-lg font-bold rounded-full shadow-lg relative overflow-hidden group"
+                  className="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-lg font-bold rounded-full shadow-lg relative overflow-hidden group cursor-pointer"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -494,7 +494,7 @@ const DragAndDropStep: React.FC<DragAndDropStepProps> = ({
               ) : (
                 <motion.button
                   onClick={initializeGame}
-                  className="px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-lg font-bold rounded-full shadow-lg flex items-center relative overflow-hidden group"
+                  className="px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-lg font-bold rounded-full shadow-lg flex items-center relative overflow-hidden group cursor-pointer"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >

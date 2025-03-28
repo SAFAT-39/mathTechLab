@@ -170,7 +170,7 @@ return (
           <div className="flex flex-wrap gap-4 justify-right">
             <button
               type="submit"
-              className={`px-8 py-3 bg-gradient-to-r ${buttonGradient} text-white font-bold rounded-lg shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0`}
+              className={`px-8 py-3 bg-gradient-to-r ${buttonGradient} text-white font-bold rounded-lg shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer`}
             >
               Check Answers
             </button>
@@ -179,7 +179,7 @@ return (
               <button
                 type="button"
                 onClick={resetPractice}
-                className="px-8 py-3 bg-white border-2 border-gray-300 text-gray-700 font-bold rounded-lg hover:bg-gray-50 transition-all"
+                className="px-8 py-3 bg-white border-2 border-gray-300 text-gray-700 font-bold rounded-lg hover:bg-gray-50 transition-all cursor-pointer"
               >
                 Try Again
               </button>
