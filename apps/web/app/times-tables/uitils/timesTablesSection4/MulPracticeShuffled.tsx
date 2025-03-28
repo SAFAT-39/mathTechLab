@@ -85,9 +85,9 @@ const MulPracticeShuffled: React.FC<MulPracticeProps> = ({
 
 const renderProblem = (problem: number) => (
   <div key={problem} className="flex items-center gap-x-3.5 mb-2">
-    <div className="w-24 text-right pr-2">
+    <div className="w-24 lg:w-32 text-right pr-2">
       <span
-        className={`font-mono text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r ${bgGradient} whitespace-nowrap`}
+        className={`font-mono text-3xl lg:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r ${bgGradient} whitespace-nowrap`}
       >
         {timesTable} × {problem}
       </span>
@@ -130,7 +130,7 @@ const renderProblem = (problem: number) => (
 
 return (
   <>
-    <div className="mt-10">
+    <div className="mt-10 lg:mt-[60px]">
       <h2 className="text-lg md:text-2xl font-bold mb-1 text-gray-800">
         {timesTable} Times Table Practice (Shuffled)
       </h2>
@@ -142,7 +142,7 @@ return (
       </p>
     </div>
 
-    <div className="flex flex-col items-center w-full max-w-3xl mx-auto p-6 rounded-xl border border-gray-300 mt-7">
+    <div className="flex flex-col items-center w-full max-w-3xl lg:max-w-4xl mx-auto p-6 rounded-xl border border-gray-300 mt-7 shadow-lg shadow-blue-100 ">
       <form onSubmit={checkAnswers}>
         <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-20 gap-x-8 gap-y-2">
           {shuffledProblems.map(renderProblem)}

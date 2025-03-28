@@ -316,7 +316,7 @@ const DragAndDropStep: React.FC<DragAndDropStepProps> = ({
 
   return (
     <>
-      <div className="mt-10">
+      <div className="mt-10 lg:mt-[60px]">
         <h2 className="text-lg md:text-2xl font-bold mb-1 text-gray-800">
           Drag the colorful number tiles to the matching equations
         </h2>
