@@ -8,7 +8,15 @@ import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
 import { Trophy, RefreshCw, Star, Sparkles, Clock } from "lucide-react";
 
-export default function ArtisticDragDropGame({ timesTable = 1 }) {
+interface DragAndDropStepProps {
+  timesTable?: number;
+  // bgGradient?: string;
+  // buttonGradient?: string;
+}
+
+const DragAndDropStep: React.FC<DragAndDropStepProps> = ({
+  timesTable = 1,
+}) => {
   // State for tracking game progress
   const [problems] = useState(Array.from({ length: 12 }, (_, i) => i + 1));
   const [answers, setAnswers] = useState<number[]>([]);
@@ -229,7 +237,7 @@ export default function ArtisticDragDropGame({ timesTable = 1 }) {
         </div> */}
 
         <div className="w-28 md:w-36 text-right pr-2 md:pr-3">
-          <span className="font-mono text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 whitespace-nowrap">
+          <span className="font-mono text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 whitespace-nowrap">
             {timesTable}×{problem}=
           </span>
         </div>
@@ -311,207 +319,221 @@ export default function ArtisticDragDropGame({ timesTable = 1 }) {
   };
 
   return (
-    <div className="bg-gradient-to-br from-indigo-50 via-white to-purple-50 rounded-2xl shadow-xl overflow-hidden border border-indigo-100">
-      {/* Game header */}
-      <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-violet-600 p-5 text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-full h-full opacity-20">
-          <div className="absolute top-0 left-0 w-20 h-20 bg-white/20 rounded-full blur-xl transform -translate-x-1/2 -translate-y-1/2"></div>
-          <div className="absolute top-0 right-0 w-32 h-32 bg-white/20 rounded-full blur-xl transform translate-x-1/2 -translate-y-1/2"></div>
-          <div className="absolute bottom-0 right-1/4 w-16 h-16 bg-white/20 rounded-full blur-xl transform translate-y-1/2"></div>
-        </div>
+    <>
+      <div className="mt-10">
+        <h2 className="text-lg md:text-2xl font-bold mb-1 text-gray-800">
+          Drag the colorful number tiles to the matching equations
+        </h2>
 
-        <div className="flex justify-between items-center relative z-10">
-          <div>
-            <h2 className="text-3xl font-bold flex items-center">
-              <span className="mr-2">{timesTable}</span>
-              <span className="text-white/80 text-2xl">×</span>
-              <span className="ml-2">Times Table</span>
-            </h2>
-            <p className="text-indigo-100 mt-1">
-              Match the correct answers by dragging them to each equation
-            </p>
+        <p className="text-gray-600 font-medium md:w-[700px]">
+          <b className="text-zinc-800">Drag and drop</b> your way to
+          multiplication mastery with our beautiful interactive game. Match the
+          correct answers and challenge yourself to beat your best time!
+        </p>
+      </div>
+      <div className="mt-4 bg-gradient-to-br from-indigo-50 via-white to-purple-50 rounded-2xl shadow-xl overflow-hidden border border-indigo-100">
+        {/* Game header */}
+        <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-violet-600 p-5 text-white relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-full h-full opacity-20">
+            <div className="absolute top-0 left-0 w-20 h-20 bg-white/20 rounded-full blur-xl transform -translate-x-1/2 -translate-y-1/2"></div>
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/20 rounded-full blur-xl transform translate-x-1/2 -translate-y-1/2"></div>
+            <div className="absolute bottom-0 right-1/4 w-16 h-16 bg-white/20 rounded-full blur-xl transform translate-y-1/2"></div>
           </div>
 
-          <div className="flex items-center space-x-3">
-            <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full flex items-center border border-white/20">
-              <Clock className="h-4 w-4 mr-2 text-indigo-200" />
-              <span className="font-mono text-lg">{formatTime(timer)}</span>
+          <div className="flex justify-between items-center relative z-10">
+            <div>
+              <h2 className="text-3xl font-bold flex items-center">
+                <span className="mr-2">{timesTable}</span>
+                <span className="text-white/80 text-2xl">×</span>
+                <span className="ml-2">Times Table</span>
+              </h2>
+              <p className="text-indigo-100 mt-1">
+                Match the correct answers by dragging them to each equation
+              </p>
             </div>
 
-            {showResults && (
+            <div className="flex items-center space-x-3">
               <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full flex items-center border border-white/20">
-                <Trophy className="h-4 w-4 mr-2 text-yellow-300" />
-                <span className="font-mono text-lg">
-                  {score}/{problems.length}
-                </span>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-
-      <div className=" p-3 md:p-5 lg:p-8 relative">
-        {/* Game instructions */}
-        {/* <motion.div
-          className="mb-8 flex items-center justify-center"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-        >
-          <div className="bg-white/80 backdrop-blur-sm px-6 py-3 rounded-full text-indigo-700 font-medium border border-indigo-100 shadow-sm flex items-center">
-            <Star className="h-5 w-5 mr-2 text-amber-500" />
-            Drag the colorful number tiles to the matching equations
-          </div>
-        </motion.div> */}
-
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 p-2">
-          {/* Problems container - Two Columns */}
-          <div className=" md:w-2/3  grid grid-cols-2 gap-4 relative ">
-            <div className="absolute inset-0 bg-gradient-to-br from-indigo-100/50 to-transparent rounded-2xl -z-10 blur-3xl opacity-50"></div>
-
-            {problems.slice(0, 12).map((problem, index) => (
-              <div
-                key={index}
-                className="relative  lg:p-2 bg-white/80 rounded-xl shadow-md"
-              >
-                {renderProblem(problem, index)}
-              </div>
-            ))}
-          </div>
-
-          {/* Answers container */}
-
-          <motion.div
-            className="w-full md:w-1/3 bg-white/80 backdrop-blur-sm p-2 md:p-6 rounded-2xl border border-indigo-100 shadow-lg relative overflow-hidden flex flex-wrap justify-center gap-1 md:gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-          >
-            {/* Background effects */}
-            {/* <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/50 to-purple-50/50 -z-10"></div>
-            <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-indigo-200/20 to-transparent rounded-full blur-xl transform translate-x-1/2 -translate-y-1/2"></div>
-            <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-purple-200/20 to-transparent rounded-full blur-xl transform -translate-x-1/2 translate-y-1/2"></div> */}
-
-            {answers.map((answer, index) => (
-              <motion.div
-                key={answer}
-                draggable
-                onDragStart={() => handleDragStart(answer)}
-                onDragEnd={handleDragEnd}
-                className={`h-14 w-20 bg-gradient-to-br ${getAnswerTileColor(index)} rounded-xl flex items-center justify-center cursor-grab shadow-lg relative`}
-                whileHover={{ scale: 1.05, rotate: 2 }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.5 + index * 0.03 }}
-              >
-                <span className="font-mono text-2xl font-bold text-white">
-                  {answer}
-                </span>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Results and buttons */}
-        <div className="mt-10 flex flex-col items-center">
-          {showResults && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mb-8 p-8 bg-white/80 backdrop-blur-sm rounded-2xl border border-indigo-100 shadow-lg w-full max-w-lg text-center relative overflow-hidden"
-            >
-              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-indigo-50/50 to-purple-50/50 -z-10"></div>
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-indigo-200/20 to-transparent rounded-full blur-xl transform translate-x-1/2 -translate-y-1/2"></div>
-              <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-purple-200/20 to-transparent rounded-full blur-xl transform -translate-x-1/2 translate-y-1/2"></div>
-
-              <div className="flex justify-center mb-4">
-                {score === problems.length ? (
-                  <div className="relative">
-                    <Trophy className="h-16 w-16 text-yellow-500" />
-                    <motion.div
-                      className="absolute -top-2 -right-2 w-6 h-6 bg-yellow-300 rounded-full"
-                      animate={{ scale: [1, 1.5, 1] }}
-                      transition={{
-                        repeat: Number.POSITIVE_INFINITY,
-                        duration: 2,
-                      }}
-                    />
-                    <motion.div
-                      className="absolute -bottom-2 -left-2 w-4 h-4 bg-yellow-300 rounded-full"
-                      animate={{ scale: [1, 1.5, 1] }}
-                      transition={{
-                        repeat: Number.POSITIVE_INFINITY,
-                        duration: 2,
-                        delay: 0.5,
-                      }}
-                    />
-                  </div>
-                ) : (
-                  <Star className="h-16 w-16 text-indigo-400" />
-                )}
+                <Clock className="h-4 w-4 mr-2 text-indigo-200" />
+                <span className="font-mono text-lg">{formatTime(timer)}</span>
               </div>
 
-              <h3 className="text-3xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
-                Your Score:{" "}
-                <span className={getScoreColor()}>
-                  {score}/{problems.length}
-                </span>
-              </h3>
-
-              <div className="flex items-center justify-center mb-4">
-                <div className="bg-indigo-100 px-4 py-2 rounded-full flex items-center">
-                  <Clock className="h-4 w-4 mr-2 text-indigo-500" />
-                  <span className="font-mono font-bold text-indigo-700">
-                    {formatTime(timer)}
+              {showResults && (
+                <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full flex items-center border border-white/20">
+                  <Trophy className="h-4 w-4 mr-2 text-yellow-300" />
+                  <span className="font-mono text-lg">
+                    {score}/{problems.length}
                   </span>
                 </div>
-              </div>
+              )}
+            </div>
+          </div>
+        </div>
 
-              <p className="text-indigo-700 text-lg">
-                {score === problems.length
-                  ? "Perfect! You're a multiplication master! 🎉"
-                  : score >= problems.length * 0.8
-                    ? "Great job! Keep practicing to get even better! 👍"
-                    : "Keep practicing! You'll get better with time. 💪"}
-              </p>
+        <div className=" p-3 md:p-5 lg:p-8 relative">
+          {/* Game instructions */}
+          {/* <motion.div
+      className="mb-8 flex items-center justify-center"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.2 }}
+    >
+      <div className="bg-white/80 backdrop-blur-sm px-6 py-3 rounded-full text-indigo-700 font-medium border border-indigo-100 shadow-sm flex items-center">
+        <Star className="h-5 w-5 mr-2 text-amber-500" />
+        Drag the colorful number tiles to the matching equations
+      </div>
+    </motion.div> */}
+
+          <div className="flex flex-col lg:flex-row items-center justify-center gap-8 p-2">
+            {/* Problems container - Two Columns */}
+            <div className=" md:w-2/3  grid grid-cols-2 gap-4 relative ">
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-100/50 to-transparent rounded-2xl -z-10 blur-3xl opacity-50"></div>
+
+              {problems.slice(0, 12).map((problem, index) => (
+                <div
+                  key={index}
+                  className="relative  lg:p-2 bg-white/80 rounded-xl shadow-md"
+                >
+                  {renderProblem(problem, index)}
+                </div>
+              ))}
+            </div>
+
+            {/* Answers container */}
+
+            <motion.div
+              className="w-full md:w-1/3 bg-white/80 backdrop-blur-sm p-2 md:p-6 rounded-2xl border border-indigo-100 shadow-lg relative overflow-hidden flex flex-wrap justify-center gap-1 md:gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+            >
+              {/* Background effects */}
+              {/* <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/50 to-purple-50/50 -z-10"></div>
+    <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-indigo-200/20 to-transparent rounded-full blur-xl transform translate-x-1/2 -translate-y-1/2"></div>
+    <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-purple-200/20 to-transparent rounded-full blur-xl transform -translate-x-1/2 translate-y-1/2"></div> */}
+
+              {answers.map((answer, index) => (
+                <motion.div
+                  key={answer}
+                  draggable
+                  onDragStart={() => handleDragStart(answer)}
+                  onDragEnd={handleDragEnd}
+                  className={`h-14 w-20 bg-gradient-to-br ${getAnswerTileColor(index)} rounded-xl flex items-center justify-center cursor-grab shadow-lg relative`}
+                  whileHover={{ scale: 1.05, rotate: 2 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.5 + index * 0.03 }}
+                >
+                  <span className="font-mono text-2xl font-bold text-white">
+                    {answer}
+                  </span>
+                </motion.div>
+              ))}
             </motion.div>
-          )}
+          </div>
 
-          <div className="flex flex-wrap gap-4 justify-center">
-            {gameCompleted && !showResults ? (
-              <motion.button
-                onClick={checkAnswers}
-                className="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-lg font-bold rounded-full shadow-lg relative overflow-hidden group"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+          {/* Results and buttons */}
+          <div className="mt-10 flex flex-col items-center">
+            {showResults && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mb-8 p-8 bg-white/80 backdrop-blur-sm rounded-2xl border border-indigo-100 shadow-lg w-full max-w-lg text-center relative overflow-hidden"
               >
-                <span className="relative z-10">Check Answers</span>
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-emerald-600 to-teal-700 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div className="absolute top-0 left-0 w-full h-full">
-                  <div className="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full blur-md transform translate-x-1/2 -translate-y-1/2"></div>
-                  <div className="absolute bottom-0 left-0 w-16 h-16 bg-white/10 rounded-full blur-md transform -translate-x-1/2 translate-y-1/2"></div>
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-indigo-50/50 to-purple-50/50 -z-10"></div>
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-indigo-200/20 to-transparent rounded-full blur-xl transform translate-x-1/2 -translate-y-1/2"></div>
+                <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-purple-200/20 to-transparent rounded-full blur-xl transform -translate-x-1/2 translate-y-1/2"></div>
+
+                <div className="flex justify-center mb-4">
+                  {score === problems.length ? (
+                    <div className="relative">
+                      <Trophy className="h-16 w-16 text-yellow-500" />
+                      <motion.div
+                        className="absolute -top-2 -right-2 w-6 h-6 bg-yellow-300 rounded-full"
+                        animate={{ scale: [1, 1.5, 1] }}
+                        transition={{
+                          repeat: Number.POSITIVE_INFINITY,
+                          duration: 2,
+                        }}
+                      />
+                      <motion.div
+                        className="absolute -bottom-2 -left-2 w-4 h-4 bg-yellow-300 rounded-full"
+                        animate={{ scale: [1, 1.5, 1] }}
+                        transition={{
+                          repeat: Number.POSITIVE_INFINITY,
+                          duration: 2,
+                          delay: 0.5,
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    <Star className="h-16 w-16 text-indigo-400" />
+                  )}
                 </div>
-              </motion.button>
-            ) : (
-              <motion.button
-                onClick={initializeGame}
-                className="px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-lg font-bold rounded-full shadow-lg flex items-center relative overflow-hidden group"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <RefreshCw className="h-5 w-5 mr-2 relative z-10" />
-                <span className="relative z-10">Play Again</span>
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-indigo-600 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div className="absolute top-0 left-0 w-full h-full">
-                  <div className="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full blur-md transform translate-x-1/2 -translate-y-1/2"></div>
-                  <div className="absolute bottom-0 left-0 w-16 h-16 bg-white/10 rounded-full blur-md transform -translate-x-1/2 translate-y-1/2"></div>
+
+                <h3 className="text-3xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
+                  Your Score:{" "}
+                  <span className={getScoreColor()}>
+                    {score}/{problems.length}
+                  </span>
+                </h3>
+
+                <div className="flex items-center justify-center mb-4">
+                  <div className="bg-indigo-100 px-4 py-2 rounded-full flex items-center">
+                    <Clock className="h-4 w-4 mr-2 text-indigo-500" />
+                    <span className="font-mono font-bold text-indigo-700">
+                      {formatTime(timer)}
+                    </span>
+                  </div>
                 </div>
-              </motion.button>
+
+                <p className="text-indigo-700 text-lg">
+                  {score === problems.length
+                    ? "Perfect! You're a multiplication master! 🎉"
+                    : score >= problems.length * 0.8
+                      ? "Great job! Keep practicing to get even better! 👍"
+                      : "Keep practicing! You'll get better with time. 💪"}
+                </p>
+              </motion.div>
             )}
+
+            <div className="flex flex-wrap gap-4 justify-center">
+              {gameCompleted && !showResults ? (
+                <motion.button
+                  onClick={checkAnswers}
+                  className="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-lg font-bold rounded-full shadow-lg relative overflow-hidden group"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="relative z-10">Check Answers</span>
+                  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-emerald-600 to-teal-700 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  <div className="absolute top-0 left-0 w-full h-full">
+                    <div className="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full blur-md transform translate-x-1/2 -translate-y-1/2"></div>
+                    <div className="absolute bottom-0 left-0 w-16 h-16 bg-white/10 rounded-full blur-md transform -translate-x-1/2 translate-y-1/2"></div>
+                  </div>
+                </motion.button>
+              ) : (
+                <motion.button
+                  onClick={initializeGame}
+                  className="px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-lg font-bold rounded-full shadow-lg flex items-center relative overflow-hidden group"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <RefreshCw className="h-5 w-5 mr-2 relative z-10" />
+                  <span className="relative z-10">Play Again</span>
+                  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-indigo-600 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  <div className="absolute top-0 left-0 w-full h-full">
+                    <div className="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full blur-md transform translate-x-1/2 -translate-y-1/2"></div>
+                    <div className="absolute bottom-0 left-0 w-16 h-16 bg-white/10 rounded-full blur-md transform -translate-x-1/2 translate-y-1/2"></div>
+                  </div>
+                </motion.button>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
-}
+};
+export default DragAndDropStep;

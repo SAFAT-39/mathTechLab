@@ -76,7 +76,7 @@ const renderProblem = (problem: number) => (
   <div key={problem} className="flex items-center gap-x-3.5 mb-2">
     <div className="w-24 text-right pr-2">
       <span
-        className={`font-mono text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r ${bgGradient} whitespace-nowrap`}
+        className={`font-mono text-3xl  font-bold bg-clip-text text-transparent bg-gradient-to-r ${bgGradient} whitespace-nowrap`}
       >
         {timesTable} × {problem}
       </span>
@@ -120,7 +120,7 @@ const renderProblem = (problem: number) => (
 return (
   <>
     <div className="mt-10 ">
-      <h2 className="text-lg md:text-xl font-bold mb-1 text-gray-800">
+      <h2 className="text-lg md:text-2xl font-bold mb-1 text-gray-800">
         {timesTable} Times Table Practic In Sequence
       </h2>
 
@@ -133,11 +133,11 @@ return (
     </div>
     <div className="flex flex-col items-center w-full max-w-3xl mx-auto p-6 rounded-xl shadow-lg mt-7">
       <form onSubmit={checkAnswers}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-2 ">
-          <div className="space-y-3 md:border-r border-gray-300 md:pr-[70px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-0 ">
+          <div className=" space-y-0 md:space-y-3 md:border-r border-gray-300 md:pr-[70px]">
             {firstColumnProblems.map(renderProblem)}
           </div>
-          <div className="space-y-3">
+          <div className="space-y-0 md:space-y-3">
             {secondColumnProblems.map(renderProblem)}
           </div>
         </div>

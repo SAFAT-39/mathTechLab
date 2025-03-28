@@ -131,7 +131,7 @@ const renderProblem = (problem: number) => (
 return (
   <>
     <div className="mt-10">
-      <h2 className="text-lg md:text-xl font-bold mb-1 text-gray-800">
+      <h2 className="text-lg md:text-2xl font-bold mb-1 text-gray-800">
         {timesTable} Times Table Practice (Shuffled)
       </h2>
 
