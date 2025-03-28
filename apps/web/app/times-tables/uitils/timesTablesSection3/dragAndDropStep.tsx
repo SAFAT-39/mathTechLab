@@ -232,10 +232,6 @@ const DragAndDropStep: React.FC<DragAndDropStepProps> = ({
         transition={{ duration: 0.3, delay: index * 0.05 }}
         className={`relative flex  items-center ${dragOverProblem === problem ? "z-10" : ""}`}
       >
-        {/* <div className="absolute -left-4 top-1/2 transform -translate-y-1/2 w-8 h-8 flex items-center justify-center">
-          <span className="text-xs font-bold text-indigo-400">{problem}</span>
-        </div> */}
-
         <div className="w-28 md:w-36 text-right pr-2 md:pr-3">
           <span className="font-mono text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 whitespace-nowrap">
             {timesTable}×{problem}=
@@ -353,10 +349,10 @@ const DragAndDropStep: React.FC<DragAndDropStepProps> = ({
             </div>
 
             <div className="flex items-center space-x-3">
-              <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full flex items-center border border-white/20">
+              {/* <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full flex items-center border border-white/20">
                 <Clock className="h-4 w-4 mr-2 text-indigo-200" />
                 <span className="font-mono text-lg">{formatTime(timer)}</span>
-              </div>
+              </div> */}
 
               {showResults && (
                 <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full flex items-center border border-white/20">
@@ -371,19 +367,6 @@ const DragAndDropStep: React.FC<DragAndDropStepProps> = ({
         </div>
 
         <div className=" p-3 md:p-5 lg:p-8 relative">
-          {/* Game instructions */}
-          {/* <motion.div
-      className="mb-8 flex items-center justify-center"
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.2 }}
-    >
-      <div className="bg-white/80 backdrop-blur-sm px-6 py-3 rounded-full text-indigo-700 font-medium border border-indigo-100 shadow-sm flex items-center">
-        <Star className="h-5 w-5 mr-2 text-amber-500" />
-        Drag the colorful number tiles to the matching equations
-      </div>
-    </motion.div> */}
-
           <div className="flex flex-col lg:flex-row items-center justify-center gap-8 p-2">
             {/* Problems container - Two Columns */}
             <div className=" md:w-2/3  grid grid-cols-2 gap-4 relative ">
@@ -407,11 +390,6 @@ const DragAndDropStep: React.FC<DragAndDropStepProps> = ({
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              {/* Background effects */}
-              {/* <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/50 to-purple-50/50 -z-10"></div>
-    <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-indigo-200/20 to-transparent rounded-full blur-xl transform translate-x-1/2 -translate-y-1/2"></div>
-    <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-purple-200/20 to-transparent rounded-full blur-xl transform -translate-x-1/2 translate-y-1/2"></div> */}
-
               {answers.map((answer, index) => (
                 <motion.div
                   key={answer}
