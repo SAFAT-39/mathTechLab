@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Game from "./Game";
+import RelatedGames from "../../components/RelatedGames";
 
 const Page = () => {
   const faqSchema = {
@@ -19,7 +20,7 @@ const Page = () => {
         name: "Can I play this game on mobile?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes! The game is fully responsive and works on all devices.",
+          text: "Yes! The 2048 game on MathTechLab is fully responsive, mobile-friendly and works on all devices.",
         },
       },
       {
@@ -67,6 +68,21 @@ const Page = () => {
       },
     ],
   };
+
+  const relatedGames = [
+    {
+      title: "2048 Game",
+      description: "Combine tiles to reach 2048!",
+      href: "/games/2048",
+      image: "/images/2048-thumbnail.png",
+    },
+    {
+      title: "Math Sprint",
+      description: "Solve math problems quickly!",
+      href: "/games/math-sprint",
+      image: "/images/math-sprint-thumbnail.png",
+    },
+  ];
   return (
     <>
       <Head>
@@ -161,7 +177,8 @@ const Page = () => {
                 Q: Can I play this game on mobile?
               </h3>
               <p>
-                A: Yes! The game is fully responsive and works on all devices.
+                A: Yes! The 2048 game on MathTechLab is fully responsive,
+                mobile-friendly and works on all devices.
               </p>
             </div>
             <div>
@@ -173,6 +190,7 @@ const Page = () => {
           </div>
         </div>
       </section>
+      <RelatedGames relatedGames={relatedGames} />
     </>
   );
 };

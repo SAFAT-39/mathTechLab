@@ -68,14 +68,14 @@ h1.title {
 .best-container {
   position: relative;
   display: inline-block;
-  background: #bbada0;
+  background: #444342;
   padding: 15px 25px;
   font-size: 25px;
   height: 56px;
   line-height: 47px;
   font-weight: bold;
   border-radius: 3px;
-  color: white;
+  color: #fbfbfb;
   margin-top: 8px;
   text-align: center;
 }
@@ -185,7 +185,7 @@ hr {
   -ms-user-select: none;
   -ms-touch-action: none;
   touch-action: none;
-  background: #bbada0;
+  background: #8f8479;
   border-radius: 6px;
   width: 500px;
   height: 500px;
@@ -232,14 +232,14 @@ hr {
   line-height: 42px;
   margin-left: 9px;
 }
-.game-container .game-message a.keep-playing-button {
+.game-container .game-message button.keep-playing-button {
   display: none;
 }
 .game-container .game-message.game-won {
   background: rgba(237, 194, 46, 0.5);
   color: #f9f6f2;
 }
-.game-container .game-message.game-won a.keep-playing-button {
+.game-container .game-message.game-won button.keep-playing-button {
   display: inline-block;
 }
 .game-container .game-message.game-won,
@@ -654,12 +654,12 @@ hr {
 }
 
 .restart-button {
-  display: inline-block;
-  background: #8f7a66;
+  /* display: inline-block; */
+  background: #444342;
   border-radius: 3px;
   padding: 0 20px;
   text-decoration: none;
-  color: #f9f6f2;
+  color: #fbfbfb;
   height: 40px;
   line-height: 42px;
   display: block;
@@ -767,14 +767,14 @@ hr {
     line-height: 42px;
     margin-left: 9px;
   }
-  .game-container .game-message a.keep-playing-button {
+  .game-container .game-message button.keep-playing-button {
     display: none;
   }
   .game-container .game-message.game-won {
     background: rgba(237, 194, 46, 0.5);
     color: #f9f6f2;
   }
-  .game-container .game-message.game-won a.keep-playing-button {
+  .game-container .game-message.game-won button.keep-playing-button {
     display: inline-block;
   }
   .game-container .game-message.game-won,

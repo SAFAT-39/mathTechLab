@@ -1,12 +1,13 @@
 import Section from "./Section";
 import TitleSubtitle from "./TitleSubtitle";
+import WhyUse from "./WhyUse";
 
 const Content = () => {
   return (
     <>
       <TitleSubtitle />
       <Section
-        title="Games"
+        title="Interactive Math Games"
         items={[
           {
             title: "🧩 24 Game",
@@ -41,6 +42,7 @@ const Content = () => {
         ]}
         seeMoreLink="/times-tables"
       />
+      <WhyUse />
     </>
   );
 };

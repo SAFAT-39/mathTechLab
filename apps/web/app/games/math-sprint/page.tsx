@@ -1,6 +1,21 @@
+import RelatedGames from "../../components/RelatedGames";
 import MathSprint from "./Game";
 
 const Page = () => {
+  const relatedGames = [
+    {
+      title: "24 Game",
+      description: "Use four numbers to make 24!",
+      href: "/games/24-game",
+      image: "/images/24-game-thumbnail.png",
+    },
+    {
+      title: "2048 Game",
+      description: "Combine tiles to reach 2048!",
+      href: "/games/2048",
+      image: "/images/2048-thumbnail.png",
+    },
+  ];
   return (
     <>
       <MathSprint />
@@ -9,9 +24,9 @@ const Page = () => {
           🚀 Math Sprint Game - Challenge Your Mental Math Skills!
         </h2>
         <p className="mt-4 text-lg">
-          Are you ready to put your math skills to the test? The{" "}
+          Do you want to put your math skills into the test? The{" "}
           <strong>Math Sprint Game</strong> is an exciting brain-training
-          challenge where you solve simple arithmetic expressions as fast as
+          challenge. Here you solve simple arithmetic expressions as fast as
           possible before the time runs out!
         </p>
 
@@ -22,7 +37,7 @@ const Page = () => {
           <li>A math expression appears on the screen.</li>
           <li>Select the correct answer from multiple choices.</li>
           <li>Solve as many expressions as possible before time runs out.</li>
-          <li>Your score is the total number of correct answers.</li>
+          <li>The total number of correct answers is your score.</li>
           <li>Try to beat your high score!</li>
         </ul>
 
@@ -41,6 +56,7 @@ const Page = () => {
           record?
         </p>
       </div>
+      <RelatedGames relatedGames={relatedGames} />
     </>
   );
 };

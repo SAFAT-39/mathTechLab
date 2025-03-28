@@ -53,23 +53,26 @@ const GamesPage = () => {
           problem-solving challenges.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1  lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-6">
           <GameCard
             title="24 Game"
             description="A classic math game where you must use four numbers and basic operations to reach 24. Perfect for sharpening your math skills and quick thinking."
             url="/games/24-game"
+            image="/images/24-game-thumbnail.png"
           />
 
           <GameCard
             title="2048 Game"
             description="Combine like numbers in this fun puzzle game to reach the elusive 2048 tile. A perfect mix of strategy and math."
             url="/games/2048-game"
+            image="/images/2048-thumbnail.png"
           />
 
           <GameCard
             title="Math Sprint Game"
             description="Solve simple math expressions against the clock! Test your speed and accuracy in this fast-paced math challenge."
             url="/games/math-sprint"
+            image="/images/math-sprint-thumbnail.png"
           />
         </div>
       </section>

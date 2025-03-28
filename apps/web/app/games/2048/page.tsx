@@ -1,3 +1,4 @@
+import RelatedGames from "../../components/RelatedGames";
 import Game2048 from "./Game";
 import Script from "next/script";
 
@@ -11,7 +12,7 @@ const Page = () => {
     {
       question: "How do you play 2048?",
       answer:
-        "Use arrow keys (or swipe on mobile) to move tiles. When two tiles with the same number touch, they merge into one with double the value. The goal is to reach the 2048 tile.",
+        "Use arrow keys  to move tiles (use swipe on touch devices). When two tiles with the same number touch, they merge into one with double the value. Reaching maximum 2048 tile is the goal.",
     },
     {
       question: "Does the game save my progress if I close the tab?",
@@ -34,6 +35,22 @@ const Page = () => {
         "While there's no guaranteed win, using a strategy like keeping your highest number in a corner and avoiding random moves can help you get better scores consistently.",
     },
   ];
+
+  const relatedGames = [
+    {
+      title: "24 Game",
+      description: "Use four numbers to make 24!",
+      href: "/games/24-game",
+      image: "/images/24-game-thumbnail.png",
+    },
+    {
+      title: "Math Sprint",
+      description: "Solve math problems quickly!",
+      href: "/games/math-sprint",
+      image: "/images/math-sprint-thumbnail.png",
+    },
+  ];
+
   return (
     <>
       <h1 className="text-3xl font-bold text-center mb-1">
@@ -49,7 +66,7 @@ const Page = () => {
       <section className="mt-[100px]">
         <h2 className="text-2xl font-semibold">How to Play 2048</h2>
         <ul className="list-disc list-inside mt-2 text-gray-700">
-          <li>Use arrow keys (or swipe) to move tiles.</li>
+          <li>Use arrow keys to move tiles (use swipe in touch devices).</li>
           <li>Merge two identical tiles to create a larger number.</li>
           <li>Keep merging until you reach 2048!</li>
           <li>Game ends when no moves are left.</li>
@@ -84,6 +101,7 @@ const Page = () => {
           ))}
         </div>
       </section>
+      <RelatedGames relatedGames={relatedGames} />
       <Script
         id="json-ld"
         type="application/ld+json"
@@ -93,7 +111,7 @@ const Page = () => {
             "@type": "VideoGame",
             name: "2048",
             url: "https://mathtechlab.com/games/2048",
-            image: "https://mathtechlab.com/images/2048-game-thumbnail.png",
+            image: "https://mathtechlab.com/images/2048-thumbnail.png",
             description:
               "Play the 2048 game online for free. Merge tiles, strategize, and reach 2048 in this fun and addictive number puzzle game!",
             author: {
