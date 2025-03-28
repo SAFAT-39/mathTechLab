@@ -13,6 +13,7 @@
     "@mathtechlab/design-system": "workspace:*",
     "@mathtechlab/ui": "workspace:*",
     "@tailwindcss/postcss": "^4.0.12",
+    "canvas-confetti": "^1.9.3",
     "framer-motion": "^12.5.0",
     "lucide-react": "^0.483.0",
     "next": "^15.2.1",

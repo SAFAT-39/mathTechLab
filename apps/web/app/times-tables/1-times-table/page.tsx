@@ -1,6 +1,7 @@
 import TimesTableSection from "../uitils/timesTablsSection1/TimesTableSection1";
 import MulPracticeInSequence from "../uitils/timesTablesSection2/MulPracticeInSequence";
 import MulPracticeShuffled from "../uitils/timesTablesSection4/MulPracticeShuffled";
+import ArtisticDragDropGame from "../uitils/timesTablesSection3/dragAndDropStep";
 
 export default function OneTimesTable() {
   return (
@@ -17,6 +18,7 @@ export default function OneTimesTable() {
         bgGradient="from-blue-600 to-violet-600"
         buttonGradient="from-violet-600 to-blue-600"
       />
+      <ArtisticDragDropGame />
       <MulPracticeShuffled
         timesTable={1}
         bgGradient="from-teal-600 to-cyan-600"
