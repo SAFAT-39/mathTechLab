@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import { ArrowDownToLine } from "lucide-react";
 
 interface TimesTableDescriptionProps {
   title: string;
@@ -80,9 +81,10 @@ const TimesTableDescription: React.FC<TimesTableDescriptionProps> = ({
             </div>
             <button
               onClick={handleDownload}
-              className="mt-6 px-6 py-3 text-black border-b border-gray-300 font-semibold rounded-lg shadow-md hover:bg-indigo-500 hover:text-white transition duration-300"
+              className="flex gap-1 mt-6 px-6 py-3 text-black border-b border-gray-300 font-semibold rounded-lg shadow-md hover:bg-indigo-500 hover:text-white transition duration-300"
             >
               {downloadText}
+              <ArrowDownToLine />
             </button>
           </div>
         </div>
