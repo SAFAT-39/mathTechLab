@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 
@@ -18,15 +19,34 @@ const TimesTableDescription: React.FC<TimesTableDescriptionProps> = ({
   imagealt,
   downloadText = "Download",
 }) => {
+  // Function to handle image download
+  const handleDownload = async () => {
+    try {
+      const response = await fetch(imageUrl.src); // Fetch the image URL
+      const blob = await response.blob();
+      const blobUrl = URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.download = imagealt || "times-table.png"; // Set default filename
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      // Revoke blob URL to free memory
+      URL.revokeObjectURL(blobUrl);
+    } catch (error) {
+      console.error("Error downloading the image:", error);
+    }
+  };
+
   return (
     <section>
       <div>
-        {/* Gradient Background */}
-
         <div className="grid lg:grid-cols-2 gap-10 items-center mt-[60px]">
           {/* Text Content */}
           <div>
-            <h2 className="text-lg md:text-2xl  font-extrabold text-gray-900 leading-snug mb-4">
+            <h2 className="text-lg md:text-2xl font-extrabold text-gray-900 leading-snug mb-4">
               {title}
             </h2>
             <p className="text-lg text-gray-700 leading-relaxed mb-6">
@@ -38,7 +58,7 @@ const TimesTableDescription: React.FC<TimesTableDescriptionProps> = ({
               {points.map((point, index) => (
                 <div
                   key={index}
-                  className="flex items-start text-lg border-b border-gray-300 "
+                  className="flex items-start text-lg border-b border-gray-300"
                 >
                   <div className="h-6 w-6 flex items-center justify-center bg-indigo-500 text-white rounded-full mr-3">
                     ✓
@@ -48,8 +68,9 @@ const TimesTableDescription: React.FC<TimesTableDescriptionProps> = ({
               ))}
             </div>
           </div>
+
           {/* Image + Download Button */}
-          <div className=" flex flex-col items-end ">
+          <div className="flex flex-col items-end">
             <div className="rounded-lg shadow-lg">
               <Image
                 src={imageUrl}
@@ -57,13 +78,12 @@ const TimesTableDescription: React.FC<TimesTableDescriptionProps> = ({
                 className="rounded-lg shadow-lg"
               />
             </div>
-            <a
-              href={imageUrl}
-              download
-              className="mt-6 px-6 py-3 text-black border-b border-gray-300  font-semibold rounded-lg shadow-md hover:bg-indigo-500 hover:text-white transition duration-300"
+            <button
+              onClick={handleDownload}
+              className="mt-6 px-6 py-3 text-black border-b border-gray-300 font-semibold rounded-lg shadow-md hover:bg-indigo-500 hover:text-white transition duration-300"
             >
               {downloadText}
-            </a>
+            </button>
           </div>
         </div>
       </div>
