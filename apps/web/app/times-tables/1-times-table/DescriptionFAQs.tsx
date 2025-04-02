@@ -1,10 +1,37 @@
 import TimesTableDescription from "../uitils/description/TimesTableDescription";
-import FaqsAll from "../uitils/faqs/FaqsAll";
+import FAQSection from "../uitils/faqs/FAQSection";
 import timestable from "../../../public/static/image/allTimesTable/1-times-table (2).png";
 
 const DescriptionFAQs = () => {
+  const faqs = [
+    {
+      question: "Why is learning the 1 Times Table important?",
+      answer:
+        "Mastering the 1 times table helps build confidence and lays the foundation for learning higher multiplication tables.",
+    },
+    {
+      question: "How does MathTechLab help with Times Tables practice?",
+      answer:
+        "MathTechLab provides interactive exercises, audio support, and drag-and-drop features to make learning engaging and fun!",
+    },
+    {
+      question: "Can I download and print the 1 Times Table?",
+      answer:
+        "Yes! You can download and print the times table from our website for offline practice.",
+    },
+    {
+      question: "Is this platform suitable for kids?",
+      answer:
+        "Absolutely! Our website is designed to be kid-friendly, engaging, and interactive, making learning fun and effective.",
+    },
+    {
+      question: "What makes MathTechLab different from other math sites?",
+      answer:
+        "We focus on interactive learning instead of plain memorization. Our drag-and-drop exercises, audio assistance, and step-by-step guidance ensure a deeper understanding of multiplication.",
+    },
+  ];
   return (
-    <div className="space-y-12">
+    <div className="space-y-[60px]">
       <TimesTableDescription
         title="Why Practice the 1 Times Table on MathTechLab?"
         description="This is the perfect place to practice the 1 Times Table. At MathTechLab, we provide an interactive and engaging way to master the 1 times table with visual learning, audio support, and hands-on activities. Unlike traditional rote memorization, our platform offers a multi-sensory approach that enhances understanding and retention."
@@ -18,7 +45,14 @@ const DescriptionFAQs = () => {
         imageUrl={timestable}
         downloadText="Download"
       />
-      <FaqsAll />
+      <FAQSection
+        title="Frequently Asked Questions"
+        faqs={faqs}
+        borderColor="border-indigo-500"
+        questionTextColor="text-indigo-600"
+        titleTextColor="text-indigo-700"
+      />
+      {/* <FAQSection title="Frequently Asked Questions" faqs={faqs} /> */}
     </div>
   );
 };

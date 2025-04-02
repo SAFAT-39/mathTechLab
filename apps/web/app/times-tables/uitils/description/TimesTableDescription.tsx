@@ -85,7 +85,7 @@ const TimesTableDescription: React.FC<TimesTableDescriptionProps> = ({
       <div>
         {/* Gradient Background */}
 
-        <div className="grid lg:grid-cols-2 gap-10 items-center p-8">
+        <div className="grid lg:grid-cols-2 gap-10 items-center mt-[60px]">
           {/* Text Content */}
           <div>
             <h2 className="text-lg md:text-2xl  font-extrabold text-gray-900 leading-snug mb-4">
