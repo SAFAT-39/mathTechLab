@@ -43,6 +43,7 @@ const DescriptionFAQs = () => {
           "Downloadable Resources – Access and download our beautifully designed 1 Times Table chart for offline practice.",
         ]}
         imageUrl={timestable}
+        imagealt="1 times table"
         downloadText="Download"
       />
       <FAQSection

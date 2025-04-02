@@ -1,67 +1,3 @@
-// import React from "react";
-
-// interface TimesTableDescriptionProps {
-//   title: string;
-//   description: string;
-//   points: string[];
-//   imageUrl: any;
-//   downloadText?: string;
-// }
-
-// const TimesTableDescription: React.FC<TimesTableDescriptionProps> = ({
-//   title,
-//   description,
-//   points,
-//   imageUrl,
-//   downloadText = "Download",
-// }) => {
-//   return (
-//     <section className="w-full max-w-5xl mx-auto px-6 py-12">
-//       <div className="grid md:grid-cols-2 gap-8 items-center">
-//         {/* Text Content */}
-//         <div>
-//           <h2 className="text-3xl md:text-4xl font-bold text-indigo-700 mb-4">
-//             {title}
-//           </h2>
-//           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-//             {description}
-//           </p>
-
-//           {/* Benefits List */}
-//           <ul className="space-y-4">
-//             {points.map((point, index) => (
-//               <li
-//                 key={index}
-//                 className="flex items-start text-gray-800 text-lg"
-//               >
-//                 ✅ <span className="ml-2">{point}</span>
-//               </li>
-//             ))}
-//           </ul>
-//         </div>
-
-//         {/* Image + Download */}
-//         <div className="text-center">
-//           <img
-//             src={imageUrl}
-//             alt="Downloadable Resource"
-//             className="w-full max-w-xs mx-auto rounded-xl shadow-lg"
-//           />
-//           <a
-//             href={imageUrl}
-//             download
-//             className="mt-4 inline-block bg-indigo-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-indigo-500 transition duration-300"
-//           >
-//             {downloadText}
-//           </a>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default TimesTableDescription;
-
 import React from "react";
 import Image from "next/image";
 
@@ -71,6 +7,7 @@ interface TimesTableDescriptionProps {
   points: string[];
   imageUrl: any;
   downloadText?: string;
+  imagealt: string;
 }
 
 const TimesTableDescription: React.FC<TimesTableDescriptionProps> = ({
@@ -78,6 +15,7 @@ const TimesTableDescription: React.FC<TimesTableDescriptionProps> = ({
   description,
   points,
   imageUrl,
+  imagealt,
   downloadText = "Download",
 }) => {
   return (
@@ -98,7 +36,10 @@ const TimesTableDescription: React.FC<TimesTableDescriptionProps> = ({
             {/* Benefits List */}
             <div className="space-y-8">
               {points.map((point, index) => (
-                <div key={index} className="flex items-start text-lg border-b ">
+                <div
+                  key={index}
+                  className="flex items-start text-lg border-b border-gray-300 "
+                >
                   <div className="h-6 w-6 flex items-center justify-center bg-indigo-500 text-white rounded-full mr-3">
                     ✓
                   </div>
@@ -112,7 +53,7 @@ const TimesTableDescription: React.FC<TimesTableDescriptionProps> = ({
             <div className="rounded-lg shadow-lg">
               <Image
                 src={imageUrl}
-                alt="Downloadable Resource"
+                alt={imagealt}
                 className="rounded-lg shadow-lg"
               />
             </div>
