@@ -2,6 +2,7 @@ import TimesTableSection from "../uitils/timesTablsSection1/TimesTableSection1";
 import MulPracticeInSequence from "../uitils/timesTablesSection2/MulPracticeInSequence";
 import MulPracticeShuffled from "../uitils/timesTablesSection4/MulPracticeShuffled";
 import DragAndDropStep from "../uitils/timesTablesSection3/dragAndDropStep";
+import DescriptionFAQs from "./DescriptionFAQs";
 
 export default function OneTimesTable() {
   return (
@@ -24,6 +25,7 @@ export default function OneTimesTable() {
         bgGradient="from-teal-600 to-cyan-600"
         buttonGradient="from-cyan-600 to-sky-600"
       />
+      <DescriptionFAQs />
     </>
   );
 }
