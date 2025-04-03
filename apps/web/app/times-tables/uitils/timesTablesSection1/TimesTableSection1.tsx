@@ -97,7 +97,7 @@ const TimesTableSection: React.FC<TimesTableProps> = ({
                 <h3 className="text-2xl font-bold mb-4 flex justify-between items-center">
                   <span>{tableNumber} Times Table</span>
                   <button
-                    className="p-2 rounded-full hover:bg-white/20 text-white"
+                    className="p-2 rounded-full hover:bg-white/20 text-white cursor-pointer"
                     onClick={playAudio}
                   >
                     {isPlaying ? "■" : "▶"}

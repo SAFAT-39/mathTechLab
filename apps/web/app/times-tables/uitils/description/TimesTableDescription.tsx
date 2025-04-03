@@ -53,9 +53,25 @@ const TimesTableDescription: React.FC<TimesTableDescriptionProps> = ({
             <p className="text-lg text-gray-700 leading-relaxed mb-6">
               {description}
             </p>
+            <ul className="space-y-5">
+              {points.map((point, index) => {
+                const [boldPart, ...rest] = point.split(" – "); // Splitting at '–' to make first part bold
+                return (
+                  <li
+                    key={index}
+                    className="flex items-start border-b-2 border-gray-300"
+                  >
+                    <span className="mr-2 text-indigo-600">✔</span>
+                    <span>
+                      <strong>{boldPart} –</strong> {rest.join(" – ")}
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
 
             {/* Benefits List */}
-            <div className="space-y-8">
+            {/* <div className="space-y-8">
               {points.map((point, index) => (
                 <div
                   key={index}
@@ -67,11 +83,11 @@ const TimesTableDescription: React.FC<TimesTableDescriptionProps> = ({
                   <span className="text-gray-800">{point}</span>
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
 
           {/* Image + Download Button */}
-          <div className="flex flex-col items-end">
+          <div className="flex flex-col items-end ">
             <div className="rounded-lg shadow-lg">
               <Image
                 src={imageUrl}
@@ -81,7 +97,7 @@ const TimesTableDescription: React.FC<TimesTableDescriptionProps> = ({
             </div>
             <button
               onClick={handleDownload}
-              className="flex gap-1 mt-6 px-6 py-3 text-black border-b border-gray-300 font-semibold rounded-lg shadow-md hover:bg-indigo-500 hover:text-white transition duration-300"
+              className="cursor-pointer flex gap-1 mt-6 px-6 py-3 text-black border-b border-gray-300 font-semibold rounded-lg shadow-md hover:bg-indigo-500 hover:text-white transition duration-300"
             >
               {downloadText}
               <ArrowDownToLine />
