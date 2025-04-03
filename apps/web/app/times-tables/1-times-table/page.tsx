@@ -1,4 +1,4 @@
-import TimesTableSection from "../uitils/timesTablsSection1/TimesTableSection1";
+import TimesTableSection from "../uitils/timesTablesSection1/TimesTableSection1";
 import MulPracticeInSequence from "../uitils/timesTablesSection2/MulPracticeInSequence";
 import MulPracticeShuffled from "../uitils/timesTablesSection4/MulPracticeShuffled";
 import DragAndDropStep from "../uitils/timesTablesSection3/dragAndDropStep";
