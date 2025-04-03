@@ -97,7 +97,7 @@ const TimesTableDescription: React.FC<TimesTableDescriptionProps> = ({
             </div>
             <button
               onClick={handleDownload}
-              className="cursor-pointer flex gap-1 mt-6 px-6 py-3 text-black border-b border-gray-300 font-semibold rounded-lg shadow-md hover:bg-indigo-500 hover:text-white transition duration-300"
+              className="cursor-pointer flex gap-1 mt-6 px-6 py-3 text-black border-b border-gray-300 font-semibold rounded-lg shadow-md hover:bg-gray-900 hover:text-white transition duration-300"
             >
               {downloadText}
               <ArrowDownToLine />
