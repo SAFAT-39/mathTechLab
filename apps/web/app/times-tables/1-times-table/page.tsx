@@ -3,6 +3,7 @@ import MulPracticeInSequence from "../uitils/timesTablesSection2/MulPracticeInSe
 import MulPracticeShuffled from "../uitils/timesTablesSection4/MulPracticeShuffled";
 import DragAndDropStep from "../uitils/timesTablesSection3/dragAndDropStep";
 import DescriptionFAQs from "./DescriptionFAQs";
+import TableNavigation from "../uitils/tableNavigation/TableNavigation";
 
 export default function OneTimesTable() {
   return (
@@ -26,6 +27,7 @@ export default function OneTimesTable() {
         buttonGradient="from-cyan-600 to-sky-600"
       />
       <DescriptionFAQs />
+      <TableNavigation totalTables={12} />
     </>
   );
 }
