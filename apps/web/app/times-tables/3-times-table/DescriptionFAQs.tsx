@@ -49,9 +49,9 @@ const DescriptionFAQs = () => {
       <FAQSection
         title="Frequently Asked Questions"
         faqs={faqs}
-        borderColor="border-indigo-500"
-        questionTextColor="text-indigo-600"
-        titleTextColor="text-indigo-700"
+        borderColor="border-teal-500"
+        questionTextColor="text-teal-600"
+        titleTextColor="text-teal-700"
       />
       {/* <FAQSection title="Frequently Asked Questions" faqs={faqs} /> */}
     </div>
