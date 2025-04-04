@@ -186,7 +186,7 @@ const MultiplicationActivityChart = () => {
       {/* How to Use Section */}
       <div className="mt-10 px-4 md:px-10 py-6 bg-gradient-to-r from-indigo-700 via-purple-700 to-indigo-800 rounded-lg  shadow-md">
         <h2 className="text-2xl font-bold text-center mb-4 text-white">
-          📌 How to Use
+          📌 How to Use Interactive Multiplication Chart
         </h2>
         <div className="flex flex-col md:flex-row justify-center items-center gap-6 text-lg">
           {/* Step 1 */}
