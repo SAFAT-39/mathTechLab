@@ -85,7 +85,7 @@ const MulPracticeShuffled: React.FC<MulPracticeProps> = ({
 
 const renderProblem = (problem: number) => (
   <div key={problem} className="flex items-center gap-x-3.5 mb-2">
-    <div className="w-24 lg:w-32 text-right pr-2">
+    <div className="w-28 lg:w-32 text-right pr-2">
       <span
         className={`font-mono text-3xl lg:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r ${bgGradient} whitespace-nowrap`}
       >
