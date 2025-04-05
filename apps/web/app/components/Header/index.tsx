@@ -53,7 +53,12 @@ const Header = () => {
       {menuOpen && (
         <nav className="md:hidden bg-white p-4 text-blue-800 font-semibold">
           {navUrls.map((item, index: number) => (
-            <Link key={index} href={item.url} className="block py-2">
+            <Link
+              key={index}
+              href={item.url}
+              className="block py-2"
+              onClick={() => setMenuOpen(false)}
+            >
               {item.title}
             </Link>
           ))}
