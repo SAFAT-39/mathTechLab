@@ -128,7 +128,7 @@ const MultiplicationActivityChart = () => {
                       >
                         <div className="flex items-center justify-center w-full h-full">
                           <motion.button
-                            className={` w-6.5 h-6.5 md:w-9 md:h-9 flex items-center justify-center rounded-md 
+                            className={` w-6.5 h-6.5 md:w-9 md:h-9 flex items-center justify-center rounded-md cursor-pointer
                             ${isRevealed ? getCellColor(product) : "bg-blue-200 hover:bg-blue-300"} 
                             transition-colors duration-200 shadow-md`}
                             onClick={() => toggleCell(row, col)}
@@ -165,7 +165,7 @@ const MultiplicationActivityChart = () => {
 
         <div className="flex flex-wrap justify-center gap-4 mt-4">
           <motion.button
-            className="px-4 py-2 bg-indigo-700 text-white rounded-md font-medium"
+            className="px-4 py-2 bg-indigo-700 text-white rounded-md font-medium cursor-pointer"
             onClick={resetAll}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -174,7 +174,7 @@ const MultiplicationActivityChart = () => {
           </motion.button>
 
           <motion.button
-            className="px-4 py-2 bg-green-700 text-white rounded-md font-medium"
+            className="px-4 py-2 bg-green-700 text-white rounded-md font-medium cursor-pointer"
             onClick={revealAll}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
