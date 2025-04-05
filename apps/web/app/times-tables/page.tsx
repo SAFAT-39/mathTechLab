@@ -2,7 +2,7 @@ import Content from "./content";
 const Page = () => {
   return (
     <>
-      <div className="flex flex-col justify-center items-center ">
+      <div className="flex flex-col justify-center items-center mt-3 md:mt-7 ">
         <h1 className="text-2xl">MathTechLab Times Tables</h1>
         <h2>Where Numbers Multiply and Minds Grow </h2>
       </div>
