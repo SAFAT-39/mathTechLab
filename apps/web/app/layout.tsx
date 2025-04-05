@@ -4,6 +4,7 @@ import "@mathtechlab/ui/styles.css";
 import type { Metadata } from "next";
 import { ReactNode } from "react";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 export const metadata: Metadata = {
   title: "MathTechLab - Explore Math, Games, and Technology",
@@ -60,12 +61,7 @@ export default function Layout({ children }: LayoutProps) {
           <main className="flex-grow container mx-auto p-4">{children}</main>
 
           {/* Footer */}
-          <footer className="bg-gray-900 text-center p-4 mt-8 text-white">
-            <p>
-              &copy; {new Date().getFullYear()} MathTechLab. All rights
-              reserved.
-            </p>
-          </footer>
+          <Footer />
         </div>
       </body>
     </html>
