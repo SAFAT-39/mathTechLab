@@ -46,7 +46,11 @@ const Header = () => {
             </Link>
           ))}
         </nav>
-        <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
+        <button
+          className="md:hidden"
+          aria-label="Menu"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
