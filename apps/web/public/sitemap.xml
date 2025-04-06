@@ -2,82 +2,92 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
 		<loc>https://mathtechlab.com/</loc>
-		<lastmod>2025-03-14</lastmod>
+		<lastmod>2025-04-07</lastmod>
 		<priority>1.00</priority>
 	</url>
   <url>
 		<loc>https://mathtechlab.com/games</loc>
-		<lastmod>2025-03-14</lastmod>
+		<lastmod>2025-04-07</lastmod>
 		<priority>0.80</priority>
 	</url>
   <url>
 		<loc>https://mathtechlab.com/games/24-game</loc>
-		<lastmod>2025-03-14</lastmod>
+		<lastmod>2025-04-07</lastmod>
 		<priority>0.80</priority>
 	</url>
   <url>
 		<loc>https://mathtechlab.com/times-tables</loc>
-		<lastmod>2025-03-14</lastmod>
+		<lastmod>2025-04-07</lastmod>
 		<priority>0.80</priority>
 	</url>
 	 <url>
 		<loc>https://mathtechlab.com/times-tables/1-times-table</loc>
-		<lastmod>2025-04-05</lastmod>
+		<lastmod>2025-04-07</lastmod>
 		<priority>0.80</priority>
 	</url>
 	<url>
 		<loc>https://mathtechlab.com/times-tables/2-times-table</loc>
-		<lastmod>2025-04-05</lastmod>
+		<lastmod>2025-04-07</lastmod>
 		<priority>0.80</priority>
 	</url>	 
 	<url>
 		<loc>https://mathtechlab.com/times-tables/3-times-table</loc>
-		<lastmod>2025-04-05</lastmod>
+		<lastmod>2025-04-07</lastmod>
 		<priority>0.80</priority>
 	</url>	 
 	<url>
 		<loc>https://mathtechlab.com/times-tables/4-times-table</loc>
-		<lastmod>2025-04-05</lastmod>
+		<lastmod>2025-04-07</lastmod>
 		<priority>0.80</priority>
 	</url>	 
 	<url>
 		<loc>https://mathtechlab.com/times-tables/5-times-table</loc>
-		<lastmod>2025-04-05</lastmod>
+		<lastmod>2025-04-07</lastmod>
 		<priority>0.80</priority>
 	</url>	 
 	<url>
 		<loc>https://mathtechlab.com/times-tables/6-times-table</loc>
-		<lastmod>2025-04-05</lastmod>
+		<lastmod>2025-04-07</lastmod>
 		<priority>0.80</priority>
 	</url>	 
 	<url>
 		<loc>https://mathtechlab.com/times-tables/7-times-table</loc>
-		<lastmod>2025-04-05</lastmod>
+		<lastmod>2025-04-07</lastmod>
 		<priority>0.80</priority>
 	</url>	 
 	<url>
 		<loc>https://mathtechlab.com/times-tables/8-times-table</loc>
-		<lastmod>2025-04-05</lastmod>
+		<lastmod>2025-04-07</lastmod>
 		<priority>0.80</priority>
 	</url>	 
 	<url>
 		<loc>https://mathtechlab.com/times-tables/9-times-table</loc>
-		<lastmod>2025-04-05</lastmod>
+		<lastmod>2025-04-07</lastmod>
 		<priority>0.80</priority>
 	</url>	 
 	<url>
 		<loc>https://mathtechlab.com/times-tables/10-times-table</loc>
-		<lastmod>2025-04-05</lastmod>
+		<lastmod>2025-04-07</lastmod>
 		<priority>0.80</priority>
 	</url>	 
 	<url>
 		<loc>https://mathtechlab.com/times-tables/11-times-table</loc>
-		<lastmod>2025-04-05</lastmod>
+		<lastmod>2025-04-07</lastmod>
 		<priority>0.80</priority>
 	</url>
 	<url>
 		<loc>https://mathtechlab.com/times-tables/12-times-table</loc>
-		<lastmod>2025-04-05</lastmod>
+		<lastmod>2025-04-07</lastmod>
+		<priority>0.80</priority>
+	</url>
+	<url>
+		<loc>https://mathtechlab.com/privacy-policy</loc>
+		<lastmod>2025-04-07</lastmod>
+		<priority>0.80</priority>
+	</url>
+	<url>
+		<loc>https://mathtechlab.com/terms-of-service</loc>
+		<lastmod>2025-04-07</lastmod>
 		<priority>0.80</priority>
 	</url>
 </urlset>
