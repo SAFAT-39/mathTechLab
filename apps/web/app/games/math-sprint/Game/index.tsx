@@ -6,7 +6,7 @@ import { startGame, resetGame } from "./gameengine";
 const MathSprint = () => {
   return (
     <div className="flex items-center justify-center">
-      <div className="math-sprint-container flex flex-col items-center justify-center">
+      <div className="math-sprint-container border flex flex-col items-center justify-center">
         <h1 className="h">Math Sprint Game</h1>
         <p className="p" id="problem"></p>
         <div className="options" id="options"></div>

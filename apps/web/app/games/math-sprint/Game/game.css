@@ -12,7 +12,7 @@
 .math-sprint-container {
   color: #333;
   text-align: center;
-  background-color: rgb(247, 241, 241);
+  background-color: #e5e7eb;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -60,7 +60,7 @@
   padding: 10px 25px;
   cursor: pointer;
   background-color: #f39c12;
-  color: #fff;
+  color: black;
   border: 1px solid gray;
   border-radius: 5px;
   font-weight: bold;
@@ -77,7 +77,7 @@
   font-weight: bold;
   font-family: "Times New Roman", Times, serif;
   font-size: 24px;
-  color: #27ae60;
+  color: green;
 }
 
 #timer {
