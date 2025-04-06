@@ -44,10 +44,10 @@ const TimesTableDescription: React.FC<TimesTableDescriptionProps> = ({
   return (
     <section>
       <div>
-        <div className="grid lg:grid-cols-2 gap-10 items-center mt-[60px]">
+        <div className=" flex flex-col lg:flex-row items-center gap-10  mt-[60px]">
           {/* Text Content */}
-          <div>
-            <h2 className="text-lg md:text-2xl font-extrabold text-gray-900 leading-snug mb-4">
+          <div className=" basis-1/2">
+            <h2 className="text-lg md:text-2xl font-extrabold text-gray-900  mb-4">
               {title}
             </h2>
             <p className="text-lg text-gray-700 leading-relaxed mb-6">
@@ -87,21 +87,23 @@ const TimesTableDescription: React.FC<TimesTableDescriptionProps> = ({
           </div>
 
           {/* Image + Download Button */}
-          <div className="flex flex-col items-end ">
-            <div className="rounded-lg shadow-lg">
-              <Image
-                src={imageUrl}
-                alt={imagealt}
-                className="rounded-lg shadow-lg"
-              />
+          <div className="basis-1/2 flex justify-center ">
+            <div className="flex flex-col items-end  ">
+              <div className="rounded-xl shadow-lg ">
+                <Image
+                  src={imageUrl}
+                  alt={imagealt}
+                  className="rounded-xl shadow-lg h-[520px] w-[300px]"
+                />
+              </div>
+              <button
+                onClick={handleDownload}
+                className="cursor-pointer flex gap-1 mt-6 px-6 py-3 text-black border-b border-gray-300 font-semibold rounded-lg shadow-md hover:bg-gray-900 hover:text-white transition duration-300"
+              >
+                {downloadText}
+                <ArrowDownToLine />
+              </button>
             </div>
-            <button
-              onClick={handleDownload}
-              className="cursor-pointer flex gap-1 mt-6 px-6 py-3 text-black border-b border-gray-300 font-semibold rounded-lg shadow-md hover:bg-gray-900 hover:text-white transition duration-300"
-            >
-              {downloadText}
-              <ArrowDownToLine />
-            </button>
           </div>
         </div>
       </div>
