@@ -194,7 +194,7 @@ const Math24Game = () => {
           ))}
         </div>
         <div className="w-[250px] flex justify-between items-center">
-          <button onClick={handleBack}>
+          <button onClick={handleBack} aria-label="Back">
             <ArrowLeftCircleIcon
               size={50}
               color={curStateIndex > 0 ? arrowActive : arrowDisabled}
@@ -206,7 +206,7 @@ const Math24Game = () => {
           >
             Skip
           </button>
-          <button onClick={handleForward}>
+          <button onClick={handleForward} aria-label="Forward">
             <ArrowRightCircleIcon
               size={50}
               color={
