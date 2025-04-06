@@ -80,7 +80,7 @@ const TimesTableSection: React.FC<TimesTableProps> = ({
       </div>
 
       {/* Main Content */}
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+      <div className="flex flex-col-reverse lg:flex-row gap-8">
         {/* Left side - Steps & Explanation */}
         <div className="lg:col-span-3 space-y-6">
           <TimesTableSteps />
