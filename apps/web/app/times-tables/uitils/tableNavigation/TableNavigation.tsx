@@ -24,18 +24,27 @@ const TableNavigation: React.FC<TableNavigationProps> = ({ totalTables }) => {
       : null;
 
   return (
-    <div className="flex gap-5 md:gap-8 justify-end  items-end  mx-auto mt-10">
+    <div className="flex gap-5 md:gap-8 justify-between  items-center  mx-auto mt-10">
       {/* Previous Button */}
       <button
         onClick={() => prevTable && router.push(prevTable)}
         disabled={!prevTable}
-        className={`md:px-6 py-3 text-lg font-semibold  transition duration-300 cursor-pointer ${
+        className={`text-right text-lg font-semibold  transition duration-300 cursor-pointer  ${
           prevTable
-            ? "text-indigo-500  hover:text-indigo-600 hover:underline"
+            ? "text-blue-600  hover:text-blue-800 hover:underline"
             : " text-gray-600 cursor-not-allowed"
         }`}
       >
-        ← Previous
+        {prevTable ? (
+          <>
+            <span>
+              <span className="block">← Previous</span>
+              <span className="block">{`${currentTable - 1} Times Table`}</span>
+            </span>
+          </>
+        ) : (
+          <span className="block">← Previous</span>
+        )}
       </button>
 
       {/* Page Indicator */}
@@ -47,13 +56,20 @@ const TableNavigation: React.FC<TableNavigationProps> = ({ totalTables }) => {
       <button
         onClick={() => nextTable && router.push(nextTable)}
         disabled={!nextTable}
-        className={`md:px-6 py-3 text-lg font-semibold transition duration-300 cursor-pointer ${
+        className={`text-left text-lg font-semibold transition duration-300 cursor-pointer  ${
           nextTable
-            ? "text-indigo-500  hover:text-indigo-600 hover:underline"
+            ? "text-blue-600  hover:text-blue-800 hover:underline"
             : " text-gray-600 cursor-not-allowed"
         }`}
       >
-        {nextTable ? `Next → ${currentTable + 1} Times Table` : "Next →"}
+        {nextTable ? (
+          <>
+            <span className="block">Next →</span>
+            <span className="block">{`${currentTable + 1} Times Table`}</span>
+          </>
+        ) : (
+          <span className="block">Next →</span>
+        )}
       </button>
     </div>
   );
