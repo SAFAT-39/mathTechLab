@@ -1,6 +1,6 @@
 const TitleSubtitle = () => {
   return (
-    <section className="text-center py-12 px-6">
+    <section className="text-center py-12">
       <h1 className="text-4xl font-bold text-primary mb-4">
         Welcome to MathTechLab
       </h1>

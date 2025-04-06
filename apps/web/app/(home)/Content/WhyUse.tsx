@@ -30,7 +30,7 @@ const points = [
 
 const WhyUse = () => {
   return (
-    <div className="container mx-auto px-6 py-12">
+    <div className="container mx-auto py-12">
       <h2 className="text-3xl font-bold mb-8 text-center">
         Why Use MathTechLab?
       </h2>
