@@ -22,8 +22,8 @@ export default async function FactorsPage({ params }: FactorsPageProps) {
   const factors = getFactors(num);
 
   return (
-    <div className="py-8 space-y-5">
-      <h1 className="text-3xl font-bold p-2 bg-green-400">Factors of {num}</h1>
+    <div className="py-4 space-y-5">
+      <h1 className="text-3xl font-bold p-2 bg-gray-400">Factors of {num}</h1>
       <Introduction num={num} />
       <Factors num={num} />
       <FactorPair num={num} />
