@@ -4,6 +4,7 @@ import numberList from "./numberList";
 import Introduction from "./Introduction";
 import Factors from "./Factors";
 import FactorPair from "./FactorPair";
+import PrimeFactorization from "./PrimeFactorization";
 
 type FactorsPageProps = {
   params: {
@@ -26,6 +27,7 @@ export default async function FactorsPage({ params }: FactorsPageProps) {
       <Introduction num={num} />
       <Factors num={num} />
       <FactorPair num={num} />
+      <PrimeFactorization num={num} />
     </div>
   );
 }

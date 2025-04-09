@@ -21,3 +21,21 @@ export const getFactorPairs = (num: number): [number, number][] => {
 
   return pairs;
 };
+
+export const getPrimeFactorization = (num: number): number[] => {
+  const factors: number[] = [];
+  let n = Math.abs(num); // Handle negative numbers
+
+  for (let i = 2; i <= Math.sqrt(n); i++) {
+    while (n % i === 0) {
+      factors.push(i);
+      n = n / i;
+    }
+  }
+
+  if (n > 1) {
+    factors.push(n);
+  }
+
+  return factors;
+};
