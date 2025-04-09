@@ -7,6 +7,7 @@ import FactorPair from "./FactorPair";
 import PrimeFactorization from "./PrimeFactorization";
 import FindFactors from "./FindFactors";
 import FAQs from "./FAQs";
+import RelatedLinks from "./RelatedLinks";
 
 type FactorsPageProps = {
   params: {
@@ -32,6 +33,7 @@ export default async function FactorsPage({ params }: FactorsPageProps) {
       <PrimeFactorization num={num} />
       <FindFactors num={num} />
       <FAQs num={num} />
+      <RelatedLinks num={num} />
     </div>
   );
 }
