@@ -24,12 +24,12 @@ const FactorPair = ({ num }: NumProps) => {
 
   return (
     <section className="text-base space-y-4">
-      <h2 className="text-2xl font-semibold">Factor pairs of {num}</h2>
+      <h2 className="text-2xl font-semibold">Factor Pairs of {num}</h2>
       <p>{renderFactorPairsParagraph(num, factorPairs)}</p>
 
       <div>
         <h3 className="text-lg font-semibold">
-          Positive factor pairs of {num}:
+          Positive Factor Pairs of {num}:
         </h3>
         <table className="w-full border border-gray-300 mt-2">
           <thead>
@@ -51,7 +51,7 @@ const FactorPair = ({ num }: NumProps) => {
 
       <div>
         <h3 className="text-lg font-semibold">
-          Negative factor pairs of {num}:
+          Negative Factor Pairs of {num}:
         </h3>
         <table className="w-full border border-gray-300 mt-2">
           <thead>
