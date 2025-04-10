@@ -36,14 +36,14 @@ const RelatedLinks = ({ num }: NumProps) => {
   return (
     <section className="mt-8">
       <h2 className="text-2xl font-semibold">Related Links</h2>
-      <table className="w-full mt-4 bg-gray-200">
+      <table className="w-full mt-4 bg-white">
         <tbody>
           {chunkedLinks.map((linkPair, rowIndex: number) => (
-            <tr key={rowIndex} className="bg-gray-100">
+            <tr key={rowIndex} className="bg-white">
               {linkPair.map((relatedNum) => (
                 <td key={relatedNum} className="p-2 border text-center">
                   <Link
-                    className="text-blue-500 hover:underline"
+                    className="text-blue-800 hover:underline"
                     href={`/factors/${relatedNum}`}
                   >
                     Factors of {relatedNum}
