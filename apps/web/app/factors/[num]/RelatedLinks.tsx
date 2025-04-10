@@ -44,7 +44,7 @@ const RelatedLinks = ({ num }: NumProps) => {
                 <td key={relatedNum} className="p-2 border text-center">
                   <Link
                     className="text-blue-800 hover:underline"
-                    href={`/factors/${relatedNum}`}
+                    href={`/factors/factors-of-${relatedNum}`}
                   >
                     Factors of {relatedNum}
                   </Link>
