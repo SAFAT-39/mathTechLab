@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-import { getFactors } from "./utils";
 import numberList from "./numberList";
 import Introduction from "./Introduction";
 import Factors from "./Factors";
