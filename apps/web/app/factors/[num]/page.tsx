@@ -14,6 +14,34 @@ type FactorsPageProps = {
   };
 };
 
+export async function generateMetadata({ params }: FactorsPageProps) {
+  const slug = (await params).num;
+  if (!slug.startsWith("factors-of-")) return {};
+
+  const parts = slug.split("-");
+  const num = parseInt(parts[parts.length - 1]);
+  if (parts.length !== 3 || isNaN(num) || !numberList.includes(num)) return {};
+
+  const url = `https://mathtechlab.com/factors/factors-of-${num}`;
+  const title = `Factors of ${num} | Factor Pairs and Prime Factorization of ${num}`;
+  const description = `Learn the factors of ${num}, including factor pairs of ${num}, prime factorization of ${num}, and how to find factors of ${num}.`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: "MathTechLab",
+      type: "article",
+    },
+    alternates: {
+      canonical: url,
+    },
+  };
+}
+
 export default async function FactorsPage({ params }: FactorsPageProps) {
   const slug = (await params).num;
   if (!slug.startsWith("factors-of-")) {
