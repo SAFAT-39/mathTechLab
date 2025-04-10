@@ -25,6 +25,7 @@ export const metadata: Metadata = {
     description:
       "Discover math from basic to advanced levels with interactive games, tools, and insightful blogs connecting mathematics to modern technology.",
     url: "https://mathtechlab.com",
+    siteName: "MathTechLab",
     type: "website",
     images: [
       {
