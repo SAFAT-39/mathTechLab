@@ -9,9 +9,9 @@ import FAQs from "./FAQs";
 import RelatedLinks from "./RelatedLinks";
 
 type FactorsPageProps = {
-  params: {
+  params: Promise<{
     num: string;
-  };
+  }>;
 };
 
 export async function generateMetadata({ params }: FactorsPageProps) {
