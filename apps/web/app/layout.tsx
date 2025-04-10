@@ -35,14 +35,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-  twitter: {
-    card: "summary_large_image",
-    site: "@MathTechLab",
-    title: "MathTechLab - Explore Math, Games, and Technology",
-    description:
-      "Join MathTechLab to explore interactive math content, games, tools, and the connection between math and technology.",
-    images: ["https://mathtechlab.com/twitter-image.jpg"],
-  },
 };
 
 type LayoutProps = {
