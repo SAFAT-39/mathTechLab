@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Game from "./Game";
 import RelatedGames from "../../components/RelatedGames";
 
@@ -85,16 +84,6 @@ const Page = () => {
   ];
   return (
     <>
-      <Head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
-        />
-      </Head>
       <div className="flex flex-col justify-center items-center gap-2">
         <h1 className="text-2xl text-center">24 Game – A Fun Math Challenge</h1>
         <h2 className="text-center md:w-[600px] font-semibold">
@@ -108,6 +97,10 @@ const Page = () => {
       </div>
       <section className="max-w-3xl mx-auto p-6 space-y-6 text-gray-800">
         {/* How to Play Section */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+        />
         <div>
           <h2 className="text-2xl font-bold text-primary">🎮 How to Play</h2>
           <ol className="list-decimal list-inside space-y-2 mt-2">
@@ -165,6 +158,11 @@ const Page = () => {
         </div>
 
         {/* FAQ Section */}
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
         <div>
           <h2 className="text-2xl font-bold text-primary">❓ FAQs</h2>
           <div className="mt-2 space-y-4">
