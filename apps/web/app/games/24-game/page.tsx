@@ -19,7 +19,7 @@ const Page = () => {
         name: "Can I play this game on mobile?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes! The 2048 game on MathTechLab is fully responsive, mobile-friendly and works on all devices.",
+          text: "Yes! The 24 game on MathTechLab is fully responsive, mobile-friendly and works on all devices.",
         },
       },
       {
