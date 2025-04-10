@@ -1,6 +1,5 @@
 import RelatedGames from "../../components/RelatedGames";
 import Game2048 from "./Game";
-import Script from "next/script";
 
 const Page = () => {
   const faqs = [
@@ -102,50 +101,52 @@ const Page = () => {
         </div>
       </section>
       <RelatedGames relatedGames={relatedGames} />
-      <Script
-        id="json-ld"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "VideoGame",
-            name: "2048",
-            url: "https://mathtechlab.com/games/2048",
-            image: "https://mathtechlab.com/images/2048-thumbnail.png",
-            description:
-              "Play the 2048 game online for free. Merge tiles, strategize, and reach 2048 in this fun and addictive number puzzle game!",
-            author: {
-              "@type": "Organization",
-              name: "MathTechLab",
-              url: "https://mathtechlab.com",
-            },
-            publisher: {
-              "@type": "Organization",
-              name: "MathTechLab",
-            },
-            genre: ["Puzzle", "Strategy"],
-            operatingSystem: "Web",
-            applicationCategory: "Game",
-            playMode: "SinglePlayer",
-            offers: {
-              "@type": "Offer",
-              price: "0",
-              priceCurrency: "USD",
-            },
-            mainEntity: {
-              "@type": "FAQPage",
-              mainEntity: faqs.map((faq) => ({
-                "@type": "Question",
-                name: faq.question,
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: faq.answer,
-                },
-              })),
-            },
-          }),
-        }}
-      />
+      <section>
+        <script
+          id="json-ld"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "VideoGame",
+              name: "2048",
+              url: "https://mathtechlab.com/games/2048",
+              image: "https://mathtechlab.com/images/2048-thumbnail.png",
+              description:
+                "Play the 2048 game online for free. Merge tiles, strategize, and reach 2048 in this fun and addictive number puzzle game!",
+              author: {
+                "@type": "Organization",
+                name: "MathTechLab",
+                url: "https://mathtechlab.com",
+              },
+              publisher: {
+                "@type": "Organization",
+                name: "MathTechLab",
+              },
+              genre: ["Puzzle", "Strategy"],
+              operatingSystem: "Web",
+              applicationCategory: "Game",
+              playMode: "SinglePlayer",
+              offers: {
+                "@type": "Offer",
+                price: "0",
+                priceCurrency: "USD",
+              },
+              mainEntity: {
+                "@type": "FAQPage",
+                mainEntity: faqs.map((faq) => ({
+                  "@type": "Question",
+                  name: faq.question,
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: faq.answer,
+                  },
+                })),
+              },
+            }),
+          }}
+        />
+      </section>
     </>
   );
 };
