@@ -16,13 +16,15 @@ type FactorsPageProps = {
 };
 
 export default async function FactorsPage({ params }: FactorsPageProps) {
-  const num = parseInt((await params).num);
-
-  if (isNaN(num) || !numberList.includes(num)) {
+  const slug = (await params).num;
+  if (!slug.startsWith("factors-of-")) {
     return notFound();
   }
-
-  const factors = getFactors(num);
+  const parts = slug.split("-");
+  const num = parseInt(parts[parts.length - 1]);
+  if (parts.length !== 3 || isNaN(num) || !numberList.includes(num)) {
+    return notFound();
+  }
 
   return (
     <div className="py-4 space-y-5">
