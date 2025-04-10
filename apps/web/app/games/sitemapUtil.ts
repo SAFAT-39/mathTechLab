@@ -7,7 +7,7 @@ const getGamesPages = () => {
     },
     {
       url: "https://mathtechlab.com/games/24-game",
-      lastModified: "2025-04-07",
+      lastModified: "2025-04-11",
       priority: 0.8,
     },
     {
