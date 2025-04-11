@@ -2,11 +2,11 @@ import numberList from "./[num]/numberList";
 
 const getFactorsPages = () => {
   const values = [
-    // {
-    //   url: "https://mathtechlab.com/factors",
-    //   lastModified: "2025-04-11",
-    //   priority: 0.8,
-    // },
+    {
+      url: "https://mathtechlab.com/factors",
+      lastModified: "2025-04-12",
+      priority: 0.7,
+    },
   ];
   for (let i = 0; i < numberList.length; i++) {
     values.push({
