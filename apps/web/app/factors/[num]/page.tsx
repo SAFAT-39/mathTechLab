@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: FactorsPageProps) {
   if (parts.length !== 3 || isNaN(num) || !numberList.includes(num)) return {};
 
   const url = `https://mathtechlab.com/factors/factors-of-${num}`;
-  const title = `Factors of ${num} | Factor Pairs and Prime Factorization of ${num}`;
+  const title = `Factors of ${num} - Factor Pairs and Prime Factorization of ${num}`;
   const description = `Learn the factors of ${num}, including factor pairs of ${num}, prime factorization of ${num}, and how to find factors of ${num}.`;
 
   return {
