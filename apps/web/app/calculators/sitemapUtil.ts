@@ -15,6 +15,16 @@ const getGamesPages = () => {
       lastModified: "2025-04-12",
       priority: 0.8,
     },
+    {
+      url: "https://mathtechlab.com/calculators/gcf-calculator",
+      lastModified: "2025-04-12",
+      priority: 0.8,
+    },
+    {
+      url: "https://mathtechlab.com/calculators/lcm-calculator",
+      lastModified: "2025-04-12",
+      priority: 0.8,
+    },
   ];
 };
 
