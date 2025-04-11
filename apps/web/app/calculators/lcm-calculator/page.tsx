@@ -17,16 +17,9 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div>
-          <LCMCalculator />
-        </div>
-        <div>
-          <Content />
-        </div>
-      </div>
-    </div>
+  return (<>
+    <LCMCalculator />
+    <Content />
+  </>
   );
 } 
