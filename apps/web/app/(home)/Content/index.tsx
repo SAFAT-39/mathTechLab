@@ -39,6 +39,11 @@ const Content = () => {
             description: "Master multiplication with interactive times tables.",
             link: "/times-tables",
           },
+          {
+            title: "Factors",
+            description: "Learn about factors, factor pairs and prime factorization of a number.",
+            link: "/factors",
+          },
         ]}
         seeMoreLink="/times-tables"
       />
