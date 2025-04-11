@@ -7,6 +7,10 @@ import Image from "next/image";
 
 const navUrls = [
   {
+    title: "Calculators",
+    url: "/calculators",
+  },
+  {
     title: "Times Tables",
     url: "/times-tables",
   },
