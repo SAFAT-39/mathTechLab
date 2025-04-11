@@ -1,0 +1,215 @@
+"use client";
+
+import { useState, useEffect } from "react";
+
+function getPrimeFactors(n: number): number[] {
+  const factors: number[] = [];
+  let num = n;
+  
+  // Handle 2 separately
+  while (num % 2 === 0) {
+    factors.push(2);
+    num /= 2;
+  }
+  
+  // Check odd numbers up to sqrt(n)
+  for (let i = 3; i <= Math.sqrt(num); i += 2) {
+    while (num % i === 0) {
+      factors.push(i);
+      num /= i;
+    }
+  }
+  
+  // If num is still greater than 2, it's a prime number
+  if (num > 2) {
+    factors.push(num);
+  }
+  
+  return factors;
+}
+
+function findGCF(numbers: number[]): number {
+  if (numbers.length === 0) return 0;
+  if (numbers.length === 1) return numbers[0];
+  
+  // Find prime factors for each number
+  const primeFactorsMap = numbers.map(num => {
+    const factors = getPrimeFactors(num);
+    const factorCounts: { [key: number]: number } = {};
+    
+    factors.forEach(factor => {
+      factorCounts[factor] = (factorCounts[factor] || 0) + 1;
+    });
+    
+    return factorCounts;
+  });
+  
+  // Find common prime factors with minimum exponents
+  const commonFactors: { [key: number]: number } = {};
+  
+  // Get all unique prime factors
+  const allPrimeFactors = new Set<number>();
+  primeFactorsMap.forEach(factorCounts => {
+    Object.keys(factorCounts).forEach(factor => {
+      allPrimeFactors.add(Number(factor));
+    });
+  });
+  
+  // Find minimum exponent for each prime factor
+  allPrimeFactors.forEach(factor => {
+    let minExponent = Infinity;
+    let isCommonFactor = true;
+    
+    primeFactorsMap.forEach(factorCounts => {
+      if (factorCounts[factor] === undefined) {
+        isCommonFactor = false;
+      } else if (factorCounts[factor] < minExponent) {
+        minExponent = factorCounts[factor];
+      }
+    });
+    
+    if (isCommonFactor && minExponent > 0) {
+      commonFactors[factor] = minExponent;
+    }
+  });
+  
+  // Calculate GCF by multiplying prime factors with their minimum exponents
+  let gcf = 1;
+  Object.entries(commonFactors).forEach(([base, exponent]) => {
+    gcf *= Math.pow(Number(base), exponent);
+  });
+  
+  return gcf;
+}
+
+function formatPrimeFactorization(factors: number[]): string {
+  if (factors.length === 0) return "1";
+  
+  const counts: { [key: number]: number } = {};
+  factors.forEach(factor => {
+    counts[factor] = (counts[factor] || 0) + 1;
+  });
+  
+  return Object.entries(counts)
+    .map(([base, exponent]) => 
+      exponent === 1 ? base : `${base}<sup>${exponent}</sup>`
+    )
+    .join(" × ");
+}
+
+export default function GCFCalculator() {
+  const [input, setInput] = useState("24, 36");
+  const [numbers, setNumbers] = useState<number[]>([24, 36]);
+  const [gcf, setGCF] = useState<number>(findGCF([24, 36]));
+  const [primeFactors, setPrimeFactors] = useState<{ [key: number]: number[] }>({
+    24: getPrimeFactors(24),
+    36: getPrimeFactors(36)
+  });
+  const [formattedResults, setFormattedResults] = useState<{ [key: number]: string }>({
+    24: formatPrimeFactorization(getPrimeFactors(24)),
+    36: formatPrimeFactorization(getPrimeFactors(36))
+  });
+
+  useEffect(() => {
+    const nums = input.split(',').map(n => Number(n.trim())).filter(n => !isNaN(n) && n > 0);
+    if (nums.length > 0) {
+      setNumbers(nums);
+      setGCF(findGCF(nums));
+      
+      const newPrimeFactors: { [key: number]: number[] } = {};
+      const newFormattedResults: { [key: number]: string } = {};
+      
+      nums.forEach(num => {
+        const factors = getPrimeFactors(num);
+        newPrimeFactors[num] = factors;
+        newFormattedResults[num] = formatPrimeFactorization(factors);
+      });
+      
+      setPrimeFactors(newPrimeFactors);
+      setFormattedResults(newFormattedResults);
+    }
+  }, [input]);
+
+  const handleSubmit = () => {
+    const nums = input.split(',').map(n => Number(n.trim())).filter(n => !isNaN(n) && n > 0);
+    if (nums.length === 0) {
+      alert("Please enter at least one valid whole number.");
+      return;
+    }
+    setNumbers(nums);
+  };
+
+  return (
+    <div className="flex flex-col lg:flex-row justify-center p-4 w-full bg-white shadow-lg rounded-2xl gap-4">
+      <div className="w-full lg:w-[400px]">
+        <h1 className="text-3xl font-extrabold text-center text-purple-700">
+          🔢 Greatest Common Factor (GCF) Calculator
+        </h1>
+        <h2 className="text-lg font-semibold text-center text-blue-700 mb-6">
+          Find the GCF of two or more numbers.
+        </h2>
+
+        <div className="flex gap-2 mb-6">
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            className="border border-gray-300 p-3 rounded-xl w-full focus:outline-none focus:ring-2 focus:ring-purple-400"
+            placeholder="Enter numbers separated by commas (e.g., 24, 36)"
+          />
+          <button
+            onClick={handleSubmit}
+            className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-xl font-semibold transition"
+          >
+            Calculate
+          </button>
+        </div>
+      </div>
+      <div className="bg-purple-50 p-4 rounded-xl shadow-inner w-full lg:w-[600px]">
+        <h2 className="text-xl font-bold text-purple-800 mb-2">
+          ✨ Greatest Common Factor
+        </h2>
+        <p className="text-gray-800 mb-4 text-xl font-mono">
+          GCF({numbers.join(", ")}) = <span className="text-purple-700 font-bold">{gcf}</span>
+        </p>
+
+        <h2 className="text-xl font-bold text-purple-800 mb-2">
+          📝 Prime Factorization of Each Number
+        </h2>
+        <div className="space-y-2 mb-4">
+          {numbers.map(num => (
+            <div key={num} className="bg-white p-2 rounded-lg">
+              <p className="text-gray-800">
+                <span className="font-semibold">{num}</span> ={" "}
+                <span dangerouslySetInnerHTML={{ __html: formattedResults[num] }}></span>
+              </p>
+              <p className="text-gray-600 text-sm">
+                Prime factors: {primeFactors[num].join(" × ")}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <h2 className="text-xl font-bold text-purple-800 mb-2">
+          🔍 How the GCF was found
+        </h2>
+        <div className="bg-white p-3 rounded-lg text-sm">
+          <p className="mb-2">
+            The GCF is the product of all prime factors that are common to all numbers, 
+            raised to the smallest exponent they appear with in any of the numbers.
+          </p>
+          <p>
+            For these numbers, the common prime factors are:{" "}
+            {Object.keys(primeFactors[numbers[0]] || {})
+              .filter(factor => 
+                numbers.every(num => 
+                  primeFactors[num].includes(Number(factor))
+                )
+              )
+              .join(", ")}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+} 
