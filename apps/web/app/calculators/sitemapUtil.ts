@@ -1,4 +1,4 @@
-const getGamesPages = () => {
+const getCalculatorsPages = () => {
   return [
     {
       url: "https://mathtechlab.com/calculators",
@@ -28,4 +28,4 @@ const getGamesPages = () => {
   ];
 };
 
-export default getGamesPages;
+export default getCalculatorsPages;

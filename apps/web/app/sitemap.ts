@@ -3,11 +3,13 @@ import getGamesPages from "./games/sitemapUtil";
 import getHomePage from "./(home)/sitemapUtil";
 import getTimesTablesPages from "./times-tables/sitemapUtil";
 import getFactorsPages from "./factors/sitemapUtil";
+import getCalculatorsPages from "./calculators/sitemapUtil";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     getHomePage(),
     ...getGamesPages(),
+    ...getCalculatorsPages(),
     ...getTimesTablesPages(),
     ...getFactorsPages(),
     ...getExtraPages(),
