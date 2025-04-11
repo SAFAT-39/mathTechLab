@@ -1,5 +1,5 @@
 import numberList from "./[num]/numberList";
-
+import Link from "next/link";
 export const metadata = {
   title: "What Are Factors? | Factor Pairs & Prime Factorization Explained",
   description:
@@ -34,6 +34,7 @@ export default function FactorsPage() {
         <p>
           So, the factors of 24 are: <strong>1, 2, 3, 4, 6, 8, 12, 24</strong>.
         </p>
+        <p>Find all factors of a number with our <Link className="text-blue-800 underline font-semibold" href="/calculators/factor-checker">Factor Checker</Link> tool.</p>
       </section>
 
       {/* Factor Pairs */}
@@ -79,6 +80,7 @@ export default function FactorsPage() {
           <strong>2³ × 3</strong>
         </p>
         <p>This breakdown can also be visualized with a factor tree.</p>
+        <p>Find the prime factorization of a number with our <Link className="text-blue-800 underline font-semibold" href="/calculators/prime-factorization-calculator">Prime Factorization Calculator</Link> tool.</p>
       </section>
 
       {/* Explore Factor Pages */}
