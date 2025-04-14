@@ -1,39 +1,33 @@
-export const metadata = {
-  title: "Prime Factorization Calculator",
-  description:
-    "Use our free Prime Factorization Calculator to find the prime factors of any number, view the factor tree, and understand prime factorization.",
-};
-
 const faqs = [
   {
-    question: "What is prime factorization?",
+    question: "What is prime factorization in mathematics?",
     answer:
-      "Prime factorization is the process of breaking down a number into its prime factors. A prime factor is a prime number that divides the original number exactly.",
+      "Prime factorization is the process of breaking down a composite number into its prime factors. A prime factor is a prime number that divides the original number exactly. This process is fundamental in number theory and has applications in cryptography, finding GCD and LCM, and simplifying fractions. For example, the prime factorization of 24 is 2³ × 3, meaning 24 = 2 × 2 × 2 × 3.",
   },
   {
-    question: "What are prime numbers?",
+    question: "What are prime numbers and why are they important?",
     answer:
-      "Prime numbers are whole numbers greater than 1 that can only be divided evenly by 1 and themselves. Examples include 2, 3, 5, 7, 11, 13, etc.",
+      "Prime numbers are whole numbers greater than 1 that can only be divided evenly by 1 and themselves. They are the building blocks of all numbers, as every composite number can be expressed as a unique product of prime numbers. Prime numbers are crucial in cryptography, number theory, and modern computing. Examples include 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, etc.",
   },
   {
-    question: "Why is prime factorization important?",
+    question: "What are the practical applications of prime factorization?",
     answer:
-      "Prime factorization is fundamental in mathematics. It's used in cryptography, finding the greatest common divisor (GCD), least common multiple (LCM), and simplifying fractions.",
+      "Prime factorization has numerous practical applications: 1) Cryptography and data security, 2) Finding the Greatest Common Divisor (GCD) and Least Common Multiple (LCM), 3) Simplifying fractions and radicals, 4) Solving mathematical problems in number theory, 5) Computer algorithms and data structures, 6) Error detection and correction in digital communications.",
   },
   {
-    question: "How do I use the Prime Factorization Calculator?",
+    question: "How does the Prime Factorization Calculator work?",
     answer:
-      "Simply enter any whole number greater than 1 in the input box and press Calculate. The tool will show you the prime factorization, list of prime factors, and a factor tree.",
+      "Our Prime Factorization Calculator uses efficient algorithms to break down any positive integer into its prime factors. Simply enter a number greater than 1, and the calculator will show you: 1) The prime factorization with exponents, 2) A list of all prime factors, 3) A visual factor tree, and 4) Step-by-step explanation of the process. The calculator handles numbers up to 10 digits and provides instant results.",
   },
   {
-    question: "What is a factor tree?",
+    question: "What is a factor tree and how does it help in understanding prime factorization?",
     answer:
-      "A factor tree is a visual representation of how a number breaks down into its prime factors. It shows the step-by-step process of dividing the number by prime numbers.",
+      "A factor tree is a visual representation that shows how a number breaks down into its prime factors. It's like a family tree for numbers, where each branch represents a division by a prime number. Factor trees help students understand the concept of prime factorization visually and make it easier to see how numbers decompose into their prime components. They're particularly useful for learning and teaching number theory.",
   },
   {
-    question: "Is prime factorization unique?",
+    question: "Is prime factorization unique for every number?",
     answer:
-      "Yes! The Fundamental Theorem of Arithmetic states that every whole number greater than 1 has a unique prime factorization, regardless of the order of the factors.",
+      "Yes! The Fundamental Theorem of Arithmetic states that every whole number greater than 1 has a unique prime factorization, regardless of the order in which the factors are written. This uniqueness is crucial in many mathematical applications, including cryptography and number theory. For example, 24 can only be written as 2³ × 3, no matter how you break it down.",
   },
 ];
 
@@ -52,114 +46,161 @@ const Content = () => {
   };
 
   return (
-    <section className="py-12 space-y-4">
+    <section className="py-12 space-y-8">
       <div>
-        <h2 className="text-2xl font-bold text-purple-700">
-          🧠 What is Prime Factorization?
+        <h1 className="text-3xl font-bold text-purple-700 mb-4">
+          Prime Factorization Calculator
+        </h1>
+        <p className="text-lg text-gray-700 mb-4">
+          Welcome to our comprehensive Prime Factorization Calculator. Whether you're a student learning number theory, a teacher preparing lessons, or someone needing to find prime factors quickly, our tool provides instant results with detailed explanations and visual representations.
+        </p>
+      </div>
+
+      <div>
+        <h2 className="text-2xl font-bold text-purple-700 mb-4">
+          Understanding Prime Factorization
         </h2>
-        <div className="pl-1 pt-2">
-          <p>
-            <strong>Prime factorization</strong> is the process of expressing a number as a product of its prime factors. A prime factor is a prime number that divides the original number exactly.
+        <div className="space-y-4">
+          <p className="text-gray-700">
+            <strong>Prime factorization</strong> is the process of expressing a number as a product of its prime factors. A prime factor is a prime number that divides the original number exactly. This concept is fundamental in number theory and has numerous applications in mathematics and computer science.
           </p>
-          <blockquote>
-            ✨ Example: <br />
-            The prime factorization of <strong>24</strong> is <strong>2³ × 3</strong>
-            <br />
-            This means 24 = 2 × 2 × 2 × 3
-          </blockquote>
+          <div className="bg-purple-50 p-4 rounded-lg">
+            <p className="font-semibold">Example:</p>
+            <p>The prime factorization of <strong>24</strong> is <strong>2³ × 3</strong></p>
+            <p>This means 24 = 2 × 2 × 2 × 3</p>
+            <p>Each factor (2 and 3) is a prime number, and we use exponents (³) to show repeated factors.</p>
+          </div>
         </div>
       </div>
 
       <div>
-        <h2 className="text-2xl font-bold text-purple-700">
-          🌳 Understanding Factor Trees
+        <h2 className="text-2xl font-bold text-purple-700 mb-4">
+          Understanding Factor Trees
         </h2>
-        <div className="pl-1 pt-2">
-          <p>
-            A <strong>factor tree</strong> is a visual way to find the prime factorization of a number. Here's how it works:
+        <div className="space-y-4">
+          <p className="text-gray-700">
+            A <strong>factor tree</strong> is a visual way to find the prime factorization of a number. It shows the step-by-step process of breaking down a number into its prime factors, making it easier to understand the concept.
           </p>
-          <blockquote>
-            ✨ Example with 24: <br />
-            24 <br />
-            ├── 2 × 12 <br />
-            │   └── 2 × 6 <br />
-            │       └── 2 × 3 <br />
-            └── 3 × 8 <br />
-                └── 2 × 4 <br />
-                    └── 2 × 2
-          </blockquote>
-          <p>
-            The prime factors are found at the ends of the branches: 2, 2, 2, 3
-          </p>
+          <div className="bg-purple-50 p-4 rounded-lg">
+            <p className="font-semibold">Example with 24:</p>
+            <pre className="font-mono text-sm">
+              {`24
+├── 2 × 12
+│   └── 2 × 6
+│       └── 2 × 3
+└── 3 × 8
+    └── 2 × 4
+        └── 2 × 2`}
+            </pre>
+            <p className="mt-2">The prime factors are found at the ends of the branches: 2, 2, 2, 3</p>
+          </div>
         </div>
       </div>
 
       <div>
-        <h2 className="text-2xl font-bold text-purple-700">
-          🧲 How to Find Prime Factorization
+        <h2 className="text-2xl font-bold text-purple-700 mb-4">
+          Methods to Find Prime Factorization
         </h2>
-        <div className="pl-1 pt-2">
-          <p>
-            You can find prime factorization using the <strong>division method</strong>. Here's how:
-          </p>
-          <h3>✅ Step-by-step (using 24 as example):</h3>
-          <ol>
-            <li>
-              Start with the smallest prime number (2):
-              <ul>
+        <div className="space-y-6">
+          <div>
+            <h3 className="text-xl font-semibold text-purple-600 mb-2">Method 1: Division Method</h3>
+            <p className="text-gray-700 mb-2">
+              The division method involves repeatedly dividing the number by the smallest possible prime number until you reach 1.
+            </p>
+            <div className="bg-purple-50 p-4 rounded-lg">
+              <p className="font-semibold">Example with 24:</p>
+              <ol className="list-decimal pl-6 space-y-1">
                 <li>24 ÷ 2 = 12</li>
                 <li>12 ÷ 2 = 6</li>
                 <li>6 ÷ 2 = 3</li>
-              </ul>
+                <li>3 ÷ 3 = 1</li>
+              </ol>
+              <p className="mt-2">The prime factors are the numbers you divided by: 2, 2, 2, 3</p>
+              <p>Written with exponents: 2³ × 3</p>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-semibold text-purple-600 mb-2">Method 2: Factor Tree Method</h3>
+            <p className="text-gray-700 mb-2">
+              The factor tree method involves breaking down the number into two factors at each step until you reach prime numbers.
+            </p>
+            <div className="bg-purple-50 p-4 rounded-lg">
+              <p className="font-semibold">Steps:</p>
+              <ol className="list-decimal pl-6 space-y-1">
+                <li>Start with the number</li>
+                <li>Find two factors that multiply to give the number</li>
+                <li>Continue breaking down each factor until you reach prime numbers</li>
+                <li>Multiply all the prime numbers to get the original number</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h2 className="text-2xl font-bold text-purple-700 mb-4">
+          Applications of Prime Factorization
+        </h2>
+        <div className="space-y-4">
+          <p className="text-gray-700">
+            Prime factorization has numerous practical applications in mathematics and beyond:
+          </p>
+          <ul className="list-disc pl-6 space-y-2">
+            <li>
+              <strong>Cryptography</strong>: Used in RSA encryption and other security algorithms
             </li>
             <li>
-              Move to the next prime number (3):
-              <ul>
-                <li>3 ÷ 3 = 1</li>
+              <strong>Number Theory</strong>: Finding GCD, LCM, and solving Diophantine equations
+            </li>
+            <li>
+              <strong>Fractions</strong>: Simplifying fractions and finding common denominators
+            </li>
+            <li>
+              <strong>Computer Science</strong>: Algorithm design and data structures
+            </li>
+            <li>
+              <strong>Error Detection</strong>: Used in error-correcting codes
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <h2 className="text-2xl font-bold text-purple-700 mb-4">
+          Using Our Prime Factorization Calculator
+        </h2>
+        <div className="space-y-4">
+          <p className="text-gray-700">
+            Our Prime Factorization Calculator makes finding prime factors easy and educational:
+          </p>
+          <ol className="list-decimal pl-6 space-y-2">
+            <li>Enter any positive integer greater than 1</li>
+            <li>Click the Calculate button</li>
+            <li>View the results:
+              <ul className="list-disc pl-6 mt-2">
+                <li>Prime factorization with exponents</li>
+                <li>List of all prime factors</li>
+                <li>Visual factor tree</li>
+                <li>Step-by-step explanation</li>
               </ul>
             </li>
           </ol>
-          <p>
-            The prime factors are the numbers you divided by: 2, 2, 2, 3
-          </p>
-          <p>
-            Written with exponents: 2³ × 3
+          <p className="text-gray-700">
+            The calculator works with numbers up to 10 digits and provides instant results with detailed explanations.
           </p>
         </div>
       </div>
 
       <div>
-        <h2 className="text-2xl font-bold text-purple-700">
-          🧑‍🏫 How to Use the Prime Factorization Calculator
+        <h2 className="text-2xl font-bold text-purple-700 mb-4">
+          Frequently Asked Questions
         </h2>
-        <div className="pl-1 pt-2">
-          <p>
-            Our <strong>Prime Factorization Calculator</strong> provides three ways to view the prime factorization:
-          </p>
-          <ul>
-            <li>
-              <strong>Prime Factorization</strong>: Shows the result with exponents (e.g., 2³ × 3)
-            </li>
-            <li>
-              <strong>Prime Factors</strong>: Lists all prime factors in order
-            </li>
-            <li>
-              <strong>Factor Tree</strong>: Visualizes the step-by-step breakdown
-            </li>
-          </ul>
-          <p>
-            Simply enter a number (like 24, 36, 100...), hit <strong>Calculate</strong>, and get instant results.
-          </p>
-        </div>
-      </div>
-
-      <div>
-        <h2 className="text-2xl font-bold text-purple-700">❓ FAQ</h2>
-        <div className="pl-1 pt-2">
+        <div className="space-y-6">
           {faqs.map((faq, idx) => (
-            <div key={idx} className="mb-4">
-              <h3 className="font-semibold">🔹 {faq.question}</h3>
-              <p>{faq.answer}</p>
+            <div key={idx} className="bg-white rounded-lg p-4 shadow-sm">
+              <h3 className="text-lg font-semibold text-purple-600 mb-2">{faq.question}</h3>
+              <p className="text-gray-700">{faq.answer}</p>
             </div>
           ))}
         </div>
