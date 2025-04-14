@@ -9,9 +9,9 @@ export const metadata: Metadata = {
   keywords:
     "LCM calculator, least common multiple, common multiple, prime factorization, math calculator, online calculator, multiple calculator, mathematics tools, fraction calculator",
   openGraph: {
-    title: "Least Common Multiple (LCM) Calculator",
+    title: "Least Common Multiple (LCM) Calculator | MathTechLab",
     description:
-      "Use our free Least Common Multiple (LCM) Calculator to find the LCM of two or more numbers, view prime factorizations, and understand how LCM is calculated.",
+      "Use our free Least Common Multiple (LCM) Calculator to find the LCM of two or more numbers. Get step-by-step solutions, prime factorizations, and learn how to find LCM using multiple methods. Perfect for students, teachers, and math enthusiasts.",
     type: "website",
   },
 };
