@@ -1,39 +1,41 @@
 export const metadata = {
-  title: "Greatest Common Factor (GCF) Calculator",
+  title: "Greatest Common Factor (GCF) Calculator | MathTechLab",
   description:
-    "Use our free Greatest Common Factor (GCF) Calculator to find the GCF of two or more numbers, view prime factorizations, and understand how GCF is calculated.",
+    "Use our free Greatest Common Factor (GCF) Calculator to find the GCF of two or more numbers. Get step-by-step solutions, prime factorizations, and learn how to find GCF using multiple methods. Perfect for students, teachers, and math enthusiasts.",
+  keywords:
+    "GCF calculator, greatest common factor, GCD calculator, common factors, prime factorization, math calculator, online calculator, factor calculator, mathematics tools",
 };
 
 const faqs = [
   {
-    question: "What is the Greatest Common Factor (GCF)?",
+    question: "What is the Greatest Common Factor (GCF) in mathematics?",
     answer:
-      "The Greatest Common Factor (GCF) is the largest number that divides two or more numbers without leaving a remainder. It's also known as the Greatest Common Divisor (GCD).",
+      "The Greatest Common Factor (GCF), also known as the Greatest Common Divisor (GCD), is the largest positive integer that divides two or more numbers without leaving a remainder. It's a fundamental concept in number theory, essential for simplifying fractions, solving algebraic equations, and understanding number relationships. For example, the GCF of 24 and 36 is 12, as 12 is the largest number that divides both 24 and 36 evenly.",
   },
   {
-    question: "How do I find the GCF of two numbers?",
+    question: "What are the different methods to find the Greatest Common Factor?",
     answer:
-      "There are several methods to find the GCF: 1) Listing all factors and finding the largest common one, 2) Using prime factorization and taking the product of common prime factors with the smallest exponents, 3) Using the Euclidean algorithm for larger numbers.",
+      "There are three main methods to find the GCF: 1) Listing Factors Method - list all factors of each number and find the largest common one, 2) Prime Factorization Method - break down numbers into prime factors and multiply common primes with smallest exponents, and 3) Euclidean Algorithm - an efficient method for larger numbers using division and remainders. Our GCF Calculator demonstrates all these methods with step-by-step explanations.",
   },
   {
-    question: "Why is GCF important?",
+    question: "How is the Greatest Common Factor used in real-world applications?",
     answer:
-      "GCF is important in many areas of mathematics, including simplifying fractions, finding equivalent fractions, solving word problems involving equal distribution, and in algebra for factoring polynomials.",
+      "The GCF has numerous practical applications: simplifying fractions to their lowest terms, finding equivalent fractions, solving word problems involving equal distribution, factoring polynomials in algebra, and even in cryptography for encryption algorithms. It's particularly useful in engineering, computer science, and financial calculations where number relationships need to be optimized.",
   },
   {
-    question: "How do I use the GCF Calculator?",
+    question: "What is the relationship between GCF and LCM (Least Common Multiple)?",
     answer:
-      "Simply enter two or more numbers separated by commas in the input box and press Calculate. The tool will show you the GCF, prime factorizations of each number, and explain how the GCF was found.",
+      "The GCF and LCM are related by the fundamental formula: GCF(a,b) × LCM(a,b) = a × b. This relationship allows you to find one when you know the other. For example, if you know the GCF of 24 and 36 is 12, and their product is 864, then their LCM must be 864 ÷ 12 = 72. This relationship is crucial for solving problems involving fractions and finding common denominators.",
   },
   {
-    question: "Can I find the GCF of more than two numbers?",
+    question: "How can I use the GCF Calculator effectively?",
     answer:
-      "Yes! Our calculator can find the GCF of any number of positive integers. Just enter all the numbers separated by commas.",
+      "Our GCF Calculator is designed for ease of use: simply enter two or more positive integers separated by commas, click Calculate, and get instant results. The calculator shows the GCF, prime factorizations of each number, and explains the calculation process step by step. It's perfect for homework help, lesson planning, or verifying your manual calculations.",
   },
   {
-    question: "What is the relationship between GCF and LCM?",
+    question: "Why is understanding GCF important for students?",
     answer:
-      "The Greatest Common Factor (GCF) and Least Common Multiple (LCM) are related by the formula: GCF(a,b) × LCM(a,b) = a × b. This relationship can be used to find one when you know the other.",
+      "Understanding GCF is crucial for students as it's a foundational concept in mathematics. It helps develop number sense, problem-solving skills, and logical thinking. Knowledge of GCF is essential for working with fractions, algebra, and number theory. Our calculator helps students learn by showing detailed steps and explanations, making it an excellent educational tool.",
   },
 ];
 
@@ -52,131 +54,166 @@ const Content = () => {
   };
 
   return (
-    <section className="py-12 space-y-4">
+    <section className="py-12 space-y-8">
       <div>
-        <h2 className="text-2xl font-bold text-purple-700">
-          🧠 What is the Greatest Common Factor (GCF)?
+        <h1 className="text-3xl font-bold text-purple-700 mb-4">
+          Greatest Common Factor (GCF) Calculator
+        </h1>
+        <p className="text-lg text-gray-700 mb-4">
+          Welcome to our comprehensive Greatest Common Factor (GCF) Calculator. Whether you're a student learning number theory, a teacher preparing lessons, or someone needing to find GCFs quickly, our tool provides instant results with detailed explanations and multiple calculation methods.
+        </p>
+      </div>
+
+      <div>
+        <h2 className="text-2xl font-bold text-purple-700 mb-4">
+          Understanding the Greatest Common Factor
         </h2>
-        <div className="pl-1 pt-2">
-          <p>
-            The <strong>Greatest Common Factor (GCF)</strong> is the largest number that divides two or more numbers without leaving a remainder. It's also known as the Greatest Common Divisor (GCD).
+        <div className="space-y-4">
+          <p className="text-gray-700">
+            The <strong>Greatest Common Factor (GCF)</strong>, also known as the Greatest Common Divisor (GCD), is the largest positive integer that divides two or more numbers without leaving a remainder. Understanding GCF is essential for:
           </p>
-          <blockquote>
-            ✨ Example: <br />
-            The GCF of <strong>24</strong> and <strong>36</strong> is <strong>12</strong>
-            <br />
-            Because 12 is the largest number that divides both 24 and 36 evenly.
-          </blockquote>
+          <ul className="list-disc pl-6 space-y-2">
+            <li>Simplifying fractions</li>
+            <li>Finding equivalent fractions</li>
+            <li>Solving algebraic equations</li>
+            <li>Understanding number relationships</li>
+            <li>Working with polynomials</li>
+          </ul>
+          <div className="bg-purple-50 p-4 rounded-lg">
+            <p className="font-semibold">Example:</p>
+            <p>The GCF of <strong>24</strong> and <strong>36</strong> is <strong>12</strong></p>
+            <p>Because 12 is the largest number that divides both 24 and 36 evenly:</p>
+            <p>24 ÷ 12 = 2 (no remainder)</p>
+            <p>36 ÷ 12 = 3 (no remainder)</p>
+          </div>
         </div>
       </div>
 
       <div>
-        <h2 className="text-2xl font-bold text-purple-700">
-          🔍 Methods to Find the GCF
+        <h2 className="text-2xl font-bold text-purple-700 mb-4">
+          Methods to Find the Greatest Common Factor
         </h2>
-        <div className="pl-1 pt-2">
-          <p>
-            There are several methods to find the GCF of two or more numbers:
-          </p>
-          <h3>✅ Method 1: Listing Factors</h3>
-          <p>
-            List all factors of each number and find the largest one that appears in all lists.
-          </p>
-          <blockquote>
-            ✨ Example with 24 and 36: <br />
-            Factors of 24: 1, 2, 3, 4, 6, 8, 12, 24 <br />
-            Factors of 36: 1, 2, 3, 4, 6, 9, 12, 18, 36 <br />
-            Common factors: 1, 2, 3, 4, 6, 12 <br />
-            GCF = 12
-          </blockquote>
-          
-          <h3>✅ Method 2: Prime Factorization</h3>
-          <p>
-            Find the prime factorization of each number, then multiply the common prime factors with the smallest exponents.
-          </p>
-          <blockquote>
-            ✨ Example with 24 and 36: <br />
-            24 = 2³ × 3 <br />
-            36 = 2² × 3² <br />
-            Common prime factors: 2² × 3 = 12
-          </blockquote>
-          
-          <h3>✅ Method 3: Euclidean Algorithm</h3>
-          <p>
-            For larger numbers, the Euclidean algorithm is more efficient. It works by repeatedly dividing the larger number by the smaller one and taking the remainder until the remainder is zero.
-          </p>
+        <div className="space-y-6">
+          <div>
+            <h3 className="text-xl font-semibold text-purple-600 mb-2">Method 1: Listing Factors</h3>
+            <p className="text-gray-700 mb-2">
+              List all factors of each number and find the largest one that appears in all lists.
+            </p>
+            <div className="bg-purple-50 p-4 rounded-lg">
+              <p className="font-semibold">Example with 24 and 36:</p>
+              <ul className="list-none space-y-1">
+                <li>Factors of 24: 1, 2, 3, 4, 6, 8, 12, 24</li>
+                <li>Factors of 36: 1, 2, 3, 4, 6, 9, 12, 18, 36</li>
+                <li>Common factors: 1, 2, 3, 4, 6, 12</li>
+                <li>GCF = 12</li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-semibold text-purple-600 mb-2">Method 2: Prime Factorization</h3>
+            <p className="text-gray-700 mb-2">
+              Find the prime factorization of each number, then multiply the common prime factors with the smallest exponents.
+            </p>
+            <div className="bg-purple-50 p-4 rounded-lg">
+              <p className="font-semibold">Example with 24 and 36:</p>
+              <ul className="list-none space-y-1">
+                <li>24 = 2³ × 3</li>
+                <li>36 = 2² × 3²</li>
+                <li>Common prime factors: 2² × 3 = 12</li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-semibold text-purple-600 mb-2">Method 3: Euclidean Algorithm</h3>
+            <p className="text-gray-700 mb-2">
+              For larger numbers, the Euclidean algorithm is more efficient. It works by repeatedly dividing the larger number by the smaller one and taking the remainder until the remainder is zero.
+            </p>
+            <div className="bg-purple-50 p-4 rounded-lg">
+              <p className="font-semibold">Example with 24 and 36:</p>
+              <ul className="list-none space-y-1">
+                <li>36 ÷ 24 = 1 remainder 12</li>
+                <li>24 ÷ 12 = 2 remainder 0</li>
+                <li>GCF = 12</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
 
       <div>
-        <h2 className="text-2xl font-bold text-purple-700">
-          🧲 Applications of GCF
+        <h2 className="text-2xl font-bold text-purple-700 mb-4">
+          Applications of the Greatest Common Factor
         </h2>
-        <div className="pl-1 pt-2">
-          <p>
-            The GCF has many practical applications in mathematics and everyday life:
+        <div className="space-y-4">
+          <p className="text-gray-700">
+            The GCF has numerous practical applications in mathematics and everyday life:
           </p>
-          <ul>
+          <ul className="list-disc pl-6 space-y-2">
             <li>
-              <strong>Simplifying Fractions</strong>: Divide the numerator and denominator by their GCF to get the simplest form.
+              <strong>Simplifying Fractions</strong>: Divide numerator and denominator by their GCF to get simplest form
             </li>
             <li>
-              <strong>Equal Distribution</strong>: Finding the largest size of equal groups that can be made from a set of items.
+              <strong>Equal Distribution</strong>: Finding largest size of equal groups from a set of items
             </li>
             <li>
-              <strong>Algebra</strong>: Factoring polynomials and solving equations.
+              <strong>Algebra</strong>: Factoring polynomials and solving equations
             </li>
             <li>
-              <strong>Cryptography</strong>: Used in various encryption algorithms.
+              <strong>Engineering</strong>: Optimizing designs and calculations
+            </li>
+            <li>
+              <strong>Cryptography</strong>: Used in various encryption algorithms
             </li>
           </ul>
-          <blockquote>
-            ✨ Example: Simplifying 24/36 <br />
-            GCF of 24 and 36 is 12 <br />
-            24 ÷ 12 = 2 <br />
-            36 ÷ 12 = 3 <br />
-            Therefore, 24/36 = 2/3 (simplified)
-          </blockquote>
+          <div className="bg-purple-50 p-4 rounded-lg">
+            <p className="font-semibold">Example: Simplifying 24/36</p>
+            <ul className="list-none space-y-1">
+              <li>GCF of 24 and 36 is 12</li>
+              <li>24 ÷ 12 = 2</li>
+              <li>36 ÷ 12 = 3</li>
+              <li>Therefore, 24/36 = 2/3 (simplified)</li>
+            </ul>
+          </div>
         </div>
       </div>
 
       <div>
-        <h2 className="text-2xl font-bold text-purple-700">
-          🧑‍🏫 How to Use the GCF Calculator
+        <h2 className="text-2xl font-bold text-purple-700 mb-4">
+          Using Our GCF Calculator
         </h2>
-        <div className="pl-1 pt-2">
-          <p>
-            Our <strong>GCF Calculator</strong> makes it easy to find the greatest common factor of any set of numbers:
+        <div className="space-y-4">
+          <p className="text-gray-700">
+            Our GCF Calculator makes finding the greatest common factor easy and educational:
           </p>
-          <ol>
-            <li>
-              Enter the numbers you want to find the GCF for, separated by commas (e.g., 24, 36, 48)
-            </li>
-            <li>
-              Click the <strong>Calculate</strong> button
-            </li>
-            <li>
-              View the results:
-              <ul>
+          <ol className="list-decimal pl-6 space-y-2">
+            <li>Enter two or more positive integers separated by commas</li>
+            <li>Click the Calculate button</li>
+            <li>View the results:
+              <ul className="list-disc pl-6 mt-2">
                 <li>The GCF of your numbers</li>
                 <li>Prime factorization of each number</li>
-                <li>Explanation of how the GCF was found</li>
+                <li>Step-by-step explanation of the calculation</li>
+                <li>Visual representation of the process</li>
               </ul>
             </li>
           </ol>
-          <p>
-            The calculator works with any number of positive integers and provides a detailed breakdown of the calculation process.
+          <p className="text-gray-700">
+            The calculator works with any number of positive integers and provides a detailed breakdown of the calculation process, making it perfect for learning and verification.
           </p>
         </div>
       </div>
 
       <div>
-        <h2 className="text-2xl font-bold text-purple-700">❓ FAQ</h2>
-        <div className="pl-1 pt-2">
+        <h2 className="text-2xl font-bold text-purple-700 mb-4">
+          Frequently Asked Questions
+        </h2>
+        <div className="space-y-6">
           {faqs.map((faq, idx) => (
-            <div key={idx} className="mb-4">
-              <h3 className="font-semibold">🔹 {faq.question}</h3>
-              <p>{faq.answer}</p>
+            <div key={idx} className="bg-white rounded-lg p-4 shadow-sm">
+              <h3 className="text-lg font-semibold text-purple-600 mb-2">{faq.question}</h3>
+              <p className="text-gray-700">{faq.answer}</p>
             </div>
           ))}
         </div>
