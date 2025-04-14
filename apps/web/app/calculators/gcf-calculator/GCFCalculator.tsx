@@ -5,13 +5,13 @@ import { useState, useEffect } from "react";
 function getPrimeFactors(n: number): number[] {
   const factors: number[] = [];
   let num = n;
-  
+
   // Handle 2 separately
   while (num % 2 === 0) {
     factors.push(2);
     num /= 2;
   }
-  
+
   // Check odd numbers up to sqrt(n)
   for (let i = 3; i <= Math.sqrt(num); i += 2) {
     while (num % i === 0) {
@@ -19,34 +19,34 @@ function getPrimeFactors(n: number): number[] {
       num /= i;
     }
   }
-  
+
   // If num is still greater than 2, it's a prime number
   if (num > 2) {
     factors.push(num);
   }
-  
+
   return factors;
 }
 
 function findGCF(numbers: number[]): number {
   if (numbers.length === 0) return 0;
   if (numbers.length === 1) return numbers[0];
-  
+
   // Find prime factors for each number
   const primeFactorsMap = numbers.map(num => {
     const factors = getPrimeFactors(num);
     const factorCounts: { [key: number]: number } = {};
-    
+
     factors.forEach(factor => {
       factorCounts[factor] = (factorCounts[factor] || 0) + 1;
     });
-    
+
     return factorCounts;
   });
-  
+
   // Find common prime factors with minimum exponents
   const commonFactors: { [key: number]: number } = {};
-  
+
   // Get all unique prime factors
   const allPrimeFactors = new Set<number>();
   primeFactorsMap.forEach(factorCounts => {
@@ -54,12 +54,12 @@ function findGCF(numbers: number[]): number {
       allPrimeFactors.add(Number(factor));
     });
   });
-  
+
   // Find minimum exponent for each prime factor
   allPrimeFactors.forEach(factor => {
     let minExponent = Infinity;
     let isCommonFactor = true;
-    
+
     primeFactorsMap.forEach(factorCounts => {
       if (factorCounts[factor] === undefined) {
         isCommonFactor = false;
@@ -67,31 +67,31 @@ function findGCF(numbers: number[]): number {
         minExponent = factorCounts[factor];
       }
     });
-    
+
     if (isCommonFactor && minExponent > 0) {
       commonFactors[factor] = minExponent;
     }
   });
-  
+
   // Calculate GCF by multiplying prime factors with their minimum exponents
   let gcf = 1;
   Object.entries(commonFactors).forEach(([base, exponent]) => {
     gcf *= Math.pow(Number(base), exponent);
   });
-  
+
   return gcf;
 }
 
 function formatPrimeFactorization(factors: number[]): string {
   if (factors.length === 0) return "1";
-  
+
   const counts: { [key: number]: number } = {};
   factors.forEach(factor => {
     counts[factor] = (counts[factor] || 0) + 1;
   });
-  
+
   return Object.entries(counts)
-    .map(([base, exponent]) => 
+    .map(([base, exponent]) =>
       exponent === 1 ? base : `${base}<sup>${exponent}</sup>`
     )
     .join(" × ");
@@ -115,16 +115,16 @@ export default function GCFCalculator() {
     if (nums.length > 0) {
       setNumbers(nums);
       setGCF(findGCF(nums));
-      
+
       const newPrimeFactors: { [key: number]: number[] } = {};
       const newFormattedResults: { [key: number]: string } = {};
-      
+
       nums.forEach(num => {
         const factors = getPrimeFactors(num);
         newPrimeFactors[num] = factors;
         newFormattedResults[num] = formatPrimeFactorization(factors);
       });
-      
+
       setPrimeFactors(newPrimeFactors);
       setFormattedResults(newFormattedResults);
     }
@@ -142,12 +142,12 @@ export default function GCFCalculator() {
   return (
     <div className="flex flex-col lg:flex-row justify-center p-4 w-full bg-white shadow-lg rounded-2xl gap-4">
       <div className="w-full lg:w-[400px]">
-        <h1 className="text-3xl font-extrabold text-center text-purple-700">
+        <h2 className="text-3xl font-extrabold text-center text-purple-700">
           🔢 Greatest Common Factor (GCF) Calculator
-        </h1>
-        <h2 className="text-lg font-semibold text-center text-blue-700 mb-6">
-          Find the GCF of two or more numbers.
         </h2>
+        <h3 className="text-lg font-semibold text-center text-blue-700 mb-6">
+          Find the GCF of two or more numbers.
+        </h3>
 
         <div className="flex gap-2 mb-6">
           <input
@@ -195,14 +195,14 @@ export default function GCFCalculator() {
         </h2>
         <div className="bg-white p-3 rounded-lg text-sm">
           <p className="mb-2">
-            The GCF is the product of all prime factors that are common to all numbers, 
+            The GCF is the product of all prime factors that are common to all numbers,
             raised to the smallest exponent they appear with in any of the numbers.
           </p>
           <p>
             For these numbers, the common prime factors are:{" "}
             {Object.keys(primeFactors[numbers[0]] || {})
-              .filter(factor => 
-                numbers.every(num => 
+              .filter(factor =>
+                numbers.every(num =>
                   primeFactors[num].includes(Number(factor))
                 )
               )

@@ -1,11 +1,3 @@
-export const metadata = {
-  title: "Greatest Common Factor (GCF) Calculator | MathTechLab",
-  description:
-    "Use our free Greatest Common Factor (GCF) Calculator to find the GCF of two or more numbers. Get step-by-step solutions, prime factorizations, and learn how to find GCF using multiple methods. Perfect for students, teachers, and math enthusiasts.",
-  keywords:
-    "GCF calculator, greatest common factor, GCD calculator, common factors, prime factorization, math calculator, online calculator, factor calculator, mathematics tools",
-};
-
 const faqs = [
   {
     question: "What is the Greatest Common Factor (GCF) in mathematics?",
