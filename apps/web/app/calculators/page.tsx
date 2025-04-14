@@ -30,6 +30,12 @@ const calculators = [
     icon: "✅",
   },
   {
+    title: "Fraction Calculator",
+    description: "Add, subtract, multiply, and divide fractions with step-by-step solutions.",
+    href: "/calculators/fraction-calculator",
+    icon: "🔢",
+  },
+  {
     title: "Prime Factorization Calculator",
     description: "Break down any number into its prime factors with a visual representation.",
     href: "/calculators/prime-factorization-calculator",
