@@ -53,12 +53,12 @@ export default function FactorChecker() {
   return (
     <div className="flex flex-col lg:flex-row justify-center p-4 w-full bg-white shadow-lg rounded-2xl gap-4">
       <div className="w-full lg:w-[400px]">
-        <h1 className="text-3xl font-extrabold text-center text-purple-700">
+        <h2 className="text-3xl font-extrabold text-center text-purple-700">
           🔍 Factor Checker
-        </h1>
-        <h2 className="text-lg font-semibold text-center text-blue-700 mb-6">
-          Calculate factors and factor pairs of any whole number.
         </h2>
+        <h3 className="text-lg font-semibold text-center text-blue-700 mb-6">
+          Calculate factors and factor pairs of any whole number.
+        </h3>
 
         <div className="flex gap-2 mb-6">
           <input
