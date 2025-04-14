@@ -3,12 +3,12 @@ import GCFCalculator from "./GCFCalculator";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Greatest Common Factor (GCF) Calculator | MathTechLab",
-  description: "Find the Greatest Common Factor (GCF) of two or more numbers with our free calculator. View prime factorizations and learn how to find the GCF using different methods.",
-  keywords: "greatest common factor, GCF, GCD, common divisor, prime factorization, math calculator, factorization",
+  title: "Greatest Common Factor (GCF) Calculator | Find GCD & Common Divisors | MathTechLab",
+  description: "Use our free Greatest Common Factor (GCF) Calculator to find the GCF of two or more numbers. Get step-by-step solutions, prime factorizations, and learn multiple methods to find the GCF. Perfect for students, teachers, and math enthusiasts.",
+  keywords: "greatest common factor calculator, GCF calculator, GCD calculator, common divisor, prime factorization, math calculator, online calculator, factorization tool, mathematics tools, number theory, highest common factor",
   openGraph: {
-    title: "Greatest Common Factor (GCF) Calculator | MathTechLab",
-    description: "Find the Greatest Common Factor (GCF) of two or more numbers with our free calculator. View prime factorizations and learn how to find the GCF using different methods.",
+    title: "Greatest Common Factor (GCF) Calculator | Find GCD & Common Divisors | MathTechLab",
+    description: "Use our free Greatest Common Factor (GCF) Calculator to find the GCF of two or more numbers. Get step-by-step solutions, prime factorizations, and learn multiple methods to find the GCF. Perfect for students, teachers, and math enthusiasts.",
     type: "website",
   },
 };
