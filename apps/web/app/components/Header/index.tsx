@@ -15,6 +15,10 @@ const navUrls = [
     url: "/times-tables",
   },
   {
+    title: "Factors",
+    url: "/factors",
+  },
+  {
     title: "24 Game",
     url: "/games/24-game",
   },
