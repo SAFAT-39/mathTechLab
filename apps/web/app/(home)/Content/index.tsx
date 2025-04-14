@@ -32,6 +32,28 @@ const Content = () => {
       />
 
       <Section
+        title="Math Calculators"
+        items={[
+          {
+            title: "Factor Checker",
+            description: "Calculate the factors of a number",
+            link: "/calculators/factor-checker",
+          },
+          {
+            title: "GCF Calculator",
+            description: "Calculate the greatest common factor of two numbers or more numbers.",
+            link: "/calculators/gcf-calculator",
+          },
+          {
+            title: "Fraction Calculator",
+            description: "Add, subtract, multiply, and divide fractions with step-by-step solutions.",
+            link: "/calculators/fraction-calculator",
+          },
+        ]}
+        seeMoreLink="/calculators"
+      />
+
+      <Section
         title="Math Learning"
         items={[
           {
