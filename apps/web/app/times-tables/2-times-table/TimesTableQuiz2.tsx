@@ -1,10 +1,10 @@
 import TimesTableQuiz from "../uitils/timeTableQuiz/TimeTableQuiz";
 
-const TimesTableQuiz1 = () => {
+const TimesTableQuiz2 = () => {
   return (
     <div className="container mx-auto  pt-[60px]">
       <h2 className="text-lg md:text-2xl  font-bold  mb-1">
-        Interactive 1 Times Table Quiz
+        Interactive 2 Times Table Quiz
       </h2>
       <p className="text-gray-600 font-medium md:w-[700px] mb-3">
         Mastering multiplication tables is a fundamental math skill that helps
@@ -23,10 +23,10 @@ const TimesTableQuiz1 = () => {
       </ul>
 
       <div className="max-w-4xl mx-auto">
-        <TimesTableQuiz tableNumber={1} />
+        <TimesTableQuiz tableNumber={2} />
       </div>
       <h2 className="text-lg md:text-2xl font-bold mb-1 mt-7">
-        How to Use This 1 Times Table Quiz
+        How to Use This 2 Times Table Quiz
       </h2>
       <p className="mb-4 md:w-[700px] text-gray-600">
         This interactive quiz is designed to help students practice their times
@@ -42,4 +42,4 @@ const TimesTableQuiz1 = () => {
   );
 };
 
-export default TimesTableQuiz1;
+export default TimesTableQuiz2;
