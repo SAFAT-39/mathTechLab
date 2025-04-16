@@ -4,6 +4,7 @@ import MulPracticeShuffled from "../uitils/timesTablesSection4/MulPracticeShuffl
 import DragAndDropStep from "../uitils/timesTablesSection3/dragAndDropStep";
 import DescriptionFAQs from "./DescriptionFAQs";
 import TableNavigation from "../uitils/tableNavigation/TableNavigation";
+import TimesTableQuiz6 from "./TimesTableQuiz6";
 
 export default function ThreeTimesTable() {
   return (
@@ -20,6 +21,7 @@ export default function ThreeTimesTable() {
         bgGradient="from-orange-600 to-yellow-600"
         buttonGradient="from-yellow-600 to-orange-600"
       />
+      <TimesTableQuiz6 />
       <DragAndDropStep timesTable={6} />
       <MulPracticeShuffled
         timesTable={6}
