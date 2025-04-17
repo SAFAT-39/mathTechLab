@@ -11,7 +11,7 @@ const renderPrimeFactorizationParagraph = (num: number, factors: number[]) => {
     })
     .join(" × ");
 
-  return `The prime factorization of ${num} involves breaking it down into the product of prime numbers. Using division, we find that the prime factors of ${num} are ${factors.join(", ")}. Therefore, the prime factorization of ${num} is ${factorCount}. Understanding prime factorization helps in finding GCF, LCM, and simplifying fractions.`;
+  return <>The prime factorization of {num} involves breaking it down into the product of prime numbers. Using division, we find that the prime factors of {num} are {factors.join(", ")}. Therefore, the prime factorization of {num} is {factorCount}. Understanding prime factorization helps in finding GCF, <Link className="text-blue-600 hover:text-blue-800 font-medium transition-colors" href="/calculators/lcm-calculator">LCM</Link>, and simplifying <Link className="text-blue-600 hover:text-blue-800 font-medium transition-colors" href="/calculators/fraction-calculator">fractions</Link>.</>;
 };
 
 const PrimeFactorization = ({ num }: NumProps) => {

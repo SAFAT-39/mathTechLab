@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { NumProps } from "./type";
 import { getFactorPairs, getFactors } from "./utils";
 
@@ -14,7 +15,7 @@ const renderFactorPairsParagraph = (
     .map(([a, b]) => `(${a}, ${b})`)
     .join(", ");
 
-  return `The factor pairs of ${num} are the pairs of integers that multiply together to give ${num}. These include both positive and negative combinations. The positive factor pairs of ${num} are ${positivePairs}, and the negative factor pairs are ${negativePairs}. Knowing the factor pairs of ${num} is useful for learning multiplication, division, and understanding concepts such as the greatest common factor and prime factorization.`;
+  return <>The factor pairs of {num} are the pairs of integers that multiply together to give {num}. These include both positive and negative combinations. The positive factor pairs of {num} are {positivePairs}, and the negative factor pairs are {negativePairs}. Knowing the factor pairs of {num} is useful for learning multiplication, division, and understanding concepts such as the <Link className="text-blue-600 hover:text-blue-800 font-medium transition-colors" href="/calculators/gcf-calculator">greatest common factor</Link> and prime factorization.</>;
 };
 
 const FactorPair = ({ num }: NumProps) => {

@@ -19,8 +19,8 @@ const Factors = ({ num }: NumProps) => {
     <section className="space-y-4">
       <h2 className="text-2xl font-bold text-purple-700">What are the Factors of {num}?</h2>
       <p className="text-gray-700 leading-relaxed">
-        There are {factors.length} factors of {num}. The positive factors of{" "}
-        {num} are {factorsString()}, while it's negative factors include{" "}
+        There are {factors.length} factors of {num}. The factors of{" "}
+        {num} are {factorsString()}. Factors can be negative. The negative factors are{" "}
         {factorsString(-1)}. All of these numbers divides {num} completely.{" "}
         {factors.length > 2
           ? `${num} is a composite number because it has other factors besides 1 and ${num}.`
