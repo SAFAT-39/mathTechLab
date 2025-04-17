@@ -2,21 +2,34 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white mt-8 px-4 py-6 text-center">
-      <div className="mb-2 space-x-4">
-        <Link href="/privacy-policy" className="hover:underline text-sm">
-          Privacy Policy
-        </Link>
-        <Link href="/terms-of-service" className="hover:underline text-sm">
-          Terms of Service
-        </Link>
-        <Link href="/sitemap.xml" className="hover:underline text-sm">
-          Sitemap
-        </Link>
+    <footer className="bg-white border-t border-gray-100 py-8">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          <div className="text-gray-600 text-sm">
+            © {new Date().getFullYear()} MathTechLab. All rights reserved.
+          </div>
+          <nav className="flex space-x-6">
+            <Link
+              href="/privacy-policy"
+              className="text-gray-600 hover:text-purple-600 text-sm font-medium transition-colors"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="/terms-of-service"
+              className="text-gray-600 hover:text-purple-600 text-sm font-medium transition-colors"
+            >
+              Terms of Service
+            </Link>
+            <Link
+              href="/sitemap.xml"
+              className="text-gray-600 hover:text-purple-600 text-sm font-medium transition-colors"
+            >
+              Sitemap
+            </Link>
+          </nav>
+        </div>
       </div>
-      <p className="text-sm">
-        &copy; {new Date().getFullYear()} MathTechLab. All rights reserved.
-      </p>
     </footer>
   );
 };

@@ -36,9 +36,9 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white sticky text-white p-1 shadow-md">
-      <div className="container mx-auto flex justify-between items-center text-blue-800 font-semibold">
-        <Link href="/" className="text-xl font-bold">
+    <header className="bg-white sticky top-0 z-50 shadow-sm border-b border-gray-100">
+      <div className="container mx-auto px-4 py-1 flex justify-between items-center">
+        <Link href="/" className="flex items-center">
           <Image
             alt="MathTechLab – Math Games and Learning"
             src="/logo.svg"
@@ -47,15 +47,19 @@ const Header = () => {
             className="w-[120px] h-[60px]"
           ></Image>
         </Link>
-        <nav className="hidden md:flex space-x-4">
+        <nav className="hidden md:flex space-x-6">
           {navUrls.map((item, index: number) => (
-            <Link key={index} href={item.url} className="hover:underline">
+            <Link
+              key={index}
+              href={item.url}
+              className="text-gray-700 hover:text-purple-600 font-medium transition-colors"
+            >
               {item.title}
             </Link>
           ))}
         </nav>
         <button
-          className="md:hidden"
+          className="md:hidden text-gray-700 hover:text-purple-600 transition-colors"
           aria-label="Menu"
           onClick={() => setMenuOpen(!menuOpen)}
         >
@@ -63,17 +67,19 @@ const Header = () => {
         </button>
       </div>
       {menuOpen && (
-        <nav className="md:hidden bg-white p-4 text-blue-800 font-semibold">
-          {navUrls.map((item, index: number) => (
-            <Link
-              key={index}
-              href={item.url}
-              className="block py-2"
-              onClick={() => setMenuOpen(false)}
-            >
-              {item.title}
-            </Link>
-          ))}
+        <nav className="md:hidden bg-white border-t border-gray-100 shadow-md">
+          <div className="container mx-auto px-4 py-3">
+            {navUrls.map((item, index: number) => (
+              <Link
+                key={index}
+                href={item.url}
+                className="block py-3 text-gray-700 hover:text-purple-600 font-medium transition-colors border-b border-gray-100 last:border-0"
+                onClick={() => setMenuOpen(false)}
+              >
+                {item.title}
+              </Link>
+            ))}
+          </div>
         </nav>
       )}
     </header>
