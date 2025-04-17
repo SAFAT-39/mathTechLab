@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Content from "./Content";
+import Content from "./Content/Content";
 
 export default function Home() {
   return (
