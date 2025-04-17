@@ -51,32 +51,32 @@ const calculators = [
 
 export default function CalculatorsPage() {
   return (
-    <div className="container mx-auto py-12">
-      <div className="max-w-3xl mx-auto text-center mb-12">
-        <h1 className="text-4xl font-bold mb-4">Math Calculators</h1>
-        <p className="text-lg text-gray-600 mb-6">
+    <div className="container mx-auto py-8 px-4">
+      <div className="max-w-3xl mx-auto text-center mb-8">
+        <h1 className="text-3xl font-bold mb-3">Math Calculators</h1>
+        <p className="text-base text-gray-600 mb-4">
           Welcome to MathTechLab's collection of free online math calculators. Our tools are designed to help students, teachers, and anyone interested in mathematics solve problems quickly and understand the underlying concepts.
         </p>
-        <p className="text-lg text-gray-600">
+        <p className="text-base text-gray-600">
           Each calculator provides detailed explanations and step-by-step solutions to help you learn as you calculate.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mx-auto">
         {calculators.map((calculator) => (
           <Link
             key={calculator.title}
             href={calculator.href}
-            className="block bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-gray-100"
+            className="block bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 hover:border-purple-200 hover:translate-y-[-2px]"
           >
-            <div className="p-6">
-              <div className="flex items-center mb-4">
-                <span className="text-3xl mr-3">{calculator.icon}</span>
-                <h2 className="text-xl font-bold text-gray-800">{calculator.title}</h2>
+            <div className="p-4">
+              <div className="flex items-center mb-2">
+                <span className="text-2xl mr-2">{calculator.icon}</span>
+                <h2 className="text-lg font-semibold text-gray-800">{calculator.title}</h2>
               </div>
-              <p className="text-gray-600">{calculator.description}</p>
-              <div className="mt-4 flex justify-end">
-                <span className="text-purple-600 font-medium">Try it now →</span>
+              <p className="text-sm text-gray-600 line-clamp-2">{calculator.description}</p>
+              <div className="mt-3 flex justify-end">
+                <span className="text-purple-600 text-sm font-medium">Try it now →</span>
               </div>
             </div>
           </Link>
