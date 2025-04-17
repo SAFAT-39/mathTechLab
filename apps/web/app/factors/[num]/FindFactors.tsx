@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { NumProps } from "./type";
 
 const getOptimizedDivisionSteps = (num: number): string[] => {
@@ -43,6 +44,7 @@ const FindFactors = ({ num }: NumProps) => {
         This method avoids unnecessary checks and gives all factor pairs
         quickly. It’s especially useful for larger numbers.
       </p>
+      <p>Find factors and factors pair of any number with our <Link className="text-blue-600 underline" href="/calculators/factor-checker">Factor Checker</Link> tool.</p>
     </section>
   );
 };

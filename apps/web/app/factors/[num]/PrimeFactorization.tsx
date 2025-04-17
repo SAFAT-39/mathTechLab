@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { NumProps } from "./type";
 import { getPrimeFactorization } from "./utils";
 
@@ -53,6 +54,7 @@ const PrimeFactorization = ({ num }: NumProps) => {
           )}
         </p>
       </div>
+      <p>Find prime factorization of any number with our <Link className="text-blue-600 underline" href="/calculators/prime-factorization">Prime Factorization Calculator</Link> tool.</p>
     </section>
   );
 };
