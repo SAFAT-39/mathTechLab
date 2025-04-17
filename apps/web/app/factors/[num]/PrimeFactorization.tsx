@@ -32,29 +32,42 @@ const PrimeFactorization = ({ num }: NumProps) => {
   });
 
   return (
-    <section className="text-base space-y-4 mt-8">
-      <h2 className="text-2xl font-semibold">Prime Factorization of {num}</h2>
-      <p>{renderPrimeFactorizationParagraph(num, factors)}</p>
+    <section className="space-y-6">
+      <h2 className="text-2xl font-bold text-purple-700">Prime Factorization of {num}</h2>
+      <p className="text-gray-700 leading-relaxed">{renderPrimeFactorizationParagraph(num, factors)}</p>
 
-      <div className="text-lg space-y-1">
-        <p>
-          <strong>Prime factors of {num}:</strong> {factors.join(", ")}
-        </p>
-        <p>
-          <strong>Prime factorization of {num}:</strong> {factorExpression}
-        </p>
-        <p>
-          <strong>Compact form:</strong>{" "}
-          {compactForm.map((part, i) =>
-            i < compactForm.length - 1 ? (
-              <span key={i}>{part} × </span>
-            ) : (
-              <span key={i}>{part}</span>
-            )
-          )}
-        </p>
+      <div className="bg-purple-50 border border-purple-100 rounded-lg p-6 space-y-4">
+        <div className="space-y-2">
+          <h3 className="text-lg font-semibold text-purple-700">Prime factors of {num}:</h3>
+          <p className="text-gray-700">{factors.join(", ")}</p>
+        </div>
+
+        <div className="space-y-2">
+          <h3 className="text-lg font-semibold text-purple-700">Prime factorization of {num}:</h3>
+          <p className="text-gray-700">{factorExpression}</p>
+        </div>
+
+        <div className="space-y-2">
+          <h3 className="text-lg font-semibold text-purple-700">Compact form:</h3>
+          <p className="text-gray-700">
+            {compactForm.map((part, i) =>
+              i < compactForm.length - 1 ? (
+                <span key={i}>{part} × </span>
+              ) : (
+                <span key={i}>{part}</span>
+              )
+            )}
+          </p>
+        </div>
       </div>
-      <p>Find prime factorization of any number with our <Link className="text-blue-600 underline" href="/calculators/prime-factorization">Prime Factorization Calculator</Link> tool.</p>
+
+      <p className="text-gray-700">
+        Find prime factorization of any number with our{" "}
+        <Link className="text-blue-600 hover:text-blue-800 font-medium transition-colors" href="/calculators/prime-factorization">
+          Prime Factorization Calculator
+        </Link>{" "}
+        tool.
+      </p>
     </section>
   );
 };

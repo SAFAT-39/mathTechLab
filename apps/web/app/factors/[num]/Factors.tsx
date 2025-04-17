@@ -16,9 +16,9 @@ const Factors = ({ num }: NumProps) => {
   };
 
   return (
-    <section className="text-base space-y-2">
-      <h2 className="text-2xl font-semibold">What are the Factors of {num}?</h2>
-      <p>
+    <section className="space-y-4">
+      <h2 className="text-2xl font-bold text-purple-700">What are the Factors of {num}?</h2>
+      <p className="text-gray-700 leading-relaxed">
         There are {factors.length} factors of {num}. The positive factors of{" "}
         {num} are {factorsString()}, while it's negative factors include{" "}
         {factorsString(-1)}. All of these numbers divides {num} completely.{" "}
@@ -26,11 +26,11 @@ const Factors = ({ num }: NumProps) => {
           ? `${num} is a composite number because it has other factors besides 1 and ${num}.`
           : `${num} is a prime number because it has no other factors than 1 and ${num}.`}
       </p>
-      <p className="p-2 w-full border rounded bg-gray-200 text-center">
-        <strong>
-          Factors of {num}: {factorsString()}.
-        </strong>
-      </p>
+      <div className="bg-purple-50 border border-purple-100 rounded-lg p-4 text-center">
+        <p className="text-lg font-semibold text-purple-700">
+          Factors of {num}: {factorsString()}
+        </p>
+      </div>
     </section>
   );
 };

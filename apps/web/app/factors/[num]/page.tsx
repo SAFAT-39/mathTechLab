@@ -54,15 +54,31 @@ export default async function FactorsPage({ params }: FactorsPageProps) {
   }
 
   return (
-    <div className="py-4 space-y-5">
-      <h1 className="text-3xl font-bold p-2 bg-gray-400">Factors of {num}</h1>
-      <Introduction num={num} />
-      <Factors num={num} />
-      <FactorPair num={num} />
-      <PrimeFactorization num={num} />
-      <FindFactors num={num} />
-      <FAQs num={num} />
-      <RelatedLinks num={num} />
+    <div className="mx-auto py-4">
+      <div className="bg-white rounded-lg shadow-lg p-6 space-y-8">
+        <h1 className="text-4xl font-extrabold text-center text-purple-700 mb-8">
+          Factors of {num}
+        </h1>
+        <Introduction num={num} />
+        <div className="border-t border-gray-100 pt-6">
+          <Factors num={num} />
+        </div>
+        <div className="border-t border-gray-100 pt-6">
+          <FactorPair num={num} />
+        </div>
+        <div className="border-t border-gray-100 pt-6">
+          <PrimeFactorization num={num} />
+        </div>
+        <div className="border-t border-gray-100 pt-6">
+          <FindFactors num={num} />
+        </div>
+        <div className="border-t border-gray-100 pt-6">
+          <FAQs num={num} />
+        </div>
+        <div className="border-t border-gray-100 pt-6">
+          <RelatedLinks num={num} />
+        </div>
+      </div>
     </div>
   );
 }

@@ -23,52 +23,56 @@ const FactorPair = ({ num }: NumProps) => {
   const negativePairs = factorPairs.filter(([a, b]) => a < 0 && b < 0);
 
   return (
-    <section className="text-base space-y-4">
-      <h2 className="text-2xl font-semibold">Factor Pairs of {num}</h2>
-      <p>{renderFactorPairsParagraph(num, factorPairs)}</p>
+    <section className="space-y-6">
+      <h2 className="text-2xl font-bold text-purple-700">Factor Pairs of {num}</h2>
+      <p className="text-gray-700 leading-relaxed">{renderFactorPairsParagraph(num, factorPairs)}</p>
 
-      <div>
-        <h3 className="text-lg font-semibold">
+      <div className="space-y-4">
+        <h3 className="text-xl font-semibold text-purple-600">
           Positive Factor Pairs of {num}:
         </h3>
-        <table className="w-full border border-gray-300 mt-2">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="px-4 py-2 border">Factor 1</th>
-              <th className="px-4 py-2 border">Factor 2</th>
-            </tr>
-          </thead>
-          <tbody>
-            {positivePairs.map(([a, b], index) => (
-              <tr key={index} className="bg-gray-200">
-                <td className="px-4 py-2 border text-center">{a}</td>
-                <td className="px-4 py-2 border text-center">{b}</td>
+        <div className="overflow-x-auto">
+          <table className="w-full border border-purple-100 rounded-lg">
+            <thead>
+              <tr className="bg-purple-50">
+                <th className="px-4 py-3 border-b border-purple-100 text-purple-700">Factor 1</th>
+                <th className="px-4 py-3 border-b border-purple-100 text-purple-700">Factor 2</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {positivePairs.map(([a, b], index) => (
+                <tr key={index} className="hover:bg-purple-50 transition-colors">
+                  <td className="px-4 py-3 border-b border-purple-100 text-center">{a}</td>
+                  <td className="px-4 py-3 border-b border-purple-100 text-center">{b}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
-      <div>
-        <h3 className="text-lg font-semibold">
+      <div className="space-y-4">
+        <h3 className="text-xl font-semibold text-purple-600">
           Negative Factor Pairs of {num}:
         </h3>
-        <table className="w-full border border-gray-300 mt-2">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="px-4 py-2 border">Factor 1</th>
-              <th className="px-4 py-2 border">Factor 2</th>
-            </tr>
-          </thead>
-          <tbody>
-            {negativePairs.map(([a, b], index) => (
-              <tr key={index} className="bg-gray-200">
-                <td className="px-4 py-2 border text-center">{a}</td>
-                <td className="px-4 py-2 border text-center">{b}</td>
+        <div className="overflow-x-auto">
+          <table className="w-full border border-purple-100 rounded-lg">
+            <thead>
+              <tr className="bg-purple-50">
+                <th className="px-4 py-3 border-b border-purple-100 text-purple-700">Factor 1</th>
+                <th className="px-4 py-3 border-b border-purple-100 text-purple-700">Factor 2</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {negativePairs.map(([a, b], index) => (
+                <tr key={index} className="hover:bg-purple-50 transition-colors">
+                  <td className="px-4 py-3 border-b border-purple-100 text-center">{a}</td>
+                  <td className="px-4 py-3 border-b border-purple-100 text-center">{b}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
   );

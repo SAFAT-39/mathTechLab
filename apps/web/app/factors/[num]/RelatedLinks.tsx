@@ -7,7 +7,7 @@ const seededShuffle = (array: number[], seed: number): number[] => {
   const arr = [...array];
   for (let i = arr.length - 1; i > 0; i--) {
     // Generate a deterministic random value based on the seed and index
-    const j = Math.floor((seed + (i + 1) * 997) % arr.length);
+    const j = Math.floor((seed + (i + 1) * 99997) % arr.length);
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
   return arr;
@@ -21,7 +21,7 @@ const getRelatedNumbers = (num: number) => {
   const shuffledList = seededShuffle(filteredList, num);
 
   // Return the first 10 numbers from the shuffled list
-  return shuffledList.slice(0, 10);
+  return shuffledList.slice(0, 12);
 };
 
 const RelatedLinks = ({ num }: NumProps) => {
@@ -34,26 +34,25 @@ const RelatedLinks = ({ num }: NumProps) => {
   }
 
   return (
-    <section className="mt-8">
-      <h2 className="text-2xl font-semibold">Related Links</h2>
-      <table className="w-full mt-4 bg-white">
-        <tbody>
-          {chunkedLinks.map((linkPair, rowIndex: number) => (
-            <tr key={rowIndex} className="bg-white">
+    <section className="space-y-4">
+      <h2 className="text-2xl font-bold text-purple-700">Related Links</h2>
+      <div className="bg-white border border-purple-100 rounded-lg overflow-hidden">
+        <div className="grid grid-cols-2 divide-x divide-y divide-purple-100">
+          {chunkedLinks.map((linkPair, rowIndex) => (
+            <div key={rowIndex} className="grid grid-cols-2 divide-x divide-purple-100">
               {linkPair.map((relatedNum) => (
-                <td key={relatedNum} className="p-2 border text-center">
-                  <Link
-                    className="text-blue-800 hover:underline"
-                    href={`/factors/factors-of-${relatedNum}`}
-                  >
-                    Factors of {relatedNum}
-                  </Link>
-                </td>
+                <Link
+                  key={relatedNum}
+                  href={`/factors/factors-of-${relatedNum}`}
+                  className="p-4 text-center text-blue-600 hover:text-blue-800 hover:bg-purple-50 transition-colors"
+                >
+                  Factors of {relatedNum}
+                </Link>
               ))}
-            </tr>
+            </div>
           ))}
-        </tbody>
-      </table>
+        </div>
+      </div>
     </section>
   );
 };
