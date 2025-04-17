@@ -40,11 +40,12 @@ const Header = () => {
       <div className="container mx-auto px-4 py-1 flex justify-between items-center">
         <Link href="/" className="flex items-center">
           <Image
-            alt="MathTechLab – Math Games and Learning"
+            alt="MathTechLab – Math Calculators, Games and Learning"
             src="/logo.svg"
             width={100}
             height={50}
             className="w-[120px] h-[60px]"
+            onClick={() => setMenuOpen(false)}
           ></Image>
         </Link>
         <nav className="hidden md:flex space-x-6">
