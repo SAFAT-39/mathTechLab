@@ -2,7 +2,7 @@ const getCalculatorsPages = () => {
   return [
     {
       url: "https://mathtechlab.com/calculators",
-      lastModified: "2025-04-14",
+      lastModified: "2025-04-17",
       priority: 0.8,
     },
     {
