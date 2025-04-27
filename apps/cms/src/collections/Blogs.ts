@@ -1,4 +1,4 @@
-// import MarkdownEditor from '@/fields/MarkdownEditor';
+import MarkdownEditor from '@/fields/MarkdownEditor';
 import type { CollectionConfig } from 'payload'
 
 
@@ -39,22 +39,14 @@ const Blogs: CollectionConfig = {
         description: 'The main image for the blog post',
       },
     },
-    // {
-    //   name: 'content',
-    //   type: 'text',
-    //   admin: {
-    //     components: {
-    //       Field: MarkdownEditor,
-    //     },
-    //   },
-    // },
     {
       name: 'content',
       type: 'textarea',
       required: true,
       admin: {
         description: 'Write your content in Markdown (MDX) format. Supports code blocks, math equations, and other MDX features.',
-        className: 'content-editor',
+        className: 'content-editor',  
+        placeholder: "Write your content in MDX..",
       },
     },
     {
