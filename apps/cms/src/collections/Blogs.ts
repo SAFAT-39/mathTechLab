@@ -1,4 +1,3 @@
-import MarkdownEditor from '@/fields/MarkdownEditor';
 import type { CollectionConfig } from 'payload'
 
 
@@ -69,7 +68,7 @@ const Blogs: CollectionConfig = {
       type: 'date',
       admin: {
         position: 'sidebar',
-        condition: (data: any) => Boolean(data?.published),
+        condition: (data) => Boolean(data?.published),
       },
     },
     {

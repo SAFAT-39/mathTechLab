@@ -1,7 +1,6 @@
 'use server';
-
-import { compile } from '@mdx-js/mdx';
-import { run } from '@mdx-js/mdx';
+// @ts-ignore
+import { compile, run } from '@mdx-js/mdx';
 import * as runtime from 'react/jsx-runtime';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
