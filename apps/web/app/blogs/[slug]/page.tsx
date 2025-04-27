@@ -1,7 +1,9 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Image from 'next/image';
+import 'katex/dist/katex.min.css'
 import { BlogPost } from '../types';
+import { renderMDX } from './renderMDX';
 
 type BlogPostPageProps = {
   params: Promise<{
@@ -49,7 +51,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const slug = (await params).slug;
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_CMS_URL}/api/blogs?where[slug][equals]=${slug}&where[published][equals]=true`,
-    { next: { revalidate: 60 } }
+    { next: { revalidate: 0 } }
   );
 
   if (!res.ok) {
@@ -62,6 +64,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   if (!post) {
     notFound();
   }
+
+  const Content = await renderMDX(post.content);
 
   return (
     <article className="container mx-auto px-4 py-8 max-w-4xl">
@@ -97,10 +101,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         )}
       </header>
 
-      <div
-        className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-blue-600 prose-strong:text-gray-900 prose-code:text-pink-500 prose-pre:bg-gray-50 prose-pre:border prose-pre:border-gray-200"
-        dangerouslySetInnerHTML={{ __html: post.content || '<p>No content available.</p>' }}
-      />
+      <div className="prose prose-lg max-w-none">
+        <Content />
+      </div>
     </article>
   );
 } 
