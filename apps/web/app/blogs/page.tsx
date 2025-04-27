@@ -32,9 +32,9 @@ function formatDate(date: string): string {
 export default async function BlogsPage({
   searchParams,
 }: {
-  searchParams: { page?: string };
+  searchParams: Promise<{ page?: string }>;
 }) {
-  const currentPage = Number(searchParams.page) || 1;
+  const currentPage = Number((await searchParams).page) || 1;
   const { docs: blogs, totalPages } = await getBlogs(currentPage);
 
   return (
