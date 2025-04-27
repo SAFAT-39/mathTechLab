@@ -68,42 +68,52 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const Content = await renderMDX(post.content);
 
   return (
-    <article className="container mx-auto px-4 py-8 max-w-4xl">
-      <header className="mb-8">
-        <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
-        <div className="flex items-center text-gray-600 mb-6">
-          <time dateTime={post.publishedDate}>
-            {formatDate(post.publishedDate)}
-          </time>
-          {post.tags && post.tags.length > 0 && (
-            <div className="ml-4 flex gap-2">
-              {post.tags.map(({ tag }: { tag: string }) => (
-                <span key={tag} className="bg-gray-100 px-2 py-1 rounded text-sm">
-                  {tag}
-                </span>
-              ))}
-            </div>
+    <div className="max-w-6xl mx-auto p-4 md:p-8 rounded-2xl shadow-xl bg-white border-t border-gray-200">
+      {/* Header Card */}
+      <div className="">
+        <div className="text-center mb-6">
+          <h1 className="text-4xl md:text-4xl font-extrabold text-purple-700 mb-4">
+            {post.title}
+          </h1>
+          <div className="flex flex-wrap justify-center items-center gap-4 text-gray-600 text-sm mb-4">
+            <time dateTime={post.publishedDate} className="font-medium">
+              {formatDate(post.publishedDate)}
+            </time>
+            {post.tags && post.tags.length > 0 && (
+              <div className="flex flex-wrap gap-2">
+                {post.tags.map(({ tag }: { tag: string }) => (
+                  <span key={tag} className="bg-purple-50 text-purple-700 px-2 py-1 rounded-full text-xs font-semibold">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+          {post.excerpt && (
+            <p className="text-base text-gray-700 italic max-w-4xl mx-auto">{post.excerpt}</p>
           )}
         </div>
+
         {post.thumbnail && (
-          <div className="relative w-full h-[400px] mb-6">
+          <div className="relative w-full h-64 mb-6 rounded-xl overflow-hidden">
             <Image
               src={post.thumbnail.url}
               alt={post.title}
               fill
-              className="object-cover rounded-lg"
+              className="object-cover"
               priority
             />
           </div>
         )}
-        {post.excerpt && (
-          <p className="text-xl text-gray-600 italic mb-6">{post.excerpt}</p>
-        )}
-      </header>
-
-      <div className="prose prose-lg max-w-none">
-        <Content />
       </div>
-    </article>
+      <hr></hr>
+
+      {/* Content Card */}
+      <article className="mt-8">
+        <div className="prose prose-lg max-w-none mx-auto">
+          <Content />
+        </div>
+      </article>
+    </div>
   );
 } 
