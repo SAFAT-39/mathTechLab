@@ -76,8 +76,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {post.title}
           </h1>
           <div className="flex flex-wrap justify-center items-center gap-4 text-gray-600 text-sm mb-4">
-            <time dateTime={post.publishedDate} className="font-medium">
-              {formatDate(post.publishedDate)}
+            {post.author && (
+              <div className="flex items-center gap-2">
+                <span className="font-medium">By</span>
+                <span className="font-semibold text-purple-700">
+                  {post.author.firstName} {post.author.lastName}
+                </span>
+              </div>
+            )}
+            <time dateTime={post.publishedAt} className="font-medium">
+              {formatDate(post.publishedAt)}
             </time>
             {post.tags && post.tags.length > 0 && (
               <div className="flex flex-wrap gap-2">

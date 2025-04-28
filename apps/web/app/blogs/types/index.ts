@@ -6,7 +6,13 @@ export interface Blog {
   thumbnail?: {
     url: string;
   };
-  publishedDate: string;
+  publishedAt: string;
+  author?: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+  };
 }
 
 export interface BlogPost extends Blog {
@@ -25,4 +31,4 @@ export interface BlogsResponse {
   hasNextPage: boolean;
   prevPage: number | null;
   nextPage: number | null;
-} 
+}

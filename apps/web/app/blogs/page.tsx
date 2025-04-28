@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 async function getBlogs(page = 1): Promise<BlogsResponse> {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_CMS_URL}/api/blogs?page=${page}&limit=9&where[published][equals]=true&sort=-publishedDate`,
+    `${process.env.NEXT_PUBLIC_CMS_URL}/api/blogs?page=${page}&limit=9&where[published][equals]=true&sort=-publishedAt`,
     { next: { revalidate: 60 } }
   );
 
@@ -91,9 +91,16 @@ export default async function BlogsPage({
                   <p className="text-gray-600 mb-4 line-clamp-3 flex-1">{blog.excerpt}</p>
                 )}
                 <div className="flex items-center justify-between mt-auto pt-2">
-                  <time className="text-sm text-gray-500">
-                    {formatDate(blog.publishedDate)}
-                  </time>
+                  <div className="flex flex-col">
+                    {blog.author && (
+                      <span className="text-sm font-medium text-purple-700">
+                        {blog.author.firstName} {blog.author.lastName}
+                      </span>
+                    )}
+                    <time dateTime={blog.publishedAt} className="text-sm text-gray-500">
+                      {formatDate(blog.publishedAt)}
+                    </time>
+                  </div>
                   <span className="inline-block px-2 py-1 text-xs bg-purple-50 text-purple-700 rounded-full font-medium">
                     Read More
                   </span>
