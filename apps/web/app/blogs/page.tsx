@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { BlogsResponse } from './types';
+import MathTechIcon from './components/MathTechIcon';
 
 export const metadata: Metadata = {
   title: 'Blog | MathTechLab',
@@ -72,8 +73,8 @@ export default async function BlogsPage({
               href={`/blogs/${blog.slug}`}
               className="group block bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow overflow-hidden border border-gray-100 hover:border-purple-300"
             >
-              {blog.thumbnail && (
-                <div className="relative h-56 w-full overflow-hidden">
+              <div className="relative h-56 w-full overflow-hidden bg-purple-50">
+                {blog.thumbnail ? (
                   <Image
                     src={blog.thumbnail.url}
                     alt={blog.title}
@@ -81,8 +82,12 @@ export default async function BlogsPage({
                     className="object-cover group-hover:scale-105 transition-transform duration-200"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
-                </div>
-              )}
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center p-4">
+                    <MathTechIcon className="w-32 h-32" />
+                  </div>
+                )}
+              </div>
               <div className="p-6 flex flex-col h-full">
                 <h2 className="text-2xl font-bold mb-2 text-gray-900 group-hover:text-purple-700 transition-colors">
                   {blog.title}
