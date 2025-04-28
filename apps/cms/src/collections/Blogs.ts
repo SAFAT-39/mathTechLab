@@ -5,7 +5,7 @@ const Blogs: CollectionConfig = {
   slug: 'blogs',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'slug', 'published', 'createdDate'],
+    defaultColumns: ['title', 'slug', 'author', 'published'],
   },
   access: {
     read: () => true,
@@ -26,6 +26,16 @@ const Blogs: CollectionConfig = {
       unique: true,
       admin: {
         description: 'The URL-friendly version of the title',
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'author',
+      type: 'relationship',
+      relationTo: 'users',
+      required: true,
+      admin: {
+        description: 'The author of the blog post',
         position: 'sidebar',
       },
     },
@@ -82,6 +92,7 @@ const Blogs: CollectionConfig = {
         },
       ],
       admin: {
+        position: 'sidebar',
         description: 'Tags to categorize the blog post',
       },
     },

@@ -186,6 +186,10 @@ export interface Blog {
    */
   slug: string;
   /**
+   * The author of the blog post
+   */
+  author: string | User;
+  /**
    * The main image for the blog post
    */
   thumbnail?: (string | null) | Media;
@@ -317,6 +321,7 @@ export interface MediaSelect<T extends boolean = true> {
 export interface BlogsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  author?: T;
   thumbnail?: T;
   content?: T;
   excerpt?: T;
