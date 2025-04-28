@@ -121,6 +121,26 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: string;
+  /**
+   * The user's first name
+   */
+  firstName: string;
+  /**
+   * The user's last name
+   */
+  lastName: string;
+  /**
+   * The user's role in the system
+   */
+  role: 'admin' | 'editor' | 'author';
+  /**
+   * A short biography of the user
+   */
+  bio?: string | null;
+  /**
+   * The user's profile picture
+   */
+  avatar?: (string | null) | Media;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -258,6 +278,11 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  firstName?: T;
+  lastName?: T;
+  role?: T;
+  bio?: T;
+  avatar?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
