@@ -7,6 +7,7 @@ export interface Blog {
     url: string;
   };
   publishedAt: string;
+  updatedAt: string;
   author?: {
     id: string;
     firstName: string;
