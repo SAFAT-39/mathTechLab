@@ -64,19 +64,11 @@ const Blogs: CollectionConfig = {
       },
     },
     {
-      name: 'publishedDate',
+      name: 'publishedAt',
       type: 'date',
       admin: {
         position: 'sidebar',
         condition: (data) => Boolean(data?.published),
-      },
-    },
-    {
-      name: 'createdDate',
-      type: 'date',
-      required: true,
-      admin: {
-        position: 'sidebar',
       },
     },
     {

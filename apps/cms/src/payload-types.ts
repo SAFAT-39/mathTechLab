@@ -198,8 +198,7 @@ export interface Blog {
    */
   excerpt?: string | null;
   published?: boolean | null;
-  publishedDate?: string | null;
-  createdDate: string;
+  publishedAt?: string | null;
   /**
    * Tags to categorize the blog post
    */
@@ -322,8 +321,7 @@ export interface BlogsSelect<T extends boolean = true> {
   content?: T;
   excerpt?: T;
   published?: T;
-  publishedDate?: T;
-  createdDate?: T;
+  publishedAt?: T;
   tags?:
     | T
     | {
