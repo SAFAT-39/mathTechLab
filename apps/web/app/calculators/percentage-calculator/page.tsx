@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import PercentageCalculator from './components/PercentageCalculator';
+import WhatPercentOfCalculator from './components/WhatPercentOfCalculator';
 import Content from './components/Content';
 
 export const metadata: Metadata = {
@@ -23,6 +24,7 @@ export default function Page() {
         </div>
 
         <PercentageCalculator />
+        <WhatPercentOfCalculator />
         <Content />
       </div>
     </div>
