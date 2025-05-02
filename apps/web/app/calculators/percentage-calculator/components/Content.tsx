@@ -19,6 +19,11 @@ export default function Content() {
           (Value × Percentage) ÷ 100 = Result
         </p>
       </div>
+      <div className="bg-gray-50 p-4 rounded-lg mb-4">
+        <p className="font-mono text-purple-700">
+          Percentage = (Value ÷ Total) × 100
+        </p>
+      </div>
 
       <h3 className="text-xl font-semibold text-purple-600 mb-3">
         Common Percentage Calculations
