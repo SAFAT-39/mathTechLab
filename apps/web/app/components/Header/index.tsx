@@ -15,10 +15,6 @@ const navUrls = [
     url: "/times-tables",
   },
   {
-    title: "Factors",
-    url: "/factors",
-  },
-  {
     title: "24 Game",
     url: "/games/24-game",
   },
@@ -29,6 +25,10 @@ const navUrls = [
   {
     title: "Math Sprint",
     url: "/games/math-sprint",
+  },
+  {
+    title: "Blogs",
+    url: "/blogs",
   },
 ];
 
