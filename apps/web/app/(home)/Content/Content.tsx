@@ -37,6 +37,11 @@ const Content = () => {
             link: "/calculators/factor-checker",
           },
           {
+            title: "🔢 Percentage Calculator",
+            description: "Calculate percentages of numbers, find what percentage one number is of another, and more.",
+            link: "/calculators/percentage-calculator",
+          },
+          {
             title: "➕ More Coming Soon",
             description: "We're constantly adding new calculators to help with your mathematical needs.",
             link: "/calculators",
