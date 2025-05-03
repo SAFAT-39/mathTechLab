@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import PercentageCalculator from './components/PercentageCalculator';
 import WhatPercentOfCalculator from './components/WhatPercentOfCalculator';
 import Content from './components/Content';
-
+import PercentageChangeCalculator from './components/PercentageChangeCalculator';
 export const metadata: Metadata = {
   title: 'Percentage Calculator | MathTechLab',
   description: 'Calculate percentages easily with our free online percentage calculator. Find percentage of a number, percentage increase/decrease, and more.',
@@ -25,6 +25,7 @@ export default function Page() {
 
         <PercentageCalculator />
         <WhatPercentOfCalculator />
+        <PercentageChangeCalculator />
         <Content />
       </div>
     </div>
