@@ -30,6 +30,11 @@ const getCalculatorsPages = () => {
       lastModified: "2025-04-14",
       priority: 0.8,
     },
+    {
+      url: "https://mathtechlab.com/calculators/percentage-calculator",
+      lastModified: "2025-05-03",
+      priority: 0.8,
+    },
   ];
 };
 
