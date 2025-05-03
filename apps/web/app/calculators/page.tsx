@@ -42,6 +42,11 @@ const calculators = [
     description: "Check if a number is a factor of another number and find all factors of any number.",
     link: "/calculators/factor-checker",
   },
+  {
+    title: "🔢 Percentage Calculator",
+    description: "Calculate percentages of numbers, find what percentage one number is of another, and more.",
+    link: "/calculators/percentage-calculator",
+  },
 ];
 
 // Card component to match home page
