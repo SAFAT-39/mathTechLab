@@ -14,7 +14,10 @@ const convertToJSExpr = (expr: string) => {
     .replace(/\\tan/g, 'Math.tan')
     .replace(/\\log/g, 'Math.log')
     .replace(/\\exp/g, 'Math.exp')
-    .replace(/\^/g, '**')
+    // Parenthesize the base of exponents (but not a leading minus)
+    .replace(/([a-zA-Z0-9_\)]+)\^([\d]+)/g, '($1)**$2')
+    // Convert -(...**...) to -(...) for cases like -x^2
+    .replace(/-\(([^)]+)\)\*\*([\d]+)/g, '-($1**$2)')
     .replace(/(\d+)x/g, '$1*x')  // 2x → 2*x
     .replace(/^y\s*=/, '')       // remove y=
     // Handle sin x, cos x, tan x format without parentheses
