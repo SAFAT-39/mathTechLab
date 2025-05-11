@@ -17,7 +17,7 @@ const Card: React.FC<CardProps> = ({ title, description, link }) => {
   return (
     <Link
       href={link}
-      className={`block p-2 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 hover:border-purple-200 hover:translate-y-[-2px] ${isComingSoon ? 'opacity-80' : ''}`}
+      className={`block p-3 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 hover:border-purple-200 hover:translate-y-[-2px] ${isComingSoon ? 'opacity-80' : ''}`}
     >
       <div className="flex flex-col h-full">
         <div className="flex items-center mb-3">

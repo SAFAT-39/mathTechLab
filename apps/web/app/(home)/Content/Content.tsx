@@ -11,6 +11,11 @@ const Content = () => {
         title="Math Calculators"
         items={[
           {
+            title: "📈 Graphing Calculator",
+            description: "Plot mathematical functions, explore equations, and visualize graphs with our interactive graphing tool.",
+            link: "/calculators/graph",
+          },
+          {
             title: "🔢 LCM Calculator",
             description:
               "Find the Least Common Multiple of two or more numbers with detailed prime factorization.",
