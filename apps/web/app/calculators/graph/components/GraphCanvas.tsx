@@ -26,7 +26,7 @@ const convertToJSExpr = (expr: string) => {
 };
 
 
-const ZOOM_FACTOR = 1.02;
+const ZOOM_FACTOR = 1.03;
 
 interface GraphCanvasProps {
   equations: string[];
