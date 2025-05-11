@@ -18,6 +18,11 @@ export const metadata: Metadata = {
 // Calculator data with descriptions
 const calculators = [
   {
+    title: "📈 Graphing Calculator",
+    description: "Plot mathematical functions, explore equations, and visualize graphs with our interactive graphing tool.",
+    link: "/calculators/graph",
+  },
+  {
     title: "🔢 LCM Calculator",
     description: "Find the Least Common Multiple of two or more numbers with detailed prime factorization.",
     link: "/calculators/lcm-calculator",
@@ -58,7 +63,7 @@ const Card = ({ title, description, link }: { title: string; description: string
   return (
     <Link
       href={link}
-      className="block p-2 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 hover:border-purple-200 hover:translate-y-[-2px]"
+      className="block p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 hover:border-purple-200 hover:translate-y-[-2px]"
     >
       <div className="flex flex-col h-full">
         <div className="flex items-center mb-3">
