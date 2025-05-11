@@ -142,12 +142,12 @@ export default function GCFCalculator() {
   return (
     <div className="flex flex-col lg:flex-row justify-center p-4 w-full bg-white shadow-lg rounded-2xl gap-4">
       <div className="w-full lg:w-[400px]">
-        <h2 className="text-3xl font-extrabold text-center text-purple-700">
+        <h1 className="text-3xl font-extrabold text-center text-purple-700">
           🔢 Greatest Common Factor (GCF) Calculator
-        </h2>
-        <h3 className="text-lg font-semibold text-center text-blue-700 mb-6">
+        </h1>
+        <h2 className="text-lg font-semibold text-center text-blue-700 mb-6">
           Find the GCF of two or more numbers.
-        </h3>
+        </h2>
 
         <div className="flex gap-2 mb-6">
           <input
