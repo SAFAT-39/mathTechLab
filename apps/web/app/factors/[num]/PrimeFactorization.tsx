@@ -63,7 +63,7 @@ const PrimeFactorization = ({ num }: NumProps) => {
 
       <p className="text-gray-700">
         Find prime factorization of any number with our{" "}
-        <Link className="text-blue-600 hover:text-blue-800 font-medium transition-colors" href="/calculators/prime-factorization">
+        <Link className="text-blue-600 hover:text-blue-800 font-medium transition-colors" href="/calculators/prime-factorization-calculator">
           Prime Factorization Calculator
         </Link>{" "}
         tool.
