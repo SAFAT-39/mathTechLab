@@ -57,6 +57,8 @@ export default function Layout({ children }: LayoutProps) {
             })(window,document,'script','dataLayer','GTM-MD8DNH2N');`,
           }}
         ></script>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6350189879354435"
+          crossOrigin="anonymous"></script>
       </head>
 
       <body>
