@@ -85,8 +85,8 @@ const Header = () => {
           </nav>
         )}
       </header>
-      <script async data-cfasync="false" src="//pl27788157.revenuecpmgate.com/9d55caf32a958b06a72b7eaa3dbdb3ba/invoke.js"></script>
-      <div id="container-9d55caf32a958b06a72b7eaa3dbdb3ba"></div>
+      {/* <script async data-cfasync="false" src="//pl27788157.revenuecpmgate.com/9d55caf32a958b06a72b7eaa3dbdb3ba/invoke.js"></script>
+      <div id="container-9d55caf32a958b06a72b7eaa3dbdb3ba"></div> */}
     </>
 
   );
