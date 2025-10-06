@@ -37,7 +37,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="bg-white sticky top-0 z-50 shadow-sm border-b border-gray-100">
+      <header id="header" className="bg-white sticky top-0 z-50 shadow-sm border-b border-gray-100">
         <div className="container mx-auto px-4 py-1 flex justify-between items-center">
           <Link href="/" className="flex items-center">
             <Image
