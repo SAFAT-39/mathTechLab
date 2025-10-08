@@ -66,10 +66,10 @@ const tables = [
 const TimesTableCard = () => {
   return (
     <div className="py-6 ">
-      <h2 className="text-xl font-bold">
+      <h2 className="text-xl font-bold ">
         Which multiplication table would you like to master?
       </h2>
-      <div className="flex flex-wrap md:flex-row flex-col gap-4 pt-2 md:items-start items-center">
+      <div className="flex justify-center flex-wrap md:flex-row flex-col gap-4 pt-3 md:items-start items-center ">
         {tables.map((table, index) => (
           <Card
             key={index}
