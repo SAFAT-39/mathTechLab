@@ -38,7 +38,10 @@ const Page = () => {
         interactive lessons, practice exercises, printable charts, and quizzes
         designed to make learning multiplication simple and fun. Build strong
         math skills and enjoy a smarter way to study with{" "}
-        <Link href={"/"} className="font-bold text-blue-700">
+        <Link
+          href={"/"}
+          className="font-bold text-blue-700 hover:underline active:underline"
+        >
           MathTechLab
         </Link>
         .
