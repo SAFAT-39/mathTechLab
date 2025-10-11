@@ -46,11 +46,6 @@ const Content = () => {
             description: "Calculate percentages of numbers, find what percentage one number is of another, and more.",
             link: "/calculators/percentage-calculator",
           },
-          {
-            title: "➕ More Coming Soon",
-            description: "We're constantly adding new calculators to help with your mathematical needs.",
-            link: "/calculators",
-          },
         ]}
         seeMoreLink="/calculators"
       />
@@ -76,11 +71,6 @@ const Content = () => {
               "Solve as many math expressions as you can within the time limit! Challenge your brain and beat your high score.",
             link: "/games/math-sprint",
           },
-          {
-            title: "🎮 More Coming Soon",
-            description: "We're developing more exciting math games to make learning fun and engaging.",
-            link: "/games",
-          },
         ]}
         seeMoreLink="/games"
       />
@@ -97,11 +87,6 @@ const Content = () => {
             title: "🔢 Factors",
             description: "Learn about factors, factor pairs and prime factorization of a number.",
             link: "/factors",
-          },
-          {
-            title: "📖 More Coming Soon",
-            description: "We're expanding our learning resources to cover more mathematical concepts.",
-            link: "/times-tables",
           },
         ]}
         seeMoreLink="/times-tables"
