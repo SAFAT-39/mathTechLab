@@ -51,6 +51,7 @@ const StaticPopover = ({ children, categories, isOpen, onMouseEnter, onMouseLeav
                     <Link
                       href={category.url}
                       className="flex items-center text-base font-semibold text-slate-700 hover:text-indigo-600 transition-all duration-300 mb-4 cursor-pointer group"
+                      onClick={onMouseLeave}
                     >
                       <span className="group-hover:underline decoration-indigo-300 decoration-2 underline-offset-2">
                         {category.title}
@@ -70,6 +71,7 @@ const StaticPopover = ({ children, categories, isOpen, onMouseEnter, onMouseLeav
                               ? 'text-indigo-700 bg-indigo-100 border border-indigo-200'
                               : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50/80'
                               }`}
+                            onClick={onMouseLeave}
                           >
                             <span className="flex-1">{item.title}</span>
                             <ArrowRight size={16} className={`transition-colors ml-1 ${isActive
