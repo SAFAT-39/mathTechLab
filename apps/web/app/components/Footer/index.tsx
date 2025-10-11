@@ -58,8 +58,8 @@ const Footer = () => {
     <footer className=" bg-gradient-to-b from-white to-gray-50 border-t border-gray-200 pt-10 pb-6 text-gray-700">
       <div className="container mx-auto px-4">
         {/* Top Section */}
-        <div className=" container flex items-center justify-center">
-          <div className="  flex lg:flex-row md:flex-col flex-col justify-between lg:gap-16 gap-10    border-b border-gray-300 pb-10">
+        <div className="  flex items-center justify-center">
+          <div className="  flex lg:flex-row md:flex-col flex-col lg:gap-16 gap-10    border-b border-gray-300 pb-10">
             {/* Logo & Description */}
             <div className=" flex flex-col basis-1/4">
               <Link href="/" className="flex items-center mb-4">
@@ -79,7 +79,7 @@ const Footer = () => {
               </p>
             </div>
 
-            <div className=" flex md:flex-row flex-col lg:gap-16 gap-10  ">
+            <div className=" flex md:flex-row flex-col lg:gap-16 md:gap-21 gap-10  ">
               {/* Games */}
               <div className="">
                 <h3 className="text-base font-bold mb-3 text-gray-800">
@@ -91,7 +91,7 @@ const Footer = () => {
                       <li key={item.title}>
                         <Link
                           href={item.url}
-                          className="flex gap-3 pb-1 text-sm font-semibold text-gray-600 hover:text-purple-600 active:text-purple-600 transition-colors duration-200 "
+                          className="flex gap-2 pb-1 text-sm font-semibold text-gray-600 hover:text-purple-600 active:text-purple-600 transition-colors duration-200 "
                         >
                           {item.title}
                           <ArrowUpRight size={16} />
@@ -113,7 +113,7 @@ const Footer = () => {
                       <li key={item.title}>
                         <Link
                           href={item.url}
-                          className="flex gap-3 pb-1 text-sm font-semibold text-gray-600 hover:text-purple-600 active:text-purple-600 transition-colors duration-200  "
+                          className="flex gap-2 pb-1 text-sm font-semibold text-gray-600 hover:text-purple-600 active:text-purple-600 transition-colors duration-200  "
                         >
                           {item.title}
                           <ArrowUpRight size={16} />
@@ -125,7 +125,7 @@ const Footer = () => {
               </div>
             </div>
 
-            <div className="flex md:flex-row flex-col lg:gap-16 gap-10 ">
+            <div className="flex md:flex-row flex-col md:gap-16 gap-10 ">
               {/* Times Tables */}
               <div>
                 <h3 className="text-base font-bold mb-3 text-gray-800">
@@ -136,7 +136,7 @@ const Footer = () => {
                     <li key={item.title}>
                       <Link
                         href={item.url}
-                        className=" flex gap-3 pb-1 text-sm font-semibold text-gray-600 hover:text-purple-600 active:text-purple-600 transition-colors duration-200 "
+                        className=" flex gap-2 pb-1 text-sm font-semibold text-gray-600 hover:text-purple-600 active:text-purple-600 transition-colors duration-200 "
                       >
                         {item.title}
                         <ArrowUpRight size={16} />
@@ -156,7 +156,7 @@ const Footer = () => {
                     <li key={item.title}>
                       <Link
                         href={item.url}
-                        className="flex gap-3 pb-1 text-sm font-semibold text-gray-600 hover:text-purple-600 active:text-purple-600 transition-colors duration-200  "
+                        className="flex gap-2 pb-1 text-sm font-semibold text-gray-600 hover:text-purple-600 active:text-purple-600 transition-colors duration-200  "
                       >
                         {item.title}
                         <ArrowUpRight size={16} />
