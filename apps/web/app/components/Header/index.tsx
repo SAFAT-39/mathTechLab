@@ -47,6 +47,7 @@ const Header = () => {
     };
   }, [menuOpen]);
 
+
   return (
     <>
       <header id="header" className="bg-white sticky top-0 z-50 shadow-sm border-b border-gray-100">
