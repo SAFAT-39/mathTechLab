@@ -149,7 +149,7 @@ const MobileMenu = ({ onItemClick }: MobileMenuProps) => {
             <Link
               key={index}
               href={item.url}
-              className="block py-3 px-4 text-sm text-gray-600 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-all duration-200 font-semibold bg-white border border-gray-200 hover:border-purple-200"
+              className="block py-3 px-4 text-sm text-gray-600 hover:text-purple-600 hover:bg-purple-50 active:text-purple-600 active:bg-purple-50 rounded-lg transition-all duration-200 font-semibold bg-white border border-gray-200 hover:border-purple-200"
               onClick={onItemClick}
             >
               {item.title}
