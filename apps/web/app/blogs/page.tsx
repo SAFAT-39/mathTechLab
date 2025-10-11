@@ -71,7 +71,7 @@ export default async function BlogsPage({
             <Link
               key={blog.id}
               href={`/blogs/${blog.slug}`}
-              className="group block bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow overflow-hidden border border-gray-100 hover:border-purple-300"
+              className="group bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow overflow-hidden border border-gray-100 hover:border-purple-300 h-full flex flex-col"
             >
               <div className="relative h-56 w-full overflow-hidden bg-purple-50">
                 {blog.thumbnail ? (
@@ -88,12 +88,12 @@ export default async function BlogsPage({
                   </div>
                 )}
               </div>
-              <div className="p-6 flex flex-col h-full">
-                <h2 className="text-2xl font-bold mb-2 text-gray-900 group-hover:text-purple-700 transition-colors">
+              <div className="p-6 flex flex-col flex-1">
+                <h2 className="text-2xl font-bold mb-2 text-gray-900 group-hover:text-purple-700 transition-colors line-clamp-3 break-words">
                   {blog.title}
                 </h2>
                 {blog.excerpt && (
-                  <p className="text-gray-600 mb-4 line-clamp-3 flex-1">{blog.excerpt}</p>
+                  <p className="text-gray-600 mb-4 line-clamp-3 flex-1 break-words overflow-hidden">{blog.excerpt}</p>
                 )}
                 <div className="flex items-center justify-between mt-auto pt-2">
                   <div className="flex flex-col">
