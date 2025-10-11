@@ -5,7 +5,7 @@ interface SectionProps {
   title: string;
   description?: string;
   items: CardProps[];
-  seeMoreLink: string;
+  seeMoreLink?: string;
 }
 
 const Section: React.FC<SectionProps> = ({ title, description, items, seeMoreLink }) => (
@@ -33,17 +33,19 @@ const Section: React.FC<SectionProps> = ({ title, description, items, seeMoreLin
       ))}
     </div>
 
-    <div className="mt-8 flex justify-center">
-      <Link
-        href={seeMoreLink}
-        className="group inline-flex items-center px-6 py-3 bg-white text-purple-600 font-medium rounded-lg shadow-sm hover:shadow-md transition-all duration-300 border border-purple-200 hover:border-purple-300"
-      >
-        <span>See All {title}</span>
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-        </svg>
-      </Link>
-    </div>
+    {seeMoreLink &&
+      <div className="mt-8 flex justify-center">
+        <Link
+          href={seeMoreLink}
+          className="group inline-flex items-center px-6 py-3 bg-white text-purple-600 font-medium rounded-lg shadow-sm hover:shadow-md transition-all duration-300 border border-purple-200 hover:border-purple-300"
+        >
+          <span>See All {title}</span>
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </Link>
+      </div>
+    }
   </section>
 );
 

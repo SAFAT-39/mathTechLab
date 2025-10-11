@@ -92,7 +92,6 @@ const Content = () => {
             link: "/factors",
           },
         ]}
-        seeMoreLink="/times-tables"
       />
 
       <WhyUse />
