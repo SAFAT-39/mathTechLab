@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ExternalLink, ChevronRight } from "lucide-react";
+import { ExternalLink, ArrowRight } from "lucide-react";
 
 interface SubItem {
   title: string;
@@ -65,7 +65,7 @@ const StaticPopover = ({ children, categories, isOpen, onMouseEnter, onMouseLeav
                           className="flex items-center justify-between text-sm text-slate-600 hover:text-indigo-600 hover:bg-indigo-50/80 px-3 mr-5 py-2 rounded-xl transition-all duration-300 cursor-pointer font-semibold hover:shadow-sm hover:scale-[1.02] group"
                         >
                           <span className="flex-1">{item.title}</span>
-                          <ChevronRight size={12} className="text-slate-400 group-hover:text-indigo-500 transition-colors ml-1" />
+                          <ArrowRight size={16} className="text-slate-400 group-hover:text-indigo-500 transition-colors ml-1" />
                         </Link>
                       ))}
                     </div>
