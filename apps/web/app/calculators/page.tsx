@@ -18,6 +18,11 @@ export const metadata: Metadata = {
 // Calculator data with descriptions
 const calculators = [
   {
+    title: "📈 Graphing Calculator",
+    description: "Plot mathematical functions, explore equations, and visualize graphs with our interactive graphing tool.",
+    link: "/calculators/graph",
+  },
+  {
     title: "🔢 LCM Calculator",
     description: "Find the Least Common Multiple of two or more numbers with detailed prime factorization.",
     link: "/calculators/lcm-calculator",
@@ -42,6 +47,11 @@ const calculators = [
     description: "Check if a number is a factor of another number and find all factors of any number.",
     link: "/calculators/factor-checker",
   },
+  {
+    title: "🔢 Percentage Calculator",
+    description: "Calculate percentages of numbers, find what percentage one number is of another, and more.",
+    link: "/calculators/percentage-calculator",
+  },
 ];
 
 // Card component to match home page
@@ -53,7 +63,7 @@ const Card = ({ title, description, link }: { title: string; description: string
   return (
     <Link
       href={link}
-      className="block p-2 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 hover:border-purple-200 hover:translate-y-[-2px]"
+      className="block p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 hover:border-purple-200 hover:translate-y-[-2px]"
     >
       <div className="flex flex-col h-full">
         <div className="flex items-center mb-3">

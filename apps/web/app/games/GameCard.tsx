@@ -4,7 +4,7 @@ interface GameCardProps {
   title: string;
   description: string;
   url: string;
-  image: string; // Added image prop
+  image: string;
 }
 
 export default function GameCard({
@@ -14,19 +14,28 @@ export default function GameCard({
   image,
 }: GameCardProps) {
   return (
-    <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 flex items-center">
-      <img
-        src={image}
-        alt={title}
-        className="w-32 h-32 object-cover rounded-lg mr-6"
-      />
-      <div className="flex flex-col">
-        <h3 className="text-2xl font-medium text-primary mb-2">{title}</h3>
-        <p className="text-gray-600 mb-3">{description}</p>
-        <Link href={url} className="text-blue-600 hover:underline">
-          Play Now
-        </Link>
+    <Link
+      href={url}
+      className="block p-2 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 hover:border-purple-200 hover:translate-y-[-2px]"
+    >
+      <div className="flex flex-col h-full">
+        <div className="flex items-center mb-3">
+          <div className="w-16 h-16 rounded-lg overflow-hidden mr-3 flex-shrink-0">
+            <img
+              src={image}
+              alt={title}
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
+        </div>
+        <p className="text-sm text-gray-600 line-clamp-2 flex-grow mb-4">{description}</p>
+        <div className="flex justify-end">
+          <span className="text-sm font-medium text-purple-600">
+            Play now →
+          </span>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 }

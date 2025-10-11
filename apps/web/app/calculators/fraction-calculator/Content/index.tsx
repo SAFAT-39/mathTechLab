@@ -48,9 +48,6 @@ const Content = () => {
   return (
     <section className="py-12 space-y-8">
       <div>
-        <h1 className="text-3xl font-bold text-purple-700 mb-4">
-          Fraction Calculator
-        </h1>
         <p className="text-lg text-gray-700 mb-4">
           Welcome to our comprehensive Fraction Calculator. Whether you're a student learning fraction operations, a teacher preparing lessons, or someone needing to work with fractions quickly, our tool provides instant results with detailed explanations and step-by-step solutions.
         </p>

@@ -1,0 +1,18 @@
+{
+  "name": "factor-image-generator",
+  "version": "1.0.0",
+  "description": "Script to generate factor images for MathTechLab",
+  "main": "generate-factor-images.js",
+  "scripts": {
+    "generate": "node generate-factor-images.js"
+  },
+  "dependencies": {
+    "canvas": "^2.11.2",
+    "sharp": "^0.34.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}

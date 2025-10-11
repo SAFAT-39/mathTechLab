@@ -11,7 +11,7 @@ const getFactorsPages = () => {
   for (let i = 0; i < numberList.length; i++) {
     values.push({
       url: `https://mathtechlab.com/factors/factors-of-${numberList[i]}`,
-      lastModified: "2025-04-17",
+      lastModified: "2025-05-15",
       priority: 0.7,
     });
   }

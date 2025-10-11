@@ -48,9 +48,6 @@ const Content = () => {
   return (
     <section className="py-12 space-y-8">
       <div>
-        <h1 className="text-3xl font-bold text-purple-700 mb-4">
-          Greatest Common Factor (GCF) Calculator
-        </h1>
         <p className="text-lg text-gray-700 mb-4">
           Welcome to our comprehensive Greatest Common Factor (GCF) Calculator. Whether you're a student learning number theory, a teacher preparing lessons, or someone needing to find GCFs quickly, our tool provides instant results with detailed explanations and multiple calculation methods.
         </p>

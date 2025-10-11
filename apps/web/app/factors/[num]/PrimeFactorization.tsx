@@ -2,6 +2,66 @@ import Link from "next/link";
 import { NumProps } from "./type";
 import { getPrimeFactorization } from "./utils";
 
+const paragraphVersions = [
+  (num: number, factors: number[], factorCount: string) => (
+    <>
+      Prime factorization of {num} is the process of expressing it as a product of its prime numbers.
+      When we repeatedly divide {num} by the smallest possible prime numbers, we get {factors.join(", ")}.
+      Therefore, the prime factorization of {num} is {factorCount}.
+      Knowing prime factors is essential for solving problems involving GCF,{" "}
+      <Link className="text-blue-600 hover:text-blue-800 font-medium transition-colors" href="/calculators/lcm-calculator">LCM</Link>,
+      and simplifying{" "}
+      <Link className="text-blue-600 hover:text-blue-800 font-medium transition-colors" href="/calculators/fraction-calculator">fractions</Link>.
+    </>
+  ),
+
+  (num: number, factors: number[], factorCount: string) => (
+    <>
+      Every composite number can be written as a product of prime numbers, which is known as prime factorization.
+      For {num}, the prime factors are {factors.join(", ")}.
+      Thus, the prime factorization of {num} is represented as {factorCount}.
+      This breakdown is useful in finding relationships between numbers, especially in topics like{" "}
+      <Link className="text-blue-600 hover:text-blue-800 font-medium transition-colors" href="/calculators/lcm-calculator">LCM</Link> and{" "}
+      <Link className="text-blue-600 hover:text-blue-800 font-medium transition-colors" href="/calculators/fraction-calculator">fractions</Link>.
+    </>
+  ),
+
+  (num: number, factors: number[], factorCount: string) => (
+    <>
+      To understand {num} more deeply, we can decompose it into its prime factors.
+      By dividing step by step, we find that {num} can be written as {factors.join(" × ")}.
+      Hence, the prime factorization of {num} is {factorCount}.
+      Prime factorization is an important concept in arithmetic and algebra because it helps in computing the{" "}
+      <Link className="text-blue-600 hover:text-blue-800 font-medium transition-colors" href="/calculators/lcm-calculator">LCM</Link>,
+      greatest common factor, and simplifying complex fractions.
+    </>
+  ),
+
+  (num: number, factors: number[], factorCount: string) => (
+    <>
+      The process of breaking down {num} into its basic building blocks, or prime numbers, is called prime factorization.
+      When we perform this process, we find that the prime factors of {num} are {factors.join(", ")}.
+      So, {num} can be expressed as {factorCount}.
+      Understanding prime factorization is valuable for solving mathematical problems involving{" "}
+      <Link className="text-blue-600 hover:text-blue-800 font-medium transition-colors" href="/calculators/lcm-calculator">LCM</Link>,
+      divisibility, and rational number simplification.
+    </>
+  ),
+
+  (num: number, factors: number[], factorCount: string) => (
+    <>
+      Prime factorization means expressing a number as a multiplication of its prime numbers.
+      For the number {num}, the prime factors obtained through repeated division are {factors.join(", ")}.
+      Hence, the prime factorization of {num} is {factorCount}.
+      This knowledge is widely used in various areas of mathematics, including finding{" "}
+      <Link className="text-blue-600 hover:text-blue-800 font-medium transition-colors" href="/calculators/lcm-calculator">LCM</Link>,
+      GCF, and reducing{" "}
+      <Link className="text-blue-600 hover:text-blue-800 font-medium transition-colors" href="/calculators/fraction-calculator">fractions</Link>
+      {" "}to their simplest form.
+    </>
+  ),
+];
+
 const renderPrimeFactorizationParagraph = (num: number, factors: number[]) => {
   const unique = Array.from(new Set(factors));
   const factorCount = unique
@@ -11,7 +71,8 @@ const renderPrimeFactorizationParagraph = (num: number, factors: number[]) => {
     })
     .join(" × ");
 
-  return <>The prime factorization of {num} involves breaking it down into the product of prime numbers. Using division, we find that the prime factors of {num} are {factors.join(", ")}. Therefore, the prime factorization of {num} is {factorCount}. Understanding prime factorization helps in finding GCF, <Link className="text-blue-600 hover:text-blue-800 font-medium transition-colors" href="/calculators/lcm-calculator">LCM</Link>, and simplifying <Link className="text-blue-600 hover:text-blue-800 font-medium transition-colors" href="/calculators/fraction-calculator">fractions</Link>.</>;
+  const randomVersion = paragraphVersions[Math.floor(Math.random() * paragraphVersions.length)];
+  return randomVersion(num, factors, factorCount);
 };
 
 const PrimeFactorization = ({ num }: NumProps) => {
@@ -63,7 +124,10 @@ const PrimeFactorization = ({ num }: NumProps) => {
 
       <p className="text-gray-700">
         Find prime factorization of any number with our{" "}
-        <Link className="text-blue-600 hover:text-blue-800 font-medium transition-colors" href="/calculators/prime-factorization">
+        <Link
+          className="text-blue-600 hover:text-blue-800 font-medium transition-colors"
+          href="/calculators/prime-factorization-calculator"
+        >
           Prime Factorization Calculator
         </Link>{" "}
         tool.

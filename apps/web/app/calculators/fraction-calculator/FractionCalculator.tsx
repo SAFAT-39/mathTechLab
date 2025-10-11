@@ -150,9 +150,9 @@ const FractionCalculator = () => {
     <div className="">
       <div className="bg-white rounded-lg shadow-lg overflow-hidden">
         <div className="p-6 sm:p-8">
-          <h2 className="text-3xl font-extrabold text-center text-purple-700 mb-8">
+          <h1 className="text-3xl font-extrabold text-center text-purple-700 mb-8">
             Fraction Calculator
-          </h2>
+          </h1>
 
           <div className="flex items-center justify-center space-x-1 sm:space-x-4 mb-8">
             {/* First Fraction */}

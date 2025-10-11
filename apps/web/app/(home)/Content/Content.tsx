@@ -11,6 +11,11 @@ const Content = () => {
         title="Math Calculators"
         items={[
           {
+            title: "📈 Graphing Calculator",
+            description: "Plot mathematical functions, explore equations, and visualize graphs with our interactive graphing tool.",
+            link: "/calculators/graph",
+          },
+          {
             title: "🔢 LCM Calculator",
             description:
               "Find the Least Common Multiple of two or more numbers with detailed prime factorization.",
@@ -35,6 +40,11 @@ const Content = () => {
             title: "🔍 Factor Checker",
             description: "Check if a number is a factor of another number and find all factors of any number.",
             link: "/calculators/factor-checker",
+          },
+          {
+            title: "🔢 Percentage Calculator",
+            description: "Calculate percentages of numbers, find what percentage one number is of another, and more.",
+            link: "/calculators/percentage-calculator",
           },
           {
             title: "➕ More Coming Soon",

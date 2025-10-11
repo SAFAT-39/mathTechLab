@@ -48,9 +48,6 @@ const Content = () => {
   return (
     <section className="py-12 space-y-8">
       <div>
-        <h1 className="text-3xl font-bold text-purple-700 mb-4">
-          Least Common Multiple (LCM) Calculator
-        </h1>
         <p className="text-lg text-gray-700 mb-4">
           Welcome to our comprehensive Least Common Multiple (LCM) Calculator. Whether you're a student learning number theory, a teacher preparing lessons, or someone needing to find LCMs quickly, our tool provides instant results with detailed explanations and multiple calculation methods.
         </p>
