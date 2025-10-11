@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { ExternalLink, ChevronRight } from "lucide-react";
 
 interface SubItem {
   title: string;
@@ -34,33 +35,37 @@ const StaticPopover = ({ children, categories, isOpen, onMouseEnter, onMouseLeav
         <>
           {/* Invisible bridge to connect button and popover */}
           <div
-            className="absolute top-full left-0 w-full h-3 bg-transparent z-40"
+            className="absolute top-full left-0 w-full h-4 bg-transparent z-40"
           />
 
           <div
-            className="absolute top-full left-0 mt-3 w-96 bg-white border border-gray-200 rounded-lg shadow-lg z-50"
+            className="absolute top-full left-0 mt-4 w-[500px] bg-white/95 backdrop-blur-sm border border-slate-200/50 rounded-2xl shadow-2xl z-50"
           >
-            <div className="p-4">
-              <div className="grid grid-cols-2 gap-6">
+            <div className="p-6">
+              <div className="grid grid-cols-2 gap-8">
                 {categories.map((category, index) => (
-                  <div key={index}>
+                  <div key={index} className="space-y-4">
                     {/* Category Header - Clickable */}
                     <Link
                       href={category.url}
-                      className="block text-sm font-semibold text-gray-800 hover:text-purple-600 transition-colors mb-3 cursor-pointer"
+                      className="flex items-center text-base font-semibold text-slate-700 hover:text-indigo-600 transition-all duration-300 mb-4 cursor-pointer group"
                     >
-                      {category.title}
+                      <span className="group-hover:underline decoration-indigo-300 decoration-2 underline-offset-2">
+                        {category.title}
+                      </span>
+                      <ExternalLink size={14} className="ml-2 text-slate-400 group-hover:text-indigo-500 transition-colors" />
                     </Link>
 
                     {/* Subcategory Items */}
-                    <div className="space-y-1">
+                    <div className="space-y-2">
                       {category.items.map((item, itemIndex) => (
                         <Link
                           key={itemIndex}
                           href={item.url}
-                          className="block text-sm text-gray-600 hover:text-purple-600 hover:bg-purple-50 px-2 py-1 rounded transition-colors cursor-pointer"
+                          className="flex items-center text-sm text-slate-600 hover:text-indigo-600 hover:bg-indigo-50/80 px-3 py-2 rounded-xl transition-all duration-300 cursor-pointer font-medium hover:shadow-sm hover:scale-[1.02] group"
                         >
-                          {item.title}
+                          <span className="flex-1">{item.title}</span>
+                          <ChevronRight size={12} className="text-slate-400 group-hover:text-indigo-500 transition-colors" />
                         </Link>
                       ))}
                     </div>
