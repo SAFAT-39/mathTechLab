@@ -53,7 +53,7 @@ export default function PrivacyPolicyPage() {
         information as described in their own privacy policies.
       </p>
 
-      <div className="privacy-headline">
+      {/* <div className="privacy-headline">
         <h1 className="text-xl font-semibold mt-8 mb-2">
           Ezoic Services
         </h1>
@@ -61,7 +61,6 @@ export default function PrivacyPolicyPage() {
 
       <div className="privacy-content">
         <p>
-          Ezoic Services<br />
           This website uses the services of Ezoic Inc. (“Ezoic”), including to manage third-party interest-based advertising. Ezoic may employ a variety of technologies on this website, including tools to serve content, display advertisements and enable advertising to visitors of this website, which may utilize first and third-party cookies.
 
           <br />A cookie is a small text file sent to your device by a web server that enables the website to remember information about your browsing activity. First-party cookies are created by the site you are visiting, while third-party cookies are set by domains other than the one you're visiting. Ezoic and our partners may place third-party cookies, tags, beacons, pixels, and similar technologies to monitor interactions with advertisements and optimize ad targeting.  Please note that disabling cookies may limit access to certain content and features on the website, and rejecting cookies does not eliminate advertisements but will result in non-personalized advertising. You can find more information about cookies and how to manage them <a href="https://allaboutcookies.org/" target="_blank">here</a>.
@@ -78,7 +77,7 @@ export default function PrivacyPolicyPage() {
           <br />
           You can view Ezoic’s privacy policy <a className="text-blue-600 underline" href="https://ezoic.com/privacy/" target="_blank">here</a>, or for additional information about Ezoic’s advertising and other partners, you can view Ezoic’s advertising partners <a className="text-blue-600 underline" href="https://www.ezoic.com/privacy-policy/advertising-partners/" target="_blank">here</a>.
         </p>
-      </div>
+      </div> */}
 
       <h2 className="text-xl font-semibold mt-8 mb-2">4. Children's Privacy</h2>
       <p className="mb-4">
