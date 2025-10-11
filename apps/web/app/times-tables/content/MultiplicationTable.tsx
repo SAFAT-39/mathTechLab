@@ -4,7 +4,7 @@ import multiplicationTable from "../../../public/static/image/timesTable/multipl
 const MultiplicationTable = () => {
   return (
     <>
-      <div className="flex justify-center items-center mb-8">
+      <div className="flex justify-center items-center mb-12">
         <Image
           src={multiplicationTable}
           alt="Times Table"
