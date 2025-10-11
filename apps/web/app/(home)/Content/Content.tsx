@@ -9,6 +9,7 @@ const Content = () => {
 
       <Section
         title="Math Calculators"
+        description="Free online math calculators that make solving problems simple and fun. Whether you're a student, teacher, or just curious about math, our tools help you calculate anything from basic fractions to complex equations. No downloads needed - just open and start calculating!"
         items={[
           {
             title: "📈 Graphing Calculator",
@@ -52,6 +53,7 @@ const Content = () => {
 
       <Section
         title="Interactive Math Games"
+        description="Turn math practice into playtime with our collection of free online math games. Perfect for kids and adults who want to sharpen their math skills while having fun. From number puzzles to speed challenges, these games make learning math feel like entertainment."
         items={[
           {
             title: "🧩 24 Game",
@@ -77,6 +79,7 @@ const Content = () => {
 
       <Section
         title="Math Learning"
+        description="Learn math the easy way with our step-by-step guides and interactive lessons. Whether you're struggling with multiplication tables or want to understand factors better, we break down complex math concepts into simple, easy-to-follow explanations that anyone can understand."
         items={[
           {
             title: "📚 Times Tables",
