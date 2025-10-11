@@ -167,14 +167,14 @@ const MobileMenu = ({ onItemClick }: MobileMenuProps) => {
         <div className="bg-white rounded-lg shadow-sm overflow-hidden">
           <button
             onClick={() => toggleMainSection('math')}
-            className="w-full flex items-center justify-between p-4 bg-gradient-to-r from-purple-100 to-blue-100 hover:from-purple-200 hover:to-blue-200 transition-all duration-200"
+            className="w-full flex items-center justify-between p-4 bg-gradient-to-r from-blue-100 to-indigo-100 hover:from-blue-200 hover:to-indigo-200 transition-all duration-200"
           >
             <div className="flex items-center">
-              <div className="w-1 h-6 bg-gradient-to-b from-purple-500 to-blue-500 rounded-full mr-3"></div>
+              <div className="w-1 h-6 bg-gradient-to-b from-blue-500 to-indigo-500 rounded-full mr-3"></div>
               <h3 className="text-lg font-bold text-gray-800">Math Learning</h3>
             </div>
             {expandedMainSections.includes('math') ?
-              <ChevronDown size={20} className="text-purple-600" /> :
+              <ChevronDown size={20} className="text-blue-600" /> :
               <ChevronRight size={20} className="text-gray-500" />
             }
           </button>
@@ -190,14 +190,14 @@ const MobileMenu = ({ onItemClick }: MobileMenuProps) => {
         <div className="bg-white rounded-lg shadow-sm overflow-hidden">
           <button
             onClick={() => toggleMainSection('calculators')}
-            className="w-full flex items-center justify-between p-4 bg-gradient-to-r from-green-100 to-teal-100 hover:from-green-200 hover:to-teal-200 transition-all duration-200"
+            className="w-full flex items-center justify-between p-4 bg-gradient-to-r from-blue-100 to-indigo-100 hover:from-blue-200 hover:to-indigo-200 transition-all duration-200"
           >
             <div className="flex items-center">
-              <div className="w-1 h-6 bg-gradient-to-b from-green-500 to-teal-500 rounded-full mr-3"></div>
+              <div className="w-1 h-6 bg-gradient-to-b from-blue-500 to-indigo-500 rounded-full mr-3"></div>
               <h3 className="text-lg font-bold text-gray-800">Calculators</h3>
             </div>
             {expandedMainSections.includes('calculators') ?
-              <ChevronDown size={20} className="text-green-600" /> :
+              <ChevronDown size={20} className="text-blue-600" /> :
               <ChevronRight size={20} className="text-gray-500" />
             }
           </button>
@@ -213,14 +213,14 @@ const MobileMenu = ({ onItemClick }: MobileMenuProps) => {
         <div className="bg-white rounded-lg shadow-sm overflow-hidden">
           <button
             onClick={() => toggleMainSection('games')}
-            className="w-full flex items-center justify-between p-4 bg-gradient-to-r from-orange-100 to-red-100 hover:from-orange-200 hover:to-red-200 transition-all duration-200"
+            className="w-full flex items-center justify-between p-4 bg-gradient-to-r from-blue-100 to-indigo-100 hover:from-blue-200 hover:to-indigo-200 transition-all duration-200"
           >
             <div className="flex items-center">
-              <div className="w-1 h-6 bg-gradient-to-b from-orange-500 to-red-500 rounded-full mr-3"></div>
+              <div className="w-1 h-6 bg-gradient-to-b from-blue-500 to-indigo-500 rounded-full mr-3"></div>
               <h3 className="text-lg font-bold text-gray-800">Games</h3>
             </div>
             {expandedMainSections.includes('games') ?
-              <ChevronDown size={20} className="text-orange-600" /> :
+              <ChevronDown size={20} className="text-blue-600" /> :
               <ChevronRight size={20} className="text-gray-500" />
             }
           </button>
