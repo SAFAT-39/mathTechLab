@@ -71,11 +71,11 @@ const Footer = () => {
                   className="w-[120px] h-[60px]"
                 />
               </Link>
-              <p className="text-sm leading-relaxed text-gray-600">
-                <b>MathTechLab</b> makes learning math fun and easy with
-                interactive games, cool puzzles, and smart tools. Explore times
-                tables, boost your skills, and see how technology makes learning
-                math smarter.
+              <p className="text-sm font-semibold leading-relaxed text-gray-600">
+                <span className="font-extrabold text-base">MathTechLab</span>{" "}
+                makes learning math fun and easy with interactive games, cool
+                puzzles, and smart tools. Explore times tables, boost your
+                skills, and see how technology makes learning math smarter.
               </p>
             </div>
 
