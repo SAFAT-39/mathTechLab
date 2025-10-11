@@ -58,8 +58,8 @@ const Footer = () => {
     <footer className=" bg-gradient-to-b from-white to-gray-50 border-t border-gray-200 pt-10 pb-6 text-gray-700">
       <div className="container mx-auto px-4">
         {/* Top Section */}
-        <div className="  flex items-center justify-center">
-          <div className="  flex lg:flex-row md:flex-col flex-col lg:gap-16 gap-10    border-b border-gray-300 pb-10">
+        <div className=" container flex items-center justify-center">
+          <div className="  flex lg:flex-row md:flex-col flex-col justify-between lg:gap-16 gap-10    border-b border-gray-300 pb-10">
             {/* Logo & Description */}
             <div className=" flex flex-col basis-1/4">
               <Link href="/" className="flex items-center mb-4">
