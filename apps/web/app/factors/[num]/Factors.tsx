@@ -1,5 +1,6 @@
 import { NumProps } from "./type";
 import { getFactors } from "./utils";
+import { getSeededSelection } from "./seededRandom";
 
 const factorDescriptions = [
   (num: number, factors: number[], factorsString: (sign?: number) => string) =>
@@ -33,8 +34,7 @@ const Factors = ({ num }: NumProps) => {
     return `${allButLast} and ${last}`;
   };
 
-  const randomDescription =
-    factorDescriptions[Math.floor(Math.random() * factorDescriptions.length)];
+  const seededDescription = getSeededSelection(factorDescriptions, num);
 
   return (
     <section className="space-y-4">
@@ -42,7 +42,7 @@ const Factors = ({ num }: NumProps) => {
         What are the Factors of {num}?
       </h2>
       <p className="text-gray-700 leading-relaxed">
-        {randomDescription(num, factors, factorsString)}
+        {seededDescription(num, factors, factorsString)}
       </p>
       <div className="bg-purple-50 border border-purple-100 rounded-lg p-4 text-center">
         <p className="text-lg font-semibold text-purple-700">

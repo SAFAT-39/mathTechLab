@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { NumProps } from "./type";
 import { getPrimeFactorization } from "./utils";
+import { getSeededSelection } from "./seededRandom";
 
 const paragraphVersions = [
   (num: number, factors: number[], factorCount: string) => (
@@ -71,8 +72,8 @@ const renderPrimeFactorizationParagraph = (num: number, factors: number[]) => {
     })
     .join(" × ");
 
-  const randomVersion = paragraphVersions[Math.floor(Math.random() * paragraphVersions.length)];
-  return randomVersion(num, factors, factorCount);
+  const seededVersion = getSeededSelection(paragraphVersions, num);
+  return seededVersion(num, factors, factorCount);
 };
 
 const PrimeFactorization = ({ num }: NumProps) => {

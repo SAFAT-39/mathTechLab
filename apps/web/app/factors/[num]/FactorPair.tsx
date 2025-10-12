@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { NumProps } from "./type";
 import { getFactorPairs } from "./utils";
+import { getSeededSelection } from "./seededRandom";
 
 const factorPairsDescriptions = [
   (num: number, positivePairs: string, negativePairs: string) =>
@@ -32,16 +33,15 @@ const renderFactorPairsParagraph = (num: number, factorPairs: [number, number][]
     .map(([a, b]) => `(${a}, ${b})`)
     .join(", ");
 
-  const randomDescription =
-    factorPairsDescriptions[Math.floor(Math.random() * factorPairsDescriptions.length)](
-      num,
-      positivePairs,
-      negativePairs
-    );
+  const seededDescription = getSeededSelection(factorPairsDescriptions, num)(
+    num,
+    positivePairs,
+    negativePairs
+  );
 
   return (
     <>
-      {randomDescription} You can also explore how factor pairs relate to the{" "}
+      {seededDescription} You can also explore how factor pairs relate to the{" "}
       <Link
         className="text-blue-600 hover:text-blue-800 font-medium transition-colors"
         href="/calculators/gcf-calculator"

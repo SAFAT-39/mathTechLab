@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { NumProps } from "./type";
+import { getSeededSelection } from "./seededRandom";
 
 const getOptimizedDivisionSteps = (num: number): string[] => {
   const steps: string[] = [];
@@ -67,15 +68,14 @@ const paragraphVersions = [
 
 const FindFactors = ({ num }: NumProps) => {
   const steps = getOptimizedDivisionSteps(num);
-  const randomParagraph =
-    paragraphVersions[Math.floor(Math.random() * paragraphVersions.length)](num);
+  const seededParagraph = getSeededSelection(paragraphVersions, num)(num);
 
   return (
     <section className="space-y-6">
       <h2 className="text-2xl font-bold text-purple-700">
         How to Find the Factors of {num}?
       </h2>
-      <p className="text-gray-700 leading-relaxed">{randomParagraph}</p>
+      <p className="text-gray-700 leading-relaxed">{seededParagraph}</p>
 
       <div className="bg-purple-50 border border-purple-100 rounded-lg p-6">
         <h3 className="text-lg font-semibold text-purple-700 mb-4">

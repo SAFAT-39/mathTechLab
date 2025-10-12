@@ -1,4 +1,5 @@
 import { NumProps } from "./type";
+import { getSeededSelection } from "./seededRandom";
 
 const Introduction = ({ num }: NumProps) => {
   const versions = [
@@ -80,9 +81,9 @@ const Introduction = ({ num }: NumProps) => {
     ),
   ];
 
-  const randomVersion = versions[Math.floor(Math.random() * versions.length)];
+  const seededVersion = getSeededSelection(versions, num);
 
-  return <section className="space-y-4">{randomVersion}</section>;
+  return <section className="space-y-4">{seededVersion}</section>;
 };
 
 export default Introduction;
