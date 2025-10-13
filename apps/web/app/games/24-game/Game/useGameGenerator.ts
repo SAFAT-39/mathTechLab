@@ -9,14 +9,44 @@ interface GameObject {
 
 const useGameGenerator = () => {
   const [game, setGame] = useState<GameObject>();
+  
+  const getCurrentIndex = (): number => {
+    const stored = localStorage.getItem('24game-current-index');
+    return stored ? parseInt(stored, 10) : 0;
+  };
+
+  const setCurrentIndex = (index: number): void => {
+    localStorage.setItem('24game-current-index', index.toString());
+  };
+
   const nextGame = () => {
     const len = data.length;
-    let index = Math.floor(Math.random() * (len - 1));
-    setGame(data[index]);
+    let currentIndex = getCurrentIndex() + 1;
+    
+    // Reset to 0 if we've reached the end
+    if (currentIndex >= len) {
+      currentIndex = 0;
+    }
+    
+    setGame(data[currentIndex]);
+    setCurrentIndex(currentIndex);
+  };
+
+  const loadCurrentGame = () => {
+    const len = data.length;
+    let currentIndex = getCurrentIndex();
+    
+    // Reset to 0 if we've reached the end
+    if (currentIndex >= len) {
+      currentIndex = 0;
+    }
+    
+    setGame(data[currentIndex]);
+    // Don't increment the index when just loading the current game
   };
 
   useEffect(() => {
-    nextGame();
+    loadCurrentGame();
   }, []);
 
   return { game, nextGame };
