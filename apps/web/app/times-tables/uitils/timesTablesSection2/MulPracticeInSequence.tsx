@@ -131,7 +131,7 @@ return (
         table in a shuffled order!
       </p>
     </div>
-    <div className="flex flex-col items-center w-full max-w-3xl lg:max-w-4xl mx-auto p-6 rounded-xl shadow-lg mt-7">
+    <div className="flex flex-col items-center w-full mx-auto p-6 rounded-xl shadow-lg mt-7">
       <form onSubmit={checkAnswers}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-0 ">
           <div className=" space-y-0 md:space-y-3 md:border-r border-gray-300 md:pr-[70px]">
