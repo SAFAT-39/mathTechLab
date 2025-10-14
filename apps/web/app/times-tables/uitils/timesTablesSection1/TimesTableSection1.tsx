@@ -65,7 +65,7 @@ const TimesTableSection: React.FC<TimesTableProps> = ({
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-3 gap-4">
         <Link
-          className="flex items-center text-blue-600 hover:text-blue-800"
+          className="flex font-bold items-center text-blue-600 hover:text-blue-800"
           href="/times-tables"
         >
           <span className="mr-2">←</span>
