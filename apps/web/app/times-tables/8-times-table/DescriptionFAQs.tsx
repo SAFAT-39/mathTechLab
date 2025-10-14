@@ -46,13 +46,13 @@ const DescriptionFAQs = () => {
         imagealt="8 times table"
         downloadText="Download"
       />
-      <FAQSection
+      {/* <FAQSection
         title="Frequently Asked Questions"
         faqs={faqs}
         borderColor="border-fuchsia-500"
         questionTextColor="text-fuchsia-600"
         titleTextColor="text-fuchsia-700"
-      />
+      /> */}
       {/* <FAQSection title="Frequently Asked Questions" faqs={faqs} /> */}
     </div>
   );

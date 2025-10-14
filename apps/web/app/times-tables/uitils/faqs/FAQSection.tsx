@@ -1,8 +1,8 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
 interface FAQ {
   question: string;
-  answer: string;
+  answer: string | ReactNode;
 }
 
 interface FAQSectionProps {
