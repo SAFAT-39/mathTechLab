@@ -8,7 +8,7 @@ const MultiplicationTable = () => {
         <Image
           src={multiplicationTable}
           alt="Times Table"
-          className="rounded-lg shadow-md"
+          className="rounded-lg shadow-md w-full"
         />
       </div>
 

@@ -71,7 +71,7 @@ const TimesTableCard = () => {
       <h2 className="text-xl font-bold ">
         Which multiplication table would you like to master?
       </h2>
-      <div className="flex justify-center flex-wrap md:flex-row flex-col gap-4 pt-3 md:items-start items-center ">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 pt-3 md:items-start items-center ">
         {tables.map((table, index) => (
           <Card
             key={index}
@@ -116,11 +116,11 @@ const TimesTableCard = () => {
             </b>
           </p>
         </div>
-        <div className=" basis-1/2 ">
+        <div className="w-full basis-1/2 ">
           <Image
             src={learnmultiplication}
             alt={"Fun and interactive way to learn 1–12 Multiplication Tables"}
-            className=" rounded-lg"
+            className="w-full rounded-lg"
           />
         </div>
       </div>

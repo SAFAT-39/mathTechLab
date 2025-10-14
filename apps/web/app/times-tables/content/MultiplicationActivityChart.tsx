@@ -93,18 +93,18 @@ const MultiplicationActivityChart = () => {
         mobile devices, the chart provides a smooth and responsive experience
         for learning multiplication interactively.
       </p>
-      <div className="flex flex-col items-center space-y-4 p-4 mx-auto">
-        <div className="rounded-xl overflow-hidden border-2 border-gray-300 shadow-lg overflow-x-auto ">
-          <table className="border-collapse">
+      <div className="flex flex-col items-center space-y-4 py-4 mx-auto">
+        <div className="w-full rounded-xl overflow-hidden border-2 border-gray-300 shadow-lg overflow-x-auto ">
+          <table className="border-collapse w-full">
             <thead>
               <tr>
-                <th className=" w-4 h-9 md:w-12 md:h-12  bg-gray-100 border border-gray-300 text-xs md:text-lg font-bold text-blue-600 sticky left-0 z-10">
+                <th className=" h-9 md:w-12 md:h-12  bg-gray-100 border border-gray-300 text-xs md:text-lg font-bold text-blue-600 sticky left-0 z-10">
                   ×
                 </th>
                 {numbers.map((num) => (
                   <th
                     key={num}
-                    className=" w-4 h-9 md:w-12 md:h-12  bg-gray-100 border border-gray-300 text-xs md:text-lgfont-bold text-blue-600"
+                    className=" h-9 md:w-12 md:h-12  bg-gray-100 border border-gray-300 text-xs md:text-lgfont-bold text-blue-600"
                   >
                     {num}
                   </th>
@@ -114,7 +114,7 @@ const MultiplicationActivityChart = () => {
             <tbody>
               {numbers.map((row) => (
                 <tr key={row}>
-                  <th className=" w-4 h-9 md:w-12 md:h-12  bg-gray-100 border border-gray-300 text-xs md:text-lg font-bold text-blue-600 sticky left-0 z-10">
+                  <th className=" h-9 md:w-12 md:h-12  bg-gray-100 border border-gray-300 text-xs md:text-lg font-bold text-blue-600 sticky left-0 z-10">
                     {row}
                   </th>
                   {numbers.map((col) => {
@@ -124,7 +124,7 @@ const MultiplicationActivityChart = () => {
                     return (
                       <td
                         key={col}
-                        className="w-4 h-9 md:w-12 md:h-12 border border-gray-300 p-0 relative"
+                        className="h-9 md:w-12 md:h-12 border border-gray-300 p-0 relative"
                       >
                         <div className="flex items-center justify-center w-full h-full">
                           <motion.button
