@@ -67,7 +67,7 @@ const tables = [
 
 const TimesTableCard = () => {
   return (
-    <div className="py-12 ">
+    <div className="pt-8 pb-12 ">
       <h2 className="text-xl font-bold ">
         Which multiplication table would you like to master?
       </h2>
