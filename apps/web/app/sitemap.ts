@@ -20,12 +20,12 @@ const getExtraPages = () => {
   return [
     {
       url: "https://mathtechlab.com/privacy-policy",
-      lastModified: "2025-04-07",
+      lastModified: "2025-10-14",
       priority: 0.6,
     },
     {
       url: "https://mathtechlab.com/terms-of-service",
-      lastModified: "2025-04-07",
+      lastModified: "2025-10-14",
       priority: 0.6,
     },
   ];

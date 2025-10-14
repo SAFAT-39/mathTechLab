@@ -1,7 +1,7 @@
 const getHomePage = () => {
   return {
     url: "https://mathtechlab.com/",
-    lastModified: "2025-05-11",
+    lastModified: "2025-10-14",
     priority: 1,
   };
 };
