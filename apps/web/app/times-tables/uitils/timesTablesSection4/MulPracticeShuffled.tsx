@@ -142,7 +142,7 @@ return (
       </p>
     </div>
 
-    <div className="flex flex-col items-center w-full max-w-3xl lg:max-w-4xl mx-auto p-6 rounded-xl border border-gray-300 mt-7 shadow-lg shadow-blue-100 ">
+    <div className="flex flex-col items-center w-full mx-auto p-6 rounded-xl border border-gray-300 mt-7 shadow-lg shadow-blue-100 ">
       <form onSubmit={checkAnswers}>
         <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-20 gap-x-8 gap-y-2">
           {shuffledProblems.map(renderProblem)}

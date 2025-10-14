@@ -87,7 +87,7 @@ const TimesTableDescription: React.FC<TimesTableDescriptionProps> = ({
           </div>
 
           {/* Image + Download Button */}
-          <div className="basis-1/2 flex justify-center ">
+          <div className="basis-1/2 flex justify-center w-full rounded-xl border border-gray-300 p-4 shadow-lg shadow-blue-100">
             <div className="flex flex-col items-end  ">
               <div className="rounded-xl shadow-lg ">
                 <Image

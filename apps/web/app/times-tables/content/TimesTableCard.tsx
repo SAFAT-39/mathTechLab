@@ -1,4 +1,6 @@
 import Card from "./Card";
+import Image from "next/image";
+import learnmultiplication from "../../../public/static/image/timesTable/learnmultiplication.png";
 
 const tables = [
   {
@@ -65,11 +67,11 @@ const tables = [
 
 const TimesTableCard = () => {
   return (
-    <div className="py-6 ">
+    <div className="pt-8 pb-12 ">
       <h2 className="text-xl font-bold ">
         Which multiplication table would you like to master?
       </h2>
-      <div className="flex justify-center flex-wrap md:flex-row flex-col gap-4 pt-3 md:items-start items-center ">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 pt-3 md:items-start items-center ">
         {tables.map((table, index) => (
           <Card
             key={index}
@@ -78,6 +80,49 @@ const TimesTableCard = () => {
             bgColor={table.bgColor}
           />
         ))}
+      </div>
+      <div className="flex lg:flex-row flex-col items-center gap-10 pt-6 mt-6">
+        <div className=" basis-1/2 ">
+          <div className="text-2xl font-bold pb-5 ">
+            Fun and interactive way to learn 1–12 Multiplication Tables
+          </div>
+          <p className="pb-3">
+            Choose any <b>1 to 12 Times Table</b> and start mastering your math
+            skills step by step. Begin with{" "}
+            <b>Times Table Practice in Sequence</b> to understand each
+            multiplication fact clearly, then challenge yourself with the{" "}
+            <b>Shuffled Times Table Quiz</b> to test your memory and accuracy.
+          </p>
+          <p className="pb-3">
+            Take your learning even further with our{" "}
+            <b>
+              Interactive Times Table Games — drag and drop the colorful number
+              tiles
+            </b>{" "}
+            to match each equation correctly and make learning truly hands-on!
+            Every table, from 1 Times Table to 12 Times Table, includes an{" "}
+            <b>interactive quiz</b> to boost your confidence and make math
+            practice exciting.
+          </p>{" "}
+          <p className="pb-3">
+            Need a quick reference? You can{" "}
+            <b>download each Times Table image</b> individually for offline
+            study, printing, or classroom use.
+          </p>
+          <p>
+            Start your journey today —{" "}
+            <b>
+              learn, play, and master all your times tables with MathTechLab!
+            </b>
+          </p>
+        </div>
+        <div className="w-full basis-1/2 ">
+          <Image
+            src={learnmultiplication}
+            alt={"Fun and interactive way to learn 1–12 Multiplication Tables"}
+            className="w-full rounded-lg"
+          />
+        </div>
       </div>
     </div>
   );

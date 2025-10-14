@@ -22,7 +22,7 @@ const TimesTableQuiz7 = () => {
         <li>Make learning fun through gamification</li>
       </ul>
 
-      <div className="max-w-4xl mx-auto">
+      <div className=" mx-auto">
         <TimesTableQuiz tableNumber={7} />
       </div>
       <h2 className="text-lg md:text-2xl font-bold mb-1 mt-7">

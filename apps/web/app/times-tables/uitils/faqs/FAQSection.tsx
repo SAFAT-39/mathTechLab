@@ -1,8 +1,8 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
 interface FAQ {
   question: string;
-  answer: string;
+  answer: string | ReactNode;
 }
 
 interface FAQSectionProps {
@@ -21,7 +21,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({
   titleTextColor = "text-indigo-700",
 }) => {
   return (
-    <section className="max-w-4xl mx-auto  space-y-6">
+    <section className="mx-auto  space-y-6">
       <h2
         className={`text-2xl md:text-3xl font-bold text-center ${titleTextColor}`}
       >

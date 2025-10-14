@@ -11,7 +11,7 @@ const Card: React.FC<CardProps> = ({ title, link, bgColor }) => {
   return (
     <Link href={link}>
       <div
-        className={`md:w-[250px] w-[250px] flex justify-center items-center gap-2 text-center  p-3 py-6 rounded-md shadow-md transition-transform transform hover:scale-105 hover:shadow-xl cursor-pointer  bg-purple-600 hover:bg-purple-800 active:bg-purple-800 `}
+        className={`w-full flex justify-center items-center gap-2 text-center  py-4 rounded-md shadow-md transition-transform transform hover:scale-105 hover:shadow-xl cursor-pointer  bg-purple-600 hover:bg-purple-800 active:bg-purple-800 `}
       >
         <h3 className="text-xl font-extrabold text-white drop-shadow-lg tracking-wide">
           {title}
