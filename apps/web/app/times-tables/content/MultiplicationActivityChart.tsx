@@ -245,7 +245,7 @@ const MultiplicationActivityChart = () => {
 
       {/* Why Our Multiplication Table Chart Work */}
       <div className="mt-10">
-        <h2 className="text-2xl md:text-3xl font-bold  mb-6 ">
+        <h2 className="text-2xl md:text-3xl font-bold  mb-6 text-center">
           Why Our Multiplication Table Chart Is the Best for Learning
         </h2>
         <div className="grid md:grid-cols-2 gap-6">
