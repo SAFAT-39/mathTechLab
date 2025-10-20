@@ -14,6 +14,20 @@ export default function ThreeTimesTable() {
           tableNumber={7}
           titleGradient="bg-gradient-to-r from-red-600 to-rose-600"
           cardGradient="bg-gradient-to-br from-rose-500 to-orange-600"
+          firstparagraph={
+            <>
+              The <b>7 times table</b> challenges learners and enhances focus
+              and memory retention.
+            </>
+          }
+          secondparaghrap={
+            <>
+              It has fewer easy patterns, making it a great test of true
+              multiplication mastery. Knowing the 7 times table is vital for
+              advanced math, including algebra and problem-solving in daily
+              situations.
+            </>
+          }
         />
       </div>
       <MulPracticeInSequence

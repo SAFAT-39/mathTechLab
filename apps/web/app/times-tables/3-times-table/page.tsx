@@ -14,6 +14,20 @@ export default function ThreeTimesTable() {
           tableNumber={3}
           titleGradient="bg-gradient-to-r from-teal-600 to-emerald-600"
           cardGradient="bg-gradient-to-br from-emerald-500 to-cyan-600"
+          firstparagraph={
+            <>
+              The <b>3 times table </b>enhances skip-counting skills and
+              encourages pattern discovery in groups of three. It’s essential
+              for improving quick calculation and division understanding.
+            </>
+          }
+          secondparaghrap={
+            <>
+              Practicing the <b>3 times table</b> supports logical thinking and
+              helps in real-life scenarios like counting objects or time
+              intervals.
+            </>
+          }
         />
       </div>
       <MulPracticeInSequence

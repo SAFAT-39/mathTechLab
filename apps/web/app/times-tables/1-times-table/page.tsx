@@ -14,6 +14,16 @@ export default function OneTimesTable() {
           tableNumber={1}
           titleGradient="bg-gradient-to-r from-blue-600 to-violet-600"
           cardGradient="bg-gradient-to-br from-violet-500 to-purple-600"
+          firstparagraph={
+            <>
+              The <b>1 multiplication table </b>helps children understand the
+              core idea of multiplication — that numbers can be repeated and
+              scaled.
+            </>
+          }
+          secondparaghrap={
+            "It builds early math confidence, laying the foundation for higher tables. Learning the 1 multiplication table boosts memory, pattern recognition, and problem-solving skills essential for future math success."
+          }
         />
       </div>
       <MulPracticeInSequence

@@ -14,6 +14,20 @@ export default function ThreeTimesTable() {
           tableNumber={4}
           titleGradient="bg-gradient-to-r from-green-600 to-lime-600"
           cardGradient="bg-gradient-to-br from-lime-500 to-emerald-600"
+          firstparagraph={
+            <>
+              Learning the 4 times table teaches children how to multiply
+              numbers efficiently in larger groups.
+            </>
+          }
+          secondparaghrap={
+            <>
+              It builds connections with the <b>2 times table</b> (since 4 is
+              double 2), reinforcing mathematical reasoning. This table improves
+              memory recall and sets a strong base for higher multiplication
+              like <b>8</b> and <b>12</b>.
+            </>
+          }
         />
       </div>
       <MulPracticeInSequence

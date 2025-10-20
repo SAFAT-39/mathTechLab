@@ -14,6 +14,19 @@ export default function ThreeTimesTable() {
           tableNumber={9}
           titleGradient="bg-gradient-to-r from-violet-600 to-purple-600"
           cardGradient="bg-gradient-to-br from-purple-500 to-indigo-600"
+          firstparagraph={
+            <>
+              The <b>9 times table</b> is famous for its fascinating
+              patterns—like the sum of digits always equaling nine.
+            </>
+          }
+          secondparaghrap={
+            <>
+              Learning these tricks makes math exciting and memorable. It
+              strengthens mental math, supports division skills, and gives
+              learners a deeper appreciation of number symmetry and structure.
+            </>
+          }
         />
       </div>
       <MulPracticeInSequence
