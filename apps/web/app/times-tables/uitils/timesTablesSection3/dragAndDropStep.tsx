@@ -317,14 +317,20 @@ const DragAndDropStep: React.FC<DragAndDropStepProps> = ({
   return (
     <>
       <div className="mt-10 lg:mt-[60px]">
-        <h2 className="text-lg md:text-2xl font-bold mb-1 text-gray-800">
+        <h2 className="text-lg md:text-3xl font-bold mb-1 text-gray-800">
           Drag the colorful number tiles to the matching equations
         </h2>
 
-        <p className="text-gray-600 font-medium md:w-[700px]">
-          <b className="text-zinc-800">Drag and drop</b> your way to
-          multiplication mastery with our beautiful interactive game. Match the
-          correct answers and challenge yourself to beat your best time!
+        <p className="text-gray-600 font-medium lg:w-[800px] md:w-[700px]">
+          <b className="text-zinc-800">Practice multiplication interactively</b>{" "}
+          with our fun and engaging drag-and-drop times table game. Improve your
+          math skills, accuracy, and speed as you match each equation with the
+          correct answer tile. This hands-on learning activity makes mastering
+          the{" "}
+          <span className="text-indigo-700 font-semibold">
+            {timesTable} Times Table{" "}
+          </span>{" "}
+          exciting for students of all ages!
         </p>
       </div>
       <div className="mt-4 bg-gradient-to-br from-indigo-50 via-white to-purple-50 rounded-2xl shadow-xl overflow-hidden border border-indigo-100">
@@ -511,6 +517,78 @@ const DragAndDropStep: React.FC<DragAndDropStepProps> = ({
           </div>
         </div>
       </div>
+      {/* How To Use Section */}
+      <section className="mt-10">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
+          How to Play the Interactive Drag and Drop Times Table Game
+        </h2>
+        <p className="text-center text-gray-600 max-w-3xl mx-auto mb-10 font-medium">
+          Learn and practice multiplication in a fun, hands-on way! This
+          interactive times table drag-and-drop activity helps students build
+          multiplication confidence, accuracy, and speed — ideal for math
+          learners of all ages.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6  mx-auto ">
+          {/* Card 1 */}
+          <div className="bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-100 rounded-2xl shadow-md p-6 hover:shadow-lg transition-shadow">
+            <h3 className="text-lg md:text-xl font-bold text-indigo-700 mb-2">
+              Step 1: Understand the Equation
+            </h3>
+            <p className="text-gray-700">
+              Each equation shows a multiplication fact — for example,{" "}
+              {timesTable} × 3 = ?. Read carefully and get ready to find the
+              matching answer tile below.
+            </p>
+          </div>
+
+          {/* Card 2 */}
+          <div className="bg-gradient-to-br from-purple-50 to-pink-50 border border-purple-100 rounded-2xl shadow-md p-6 hover:shadow-lg transition-shadow">
+            <h3 className="text-lg md:text-xl font-bold text-purple-700 mb-2">
+              Step 2: Drag and Drop the Correct Answer
+            </h3>
+            <p className="text-gray-700">
+              Drag the colorful number tiles from the right side and drop each
+              one into the correct equation box. Each tile represents a possible
+              answer.
+            </p>
+          </div>
+
+          {/* Card 3 */}
+          <div className="bg-gradient-to-br from-pink-50 to-rose-50 border border-pink-100 rounded-2xl shadow-md p-6 hover:shadow-lg transition-shadow">
+            <h3 className="text-lg md:text-xl font-bold text-pink-700 mb-2">
+              Step 3: Check Your Answers
+            </h3>
+            <p className="text-gray-700">
+              Once you’ve matched all equations, click the{" "}
+              <b>“Check Answers”</b>
+              button. You’ll see your score, the correct answers, and which ones
+              need more practice.
+            </p>
+          </div>
+
+          {/* Card 4 */}
+          <div className="bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-100 rounded-2xl shadow-md p-6 hover:shadow-lg transition-shadow">
+            <h3 className="text-lg md:text-xl font-bold text-emerald-700 mb-2">
+              Step 4: Improve and Replay
+            </h3>
+            <p className="text-gray-700">
+              Practice makes perfect! Use the <b>“Play Again”</b> button to
+              retry and aim for a perfect score. Watch your progress and become
+              a times table master!
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-10 text-center">
+          <p className="text-gray-600 font-medium max-w-2xl mx-auto">
+            This interactive math learning game strengthens multiplication
+            skills, enhances memory retention, and boosts math confidence —
+            perfect for students learning the <b>{timesTable} Times Table</b>{" "}
+            and beyond.
+          </p>
+        </div>
+      </section>
     </>
   );
 };

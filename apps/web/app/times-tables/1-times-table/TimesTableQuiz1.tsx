@@ -3,7 +3,7 @@ import TimesTableQuiz from "../uitils/timeTableQuiz/TimeTableQuiz";
 const TimesTableQuiz1 = () => {
   return (
     <div className="container mx-auto  pt-[60px]">
-      <h2 className="text-lg md:text-2xl  font-bold  pb-3">
+      <h2 className="text-lg md:text-3xl  font-bold  pb-3">
         Interactive 1 Times Table Quiz
       </h2>
       <p className="text-gray-700 font-medium lg:w-[800px] md:w-[700px] leading-relaxed mb-6">
@@ -27,7 +27,7 @@ const TimesTableQuiz1 = () => {
       </div>
 
       <div className="mt-10  mx-auto">
-        <h2 className="text-lg md:text-2xl font-bold mb-5 text-gray-800">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
           How to Use Interactive 1 Times Table Quiz
         </h2>
 
