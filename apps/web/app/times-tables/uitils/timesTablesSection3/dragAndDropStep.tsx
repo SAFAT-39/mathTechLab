@@ -555,15 +555,14 @@ const DragAndDropStep: React.FC<DragAndDropStepProps> = ({
           </div>
 
           {/* Card 3 */}
-          <div className="bg-gradient-to-br from-pink-50 to-rose-50 border border-pink-100 rounded-2xl shadow-md p-6 hover:shadow-lg transition-shadow">
-            <h3 className="text-lg md:text-xl font-bold text-pink-700 mb-2">
+          <div className="bg-gradient-to-br from-yellow-50 to-orange-50 border border-yellow-100 rounded-2xl shadow-md p-6 hover:shadow-lg transition-shadow">
+            <h3 className="text-lg md:text-xl font-bold text-yellow-700 mb-2">
               Step 3: Check Your Answers
             </h3>
             <p className="text-gray-700">
               Once you’ve matched all equations, click the{" "}
-              <b>“Check Answers”</b>
-              button. You’ll see your score, the correct answers, and which ones
-              need more practice.
+              <b>“Check Answers”</b> button. You’ll see your score, the correct
+              answers, and which ones need more practice.
             </p>
           </div>
 
