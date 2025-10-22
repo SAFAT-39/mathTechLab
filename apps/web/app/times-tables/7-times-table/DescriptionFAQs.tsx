@@ -33,14 +33,22 @@ const DescriptionFAQs = () => {
   return (
     <div className="space-y-[60px]">
       <TimesTableDescription
-        title="Why Practice the 7 Times Table on MathTechLab?"
-        description="This is the perfect place to practice the 7 Times Table. At MathTechLab, we provide an interactive and engaging way to master the 7 times table with visual learning, audio support, and hands-on activities. Unlike traditional rote memorization, our platform offers a multi-sensory approach that enhances understanding and retention."
+        title="Master the 7 Times Table Through Interactive Play"
+        description={
+          <>
+            The <b>7 Times Table</b> can be tricky, but our engaging practice
+            system makes it easy and enjoyable. MathTechLab’s visual tools,
+            audio support, and smart feedback guide learners every step of the
+            way.
+          </>
+        }
         points={[
-          "Interactive Learning – Our platform provides step-by-step guidance with audio playback to help users visualize, listen, and repeat equations.",
-          "Engaging Practice Methods – Users can practice in sequential and shuffled order to reinforce learning dynamically.",
-          "Drag-and-Drop Games – Improve problem-solving skills by matching colorful number tiles to their correct equations.",
-          "Instant Feedback – Get real-time hints and corrections to ensure a fun and frustration-free learning experience.",
-          "Downloadable Resources – Access and download our beautifully designed 7 Times Table chart for offline practice.",
+          "Visual and Audio Practice – Reinforce learning with multi-sensory tools.",
+          "Challenging Quizzes – Build confidence with progressively harder questions.",
+          "Drag-and-Drop Fun – Solve equations by moving colorful tiles into place.",
+          "Instant Review – Identify errors quickly to boost retention.",
+          "Cross-Device Compatible – Use the 7 Times Table app on any device, anywhere.",
+          "Downloadable Resources – Print or save the 7 Times Table chart for revision.",
         ]}
         imageUrl={timestable}
         imagealt="7 times table"

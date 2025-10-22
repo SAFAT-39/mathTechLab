@@ -33,14 +33,21 @@ const DescriptionFAQs = () => {
   return (
     <div className="space-y-[60px]">
       <TimesTableDescription
-        title="Why Practice the 10 Times Table on MathTechLab?"
-        description="This is the perfect place to practice the 10 Times Table. At MathTechLab, we provide an interactive and engaging way to master the 10 times table with visual learning, audio support, and hands-on activities. Unlike traditional rote memorization, our platform offers a multi-sensory approach that enhances understanding and retention."
+        title="Master the 10 Times Table with Confidence"
+        description={
+          <>
+            The <b>10 Times Table</b> is essential for developing multiplication
+            fluency. <b>MathTechLab</b> helps children master it quickly with
+            guided exercises and visual math activities.
+          </>
+        }
         points={[
-          "Interactive Learning – Our platform provides step-by-step guidance with audio playback to help users visualize, listen, and repeat equations.",
-          "Engaging Practice Methods – Users can practice in sequential and shuffled order to reinforce learning dynamically.",
-          "Drag-and-Drop Games – Improve problem-solving skills by matching colorful number tiles to their correct equations.",
-          "Instant Feedback – Get real-time hints and corrections to ensure a fun and frustration-free learning experience.",
-          "Downloadable Resources – Access and download our beautifully designed 10 Times Table chart for offline practice.",
+          "Easy-to-Follow Patterns – Understand how multiplying by 10 builds number sense.",
+          "Engaging Visuals – Bright, animated designs make math fun and memorable.",
+          "Practice Flexibility – Practice questions in sequence or shuffled mode.",
+          "Instant Checking – Receive real-time feedback to improve accuracy.",
+          "Cross-Device Compatible – Use on desktop, tablet, or phone for easy access.",
+          "Downloadable Resources – Download the 10 Times Table printable chart for free.",
         ]}
         imageUrl={timestable}
         imagealt="10 times table"

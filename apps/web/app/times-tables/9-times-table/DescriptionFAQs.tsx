@@ -33,14 +33,21 @@ const DescriptionFAQs = () => {
   return (
     <div className="space-y-[60px]">
       <TimesTableDescription
-        title="Why Practice the 9 Times Table on MathTechLab?"
-        description="This is the perfect place to practice the 9 Times Table. At MathTechLab, we provide an interactive and engaging way to master the 9 times table with visual learning, audio support, and hands-on activities. Unlike traditional rote memorization, our platform offers a multi-sensory approach that enhances understanding and retention."
+        title="Make the 9 Times Table Easy and Fun to Learn"
+        description={
+          <>
+            The <b>9 Times Table</b> teaches pattern-based multiplication that
+            boosts numerical confidence. <b>MathTechLab</b> turns complex tables
+            into simple, enjoyable challenges.
+          </>
+        }
         points={[
-          "Interactive Learning – Our platform provides step-by-step guidance with audio playback to help users visualize, listen, and repeat equations.",
-          "Engaging Practice Methods – Users can practice in sequential and shuffled order to reinforce learning dynamically.",
-          "Drag-and-Drop Games – Improve problem-solving skills by matching colorful number tiles to their correct equations.",
-          "Instant Feedback – Get real-time hints and corrections to ensure a fun and frustration-free learning experience.",
-          "Downloadable Resources – Access and download our beautifully designed 9 Times Table chart for offline practice.",
+          "Pattern Discovery – Identify unique patterns within the 9 Times Table.",
+          "Gamified Practice – Play math games that make learning fun and effective.",
+          "Mixed Questions – Solve shuffled problems to build critical thinking.",
+          "Progressive Feedback – See instant results and tips for improvement.",
+          "Cross-Device Compatible – Fully optimized for PC, tablet, and mobile learning.",
+          "Downloadable Resources – Download your 9 Times Table sheet for home practice.",
         ]}
         imageUrl={timestable}
         imagealt="9 times table"

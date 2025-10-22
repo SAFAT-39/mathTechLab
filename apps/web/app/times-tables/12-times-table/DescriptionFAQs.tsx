@@ -33,14 +33,21 @@ const DescriptionFAQs = () => {
   return (
     <div className="space-y-[60px]">
       <TimesTableDescription
-        title="Why Practice the 12 Times Table on MathTechLab?"
-        description="This is the perfect place to practice the 12 Times Table. At MathTechLab, we provide an interactive and engaging way to master the 12 times table with visual learning, audio support, and hands-on activities. Unlike traditional rote memorization, our platform offers a multi-sensory approach that enhances understanding and retention."
+        title="Complete the 12 Times Table Challenge on MathTechLab"
+        description={
+          <>
+            The <b>12 Times Table</b> completes the foundation of basic
+            multiplication. MathTechLab’s interactive activities, games, and
+            visual feedback make mastering it simple and enjoyable.
+          </>
+        }
         points={[
-          "Interactive Learning – Our platform provides step-by-step guidance with audio playback to help users visualize, listen, and repeat equations.",
-          "Engaging Practice Methods – Users can practice in sequential and shuffled order to reinforce learning dynamically.",
-          "Drag-and-Drop Games – Improve problem-solving skills by matching colorful number tiles to their correct equations.",
-          "Instant Feedback – Get real-time hints and corrections to ensure a fun and frustration-free learning experience.",
-          "Downloadable Resources – Access and download our beautifully designed 12 Times Table chart for offline practice.",
+          "Comprehensive Learning – Review all previous tables for stronger retention.",
+          "Interactive Quizzes – Solve shuffled questions for real-world practice.",
+          "Visual Engagement – Colorful tiles and animations enhance focus.",
+          "Progress Feedback – Track improvement with instant result updates.",
+          "Cross-Device Compatible – Practice the 12 Times Table seamlessly on any device.",
+          "Downloadable Resources – Download the 12 Times Table printable for offline learning.",
         ]}
         imageUrl={timestable}
         imagealt="12 times table"
