@@ -124,11 +124,18 @@ return (
         {timesTable} Times Table Practic In Sequence
       </h2>
 
-      <p className="text-gray-600 font-medium md:w-[700px]">
-        Fill in your answers and test your multiplication skills! Click
-        <b className="text-zinc-800"> Check Answers</b> to see how you did! If
-        you get everything right, challenge yourself with the {timesTable} times
-        table in a shuffled order!
+      <p className="text-gray-700 font-medium lg:w-[800px] md:w-[700px] leading-relaxed mt-2 ">
+        Sharpen your multiplication skills with the{" "}
+        <span className="text-indigo-700 font-semibold">
+          {timesTable} Times Table Practice in Sequence
+        </span>
+        ! Enter your answers carefully to strengthen your math accuracy and
+        speed. When ready, click <b className="text-zinc-800">Check Answers</b>{" "}
+        to test your performance. If you master every equation, move on to the{" "}
+        <span className="text-purple-700 font-semibold">
+          Shuffled {timesTable} Times Table Challenge
+        </span>{" "}
+        to boost your memory and confidence in multiplication learning.
       </p>
     </div>
     <div className="flex flex-col items-center w-full mx-auto p-6 rounded-xl shadow-lg mt-7">
