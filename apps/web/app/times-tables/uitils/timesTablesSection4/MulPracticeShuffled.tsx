@@ -131,14 +131,17 @@ const renderProblem = (problem: number) => (
 return (
   <>
     <div className="mt-10 lg:mt-[60px]">
-      <h2 className="text-lg md:text-2xl font-bold mb-1 text-gray-800">
+      <h2 className="text-lg md:text-3xl font-bold mb-1 text-gray-800">
         {timesTable} Times Table Practice (Shuffled)
       </h2>
 
-      <p className="text-gray-600 font-medium md:w-[700px]">
-        Fill in your answers and test your multiplication skills! Click
-        <b className="text-zinc-800"> Check Answers</b> to see how you did! If
-        you get everything right, keep practicing with different tables!
+      <p className="text-gray-600 font-medium lg:w-[800px] md:w-[700px]">
+        Strengthen your multiplication skills with this interactive{" "}
+        <b className="text-purple-700">{timesTable} Times Table Practice</b>{" "}
+        activity. Solve each equation, type your answers, and then click{" "}
+        <b className="text-zinc-800">Check Answers</b> to see your score
+        instantly. This shuffled times table quiz helps students build speed,
+        accuracy, and confidence in math through fun online practice.
       </p>
     </div>
 
