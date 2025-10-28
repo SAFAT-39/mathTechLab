@@ -1,7 +1,9 @@
 "use client";
 
+import { RefreshCw } from "lucide-react";
 import type React from "react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import ConfettiExplosion from "react-confetti-explosion";
 
 interface MulPracticeProps {
   timesTable?: number;
@@ -10,193 +12,193 @@ interface MulPracticeProps {
 }
 
 const MulPracticeInSequence: React.FC<MulPracticeProps> = ({
-  timesTable = 1, // Default value
-  bgGradient = "from-purple-600 to-indigo-600", // Default gradient
+  timesTable = 1,
+  bgGradient = "from-purple-600 to-indigo-600",
   buttonGradient = "from-indigo-600 to-purple-600",
 }) => {
-  const [answers, setAnswers] = useState<Record<number, string>>({});
-  const [isCorrect, setIsCorrect] = useState<Record<number, boolean>>({});
-  const [showResults, setShowResults] = useState(false);
-  const [allCorrect, setAllCorrect] = useState(false);
-  const [showAlert, setShowAlert] = useState(false);
-  const [alertMessage, setAlertMessage] = useState("");
-
   const firstColumnProblems = [1, 2, 3, 4, 5, 6];
   const secondColumnProblems = [7, 8, 9, 10, 11, 12];
+  const allProblems = useMemo(
+    () => [...firstColumnProblems, ...secondColumnProblems],
+    []
+  );
+
+  const [answers, setAnswers] = useState<Record<number, string>>({});
+  const [isCorrect, setIsCorrect] = useState<Record<number, boolean>>({});
+  const [popped, setPopped] = useState<Record<number, boolean>>({});
+  const [explodeFor, setExplodeFor] = useState<Record<number, boolean>>({});
+
+  const allFilled = useMemo(
+    () =>
+      allProblems.every((p) => answers[p] !== undefined && answers[p] !== ""),
+    [answers, allProblems]
+  );
 
   const handleChange = (problem: number, value: string) => {
     if (value !== "" && !/^\d+$/.test(value)) return;
+
     setAnswers((prev) => ({ ...prev, [problem]: value }));
 
-    if (showResults) {
-      setIsCorrect((prev) => ({ ...prev, [problem]: false }));
-      setShowResults(false);
-      setAllCorrect(false);
-      setShowAlert(false);
-    }
-  };
-
-  const checkAnswers = (e: React.FormEvent) => {
-    e.preventDefault();
-    const allProblems = [...firstColumnProblems, ...secondColumnProblems];
-
-    const unanswered = allProblems.filter((problem) => !answers[problem]);
-    if (unanswered.length > 0) {
-      setAlertMessage(
-        `Please fill in all answers. You missed ${unanswered.length} question${unanswered.length > 1 ? "s" : ""}.`
-      );
-      setShowAlert(true);
+    if (value === "") {
+      setIsCorrect((prev) => {
+        const next = { ...prev };
+        delete next[problem];
+        return next;
+      });
+      setExplodeFor((prev) => ({ ...prev, [problem]: false }));
       return;
     }
 
-    const results: Record<number, boolean> = {};
-    let correct = true;
+    const numeric = Number.parseInt(value, 10);
+    const correctNow = numeric === problem * timesTable;
 
-    allProblems.forEach((problem) => {
-      const userAnswer = Number.parseInt(answers[problem]);
-      const correctAnswer = problem * timesTable;
-      results[problem] = userAnswer === correctAnswer;
-      if (userAnswer !== correctAnswer) correct = false;
-    });
+    setIsCorrect((prev) => ({ ...prev, [problem]: correctNow }));
 
-    setIsCorrect(results);
-    setShowResults(true);
-    setAllCorrect(correct);
+    if (correctNow) {
+      setPopped((prev) => {
+        const already = !!prev[problem];
+        if (!already) {
+          setExplodeFor((ePrev) => ({ ...ePrev, [problem]: true }));
+          return { ...prev, [problem]: true };
+        }
+        return prev;
+      });
+    } else {
+      setPopped((prev) => {
+        if (prev[problem]) {
+          const next = { ...prev };
+          delete next[problem];
+          return next;
+        }
+        return prev;
+      });
+    }
   };
 
   const resetPractice = () => {
     setAnswers({});
     setIsCorrect({});
-    setShowResults(false);
-    setAllCorrect(false);
-    setShowAlert(false);
+    setExplodeFor({});
+    setPopped({});
   };
 
-const renderProblem = (problem: number) => (
-  <div key={problem} className="flex items-center gap-x-3.5 mb-2">
-    <div className="w-28 lg:w-32 text-right pr-2">
-      <span
-        className={`font-mono text-3xl lg:text-4xl  font-bold bg-clip-text text-transparent bg-gradient-to-r ${bgGradient} whitespace-nowrap`}
-      >
-        {timesTable} × {problem}
-      </span>
-    </div>
+  const renderProblem = (problem: number) => {
+    const value = answers[problem] || "";
+    const correct = isCorrect[problem] === true;
+    const hasValue = value !== "";
 
-    <span className="text-gray-500 text-3xl px-1 font-mono">=</span>
+    const borderClass = correct
+      ? "border-emerald-400 bg-emerald-50 ring-2 ring-emerald-200"
+      : hasValue
+        ? "border-rose-400 bg-rose-50 ring-2 ring-rose-200"
+        : "border-amber-400 bg-amber-50 ring-2 ring-amber-200";
 
-    <div className="relative">
-      <input
-        type="text"
-        value={answers[problem] || ""}
-        onChange={(e) => handleChange(problem, e.target.value)}
-        className={`w-16 h-12 text-center text-3xl font-mono font-semibold rounded-lg border-2 shadow-sm outline-none transition-all ${
-          showResults
-            ? isCorrect[problem]
-              ? "border-emerald-400 bg-emerald-50 ring-2 ring-emerald-200"
-              : answers[problem]
-                ? "border-rose-400 bg-rose-50 ring-2 ring-rose-200"
-                : "border-amber-400 bg-amber-50 ring-2 ring-amber-200"
-            : "border-indigo-200 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
-        }`}
-        placeholder="?"
-        maxLength={3}
-      />
-
-      {showResults && (
-        <div className="absolute -right-7 top-1/2 transform -translate-y-1/2">
-          {isCorrect[problem] ? (
-            <span className="text-emerald-500 text-2xl">✓</span>
-          ) : answers[problem] ? (
-            <span className="text-rose-500 text-xl font-medium">✗</span>
-          ) : (
-            <span className="text-amber-500 text-xl font-medium">?</span>
-          )}
-        </div>
-      )}
-    </div>
-  </div>
-);
-
-return (
-  <>
-    <div className="mt-10 lg:mt-[60px] ">
-      <h2 className="text-lg md:text-3xl font-bold mb-1 text-gray-800">
-        {timesTable} Times Table Practic In Sequence
-      </h2>
-
-      <p className="text-gray-700 font-medium lg:w-[800px] md:w-[700px] leading-relaxed mt-2 ">
-        Sharpen your multiplication skills with the{" "}
-        <span className="text-indigo-700 font-semibold">
-          {timesTable} Times Table Practice in Sequence
-        </span>
-        ! Enter your answers carefully to strengthen your math accuracy and
-        speed. When ready, click <b className="text-zinc-800">Check Answers</b>{" "}
-        to test your performance. If you master every equation, move on to the{" "}
-        <span className="text-purple-700 font-semibold">
-          Shuffled {timesTable} Times Table Challenge
-        </span>{" "}
-        to boost your memory and confidence in multiplication learning.
-      </p>
-    </div>
-    <div className="flex flex-col items-center w-full mx-auto p-6 rounded-xl shadow-lg mt-7">
-      <form onSubmit={checkAnswers}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-0 ">
-          <div className=" space-y-0 md:space-y-3 md:border-r border-gray-300 md:pr-[70px]">
-            {firstColumnProblems.map(renderProblem)}
-          </div>
-          <div className="space-y-0 md:space-y-3">
-            {secondColumnProblems.map(renderProblem)}
-          </div>
-        </div>
-
-        {showResults && (
-          <div
-            className={`mt-8 p-4 rounded-lg text-center ${
-              allCorrect
-                ? "bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200"
-                : "bg-gradient-to-r from-amber-50 to-yellow-50 border border-amber-200"
-            }`}
+    return (
+      <div key={problem} className="flex items-center gap-x-3.5 mb-2">
+        <div className="w-28 lg:w-32 text-right pr-2">
+          <span
+            className={`font-mono text-3xl lg:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r ${bgGradient} whitespace-nowrap`}
           >
-            <p
-              className={`font-medium text-lg ${allCorrect ? "text-emerald-800" : "text-amber-800"}`}
-            >
-              {allCorrect
-                ? "Amazing job! All answers are correct! 🎉"
-                : "Keep practicing! Some answers need correction. 💪"}
-            </p>
-          </div>
-        )}
+            {timesTable} × {problem}
+          </span>
+        </div>
 
-        <div className="mt-8 flex flex-col items-center">
-          <div className="flex flex-wrap gap-4 justify-center">
-            <button
-              type="submit"
-              className={`px-8 py-3 bg-gradient-to-r ${buttonGradient} text-white font-bold rounded-lg shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer `}
-            >
-              Check Answers
-            </button>
+        <span className="text-gray-500 text-3xl px-1 font-mono">=</span>
 
-            {showResults && (
-              <button
-                type="button"
-                onClick={resetPractice}
-                className="px-8 py-3 bg-white border-2 border-gray-300 text-gray-700 font-bold rounded-lg hover:bg-gray-50 transition-all cursor-pointer"
-              >
-                Try Again
-              </button>
+        <div className="relative">
+          <input
+            type="text"
+            value={value}
+            onChange={(e) => handleChange(problem, e.target.value)}
+            className={`w-16 h-12 text-center text-3xl font-mono font-semibold rounded-lg border-2 shadow-sm outline-none transition-all ${
+              hasValue
+                ? borderClass
+                : "border-indigo-200 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+            }`}
+            placeholder="?"
+            maxLength={3}
+          />
+
+          <div className="absolute -right-7 top-1/2 transform -translate-y-1/2">
+            {correct ? (
+              <span className="text-emerald-500 text-2xl">✓</span>
+            ) : hasValue ? (
+              <span className="text-rose-500 text-xl font-medium">✗</span>
+            ) : (
+              <span className="text-amber-500 text-xl font-medium">?</span>
             )}
           </div>
 
-          {showAlert && (
-            <div className="mt-4 bg-rose-100 border-l-4 border-rose-500 text-rose-700 p-3 rounded-md max-w-md">
-              <p className="font-medium">{alertMessage}</p>
+          {explodeFor[problem] && (
+            <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+              <ConfettiExplosion
+                force={0.8}
+                duration={2200}
+                particleCount={50}
+                width={280}
+                onComplete={() =>
+                  setExplodeFor((prev) => ({ ...prev, [problem]: false }))
+                }
+              />
             </div>
           )}
         </div>
-      </form>
-    </div>
-  </>
-);
+      </div>
+    );
+  };
+
+  return (
+    <>
+      <div className="mt-10 lg:mt-[60px] ">
+        <h2 className="text-lg md:text-3xl font-bold mb-1 text-gray-800">
+          {timesTable} Times Table Practic In Sequence
+        </h2>
+
+        <p className="text-gray-700 font-medium lg:w-[800px] md:w-[700px] leading-relaxed mt-2 ">
+          Sharpen your multiplication skills with the{" "}
+          <span className="text-indigo-700 font-semibold">
+            {timesTable} Times Table Practice in Sequence
+          </span>
+          ! Enter your answers carefully to strengthen your math accuracy and
+          speed. Progress updates live; correct answers turn "green" with a
+          checkmark <span className="text-emerald-500 text-xl">✓</span>. When
+          every field is filled, use <b className="text-zinc-800">Try Again</b>{" "}
+          to restart. If you master every equation, move on to the{" "}
+          <span className="text-indigo-700 font-semibold">
+            Shuffled {timesTable} Times Table Challenge
+          </span>{" "}
+          to boost your memory and confidence in multiplication learning.
+        </p>
+      </div>
+      <div className="flex flex-col items-center w-full mx-auto p-6 rounded-xl shadow-lg mt-7 ">
+        <form onSubmit={(e) => e.preventDefault()}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-0 ">
+            <div className="space-y-0 md:space-y-3 md:border-r border-gray-300 md:pr-[70px]">
+              {firstColumnProblems.map(renderProblem)}
+            </div>
+            <div className="space-y-0 md:space-y-3">
+              {secondColumnProblems.map(renderProblem)}
+            </div>
+          </div>
+
+          <div className="mt-8 flex flex-col items-center">
+            <div className="flex flex-wrap gap-4 justify-center">
+              {allFilled && (
+                <button
+                  type="button"
+                  onClick={resetPractice}
+                  className={`flex items-center px-8 py-3 bg-gradient-to-r ${buttonGradient} text-white font-bold rounded-lg shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer`}
+                >
+                  <RefreshCw className="h-5 w-5 mr-2 " />
+                  <span>Try Again</span>
+                </button>
+              )}
+            </div>
+          </div>
+        </form>
+      </div>
+    </>
+  );
 };
 
 export default MulPracticeInSequence;
