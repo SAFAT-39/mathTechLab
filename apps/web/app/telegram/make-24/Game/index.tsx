@@ -157,9 +157,18 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
     setSolved(0);
   };
 
+  // Encoding constants - two random numbers
+  const ENCODE_MULTIPLIER = 47382;
+  const ENCODE_ADDITION = 91627;
+
+  const encodePuzzleIndex = (index: number): number => {
+    return index * ENCODE_MULTIPLIER + ENCODE_ADDITION;
+  };
+
   const handleShare = async () => {
     const puzzleIndex = game?.id ?? getCurrentPuzzleIndex();
-    const shareUrl = `https://t.me/PlayMake24Bot/Make24?startapp=${puzzleIndex}`;
+    const encodedIndex = encodePuzzleIndex(puzzleIndex);
+    const shareUrl = `https://t.me/PlayMake24Bot/Make24?startapp=${encodedIndex}`;
 
     // Copy link to clipboard - most reliable method in Telegram Mini Apps
     // Users can then paste it in any Telegram message

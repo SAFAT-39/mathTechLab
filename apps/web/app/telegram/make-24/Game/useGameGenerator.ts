@@ -17,25 +17,25 @@ const useGameGenerator = (initialPuzzleId?: number) => {
     return data[randomIndex];
   };
 
-  const loadGameById = (id: number): void => {
-    const len = data.length;
-    // Ensure the id is within valid range
-    let puzzleIndex = id;
-    if (puzzleIndex < 0 || puzzleIndex >= len) {
-      puzzleIndex = 0;
-    }
-    const selectedGame = data[puzzleIndex];
-    setGame(selectedGame);
-    setCurrentGameId(selectedGame.id);
-  };
-
-  const nextGame = () => {
+  const loadRandomGame = () => {
     const randomGame = getRandomPuzzle();
     setGame(randomGame);
     setCurrentGameId(randomGame.id);
   };
 
-  const loadRandomGame = () => {
+  const loadGameById = (id: number): void => {
+    // Find puzzle by ID (IDs start from 1, array is 0-indexed)
+    const selectedGame = data.find(puzzle => puzzle.id === id);
+    if (selectedGame) {
+      setGame(selectedGame);
+      setCurrentGameId(selectedGame.id);
+    } else {
+      // If puzzle not found, load a random game as fallback
+      loadRandomGame();
+    }
+  };
+
+  const nextGame = () => {
     const randomGame = getRandomPuzzle();
     setGame(randomGame);
     setCurrentGameId(randomGame.id);
