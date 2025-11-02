@@ -7,49 +7,55 @@ interface GameObject {
   solutions: string[];
 }
 
-const useGameGenerator = () => {
+const useGameGenerator = (initialPuzzleId?: number) => {
   const [game, setGame] = useState<GameObject>();
+  const [currentGameId, setCurrentGameId] = useState<number | null>(null);
   
-  const getCurrentIndex = (): number => {
-    const stored = localStorage.getItem('24game-current-index');
-    return stored ? parseInt(stored, 10) : 0;
+  const getRandomPuzzle = (): GameObject => {
+    const len = data.length;
+    const randomIndex = Math.floor(Math.random() * len);
+    return data[randomIndex];
   };
 
-  const setCurrentIndex = (index: number): void => {
-    localStorage.setItem('24game-current-index', index.toString());
+  const loadGameById = (id: number): void => {
+    const len = data.length;
+    // Ensure the id is within valid range
+    let puzzleIndex = id;
+    if (puzzleIndex < 0 || puzzleIndex >= len) {
+      puzzleIndex = 0;
+    }
+    const selectedGame = data[puzzleIndex];
+    setGame(selectedGame);
+    setCurrentGameId(selectedGame.id);
   };
 
   const nextGame = () => {
-    const len = data.length;
-    let currentIndex = getCurrentIndex() + 1;
-    
-    // Reset to 0 if we've reached the end
-    if (currentIndex >= len) {
-      currentIndex = 0;
-    }
-    
-    setGame(data[currentIndex]);
-    setCurrentIndex(currentIndex);
+    const randomGame = getRandomPuzzle();
+    setGame(randomGame);
+    setCurrentGameId(randomGame.id);
   };
 
-  const loadCurrentGame = () => {
-    const len = data.length;
-    let currentIndex = getCurrentIndex();
-    
-    // Reset to 0 if we've reached the end
-    if (currentIndex >= len) {
-      currentIndex = 0;
-    }
-    
-    setGame(data[currentIndex]);
-    // Don't increment the index when just loading the current game
+  const loadRandomGame = () => {
+    const randomGame = getRandomPuzzle();
+    setGame(randomGame);
+    setCurrentGameId(randomGame.id);
   };
 
   useEffect(() => {
-    loadCurrentGame();
-  }, []);
+    if (initialPuzzleId !== undefined && !isNaN(initialPuzzleId)) {
+      // Load the specific puzzle from the share link
+      loadGameById(initialPuzzleId);
+    } else {
+      // Load a random game
+      loadRandomGame();
+    }
+  }, [initialPuzzleId]);
 
-  return { game, nextGame };
+  const getCurrentPuzzleIndex = (): number => {
+    return currentGameId ?? (game?.id ?? 0);
+  };
+
+  return { game, nextGame, getCurrentPuzzleIndex, loadGameById };
 };
 
 export default useGameGenerator;

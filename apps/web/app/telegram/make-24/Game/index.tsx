@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { generateGame } from "./utils";
 import NumberBox from "./NumberBox";
-import { ArrowLeftCircleIcon, ArrowRightCircleIcon } from "lucide-react";
+import { ArrowLeftCircleIcon, ArrowRightCircleIcon, Share2 } from "lucide-react";
 import Fraction from "./Fraction";
 import { useTimer } from "./useTimer";
 import useGameGenerator from "./useGameGenerator";
@@ -16,7 +16,11 @@ interface BoardState {
   selectedIndex: number;
 }
 
-const Math24Game = () => {
+interface Math24GameProps {
+  initialPuzzleId?: number;
+}
+
+const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
   const [numbers, setNumbers] = useState(generateGame());
   const [boardStates, setBoardStates] = useState<BoardState[]>([]);
   const [curStateIndex, setCurStateIndex] = useState(-1);
@@ -28,9 +32,10 @@ const Math24Game = () => {
   const [solved, setSolved] = useState(0);
 
   const [openSolution, setOpenSolution] = useState<boolean>(false);
+  const [showCopiedMessage, setShowCopiedMessage] = useState<boolean>(false);
 
   const { time, reset: resetTimer } = useTimer();
-  const { game, nextGame } = useGameGenerator();
+  const { game, nextGame, getCurrentPuzzleIndex } = useGameGenerator(initialPuzzleId);
 
   useEffect(() => {
     if (!game) return;
@@ -152,12 +157,42 @@ const Math24Game = () => {
     setSolved(0);
   };
 
+  const handleShare = async () => {
+    const puzzleIndex = game?.id ?? getCurrentPuzzleIndex();
+    const shareUrl = `https://t.me/PlayMake24Bot/Make24?startapp=${puzzleIndex}`;
+
+    // Copy link to clipboard - most reliable method in Telegram Mini Apps
+    // Users can then paste it in any Telegram message
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      try {
+        await navigator.clipboard.writeText(shareUrl);
+        setShowCopiedMessage(true);
+        setTimeout(() => {
+          setShowCopiedMessage(false);
+        }, 2000);
+      } catch (error) {
+        // Clipboard failed, silently do nothing
+      }
+    }
+  };
+
   const arrowActive = "#05df72";
   const arrowDisabled = "black";
 
   return (
     <div className="flex flex-col justify-center items-center border rounded-lg  bg-gray-200">
+      <button
+        className="w-full bg-blue-600 hover:bg-blue-500 active:bg-blue-500 py-2 text-center text-lg text-gray-100 font-bold rounded flex items-center justify-center gap-2"
+        onClick={handleShare}
+      >
+        <Share2 size={20} />
+        Share Puzzle
+      </button>
+      {showCopiedMessage && (
+        <p className="text-green-600 font-bold text-sm animate-pulse">Link copied!</p>
+      )}
       <div className="flex flex-col justify-center  items-center gap-2 w-[340px] px-2 py-2">
+
         <div className="flex w-full justify-between border-b pb-1 mb-1">
           <p className="font-bold">Solved: {solved}</p>
           <p className="font-bold">Score: {score}</p>
@@ -182,11 +217,10 @@ const Math24Game = () => {
           {operators.map((op: string, index: number) => (
             <button
               key={index}
-              className={`border-2 border-green-600  h-[50px] w-[50px] flex items-center justify-center text-5xl text-green-600 font-bold leading-none ${
-                selectedOperator === op
-                  ? "text-green-800 border-6 border-green-800"
-                  : "hover:border-green-800 active:border-green-800"
-              }`}
+              className={`border-2 border-green-600  h-[50px] w-[50px] flex items-center justify-center text-5xl text-green-600 font-bold leading-none ${selectedOperator === op
+                ? "text-green-800 border-6 border-green-800"
+                : "hover:border-green-800 active:border-green-800"
+                }`}
               onClick={() => handleOperatorClick(op)}
             >
               {op}
