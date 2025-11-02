@@ -238,7 +238,7 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
             />
           </button>
           <button
-            className="border-2 border-red-500 hover:border-red-400 active:border-red-400 text-red-500 hover:text-red-400 active:text-red-400 px-3 rounded"
+            className="border-2 border-red-500 hover:border-red-400 active:border-red-400 text-red-500 hover:text-red-400 active:text-red-400 px-5 py-1.5 text-base font-bold rounded"
             onClick={handleSkip}
           >
             Next
