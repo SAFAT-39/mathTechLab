@@ -8,6 +8,7 @@ import Fraction from "./Fraction";
 import { useTimer } from "./useTimer";
 import useGameGenerator from "./useGameGenerator";
 import SolutionDialog from "./SolutionDialog";
+import confetti from "canvas-confetti";
 
 export const infinity = 999999999999999;
 
@@ -33,6 +34,7 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
 
   const [openSolution, setOpenSolution] = useState<boolean>(false);
   const [showCopiedMessage, setShowCopiedMessage] = useState<boolean>(false);
+  const [isPuzzleSolved, setIsPuzzleSolved] = useState<boolean>(false);
 
   const { time, reset: resetTimer } = useTimer();
   const { game, nextGame, getCurrentPuzzleIndex } = useGameGenerator(initialPuzzleId);
@@ -48,6 +50,7 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
     });
     setCurStateIndex(0);
     setSelectedOperator("");
+    setIsPuzzleSolved(false);
     resetTimer();
   }, [game]);
 
@@ -80,15 +83,20 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
         return true;
       } else return false;
     };
-    const nextLevel = () => {
-      setTimeout(() => {
-        nextGame();
-      }, 1000);
-    };
-    if (isGameComplete()) {
+    if (isGameComplete() && !isPuzzleSolved) {
       setSolved((prev) => prev + 1);
       setScore((prev) => prev + 24 * (game?.solutions.length || 1));
-      nextLevel();
+      setIsPuzzleSolved(true);
+
+      // Particle effect
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
+        gravity: 0.5,
+        decay: 0.9,
+        ticks: 200
+      });
     }
   }, [boardStates]);
 
@@ -143,7 +151,13 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
   };
 
   const handleSkip = () => {
-    setOpenSolution(true);
+    if (isPuzzleSolved) {
+      // If puzzle is solved, go to next puzzle
+      nextGame();
+    } else {
+      // If puzzle not solved, show solution
+      setOpenSolution(true);
+    }
   };
 
   const handleSolutionClose = () => {
@@ -238,7 +252,10 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
             />
           </button>
           <button
-            className="border-2 border-red-500 hover:border-red-400 active:border-red-400 text-red-500 hover:text-red-400 active:text-red-400 px-5 py-1.5 text-base font-bold rounded"
+            className={`border-2 px-5 py-1.5 text-base font-bold rounded ${isPuzzleSolved
+              ? "border-green-600 hover:border-green-500 active:border-green-500 text-green-600 hover:text-green-500 active:text-green-500"
+              : "border-red-500 hover:border-red-400 active:border-red-400 text-red-500 hover:text-red-400 active:text-red-400"
+              }`}
             onClick={handleSkip}
           >
             Next
