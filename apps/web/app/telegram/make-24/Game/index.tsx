@@ -151,12 +151,6 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
     nextGame();
   };
 
-  const handleRestart = () => {
-    nextGame();
-    setScore(0);
-    setSolved(0);
-  };
-
   // Encoding constants - two random numbers
   const ENCODE_MULTIPLIER = 47382;
   const ENCODE_ADDITION = 91627;
@@ -247,7 +241,7 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
             className="border-2 border-red-500 hover:border-red-400 active:border-red-400 text-red-500 hover:text-red-400 active:text-red-400 px-3 rounded"
             onClick={handleSkip}
           >
-            Skip
+            Next
           </button>
           <button onClick={handleForward} aria-label="Forward">
             <ArrowRightCircleIcon
@@ -261,12 +255,6 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
           </button>
         </div>
       </div>
-      <button
-        className="w-full bg-green-600 hover:bg-green-500 active:bg-green-500 py-1 text-center text-2xl text-gray-100 font-bold rounded-b-lg"
-        onClick={handleRestart}
-      >
-        Restart
-      </button>
       <SolutionDialog
         isOpen={openSolution}
         onClose={handleSolutionClose}
