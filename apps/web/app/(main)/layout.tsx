@@ -1,4 +1,4 @@
-import "./globals.css";
+import "../globals.css";
 import "@mathtechlab/design-system/styles.css";
 import "@mathtechlab/ui/styles.css";
 import type { Metadata } from "next";

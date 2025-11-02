@@ -1,6 +1,6 @@
 import Card from "./Card";
 import Image from "next/image";
-import learnmultiplication from "../../../public/static/image/timesTable/learnmultiplication.png";
+import learnmultiplication from "../../../../public/static/image/timesTable/learnmultiplication.png";
 
 const tables = [
   {

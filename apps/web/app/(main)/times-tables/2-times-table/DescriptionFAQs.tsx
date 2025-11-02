@@ -1,13 +1,13 @@
 import TimesTableDescription from "../uitils/description/TimesTableDescription";
 import FAQSection from "../uitils/faqs/FAQSection";
-import timestable from "../../../public/static/image/allTimesTable/4-times-table.webp";
+import timestable from "../../../../public/static/image/allTimesTable/2-times-table.webp";
 
 const DescriptionFAQs = () => {
   const faqs = [
     {
-      question: "Why is learning the 4 Times Table important?",
+      question: "Why is learning the 2 Times Table important?",
       answer:
-        "Mastering the 4 times table helps build confidence and lays the foundation for learning higher multiplication tables.",
+        "Mastering the 2 times table helps build confidence and lays the foundation for learning higher multiplication tables.",
     },
     {
       question: "How does MathTechLab help with Times Tables practice?",
@@ -15,7 +15,7 @@ const DescriptionFAQs = () => {
         "MathTechLab provides interactive exercises, audio support, and drag-and-drop features to make learning engaging and fun!",
     },
     {
-      question: "Can I download and print the 4 Times Table?",
+      question: "Can I download and print the 2 Times Table?",
       answer:
         "Yes! You can download and print the times table from our website for offline practice.",
     },
@@ -33,25 +33,25 @@ const DescriptionFAQs = () => {
   return (
     <div className="space-y-[60px]">
       <TimesTableDescription
-        title="Why Practice the 4 Times Table on MathTechLab?"
-        description="This is the perfect place to practice the 4 Times Table. At MathTechLab, we provide an interactive and engaging way to master the 4 times table with visual learning, audio support, and hands-on activities. Unlike traditional rote memorization, our platform offers a multi-sensory approach that enhances understanding and retention."
+        title="Why Practice the 2 Times Table on MathTechLab?"
+        description="This is the perfect place to practice the 2 Times Table. At MathTechLab, we provide an interactive and engaging way to master the 2 times table with visual learning, audio support, and hands-on activities. Unlike traditional rote memorization, our platform offers a multi-sensory approach that enhances understanding and retention."
         points={[
           "Interactive Learning – Our platform provides step-by-step guidance with audio playback to help users visualize, listen, and repeat equations.",
           "Engaging Practice Methods – Users can practice in sequential and shuffled order to reinforce learning dynamically.",
           "Drag-and-Drop Games – Improve problem-solving skills by matching colorful number tiles to their correct equations.",
           "Instant Feedback – Get real-time hints and corrections to ensure a fun and frustration-free learning experience.",
-          "Downloadable Resources – Access and download our beautifully designed 4 Times Table chart for offline practice.",
+          "Downloadable Resources – Access and download our beautifully designed 2 Times Table chart for offline practice.",
         ]}
         imageUrl={timestable}
-        imagealt="4 times table"
+        imagealt="2 times table"
         downloadText="Download"
       />
       {/* <FAQSection
         title="Frequently Asked Questions"
         faqs={faqs}
-        borderColor="border-teal-500"
-        questionTextColor="text-teal-600"
-        titleTextColor="text-teal-700"
+        borderColor="border-sky-500"
+        questionTextColor="text-sky-600"
+        titleTextColor="text-sky-700"
       /> */}
       {/* <FAQSection title="Frequently Asked Questions" faqs={faqs} /> */}
     </div>

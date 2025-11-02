@@ -1,6 +1,6 @@
 import TimesTableDescription from "../uitils/description/TimesTableDescription";
 import FAQSection from "../uitils/faqs/FAQSection";
-import timestable from "../../../public/static/image/allTimesTable/11-times-table.webp";
+import timestable from "../../../../public/static/image/allTimesTable/11-times-table.webp";
 
 const DescriptionFAQs = () => {
   const faqs = [

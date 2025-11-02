@@ -1,13 +1,13 @@
 import TimesTableDescription from "../uitils/description/TimesTableDescription";
 import FAQSection from "../uitils/faqs/FAQSection";
-import timestable from "../../../public/static/image/allTimesTable/12-times-table.webp";
+import timestable from "../../../../public/static/image/allTimesTable/10-times-table.webp";
 
 const DescriptionFAQs = () => {
   const faqs = [
     {
-      question: "Why is learning the 12 Times Table important?",
+      question: "Why is learning the 10 Times Table important?",
       answer:
-        "Mastering the 12 times table helps build confidence and lays the foundation for learning higher multiplication tables.",
+        "Mastering the 10 times table helps build confidence and lays the foundation for learning higher multiplication tables.",
     },
     {
       question: "How does MathTechLab help with Times Tables practice?",
@@ -15,7 +15,7 @@ const DescriptionFAQs = () => {
         "MathTechLab provides interactive exercises, audio support, and drag-and-drop features to make learning engaging and fun!",
     },
     {
-      question: "Can I download and print the 12 Times Table?",
+      question: "Can I download and print the 10 Times Table?",
       answer:
         "Yes! You can download and print the times table from our website for offline practice.",
     },
@@ -33,25 +33,25 @@ const DescriptionFAQs = () => {
   return (
     <div className="space-y-[60px]">
       <TimesTableDescription
-        title="Why Practice the 12 Times Table on MathTechLab?"
-        description="This is the perfect place to practice the 12 Times Table. At MathTechLab, we provide an interactive and engaging way to master the 12 times table with visual learning, audio support, and hands-on activities. Unlike traditional rote memorization, our platform offers a multi-sensory approach that enhances understanding and retention."
+        title="Why Practice the 10 Times Table on MathTechLab?"
+        description="This is the perfect place to practice the 10 Times Table. At MathTechLab, we provide an interactive and engaging way to master the 10 times table with visual learning, audio support, and hands-on activities. Unlike traditional rote memorization, our platform offers a multi-sensory approach that enhances understanding and retention."
         points={[
           "Interactive Learning – Our platform provides step-by-step guidance with audio playback to help users visualize, listen, and repeat equations.",
           "Engaging Practice Methods – Users can practice in sequential and shuffled order to reinforce learning dynamically.",
           "Drag-and-Drop Games – Improve problem-solving skills by matching colorful number tiles to their correct equations.",
           "Instant Feedback – Get real-time hints and corrections to ensure a fun and frustration-free learning experience.",
-          "Downloadable Resources – Access and download our beautifully designed 12 Times Table chart for offline practice.",
+          "Downloadable Resources – Access and download our beautifully designed 10 Times Table chart for offline practice.",
         ]}
         imageUrl={timestable}
-        imagealt="12 times table"
+        imagealt="10 times table"
         downloadText="Download"
       />
       {/* <FAQSection
         title="Frequently Asked Questions"
         faqs={faqs}
-        borderColor="border-green-500"
-        questionTextColor="text-green-600"
-        titleTextColor="text-green-700"
+        borderColor="border-indigo-500"
+        questionTextColor="text-indigo-600"
+        titleTextColor="text-indigo-700"
       /> */}
       {/* <FAQSection title="Frequently Asked Questions" faqs={faqs} /> */}
     </div>

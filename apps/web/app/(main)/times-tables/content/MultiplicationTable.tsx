@@ -119,7 +119,7 @@
 
 // export default MultiplicationTable;
 import Image from "next/image";
-import multiplicationTable from "../../../public/static/image/timesTable/multiplicationTables.webp";
+import multiplicationTable from "../../../../public/static/image/timesTable/multiplicationTables.webp";
 
 const MultiplicationTable = () => {
   return (
