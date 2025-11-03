@@ -150,14 +150,14 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
     }
   };
 
+  const handleNext = () => {
+    // Only called when puzzle is solved - go to next puzzle
+    nextGame();
+  };
+
   const handleSkip = () => {
-    if (isPuzzleSolved) {
-      // If puzzle is solved, go to next puzzle
-      nextGame();
-    } else {
-      // If puzzle not solved, show solution
-      setOpenSolution(true);
-    }
+    // Show solution dialog (ads may be shown before this)
+    setOpenSolution(true);
   };
 
   const handleSolutionClose = () => {
@@ -251,15 +251,22 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
               color={curStateIndex > 0 ? arrowActive : arrowDisabled}
             />
           </button>
-          <button
-            className={`border-2 px-5 py-1.5 text-base font-bold rounded ${isPuzzleSolved
-              ? "border-green-600 hover:border-green-500 active:border-green-500 text-green-600 hover:text-green-500 active:text-green-500"
-              : "border-red-500 hover:border-red-400 active:border-red-400 text-red-500 hover:text-red-400 active:text-red-400"
-              }`}
-            onClick={handleSkip}
-          >
-            Next
-          </button>
+          {isPuzzleSolved ? (
+            <button
+              className="border-2 px-5 py-1.5 text-base font-bold rounded border-green-600 hover:border-green-500 active:border-green-500 text-green-600 hover:text-green-500 active:text-green-500"
+              onClick={handleNext}
+            >
+              Next
+            </button>
+          ) : (
+            <button
+              className="border-2 px-5 py-1.5 text-base font-bold rounded border-orange-500 hover:border-orange-400 active:border-orange-400 text-orange-600 hover:text-orange-500 active:text-orange-500 relative"
+              onClick={handleSkip}
+            >
+              Skip
+              <span className="absolute -top-1 -right-1 text-xs bg-yellow-400 text-yellow-900 px-1 rounded">AD</span>
+            </button>
+          )}
           <button onClick={handleForward} aria-label="Forward">
             <ArrowRightCircleIcon
               size={50}
