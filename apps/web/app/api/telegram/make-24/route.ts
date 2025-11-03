@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
           [
             {
               text: '🎮 Play Make 24',
-              web_app: { url: process.env.NEXT_PUBLIC_MINIAPP_URL }
+              web_app: { url: process.env.NEXT_PUBLIC_MINIAPP_URL! }
             }
           ]
         ]
