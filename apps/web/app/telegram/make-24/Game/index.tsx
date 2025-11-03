@@ -176,7 +176,8 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
   const handleShare = async () => {
     const puzzleIndex = game?.id ?? getCurrentPuzzleIndex();
     const encodedIndex = encodePuzzleIndex(puzzleIndex);
-    const shareUrl = `https://t.me/PlayMake24Bot/Make24?startapp=${encodedIndex}`;
+    const baseUrl = process.env.NEXT_PUBLIC_SHARE_BASE_URL || 'https://t.me/PlayMake24Bot/Make24';
+    const shareUrl = `${baseUrl}?startapp=${encodedIndex}`;
 
     // Copy link to clipboard - most reliable method in Telegram Mini Apps
     // Users can then paste it in any Telegram message
