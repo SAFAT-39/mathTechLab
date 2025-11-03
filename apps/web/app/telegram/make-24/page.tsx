@@ -63,7 +63,7 @@ function Make24GameContent() {
               <h2 className="text-xl font-bold text-white">How to Play</h2>
               <button
                 onClick={() => setShowHelp(false)}
-                className="text-gray-400 hover:text-white"
+                className="text-gray-400 hover:text-white text-3xl font-bold leading-none"
               >
                 ×
               </button>
