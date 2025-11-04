@@ -221,13 +221,7 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
     <div className="flex flex-col justify-center items-center border rounded-lg  bg-gray-200" ref={gameRef}>
       <div className="w-full bg-blue-500 px-2 py-2 flex items-center justify-between rounded-t-lg relative">
         <p className="text-lg font-semibold text-white">Make 24 Using (+ − × ÷)</p>
-        <div className="flex items-center gap-2 relative">
-          {/* Toast notification for copied link - positioned above buttons */}
-          {showCopiedMessage && (
-            <div className="absolute bottom-full right-0 mb-2 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 animate-[fadeIn_0.3s_ease-in-out] whitespace-nowrap">
-              Link copied!
-            </div>
-          )}
+        <div className="flex items-center gap-2">
           <button
             className="bg-blue-600 hover:bg-blue-700 active:bg-blue-700 p-1.5 text-white rounded flex items-center justify-center"
             onClick={handleDownload}
@@ -235,13 +229,21 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
           >
             <Download size={18} />
           </button>
-          <button
-            className="bg-blue-600 hover:bg-blue-700 active:bg-blue-700 px-3 py-1.5 text-sm text-white font-bold rounded flex items-center justify-center gap-1.5"
-            onClick={handleShare}
-          >
-            <Share2 size={16} />
-            Share
-          </button>
+          <div className="relative">
+            {/* Toast notification for copied link - positioned above Share button */}
+            {showCopiedMessage && (
+              <div className="absolute bottom-full right-0 mb-2 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 animate-[fadeIn_0.3s_ease-in-out] whitespace-nowrap pointer-events-none">
+                Link copied!
+              </div>
+            )}
+            <button
+              className="bg-blue-600 hover:bg-blue-700 active:bg-blue-700 px-3 py-1.5 text-sm text-white font-bold rounded flex items-center justify-center gap-1.5"
+              onClick={handleShare}
+            >
+              <Share2 size={16} />
+              Share
+            </button>
+          </div>
         </div>
       </div>
       <div className="flex flex-col justify-center  items-center gap-2 w-[340px] px-2 py-2">
