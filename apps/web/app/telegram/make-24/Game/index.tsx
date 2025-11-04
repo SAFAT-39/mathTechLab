@@ -200,7 +200,7 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
   return (
     <div className="flex flex-col justify-center items-center border rounded-lg  bg-gray-200">
       <button
-        className="w-full bg-blue-600 hover:bg-blue-500 active:bg-blue-500 py-2 text-center text-lg text-gray-100 font-bold rounded flex items-center justify-center gap-2"
+        className="w-full bg-blue-600 hover:bg-blue-500 active:bg-blue-500 py-2 text-center text-lg text-gray-100 font-bold rounded-t-lg flex items-center justify-center gap-2"
         onClick={handleShare}
       >
         <Share2 size={20} />
