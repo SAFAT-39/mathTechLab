@@ -348,7 +348,7 @@ const DragAndDropStep: React.FC<DragAndDropStepProps> = ({
               </p>
               <motion.button
                 onClick={initializeGame}
-                className="mt-6 px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-lg font-bold rounded-full shadow-lg flex items-center mx-auto"
+                className="mt-6 px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-lg font-bold rounded-full shadow-lg flex items-center mx-auto cursor-pointer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
