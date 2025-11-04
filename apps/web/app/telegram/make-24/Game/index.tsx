@@ -203,7 +203,7 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
       const dataUrl = await toJpeg(gameRef.current, {
         backgroundColor: "#e5e7eb",
         cacheBust: true,
-        pixelRatio: 1,
+        pixelRatio: 2,
       });
       const link = document.createElement("a");
       link.href = dataUrl;
