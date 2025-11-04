@@ -1,14 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { generateGame } from "./utils";
 import NumberBox from "./NumberBox";
-import { ArrowLeftCircleIcon, ArrowRightCircleIcon, Share2 } from "lucide-react";
+import { ArrowLeftCircleIcon, ArrowRightCircleIcon, Share2, Download } from "lucide-react";
 import Fraction from "./Fraction";
 import { useTimer } from "./useTimer";
 import useGameGenerator from "./useGameGenerator";
 import SolutionDialog from "./SolutionDialog";
 import confetti from "canvas-confetti";
+import { toJpeg } from "html-to-image";
+
 
 export const infinity = 999999999999999;
 
@@ -25,6 +27,7 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
   const [numbers, setNumbers] = useState(generateGame());
   const [boardStates, setBoardStates] = useState<BoardState[]>([]);
   const [curStateIndex, setCurStateIndex] = useState(-1);
+  const gameRef = useRef<HTMLDivElement>(null);
 
   const operators = ["+", "-", "×", "÷"];
   const [selectedOperator, setSelectedOperator] = useState("");
@@ -194,21 +197,53 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
     }
   };
 
+  const handleDownload = async () => {
+    if (!gameRef.current) return;
+    try {
+      const dataUrl = await toJpeg(gameRef.current, {
+        backgroundColor: "#e5e7eb",
+        cacheBust: true,
+        pixelRatio: 1,
+      });
+      const link = document.createElement("a");
+      link.href = dataUrl;
+      link.download = `make24-${Date.now()}.jpg`;
+      link.click();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const arrowActive = "#05df72";
   const arrowDisabled = "black";
 
   return (
-    <div className="flex flex-col justify-center items-center border rounded-lg  bg-gray-200">
-      <button
-        className="w-full bg-blue-600 hover:bg-blue-500 active:bg-blue-500 py-2 text-center text-lg text-gray-100 font-bold rounded-t-lg flex items-center justify-center gap-2"
-        onClick={handleShare}
-      >
-        <Share2 size={20} />
-        Share Puzzle
-      </button>
-      {showCopiedMessage && (
-        <p className="text-green-600 font-bold text-sm animate-pulse">Link copied!</p>
-      )}
+    <div className="flex flex-col justify-center items-center border rounded-lg  bg-gray-200" ref={gameRef}>
+      <div className="w-full bg-blue-500 px-2 py-2 flex items-center justify-between rounded-t-lg relative">
+        <p className="text-lg font-semibold text-white">Make 24 Using (+ − × ÷)</p>
+        <div className="flex items-center gap-2 relative">
+          {/* Toast notification for copied link - positioned above buttons */}
+          {showCopiedMessage && (
+            <div className="absolute bottom-full right-0 mb-2 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 animate-[fadeIn_0.3s_ease-in-out] whitespace-nowrap">
+              Link copied!
+            </div>
+          )}
+          <button
+            className="bg-blue-600 hover:bg-blue-700 active:bg-blue-700 p-1.5 text-white rounded flex items-center justify-center"
+            onClick={handleDownload}
+            aria-label="Download screenshot"
+          >
+            <Download size={18} />
+          </button>
+          <button
+            className="bg-blue-600 hover:bg-blue-700 active:bg-blue-700 px-3 py-1.5 text-sm text-white font-bold rounded flex items-center justify-center gap-1.5"
+            onClick={handleShare}
+          >
+            <Share2 size={16} />
+            Share
+          </button>
+        </div>
+      </div>
       <div className="flex flex-col justify-center  items-center gap-2 w-[340px] px-2 py-2">
 
         <div className="flex w-full justify-between border-b pb-1 mb-1">
