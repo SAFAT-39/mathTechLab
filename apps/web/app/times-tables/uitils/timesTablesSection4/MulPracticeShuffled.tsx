@@ -1,7 +1,9 @@
 "use client";
 
+import { RefreshCw } from "lucide-react";
 import type React from "react";
-import { useState, useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
+import ConfettiExplosion from "react-confetti-explosion";
 
 interface MulPracticeProps {
   timesTable?: number;
@@ -10,12 +12,12 @@ interface MulPracticeProps {
 }
 
 const shuffleArray = (array: number[]) => {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
+  const a = [...array];
+  for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    [a[i], a[j]] = [a[j], a[i]];
   }
-  return shuffled;
+  return a;
 };
 
 const MulPracticeShuffled: React.FC<MulPracticeProps> = ({
@@ -23,182 +25,177 @@ const MulPracticeShuffled: React.FC<MulPracticeProps> = ({
   bgGradient = "from-purple-600 to-indigo-600",
   buttonGradient = "from-indigo-600 to-purple-600",
 }) => {
+  const [problems, setProblems] = useState<number[]>([]);
+  useEffect(
+    () => setProblems(shuffleArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])),
+    []
+  );
+
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [isCorrect, setIsCorrect] = useState<Record<number, boolean>>({});
-  const [showResults, setShowResults] = useState(false);
-  const [allCorrect, setAllCorrect] = useState(false);
-  const [showAlert, setShowAlert] = useState(false);
-  const [alertMessage, setAlertMessage] = useState("");
-  const [shuffledProblems, setShuffledProblems] = useState<number[]>([]);
+  const [popped, setPopped] = useState<Record<number, boolean>>({});
+  const [explodeFor, setExplodeFor] = useState<Record<number, boolean>>({});
 
-  useEffect(() => {
-    setShuffledProblems(shuffleArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]));
-  }, []);
+  const allFilled = useMemo(
+    () =>
+      problems.length > 0 &&
+      problems.every((p) => answers[p] !== undefined && answers[p] !== ""),
+    [answers, problems]
+  );
 
   const handleChange = (problem: number, value: string) => {
     if (value !== "" && !/^\d+$/.test(value)) return;
     setAnswers((prev) => ({ ...prev, [problem]: value }));
 
-    if (showResults) {
-      setIsCorrect((prev) => ({ ...prev, [problem]: false }));
-      setShowResults(false);
-      setAllCorrect(false);
-      setShowAlert(false);
-    }
-  };
-
-  const checkAnswers = (e: React.FormEvent) => {
-    e.preventDefault();
-    const unanswered = shuffledProblems.filter((problem) => !answers[problem]);
-
-    if (unanswered.length > 0) {
-      setAlertMessage(
-        `Please fill in all answers. You missed ${unanswered.length} question${unanswered.length > 1 ? "s" : ""}.`
-      );
-      setShowAlert(true);
+    if (value === "") {
+      setIsCorrect((prev) => {
+        const next = { ...prev };
+        delete next[problem];
+        return next;
+      });
+      setExplodeFor((prev) => ({ ...prev, [problem]: false }));
       return;
     }
 
-    const results: Record<number, boolean> = {};
-    let correct = true;
+    const numeric = Number.parseInt(value, 10);
+    const correctNow = numeric === problem * timesTable;
+    setIsCorrect((prev) => ({ ...prev, [problem]: correctNow }));
 
-    shuffledProblems.forEach((problem) => {
-      const userAnswer = Number.parseInt(answers[problem]);
-      const correctAnswer = problem * timesTable;
-      results[problem] = userAnswer === correctAnswer;
-      if (userAnswer !== correctAnswer) correct = false;
-    });
-
-    setIsCorrect(results);
-    setShowResults(true);
-    setAllCorrect(correct);
+    if (correctNow) {
+      setPopped((prev) => {
+        const already = !!prev[problem];
+        if (!already) {
+          setExplodeFor((p) => ({ ...p, [problem]: true }));
+          return { ...prev, [problem]: true };
+        }
+        return prev;
+      });
+    } else {
+      setPopped((prev) => {
+        if (prev[problem]) {
+          const next = { ...prev };
+          delete next[problem];
+          return next;
+        }
+        return prev;
+      });
+    }
   };
 
   const resetPractice = () => {
     setAnswers({});
     setIsCorrect({});
-    setShowResults(false);
-    setAllCorrect(false);
-    setShowAlert(false);
-    setShuffledProblems(shuffleArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]));
+    setExplodeFor({});
+    setPopped({});
+    setProblems(shuffleArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]));
   };
 
-const renderProblem = (problem: number) => (
-  <div key={problem} className="flex items-center gap-x-3.5 mb-2">
-    <div className="w-28 lg:w-32 text-right pr-2">
-      <span
-        className={`font-mono text-3xl lg:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r ${bgGradient} whitespace-nowrap`}
-      >
-        {timesTable} × {problem}
-      </span>
-    </div>
+  const renderProblem = (problem: number) => {
+    const value = answers[problem] || "";
+    const correct = isCorrect[problem] === true;
+    const hasValue = value !== "";
 
-    <span className="text-gray-500 text-3xl px-1 font-mono">=</span>
+    const borderClass = correct
+      ? "border-emerald-400 bg-emerald-50 ring-2 ring-emerald-200"
+      : hasValue
+        ? "border-rose-400 bg-rose-50 ring-2 ring-rose-200"
+        : "border-amber-400 bg-amber-50 ring-2 ring-amber-200";
 
-    <div className="relative">
-      <input
-        type="text"
-        value={answers[problem] || ""}
-        onChange={(e) => handleChange(problem, e.target.value)}
-        className={`w-16 h-12 text-center text-3xl font-mono font-semibold rounded-lg border-2 shadow-sm outline-none transition-all ${
-          showResults
-            ? isCorrect[problem]
-              ? "border-emerald-400 bg-emerald-50 ring-2 ring-emerald-200"
-              : answers[problem]
-                ? "border-rose-400 bg-rose-50 ring-2 ring-rose-200"
-                : "border-amber-400 bg-amber-50 ring-2 ring-amber-200"
-            : "border-indigo-200 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
-        }`}
-        placeholder="?"
-        maxLength={3}
-      />
-
-      {showResults && (
-        <div className="absolute -right-7 top-1/2 transform -translate-y-1/2">
-          {isCorrect[problem] ? (
-            <span className="text-emerald-500 text-2xl">✓</span>
-          ) : answers[problem] ? (
-            <span className="text-rose-500 text-xl font-medium">✗</span>
-          ) : (
-            <span className="text-amber-500 text-xl font-medium">?</span>
-          )}
-        </div>
-      )}
-    </div>
-  </div>
-);
-
-return (
-  <>
-    <div className="mt-10 lg:mt-[60px]">
-      <h2 className="text-lg md:text-3xl font-bold mb-1 text-gray-800">
-        {timesTable} Times Table Practice (Shuffled)
-      </h2>
-
-      <p className="text-gray-600 font-medium lg:w-[800px] md:w-[700px]">
-        Strengthen your multiplication skills with this interactive{" "}
-        <b className="text-purple-700">{timesTable} Times Table Practice</b>{" "}
-        activity. Solve each equation, type your answers, and then click{" "}
-        <b className="text-zinc-800">Check Answers</b> to see your score
-        instantly. This shuffled times table quiz helps students build speed,
-        accuracy, and confidence in math through fun online practice.
-      </p>
-    </div>
-
-    <div className="flex flex-col items-center w-full mx-auto p-6 rounded-xl border border-gray-300 mt-7 shadow-lg shadow-blue-100 ">
-      <form onSubmit={checkAnswers}>
-        <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-20 gap-x-8 gap-y-2">
-          {shuffledProblems.map(renderProblem)}
-        </div>
-
-        {showResults && (
-          <div
-            className={`mt-8 p-4 rounded-lg text-center ${
-              allCorrect
-                ? "bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200"
-                : "bg-gradient-to-r from-amber-50 to-yellow-50 border border-amber-200"
-            }`}
+    return (
+      <div key={problem} className="flex items-center gap-x-3.5 mb-2">
+        <div className="w-28 lg:w-32 text-right pr-2">
+          <span
+            className={`font-mono text-3xl lg:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r ${bgGradient} whitespace-nowrap`}
           >
-            <p
-              className={`font-medium text-lg ${allCorrect ? "text-emerald-800" : "text-amber-800"}`}
-            >
-              {allCorrect
-                ? "Amazing job! All answers are correct! 🎉"
-                : "Keep practicing! Some answers need correction. 💪"}
-            </p>
-          </div>
-        )}
+            {timesTable} × {problem}
+          </span>
+        </div>
 
-        <div className="mt-8 flex flex-col items-center">
-          <div className="flex flex-wrap gap-4 justify-right">
-            <button
-              type="submit"
-              className={`px-8 py-3 bg-gradient-to-r ${buttonGradient} text-white font-bold rounded-lg shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer`}
-            >
-              Check Answers
-            </button>
+        <span className="text-gray-500 text-3xl px-1 font-mono">=</span>
 
-            {showResults && (
-              <button
-                type="button"
-                onClick={resetPractice}
-                className="px-8 py-3 bg-white border-2 border-gray-300 text-gray-700 font-bold rounded-lg hover:bg-gray-50 transition-all cursor-pointer"
-              >
-                Try Again
-              </button>
+        <div className="relative">
+          <input
+            type="text"
+            value={value}
+            onChange={(e) => handleChange(problem, e.target.value)}
+            className={`w-16 h-12 text-center text-3xl font-mono font-semibold rounded-lg border-2 shadow-sm outline-none transition-all ${
+              hasValue
+                ? borderClass
+                : "border-indigo-200 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+            }`}
+            placeholder="?"
+            maxLength={3}
+          />
+
+          <div className="absolute -right-7 top-1/2 transform -translate-y-1/2">
+            {correct ? (
+              <span className="text-emerald-500 text-2xl">✓</span>
+            ) : hasValue ? (
+              <span className="text-rose-500 text-xl font-medium">✗</span>
+            ) : (
+              <span className="text-amber-500 text-xl font-medium">?</span>
             )}
           </div>
 
-          {showAlert && (
-            <div className="mt-4 bg-rose-100 border-l-4 border-rose-500 text-rose-700 p-3 rounded-md max-w-md">
-              <p className="font-medium">{alertMessage}</p>
+          {explodeFor[problem] && (
+            <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+              <ConfettiExplosion
+                force={0.8}
+                duration={2200}
+                particleCount={50}
+                width={280}
+                onComplete={() =>
+                  setExplodeFor((prev) => ({ ...prev, [problem]: false }))
+                }
+              />
             </div>
           )}
         </div>
-      </form>
-    </div>
-  </>
-);
+      </div>
+    );
+  };
+
+  return (
+    <>
+      <div className="mt-10 lg:mt-[60px]">
+        <h2 className="text-lg md:text-3xl font-bold mb-1 text-gray-800">
+          {timesTable} Times Table Practice (Shuffled)
+        </h2>
+
+        <p className="text-gray-600 font-medium lg:w-[800px] md:w-[700px]">
+          Strengthen your multiplication skills with this interactive{" "}
+          <b className="text-purple-700">{timesTable} Times Table Practice</b>{" "}
+          activity. Solve each equation and watch answers validate instantly.
+          When every field is filled, use{" "}
+          <b className="text-zinc-800">Try Again</b> to restart.
+        </p>
+      </div>
+
+      <div className="flex flex-col items-center w-full mx-auto p-6 rounded-xl border border-gray-300 mt-7 shadow-lg shadow-blue-100 ">
+        {/* No submit; live validation */}
+        <form onSubmit={(e) => e.preventDefault()}>
+          <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-20 gap-x-8 gap-y-2">
+            {problems.map(renderProblem)}
+          </div>
+
+          <div className="mt-8 flex flex-col items-center">
+            <div className="flex flex-wrap gap-4 justify-right">
+              {allFilled && (
+                <button
+                  type="button"
+                  onClick={resetPractice}
+                  className={`flex items-center px-8 py-3 bg-gradient-to-r ${buttonGradient} text-white font-bold rounded-lg shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer`}
+                >
+                  <RefreshCw className="h-5 w-5 mr-2 " />
+                  <span>Try Again</span>
+                </button>
+              )}
+            </div>
+          </div>
+        </form>
+      </div>
+    </>
+  );
 };
 
 export default MulPracticeShuffled;
