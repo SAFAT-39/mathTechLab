@@ -10,6 +10,7 @@ import useGameGenerator from "./useGameGenerator";
 import SolutionDialog from "./SolutionDialog";
 import confetti from "canvas-confetti";
 import { toJpeg } from "html-to-image";
+import GIF from "gif.js";
 
 
 export const infinity = 999999999999999;
@@ -38,12 +39,30 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
   const [openSolution, setOpenSolution] = useState<boolean>(false);
   const [showCopiedMessage, setShowCopiedMessage] = useState<boolean>(false);
   const [isPuzzleSolved, setIsPuzzleSolved] = useState<boolean>(false);
+  const [frameImages, setFrameImages] = useState<string[]>([]);
 
   const { time, reset: resetTimer } = useTimer();
   const { game, nextGame, getCurrentPuzzleIndex } = useGameGenerator(initialPuzzleId);
 
+  // Capture frame function
+  const captureFrame = async () => {
+    if (!gameRef.current) return;
+    try {
+      const dataUrl = await toJpeg(gameRef.current, {
+        backgroundColor: "#e5e7eb",
+        cacheBust: true,
+        pixelRatio: 2,
+      });
+      setFrameImages((prev) => [...prev, dataUrl]);
+    } catch (err) {
+      console.error("Error capturing frame:", err);
+    }
+  };
+
+
   useEffect(() => {
     if (!game) return;
+    setFrameImages([]);
     setBoardStates((prevStates) => {
       const newState: BoardState = {
         board: game.problem.map((num: number) => new Fraction(num)),
@@ -55,7 +74,10 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
     setSelectedOperator("");
     setIsPuzzleSolved(false);
     resetTimer();
+    const timeoutId = setTimeout(() => captureFrame(), 100);
+    return () => clearTimeout(timeoutId);
   }, [game]);
+
 
   const calculate = (num1: Fraction, op: string, num2: Fraction) => {
     switch (op) {
@@ -127,6 +149,7 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
       ]);
       setCurStateIndex((value) => value + 1);
       setSelectedOperator("");
+      captureFrame();
     } else {
       setBoardStates((prevStates) => {
         const newStates = [...prevStates];
@@ -134,22 +157,28 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
         return newStates;
       });
       setSelectedOperator("");
+      captureFrame();
     }
   };
 
   const handleOperatorClick = (op: string) => {
-    if (boardStates[curStateIndex].selectedIndex != -1) setSelectedOperator(op);
+    if (boardStates[curStateIndex].selectedIndex != -1) {
+      setSelectedOperator(op);
+      captureFrame();
+    }
   };
 
   const handleBack = () => {
     if (curStateIndex > 0) {
       setCurStateIndex((prev) => prev - 1);
+      captureFrame();
     }
   };
 
   const handleForward = () => {
     if (curStateIndex + 1 < boardStates.length) {
       setCurStateIndex((prev) => prev + 1);
+      captureFrame();
     }
   };
 
@@ -198,19 +227,76 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
   };
 
   const handleDownload = async () => {
-    if (!gameRef.current) return;
+    if (frameImages.length === 0) {
+      // Fallback to single image if no frames captured
+      if (!gameRef.current) return;
+      try {
+        const dataUrl = await toJpeg(gameRef.current, {
+          backgroundColor: "#e5e7eb",
+          cacheBust: true,
+          pixelRatio: 2,
+        });
+        const link = document.createElement("a");
+        link.href = dataUrl;
+        link.download = `make24-${Date.now()}.jpg`;
+        link.click();
+      } catch (err) {
+        console.error(err);
+      }
+      return;
+    }
+
     try {
-      const dataUrl = await toJpeg(gameRef.current, {
-        backgroundColor: "#e5e7eb",
-        cacheBust: true,
-        pixelRatio: 2,
+      // Load first image to get dimensions
+      const loadImage = (src: string): Promise<HTMLImageElement> => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.crossOrigin = "anonymous";
+          img.onload = () => resolve(img);
+          img.onerror = reject;
+          img.src = src;
+        });
+      };
+
+      if (frameImages.length === 0) return;
+
+      // Get dimensions from first frame
+      const firstImg = await loadImage(frameImages[0]);
+      const width = firstImg.width;
+      const height = firstImg.height;
+
+      // Create GIF from frames
+      const gif = new GIF({
+        workers: 2,
+        quality: 10,
+        width: width,
+        height: height,
+        workerScript: "/gif.worker.js",
       });
-      const link = document.createElement("a");
-      link.href = dataUrl;
-      link.download = `make24-${Date.now()}.jpg`;
-      link.click();
+
+      // Add frames to GIF
+      for (const frameDataUrl of frameImages) {
+        try {
+          const img = await loadImage(frameDataUrl);
+          gif.addFrame(img, { delay: 1500 }); // 1500ms delay between frames
+        } catch (err) {
+          console.error("Error loading frame image:", err);
+        }
+      }
+
+      // Render GIF
+      gif.on("finished", (blob: Blob) => {
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `make24-${Date.now()}.gif`;
+        link.click();
+        URL.revokeObjectURL(url);
+      });
+
+      gif.render();
     } catch (err) {
-      console.error(err);
+      console.error("Error creating GIF:", err);
     }
   };
 
