@@ -223,11 +223,11 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
         <p className="text-lg font-semibold text-white">Make 24 Using (+ − × ÷)</p>
         <div className="flex items-center gap-2">
           <button
-            className="bg-blue-600 hover:bg-blue-700 active:bg-blue-700 p-1.5 text-white rounded flex items-center justify-center"
+            className="bg-blue-500 p-1.5 text-white rounded flex items-center justify-center"
             onClick={handleDownload}
             aria-label="Download screenshot"
           >
-            <Download size={18} />
+            <Download size={18} className="text-blue-500" />
           </button>
           <div className="relative">
             {/* Toast notification for copied link - positioned above Share button */}
