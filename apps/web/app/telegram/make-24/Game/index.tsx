@@ -40,22 +40,56 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
   const [showCopiedMessage, setShowCopiedMessage] = useState<boolean>(false);
   const [isPuzzleSolved, setIsPuzzleSolved] = useState<boolean>(false);
   const [frameImages, setFrameImages] = useState<string[]>([]);
+  const idleCallbackRef = useRef<number | null>(null);
 
   const { time, reset: resetTimer } = useTimer();
   const { game, nextGame, getCurrentPuzzleIndex } = useGameGenerator(initialPuzzleId);
 
-  // Capture frame function
-  const captureFrame = async () => {
-    if (!gameRef.current) return;
-    try {
-      const dataUrl = await toJpeg(gameRef.current, {
-        backgroundColor: "#e5e7eb",
-        cacheBust: true,
-        pixelRatio: 2,
-      });
-      setFrameImages((prev) => [...prev, dataUrl]);
-    } catch (err) {
-      console.error("Error capturing frame:", err);
+  // Capture frame function - deferred to avoid blocking UI
+  // Note: html-to-image cannot run in Web Workers (no DOM access)
+  // Instead, we use requestIdleCallback to run when browser is idle
+  const captureFrame = () => {
+    if (!gameRef.current || typeof window === "undefined") return;
+
+    // Cancel any pending capture
+    if (idleCallbackRef.current !== null && typeof cancelIdleCallback !== "undefined") {
+      cancelIdleCallback(idleCallbackRef.current);
+      idleCallbackRef.current = null;
+    }
+
+    // Use requestIdleCallback to run capture when browser is idle
+    if (typeof requestIdleCallback !== "undefined") {
+      idleCallbackRef.current = requestIdleCallback(
+        async () => {
+          idleCallbackRef.current = null;
+          try {
+            const dataUrl = await toJpeg(gameRef.current!, {
+              backgroundColor: "#e5e7eb",
+              cacheBust: true,
+              pixelRatio: 2, // Reduced for faster capture
+              quality: 0.95,
+            });
+            setFrameImages((prev) => [...prev, dataUrl]);
+          } catch (err) {
+            console.error("Error capturing frame:", err);
+          }
+        },
+        { timeout: 2000 } // Fallback timeout
+      );
+    } else {
+      // Fallback for browsers without requestIdleCallback
+      setTimeout(async () => {
+        try {
+          const dataUrl = await toJpeg(gameRef.current!, {
+            backgroundColor: "#e5e7eb",
+            cacheBust: true,
+            pixelRatio: 1,
+          });
+          setFrameImages((prev) => [...prev, dataUrl]);
+        } catch (err) {
+          console.error("Error capturing frame:", err);
+        }
+      }, 0);
     }
   };
 
@@ -75,7 +109,14 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
     setIsPuzzleSolved(false);
     resetTimer();
     const timeoutId = setTimeout(() => captureFrame(), 100);
-    return () => clearTimeout(timeoutId);
+    return () => {
+      clearTimeout(timeoutId);
+      // Cancel any pending idle callbacks
+      if (idleCallbackRef.current !== null && typeof cancelIdleCallback !== "undefined") {
+        cancelIdleCallback(idleCallbackRef.current);
+        idleCallbackRef.current = null;
+      }
+    };
   }, [game]);
 
 
@@ -227,15 +268,9 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
   };
 
   const handleDownload = async () => {
-    if (frameImages.length === 0) {
-      // Fallback to single image if no frames captured
-      if (!gameRef.current) return;
+    if (frameImages.length === 1) {
       try {
-        const dataUrl = await toJpeg(gameRef.current, {
-          backgroundColor: "#e5e7eb",
-          cacheBust: true,
-          pixelRatio: 2,
-        });
+        const dataUrl = frameImages[0];
         const link = document.createElement("a");
         link.href = dataUrl;
         link.download = `make24-${Date.now()}.jpg`;
@@ -268,7 +303,7 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
       // Create GIF from frames
       const gif = new GIF({
         workers: 2,
-        quality: 10,
+        quality: 100,
         width: width,
         height: height,
         workerScript: "/gif.worker.js",
