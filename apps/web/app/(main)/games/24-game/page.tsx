@@ -1,7 +1,12 @@
-import GameWraper from "./GameWraper";
+import Game from "./Game";
 import RelatedGames from "../../components/RelatedGames";
 
-const Page = () => {
+interface PageProps {
+  searchParams: Promise<{ id?: string }>;
+}
+
+const Page = async ({ searchParams }: PageProps) => {
+  const params = await searchParams;
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -93,7 +98,7 @@ const Page = () => {
         </h2>
       </div>
       <div className="flex flex-col justify-center items-center px-2 py-5 pb-16">
-        <GameWraper />
+        <Game initialPuzzleId={params.id ? parseInt(params.id) : undefined} />
       </div>
       <section className="max-w-3xl mx-auto p-6 space-y-6 text-gray-800">
         {/* How to Play Section */}
