@@ -87,6 +87,24 @@ const Page = async ({ searchParams }: PageProps) => {
       image: "/images/math-sprint-thumbnail.png",
     },
   ];
+
+  // Decoding constants - must match encoding constants
+  const DECODE_MULTIPLIER = 47382;
+  const DECODE_SUBTRACTION = 91627;
+
+  const decodePuzzleIndex = (encoded: string): number | undefined => {
+    const encodedNum = parseInt(encoded, 10);
+    if (isNaN(encodedNum)) return undefined;
+    // Decode: (encoded - DECODE_SUBTRACTION) / DECODE_MULTIPLIER
+    const decoded = (encodedNum - DECODE_SUBTRACTION) / DECODE_MULTIPLIER;
+    // Check if the decoded value is a valid integer
+    if (Number.isInteger(decoded) && decoded >= 0) {
+      return decoded;
+    }
+    return undefined;
+  };
+
+  const puzzleId = params.id ? decodePuzzleIndex(params.id) : undefined;
   return (
     <>
       <div className="flex flex-col justify-center items-center gap-2">
@@ -98,7 +116,7 @@ const Page = async ({ searchParams }: PageProps) => {
         </h2>
       </div>
       <div className="flex flex-col justify-center items-center px-2 py-5 pb-16">
-        <Game initialPuzzleId={params.id ? parseInt(params.id) : undefined} />
+        <Game initialPuzzleId={puzzleId} />
       </div>
       <section className="max-w-3xl mx-auto p-6 space-y-6 text-gray-800">
         {/* How to Play Section */}
