@@ -1,7 +1,30 @@
+'use client'
 import Game from "./Game";
 import RelatedGames from "../../components/RelatedGames";
+import { useSearchParams } from "next/navigation";
 
 const Page = () => {
+  const searchParams = useSearchParams();
+  const encodedPuzzleId = searchParams.get('id');
+
+  // Decoding constants - must match encoding constants
+  const DECODE_MULTIPLIER = 47382;
+  const DECODE_SUBTRACTION = 91627;
+
+  const decodePuzzleIndex = (encoded: string): number | undefined => {
+    const encodedNum = parseInt(encoded, 10);
+    if (isNaN(encodedNum)) return undefined;
+    // Decode: (encoded - DECODE_SUBTRACTION) / DECODE_MULTIPLIER
+    const decoded = (encodedNum - DECODE_SUBTRACTION) / DECODE_MULTIPLIER;
+    // Check if the decoded value is a valid integer
+    if (Number.isInteger(decoded) && decoded >= 0) {
+      return decoded;
+    }
+    return undefined;
+  };
+
+  const puzzleId = encodedPuzzleId ? decodePuzzleIndex(encodedPuzzleId) : undefined;
+
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -93,7 +116,7 @@ const Page = () => {
         </h2>
       </div>
       <div className="flex flex-col justify-center items-center px-2 py-5 pb-16">
-        <Game />
+        <Game initialPuzzleId={puzzleId} />
       </div>
       <section className="max-w-3xl mx-auto p-6 space-y-6 text-gray-800">
         {/* How to Play Section */}

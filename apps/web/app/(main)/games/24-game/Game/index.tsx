@@ -1,13 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { generateGame } from "./utils";
 import NumberBox from "./NumberBox";
-import { ArrowLeftCircleIcon, ArrowRightCircleIcon } from "lucide-react";
+import { ArrowLeftCircleIcon, ArrowRightCircleIcon, Share2, Download } from "lucide-react";
 import Fraction from "./Fraction";
 import { useTimer } from "./useTimer";
 import useGameGenerator from "./useGameGenerator";
 import SolutionDialog from "./SolutionDialog";
+import confetti from "canvas-confetti";
+import { toJpeg } from "html-to-image";
+import GIF from "gif.js";
+
 
 export const infinity = 999999999999999;
 
@@ -16,10 +20,15 @@ interface BoardState {
   selectedIndex: number;
 }
 
-const Math24Game = () => {
+interface Math24GameProps {
+  initialPuzzleId?: number;
+}
+
+const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
   const [numbers, setNumbers] = useState(generateGame());
   const [boardStates, setBoardStates] = useState<BoardState[]>([]);
   const [curStateIndex, setCurStateIndex] = useState(-1);
+  const gameRef = useRef<HTMLDivElement>(null);
 
   const operators = ["+", "-", "×", "÷"];
   const [selectedOperator, setSelectedOperator] = useState("");
@@ -28,12 +37,66 @@ const Math24Game = () => {
   const [solved, setSolved] = useState(0);
 
   const [openSolution, setOpenSolution] = useState<boolean>(false);
+  const [showCopiedMessage, setShowCopiedMessage] = useState<boolean>(false);
+  const [isPuzzleSolved, setIsPuzzleSolved] = useState<boolean>(false);
+  const [frameImages, setFrameImages] = useState<string[]>([]);
+  const idleCallbackRef = useRef<number | null>(null);
 
   const { time, reset: resetTimer } = useTimer();
-  const { game, nextGame } = useGameGenerator();
+  const { game, nextGame, getCurrentPuzzleIndex } = useGameGenerator(initialPuzzleId);
+
+  // Capture frame function - deferred to avoid blocking UI
+  // Note: html-to-image cannot run in Web Workers (no DOM access)
+  // Instead, we use requestIdleCallback to run when browser is idle
+  const captureFrame = () => {
+    if (!gameRef.current || typeof window === "undefined") return;
+
+    // Cancel any pending capture
+    if (idleCallbackRef.current !== null && typeof cancelIdleCallback !== "undefined") {
+      cancelIdleCallback(idleCallbackRef.current);
+      idleCallbackRef.current = null;
+    }
+
+    // Use requestIdleCallback to run capture when browser is idle
+    if (typeof requestIdleCallback !== "undefined") {
+      idleCallbackRef.current = requestIdleCallback(
+        async () => {
+          idleCallbackRef.current = null;
+          try {
+            const dataUrl = await toJpeg(gameRef.current!, {
+              backgroundColor: "#e5e7eb",
+              cacheBust: true,
+              pixelRatio: 2, // Reduced for faster capture
+              quality: 0.95,
+            });
+            setFrameImages((prev) => [...prev, dataUrl]);
+          } catch (err) {
+            console.error("Error capturing frame:", err);
+          }
+        },
+        { timeout: 2000 } // Fallback timeout
+      );
+    } else {
+      // Fallback for browsers without requestIdleCallback
+      setTimeout(async () => {
+        try {
+          const dataUrl = await toJpeg(gameRef.current!, {
+            backgroundColor: "#e5e7eb",
+            cacheBust: true,
+            pixelRatio: 1,
+          });
+          setFrameImages((prev) => [...prev, dataUrl]);
+        } catch (err) {
+          console.error("Error capturing frame:", err);
+        }
+      }, 0);
+    }
+  };
+
 
   useEffect(() => {
     if (!game) return;
+    setFrameImages([]);
     setBoardStates((prevStates) => {
       const newState: BoardState = {
         board: game.problem.map((num: number) => new Fraction(num)),
@@ -43,8 +106,19 @@ const Math24Game = () => {
     });
     setCurStateIndex(0);
     setSelectedOperator("");
+    setIsPuzzleSolved(false);
     resetTimer();
+    const timeoutId = setTimeout(() => captureFrame(), 100);
+    return () => {
+      clearTimeout(timeoutId);
+      // Cancel any pending idle callbacks
+      if (idleCallbackRef.current !== null && typeof cancelIdleCallback !== "undefined") {
+        cancelIdleCallback(idleCallbackRef.current);
+        idleCallbackRef.current = null;
+      }
+    };
   }, [game]);
+
 
   const calculate = (num1: Fraction, op: string, num2: Fraction) => {
     switch (op) {
@@ -75,15 +149,20 @@ const Math24Game = () => {
         return true;
       } else return false;
     };
-    const nextLevel = () => {
-      setTimeout(() => {
-        nextGame();
-      }, 1000);
-    };
-    if (isGameComplete()) {
+    if (isGameComplete() && !isPuzzleSolved) {
       setSolved((prev) => prev + 1);
       setScore((prev) => prev + 24 * (game?.solutions.length || 1));
-      nextLevel();
+      setIsPuzzleSolved(true);
+
+      // Particle effect
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
+        gravity: 0.5,
+        decay: 0.9,
+        ticks: 200
+      });
     }
   }, [boardStates]);
 
@@ -111,6 +190,7 @@ const Math24Game = () => {
       ]);
       setCurStateIndex((value) => value + 1);
       setSelectedOperator("");
+      captureFrame();
     } else {
       setBoardStates((prevStates) => {
         const newStates = [...prevStates];
@@ -118,26 +198,38 @@ const Math24Game = () => {
         return newStates;
       });
       setSelectedOperator("");
+      captureFrame();
     }
   };
 
   const handleOperatorClick = (op: string) => {
-    if (boardStates[curStateIndex].selectedIndex != -1) setSelectedOperator(op);
+    if (boardStates[curStateIndex].selectedIndex != -1) {
+      setSelectedOperator(op);
+      captureFrame();
+    }
   };
 
   const handleBack = () => {
     if (curStateIndex > 0) {
       setCurStateIndex((prev) => prev - 1);
+      captureFrame();
     }
   };
 
   const handleForward = () => {
     if (curStateIndex + 1 < boardStates.length) {
       setCurStateIndex((prev) => prev + 1);
+      captureFrame();
     }
   };
 
+  const handleNext = () => {
+    // Only called when puzzle is solved - go to next puzzle
+    nextGame();
+  };
+
   const handleSkip = () => {
+    // Show solution dialog (ads may be shown before this)
     setOpenSolution(true);
   };
 
@@ -146,18 +238,137 @@ const Math24Game = () => {
     nextGame();
   };
 
-  const handleRestart = () => {
-    nextGame();
-    setScore(0);
-    setSolved(0);
+  // Encoding constants - two random numbers
+  const ENCODE_MULTIPLIER = 47382;
+  const ENCODE_ADDITION = 91627;
+
+  const encodePuzzleIndex = (index: number): number => {
+    return index * ENCODE_MULTIPLIER + ENCODE_ADDITION;
+  };
+
+  const handleShare = async () => {
+    const puzzleIndex = game?.id ?? getCurrentPuzzleIndex();
+    const encodedIndex = encodePuzzleIndex(puzzleIndex);
+    const baseUrl = process.env.NEXT_PUBLIC_HOST;
+    const shareUrl = `${baseUrl}/games/24-game/?id=${encodedIndex}`;
+
+    // Copy link to clipboard - most reliable method in Telegram Mini Apps
+    // Users can then paste it in any Telegram message
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      try {
+        await navigator.clipboard.writeText(shareUrl);
+        setShowCopiedMessage(true);
+        setTimeout(() => {
+          setShowCopiedMessage(false);
+        }, 2000);
+      } catch (error) {
+        // Clipboard failed, silently do nothing
+      }
+    }
+  };
+
+  const handleDownload = async () => {
+    if (frameImages.length === 1) {
+      try {
+        const dataUrl = frameImages[0];
+        const link = document.createElement("a");
+        link.href = dataUrl;
+        link.download = `make24-${Date.now()}.jpg`;
+        link.click();
+      } catch (err) {
+        console.error(err);
+      }
+      return;
+    }
+
+    try {
+      // Load first image to get dimensions
+      const loadImage = (src: string): Promise<HTMLImageElement> => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.crossOrigin = "anonymous";
+          img.onload = () => resolve(img);
+          img.onerror = reject;
+          img.src = src;
+        });
+      };
+
+      if (frameImages.length === 0) return;
+
+      // Get dimensions from first frame
+      const firstImg = await loadImage(frameImages[0]);
+      const width = firstImg.width;
+      const height = firstImg.height;
+
+      // Create GIF from frames
+      const gif = new GIF({
+        workers: 2,
+        quality: 100,
+        width: width,
+        height: height,
+        workerScript: "/gif.worker.js",
+      });
+
+      // Add frames to GIF
+      for (const frameDataUrl of frameImages) {
+        try {
+          const img = await loadImage(frameDataUrl);
+          gif.addFrame(img, { delay: 1500 }); // 1500ms delay between frames
+        } catch (err) {
+          console.error("Error loading frame image:", err);
+        }
+      }
+
+      // Render GIF
+      gif.on("finished", (blob: Blob) => {
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `make24-${Date.now()}.gif`;
+        link.click();
+        URL.revokeObjectURL(url);
+      });
+
+      gif.render();
+    } catch (err) {
+      console.error("Error creating GIF:", err);
+    }
   };
 
   const arrowActive = "#05df72";
   const arrowDisabled = "black";
 
   return (
-    <div className="flex flex-col justify-center items-center border rounded-lg  bg-gray-200">
+    <div className="flex flex-col justify-center items-center border rounded-lg  bg-gray-200" ref={gameRef}>
+      <div className="w-full bg-blue-500 px-2 py-2 flex items-center justify-between rounded-t-lg relative">
+        <p className="text-lg font-semibold text-white">Make 24 Using (+ − × ÷)</p>
+        <div className="flex items-center gap-2">
+          <button
+            className="bg-blue-500 p-1.5 text-white rounded flex items-center justify-center"
+            onClick={handleDownload}
+            aria-label="Download screenshot"
+          >
+            <Download size={18} className="text-blue-500" />
+          </button>
+          <div className="relative">
+            {/* Toast notification for copied link - positioned above Share button */}
+            {showCopiedMessage && (
+              <div className="absolute bottom-full right-0 mb-2 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 animate-[fadeIn_0.3s_ease-in-out] whitespace-nowrap pointer-events-none">
+                Link copied!
+              </div>
+            )}
+            <button
+              className="bg-blue-600 hover:bg-blue-700 active:bg-blue-700 px-3 py-1.5 text-sm text-white font-bold rounded flex items-center justify-center gap-1.5"
+              onClick={handleShare}
+            >
+              <Share2 size={16} />
+              Share
+            </button>
+          </div>
+        </div>
+      </div>
       <div className="flex flex-col justify-center  items-center gap-2 w-[340px] px-2 py-2">
+
         <div className="flex w-full justify-between border-b pb-1 mb-1">
           <p className="font-bold">Solved: {solved}</p>
           <p className="font-bold">Score: {score}</p>
@@ -182,11 +393,10 @@ const Math24Game = () => {
           {operators.map((op: string, index: number) => (
             <button
               key={index}
-              className={`border-2 border-green-600  h-[50px] w-[50px] flex items-center justify-center text-5xl text-green-600 font-bold leading-none ${
-                selectedOperator === op
-                  ? "text-green-800 border-6 border-green-800"
-                  : "hover:border-green-800 active:border-green-800"
-              }`}
+              className={`border-2 border-green-600  h-[50px] w-[50px] flex items-center justify-center text-5xl text-green-600 font-bold leading-none ${selectedOperator === op
+                ? "text-green-800 border-6 border-green-800"
+                : "hover:border-green-800 active:border-green-800"
+                }`}
               onClick={() => handleOperatorClick(op)}
             >
               {op}
@@ -200,12 +410,22 @@ const Math24Game = () => {
               color={curStateIndex > 0 ? arrowActive : arrowDisabled}
             />
           </button>
-          <button
-            className="border-2 border-red-500 hover:border-red-400 active:border-red-400 text-red-500 hover:text-red-400 active:text-red-400 px-3 rounded"
-            onClick={handleSkip}
-          >
-            Skip
-          </button>
+          {isPuzzleSolved ? (
+            <button
+              className="border-2 px-5 py-1.5 text-base font-bold rounded border-green-600 hover:border-green-500 active:border-green-500 text-green-600 hover:text-green-500 active:text-green-500"
+              onClick={handleNext}
+            >
+              Next
+            </button>
+          ) : (
+            <button
+              className="border-2 px-5 py-1.5 text-base font-bold rounded border-orange-500 hover:border-orange-400 active:border-orange-400 text-orange-600 hover:text-orange-500 active:text-orange-500 relative"
+              onClick={handleSkip}
+            >
+              Skip
+              {/* <span className="absolute -top-1 -right-1 text-xs bg-yellow-400 text-yellow-900 px-1 rounded">AD</span> */}
+            </button>
+          )}
           <button onClick={handleForward} aria-label="Forward">
             <ArrowRightCircleIcon
               size={50}
@@ -218,12 +438,6 @@ const Math24Game = () => {
           </button>
         </div>
       </div>
-      <button
-        className="w-full bg-green-600 hover:bg-green-500 active:bg-green-500 py-1 text-center text-2xl text-gray-100 font-bold rounded-b-lg"
-        onClick={handleRestart}
-      >
-        Restart
-      </button>
       <SolutionDialog
         isOpen={openSolution}
         onClose={handleSolutionClose}
