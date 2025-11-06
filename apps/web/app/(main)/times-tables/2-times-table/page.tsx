@@ -14,6 +14,15 @@ export default function TwoTimesTable() {
           tableNumber={2}
           titleGradient="bg-gradient-to-r from-blue-600 to-sky-600"
           cardGradient="bg-gradient-to-br from-sky-500 to-cyan-600"
+          firstparagraph={
+            <>
+              The <b>2 times table</b> introduces the concept of doubling,
+              helping learners recognize even numbers and patterns in counting.
+            </>
+          }
+          secondparaghrap={
+            "Mastering it strengthens arithmetic fluency and prepares children for more complex tables. It’s also a key step in developing mental math skills and understanding number relationships."
+          }
         />
       </div>
       <MulPracticeInSequence

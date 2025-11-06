@@ -33,14 +33,21 @@ const DescriptionFAQs = () => {
   return (
     <div className="space-y-[60px]">
       <TimesTableDescription
-        title="Why Practice the 5 Times Table on MathTechLab?"
-        description="This is the perfect place to practice the 5 Times Table. At MathTechLab, we provide an interactive and engaging way to master the 5 times table with visual learning, audio support, and hands-on activities. Unlike traditional rote memorization, our platform offers a multi-sensory approach that enhances understanding and retention."
+        title="Explore the 5 Times Table with Fun Online Quizzes"
+        description={
+          <>
+            The <b>5 Times Table </b>introduces patterns that help students
+            understand multiplication deeply. <b>MathTechLab</b> enhances this
+            with voice learning, animations, and real-time feedback.
+          </>
+        }
         points={[
-          "Interactive Learning – Our platform provides step-by-step guidance with audio playback to help users visualize, listen, and repeat equations.",
-          "Engaging Practice Methods – Users can practice in sequential and shuffled order to reinforce learning dynamically.",
-          "Drag-and-Drop Games – Improve problem-solving skills by matching colorful number tiles to their correct equations.",
-          "Instant Feedback – Get real-time hints and corrections to ensure a fun and frustration-free learning experience.",
-          "Downloadable Resources – Access and download our beautifully designed 5 Times Table chart for offline practice.",
+          "Pattern Recognition – Identify and memorize easy-to-follow number sequences.",
+          "Interactive Games – Practice multiplication through engaging drag-and-drop tasks.",
+          "Audio Support – Listen and repeat for better retention and pronunciation.",
+          "Instant Results – View your correct and incorrect answers immediately.",
+          "Cross-Device Compatible – Access the 5 Times Table practice tool on mobile, tablet, or computer.",
+          "Downloadable Resources – Download the 5 Times Table chart for continued learning.",
         ]}
         imageUrl={timestable}
         imagealt="5 times table"

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import Link from "next/link";
 import TimesTableSteps from "./TimesTableSteps";
 import TimesTableWhy from "./TimesTableWhy";
@@ -8,12 +8,16 @@ interface TimesTableProps {
   tableNumber: number;
   titleGradient: string;
   cardGradient: string;
+  firstparagraph: string | ReactNode;
+  secondparaghrap: string | ReactNode;
 }
 
 const TimesTableSection: React.FC<TimesTableProps> = ({
   tableNumber,
   titleGradient,
   cardGradient,
+  firstparagraph,
+  secondparaghrap,
 }) => {
   const [currentFact, setCurrentFact] = useState(1);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -84,7 +88,11 @@ const TimesTableSection: React.FC<TimesTableProps> = ({
         {/* Left side - Steps & Explanation */}
         <div className="lg:col-span-3 space-y-6">
           <TimesTableSteps />
-          <TimesTableWhy tableNumber={tableNumber} />
+          <TimesTableWhy
+            tableNumber={tableNumber}
+            firstparagraph={firstparagraph}
+            secondparaghrap={secondparaghrap}
+          />
         </div>
 
         {/* Right side - Times Table Card */}
@@ -128,8 +136,8 @@ const TimesTableSection: React.FC<TimesTableProps> = ({
               </div>
               <div className="bg-white/10 p-4">
                 <p className="text-white/90 text-sm">
-                  Click the play button to hear each fact read aloud. Practice
-                  saying them yourself to build memory.
+                  Click the <b>play</b> button to hear each fact read aloud.
+                  Practice saying them yourself to build memory.
                 </p>
               </div>
             </div>

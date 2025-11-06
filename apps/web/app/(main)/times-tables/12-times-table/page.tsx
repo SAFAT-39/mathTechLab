@@ -14,6 +14,20 @@ export default function ThreeTimesTable() {
           tableNumber={12}
           titleGradient="bg-gradient-to-r from-emerald-600 to-green-600"
           cardGradient="bg-gradient-to-br from-green-500 to-lime-600"
+          firstparagraph={
+            <>
+              The <b>12 times table</b> is a key milestone in mastering all
+              basic multiplications.
+            </>
+          }
+          secondparaghrap={
+            <>
+              It combines multiple skills from earlier tables and is essential
+              for advanced math and daily applications like measuring, time, and
+              fractions. Learning it boosts overall math fluency and confidence
+              in problem-solving.
+            </>
+          }
         />
       </div>
       <MulPracticeInSequence

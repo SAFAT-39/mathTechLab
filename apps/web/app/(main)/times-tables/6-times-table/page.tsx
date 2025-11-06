@@ -14,6 +14,20 @@ export default function ThreeTimesTable() {
           tableNumber={6}
           titleGradient="bg-gradient-to-r from-orange-600 to-red-600"
           cardGradient="bg-gradient-to-br from-red-500 to-orange-600"
+          firstparagraph={
+            <>
+              The <b>6 times table</b> strengthens both multiplication and
+              division understanding.
+            </>
+          }
+          secondparaghrap={
+            <>
+              It encourages children to link smaller tables (like 2 and 3) for
+              faster recall. Learning this table improves mental calculation
+              speed and prepares students for solving multi-step math problems
+              with ease.
+            </>
+          }
         />
       </div>
       <MulPracticeInSequence

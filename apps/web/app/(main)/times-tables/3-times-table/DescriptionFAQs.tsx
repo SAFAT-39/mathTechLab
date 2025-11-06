@@ -33,14 +33,21 @@ const DescriptionFAQs = () => {
   return (
     <div className="space-y-[60px]">
       <TimesTableDescription
-        title="Why Practice the 3 Times Table on MathTechLab?"
-        description="This is the perfect place to practice the 3 Times Table. At MathTechLab, we provide an interactive and engaging way to master the 3 times table with visual learning, audio support, and hands-on activities. Unlike traditional rote memorization, our platform offers a multi-sensory approach that enhances understanding and retention."
+        title="Learn the 3 Times Table in a Fun and Interactive Way"
+        description={
+          <>
+            The <b>3 Times Table</b> is an important step in developing
+            arithmetic fluency. <b>MathTechLab</b> makes it enjoyable with
+            colorful visuals, smart quizzes, and voice-based learning aids.
+          </>
+        }
         points={[
-          "Interactive Learning – Our platform provides step-by-step guidance with audio playback to help users visualize, listen, and repeat equations.",
-          "Engaging Practice Methods – Users can practice in sequential and shuffled order to reinforce learning dynamically.",
-          "Drag-and-Drop Games – Improve problem-solving skills by matching colorful number tiles to their correct equations.",
-          "Instant Feedback – Get real-time hints and corrections to ensure a fun and frustration-free learning experience.",
-          "Downloadable Resources – Access and download our beautifully designed 3 Times Table chart for offline practice.",
+          "Step-by-Step Guidance – Each question includes hints for better comprehension.",
+          "Engaging Activities – Strengthen pattern recognition with interactive games.",
+          "Mixed-Order Practice – Reinforce learning with shuffled multiplication questions.",
+          "Instant Results – Get feedback instantly to learn from your mistakes.",
+          "Cross-Device Compatible – Study anywhere on PC, tablet, or smartphone effortlessly.",
+          "Downloadable Resources – Download the printable 3 Times Table chart anytime.",
         ]}
         imageUrl={timestable}
         imagealt="3 times table"

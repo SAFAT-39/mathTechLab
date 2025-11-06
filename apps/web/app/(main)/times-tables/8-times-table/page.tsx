@@ -14,6 +14,19 @@ export default function ThreeTimesTable() {
           tableNumber={8}
           titleGradient="bg-gradient-to-r from-pink-600 to-fuchsia-600"
           cardGradient="bg-gradient-to-br from-fuchsia-500 to-purple-600"
+          firstparagraph={
+            <>
+              The <b>8 times table </b>reinforces doubling and number grouping.
+            </>
+          }
+          secondparaghrap={
+            <>
+              Since <b>8</b> is a multiple of <b>2</b> and <b>4</b>, it connects
+              earlier learning with advanced multiplication. Mastering it builds
+              faster recall, better pattern recognition, and stronger
+              problem-solving abilities in both math and logic-based tasks.
+            </>
+          }
         />
       </div>
       <MulPracticeInSequence

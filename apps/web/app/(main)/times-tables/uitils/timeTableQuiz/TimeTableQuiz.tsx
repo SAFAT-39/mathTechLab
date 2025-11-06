@@ -15,7 +15,7 @@ interface TimesTableQuizProps {
 const TimesTableQuiz = ({
   tableNumber,
   questionCount = 15,
-  title = `Master the ${tableNumber} Times Table!`,
+  title = `Multiple choice - ${tableNumber} Times Table!`,
 }: TimesTableQuizProps) => {
   const [questions, setQuestions] = useState<
     Array<{

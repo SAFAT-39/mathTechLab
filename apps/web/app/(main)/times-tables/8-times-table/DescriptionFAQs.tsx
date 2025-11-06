@@ -33,14 +33,21 @@ const DescriptionFAQs = () => {
   return (
     <div className="space-y-[60px]">
       <TimesTableDescription
-        title="Why Practice the 8 Times Table on MathTechLab?"
-        description="This is the perfect place to practice the 8 Times Table. At MathTechLab, we provide an interactive and engaging way to master the 8 times table with visual learning, audio support, and hands-on activities. Unlike traditional rote memorization, our platform offers a multi-sensory approach that enhances understanding and retention."
+        title="Learn and Practice the 8 Times Table Online"
+        description={
+          <>
+            The <b>8 Times Table</b> helps students understand larger
+            multiplication patterns. MathTechLab’s interactive design keeps kids
+            motivated while strengthening problem-solving skills.
+          </>
+        }
         points={[
-          "Interactive Learning – Our platform provides step-by-step guidance with audio playback to help users visualize, listen, and repeat equations.",
-          "Engaging Practice Methods – Users can practice in sequential and shuffled order to reinforce learning dynamically.",
-          "Drag-and-Drop Games – Improve problem-solving skills by matching colorful number tiles to their correct equations.",
-          "Instant Feedback – Get real-time hints and corrections to ensure a fun and frustration-free learning experience.",
-          "Downloadable Resources – Access and download our beautifully designed 8 Times Table chart for offline practice.",
+          "Interactive Visuals – Bright and engaging UI to keep learners focused.",
+          "Practice Options – Switch between ordered and mixed question sets.",
+          "Audio Learning – Listen and repeat equations for auditory reinforcement.",
+          "Motivating Feedback – Fun progress tracking keeps students engaged.",
+          "Cross-Device Compatible – Learn on mobile, tablet, or desktop without limits.",
+          "Downloadable Resources – Grab your 8 Times Table chart for offline learning.",
         ]}
         imageUrl={timestable}
         imagealt="8 times table"

@@ -14,6 +14,20 @@ export default function ThreeTimesTable() {
           tableNumber={11}
           titleGradient="bg-gradient-to-r from-cyan-600 to-teal-600"
           cardGradient="bg-gradient-to-br from-teal-500 to-emerald-600"
+          firstparagraph={
+            <>
+              The <b>11 times table </b>introduces number repetition and pattern
+              observation.
+            </>
+          }
+          secondparaghrap={
+            <>
+              It helps learners identify numeric symmetry, improving number
+              sense. Practicing it builds quick recall for two-digit
+              multiplication and enhances logical thinking for more complex math
+              concepts.
+            </>
+          }
         />
       </div>
       <MulPracticeInSequence

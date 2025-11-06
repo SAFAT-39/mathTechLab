@@ -14,6 +14,20 @@ export default function ThreeTimesTable() {
           tableNumber={5}
           titleGradient="bg-gradient-to-r from-yellow-600 to-amber-600"
           cardGradient="bg-gradient-to-br from-amber-500 to-orange-600"
+          firstparagraph={
+            <>
+              The <b>5 times table</b> is one of the most useful in everyday
+              life—especially for telling time and counting money.
+            </>
+          }
+          secondparaghrap={
+            <>
+              Its clear pattern ending in 0 or 5 makes it easy to learn.
+              Mastering it boosts quick recall and confidence, supporting
+              overall math fluency and helping learners tackle harder tables
+              later.
+            </>
+          }
         />
       </div>
       <MulPracticeInSequence

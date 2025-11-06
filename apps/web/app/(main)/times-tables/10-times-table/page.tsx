@@ -14,6 +14,20 @@ export default function ThreeTimesTable() {
           tableNumber={10}
           titleGradient="bg-gradient-to-r from-indigo-600 to-blue-600"
           cardGradient="bg-gradient-to-br from-blue-500 to-purple-600"
+          firstparagraph={
+            <>
+              The <b>10 times table</b> simplifies multiplication through
+              base-ten understanding.
+            </>
+          }
+          secondparaghrap={
+            <>
+              Its clear pattern helps students quickly scale numbers, boosting
+              confidence and mental agility. This table forms a bridge between
+              counting and higher arithmetic, making math more intuitive and fun
+              to learn.
+            </>
+          }
         />
       </div>
       <MulPracticeInSequence

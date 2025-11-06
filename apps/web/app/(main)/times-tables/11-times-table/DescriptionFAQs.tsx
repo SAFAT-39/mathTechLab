@@ -33,14 +33,21 @@ const DescriptionFAQs = () => {
   return (
     <div className="space-y-[60px]">
       <TimesTableDescription
-        title="Why Practice the 11 Times Table on MathTechLab?"
-        description="This is the perfect place to practice the 11 Times Table. At MathTechLab, we provide an interactive and engaging way to master the 11 times table with visual learning, audio support, and hands-on activities. Unlike traditional rote memorization, our platform offers a multi-sensory approach that enhances understanding and retention."
+        title="Interactive 11 Times Table Practice for Faster Learning"
+        description={
+          <>
+            The <b>11 Times Table</b> introduces number repetition patterns that
+            are fun to explore. With MathTechLab’s interactive features,
+            learners can quickly master this table through practice and play.
+          </>
+        }
         points={[
-          "Interactive Learning – Our platform provides step-by-step guidance with audio playback to help users visualize, listen, and repeat equations.",
-          "Engaging Practice Methods – Users can practice in sequential and shuffled order to reinforce learning dynamically.",
-          "Drag-and-Drop Games – Improve problem-solving skills by matching colorful number tiles to their correct equations.",
-          "Instant Feedback – Get real-time hints and corrections to ensure a fun and frustration-free learning experience.",
-          "Downloadable Resources – Access and download our beautifully designed 11 Times Table chart for offline practice.",
+          "Pattern Learning – Discover repeating number patterns for easy recall.",
+          "Hands-On Games – Strengthen multiplication skills through visual puzzles.",
+          "Instant Feedback – Get corrections and hints instantly for improvement.",
+          "Audio Support – Listen, speak, and repeat for full learning engagement.",
+          "Cross-Device Compatible – Works perfectly on PC, tablet, and mobile browsers.",
+          "Downloadable Resources – Save the 11 Times Table sheet for continued study.",
         ]}
         imageUrl={timestable}
         imagealt="11 times table"

@@ -33,14 +33,22 @@ const DescriptionFAQs = () => {
   return (
     <div className="space-y-[60px]">
       <TimesTableDescription
-        title="Why Practice the 2 Times Table on MathTechLab?"
-        description="This is the perfect place to practice the 2 Times Table. At MathTechLab, we provide an interactive and engaging way to master the 2 times table with visual learning, audio support, and hands-on activities. Unlike traditional rote memorization, our platform offers a multi-sensory approach that enhances understanding and retention."
+        title="Master the 2 Times Table with Interactive Learning"
+        description={
+          <>
+            The <b>2 Times Table</b> introduces the concept of doubling numbers,
+            a core skill in early math education. <b>MathTechLab</b> turns this
+            into an engaging digital experience through visual quizzes and
+            hands-on challenges.
+          </>
+        }
         points={[
-          "Interactive Learning – Our platform provides step-by-step guidance with audio playback to help users visualize, listen, and repeat equations.",
-          "Engaging Practice Methods – Users can practice in sequential and shuffled order to reinforce learning dynamically.",
-          "Drag-and-Drop Games – Improve problem-solving skills by matching colorful number tiles to their correct equations.",
-          "Instant Feedback – Get real-time hints and corrections to ensure a fun and frustration-free learning experience.",
-          "Downloadable Resources – Access and download our beautifully designed 2 Times Table chart for offline practice.",
+          "Audio and Visual Support – Hear and see each multiplication for better understanding.",
+          "Dynamic Quizzes – Practice in sequential and shuffled formats for long-term recall.",
+          "Interactive Challenges – Strengthen your math logic with drag-and-drop puzzles.",
+          "Progress Tracking – Instantly view which answers are correct or need improvement.",
+          "Cross-Device Compatible – Fully responsive design for PC, tablet, and mobile users.",
+          "Downloadable Resources – Access the 2 Times Table worksheet for easy offline study.",
         ]}
         imageUrl={timestable}
         imagealt="2 times table"
