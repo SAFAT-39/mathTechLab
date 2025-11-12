@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { ReactNode } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import SessionProviderWrapper from "./SessionProviderWrapper";
 
 export const metadata: Metadata = {
   title: "MathTechLab - Explore Math, Games, and Technology",
@@ -42,7 +43,7 @@ type LayoutProps = {
   children: ReactNode;
 };
 
-export default function Layout({ children }: LayoutProps) {
+export default function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="en">
       <head>
@@ -57,8 +58,11 @@ export default function Layout({ children }: LayoutProps) {
             })(window,document,'script','dataLayer','GTM-MD8DNH2N');`,
           }}
         ></script>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6350189879354435"
-          crossOrigin="anonymous"></script>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6350189879354435"
+          crossOrigin="anonymous"
+        ></script>
         {/* <script src="https://cmp.gatekeeperconsent.com/min.js" data-cfasync="false"></script>
         <script src="https://the.gatekeeperconsent.com/cmp.min.js" data-cfasync="false"></script>
 
@@ -84,16 +88,18 @@ export default function Layout({ children }: LayoutProps) {
           ></iframe>
         </noscript>
 
-        <div className="flex flex-col min-h-screen">
-          {/* Header */}
-          <Header />
+        <SessionProviderWrapper>
+          <div className="flex flex-col min-h-screen">
+            {/* Header */}
+            <Header />
 
-          {/* Main Content */}
-          <main className="flex-grow container mx-auto p-4">{children}</main>
+            {/* Main Content */}
+            <main className="flex-grow container mx-auto p-4">{children}</main>
 
-          {/* Footer */}
-          <Footer />
-        </div>
+            {/* Footer */}
+            <Footer />
+          </div>
+        </SessionProviderWrapper>
       </body>
     </html>
   );

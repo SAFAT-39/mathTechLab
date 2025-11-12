@@ -9,11 +9,12 @@ import Calculators from "./components/Calculators";
 import Games from "./components/Games";
 import Blogs from "./components/Blogs";
 import MobileMenu from "./components/MobileMenu";
-
+import { useSession } from "next-auth/react";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const { data: session, status } = useSession();
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
@@ -21,36 +22,38 @@ const Header = () => {
       // Store the current scroll position
       const scrollY = window.scrollY;
       // Apply styles to prevent scrolling
-      document.body.style.position = 'fixed';
+      document.body.style.position = "fixed";
       document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = '100%';
-      document.body.style.overflow = 'hidden';
+      document.body.style.width = "100%";
+      document.body.style.overflow = "hidden";
     } else {
       // Restore scrolling
       const scrollY = document.body.style.top;
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      document.body.style.overflow = '';
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
       // Restore scroll position
       if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+        window.scrollTo(0, parseInt(scrollY || "0") * -1);
       }
     }
 
     // Cleanup function to restore scroll when component unmounts
     return () => {
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      document.body.style.overflow = '';
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
     };
   }, [menuOpen]);
 
-
   return (
     <>
-      <header id="header" className="bg-white sticky top-0 z-50 shadow-sm border-b border-gray-100">
+      <header
+        id="header"
+        className="bg-white sticky top-0 z-50 shadow-sm border-b border-gray-100"
+      >
         <div className="container mx-auto px-4 py-1 flex justify-between items-center">
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
@@ -83,11 +86,32 @@ const Header = () => {
             </nav>
           </div>
 
-          {/* Right navigation - Blogs */}
-          <div className="flex items-center">
+          {/* Right navigation - Blogs + Auth/Profile */}
+          <div className="flex items-center gap-4">
             <nav className="hidden md:flex">
               <Blogs />
             </nav>
+            {/* Auth/Profile Buttons */}
+            {status === "loading" ? null : !session ? (
+              <>
+                <Link href="/auth/login" className="btn btn-primary">
+                  Sign In
+                </Link>
+                <Link href="/auth/register" className="btn btn-secondary">
+                  Sign Up
+                </Link>
+              </>
+            ) : (
+              <Link href="/profile">
+                <Image
+                  src={session.user?.image || "/default-profile.png"}
+                  alt="Profile"
+                  width={40}
+                  height={40}
+                  className="rounded-full border"
+                />
+              </Link>
+            )}
             <button
               className="md:hidden text-gray-700 hover:text-purple-600 transition-colors"
               aria-label="Menu"
@@ -108,7 +132,6 @@ const Header = () => {
       {/* <script async data-cfasync="false" src="//pl27788157.revenuecpmgate.com/9d55caf32a958b06a72b7eaa3dbdb3ba/invoke.js"></script>
       <div id="container-9d55caf32a958b06a72b7eaa3dbdb3ba"></div> */}
     </>
-
   );
 };
 

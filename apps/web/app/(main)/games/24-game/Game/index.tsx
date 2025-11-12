@@ -6,6 +6,7 @@ import NumberBox from "./NumberBox";
 import { ArrowLeftCircleIcon, ArrowRightCircleIcon, Share2, Download } from "lucide-react";
 import Fraction from "./Fraction";
 import { useTimer } from "./useTimer";
+import { useCountdownTimer } from "./useCountdownTimer";
 import useGameGenerator from "./useGameGenerator";
 import SolutionDialog from "./SolutionDialog";
 import confetti from "canvas-confetti";
@@ -22,9 +23,25 @@ interface BoardState {
 
 interface Math24GameProps {
   initialPuzzleId?: number;
+  mode?: "puzzle" | "competition";
+  onPuzzleSolved?: () => void;
+  competitionTotalPuzzles?: number;
+  competitionSolvedCount?: number;
+  competitionDuration?: number; // in seconds
+  onSkip?: () => void;
+  onTimeUp?: () => void;
 }
 
-const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
+const Math24Game = ({
+  initialPuzzleId,
+  mode = "puzzle",
+  onPuzzleSolved,
+  competitionTotalPuzzles,
+  competitionSolvedCount = 0,
+  competitionDuration,
+  onSkip,
+  onTimeUp,
+}: Math24GameProps) => {
   const [numbers, setNumbers] = useState(generateGame());
   const [boardStates, setBoardStates] = useState<BoardState[]>([]);
   const [curStateIndex, setCurStateIndex] = useState(-1);
@@ -42,8 +59,32 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
   const [frameImages, setFrameImages] = useState<string[]>([]);
   const idleCallbackRef = useRef<number | null>(null);
 
-  const { time, reset: resetTimer } = useTimer();
+  const { time: timerTime, reset: resetTimer } = useTimer();
+  const { time: countdownTime, remainingSeconds, reset: resetCountdown, isFinished } = useCountdownTimer(0);
   const { game, nextGame, getCurrentPuzzleIndex } = useGameGenerator(initialPuzzleId);
+
+  // Use countdown in competition mode, regular timer in puzzle mode
+  const time = mode === "competition" && competitionDuration ? countdownTime : timerTime;
+
+  // Initialize and reset countdown when competition starts
+  useEffect(() => {
+    if (mode === "competition" && competitionDuration && competitionDuration > 0) {
+      // Reset countdown to the full duration when competition starts
+      resetCountdown(competitionDuration);
+    } else if (mode !== "competition") {
+      // Reset to 0 when not in competition mode
+      resetCountdown(0);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [competitionDuration, mode]); // resetCountdown is stable, so we can omit it
+
+  // Detect when time is up in competition mode
+  useEffect(() => {
+    // Only trigger if competition is actually running (has duration set) and time is finished
+    if (mode === "competition" && competitionDuration && competitionDuration > 0 && isFinished && onTimeUp) {
+      onTimeUp();
+    }
+  }, [isFinished, mode, competitionDuration, onTimeUp]);
 
   // Capture frame function - deferred to avoid blocking UI
   // Note: html-to-image cannot run in Web Workers (no DOM access)
@@ -107,7 +148,11 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
     setCurStateIndex(0);
     setSelectedOperator("");
     setIsPuzzleSolved(false);
-    resetTimer();
+    if (mode === "competition" && competitionDuration) {
+      // Don't reset countdown when puzzle changes in competition
+    } else {
+      resetTimer();
+    }
     const timeoutId = setTimeout(() => captureFrame(), 100);
     return () => {
       clearTimeout(timeoutId);
@@ -163,10 +208,18 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
         decay: 0.9,
         ticks: 200
       });
+
+      // Call onPuzzleSolved callback if provided
+      if (onPuzzleSolved) {
+        onPuzzleSolved();
+      }
     }
   }, [boardStates]);
 
   const handleNumberClick = (index: number, num: Fraction) => {
+    // Don't allow moves if time is up in competition mode
+    if (mode === "competition" && isFinished) return;
+
     const state = boardStates[curStateIndex];
 
     if (state.selectedIndex === index) return;
@@ -203,6 +256,9 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
   };
 
   const handleOperatorClick = (op: string) => {
+    // Don't allow moves if time is up in competition mode
+    if (mode === "competition" && isFinished) return;
+
     if (boardStates[curStateIndex].selectedIndex != -1) {
       setSelectedOperator(op);
       captureFrame();
@@ -229,8 +285,13 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
   };
 
   const handleSkip = () => {
-    // Show solution dialog (ads may be shown before this)
-    setOpenSolution(true);
+    if (mode === "competition" && onSkip) {
+      // In competition mode, skip goes to next puzzle without showing solution
+      onSkip();
+    } else {
+      // In puzzle mode, show solution dialog
+      setOpenSolution(true);
+    }
   };
 
   const handleSolutionClose = () => {
@@ -341,7 +402,7 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
   return (
     <div className="flex flex-col justify-center items-center border rounded-lg  bg-gray-200" ref={gameRef}>
       <div className="w-full bg-blue-500 px-2 py-2 flex items-center justify-between rounded-t-lg relative">
-        <p className="text-lg font-semibold text-white">Make 24 Using (+ − × ÷)</p>
+        <p className="text-base md:text-lg font-semibold text-white">Make 24 Using (+ − × ÷)</p>
         <div className="flex items-center gap-2">
           <button
             className="bg-blue-500 p-1.5 text-white rounded flex items-center justify-center"
@@ -367,10 +428,15 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col justify-center  items-center gap-2 w-[340px] px-2 py-2">
+      <div className="flex flex-col justify-center  items-center gap-2 w-[312px] md:w-[340px] px-2 py-2">
 
         <div className="flex w-full justify-between border-b pb-1 mb-1">
-          <p className="font-bold">Solved: {solved}</p>
+          <p className="font-bold">
+            Solved:{" "}
+            {mode === "competition" && competitionTotalPuzzles !== undefined
+              ? `${competitionSolvedCount}/${competitionTotalPuzzles}`
+              : solved}
+          </p>
           <p className="font-bold">Score: {score}</p>
           <p className="font-bold">Time: {time}</p>
         </div>
@@ -438,11 +504,13 @@ const Math24Game = ({ initialPuzzleId }: Math24GameProps) => {
           </button>
         </div>
       </div>
-      <SolutionDialog
-        isOpen={openSolution}
-        onClose={handleSolutionClose}
-        items={game?.solutions || []}
-      />
+      {mode !== "competition" && (
+        <SolutionDialog
+          isOpen={openSolution}
+          onClose={handleSolutionClose}
+          items={game?.solutions || []}
+        />
+      )}
     </div>
   );
 };

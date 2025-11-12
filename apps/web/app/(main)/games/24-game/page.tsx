@@ -1,4 +1,4 @@
-import Game from "./Game";
+import GameArea from "./GameArea";
 import RelatedGames from "../../components/RelatedGames";
 
 interface PageProps {
@@ -115,9 +115,7 @@ const Page = async ({ searchParams }: PageProps) => {
           your problem-solving skills and see how fast you can find a solution!
         </h2>
       </div>
-      <div className="flex flex-col justify-center items-center px-2 py-5 pb-16">
-        <Game initialPuzzleId={puzzleId} />
-      </div>
+      <GameArea initialPuzzleId={puzzleId} />
       <section className="max-w-3xl mx-auto p-6 space-y-6 text-gray-800">
         {/* How to Play Section */}
         <script
