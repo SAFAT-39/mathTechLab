@@ -4,6 +4,7 @@ import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import clientPromise from "../../../utils/mongodb";
 import bcrypt from "bcryptjs";
 
+// NextAuth configuration
 export const authOptions: NextAuthOptions = {
   adapter: MongoDBAdapter(clientPromise, {
     databaseName: process.env.DB_NAME,
@@ -32,7 +33,7 @@ export const authOptions: NextAuthOptions = {
         if (!credentials?.password) return null;
 
         const isValid = await bcrypt.compare(
-          credentials?.password,
+          credentials.password,
           user.password
         );
         if (!isValid) return null;
@@ -48,6 +49,24 @@ export const authOptions: NextAuthOptions = {
   ],
   session: {
     strategy: "jwt",
+  },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.username = user.username ?? null;
+        token.name = user.name ?? null;
+        token.email = user.email ?? null;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (token) {
+        session.user.username = token.username ?? null;
+        session.user.name = token.name ?? null;
+        session.user.email = token.email ?? null;
+      }
+      return session;
+    },
   },
   pages: {
     signIn: "/auth/login",
