@@ -94,10 +94,16 @@ const Header = () => {
             {/* Auth/Profile Buttons */}
             {status === "loading" ? null : !session ? (
               <>
-                <Link href="/auth/login" className="btn btn-primary">
+                <Link
+                  href="/auth/login"
+                  className="p-1 font-medium rounded-sm border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white transition-colors"
+                >
                   Sign In
                 </Link>
-                <Link href="/auth/register" className="btn btn-secondary">
+                <Link
+                  href="/auth/register"
+                  className="p-1 font-medium rounded-sm border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white transition-colors"
+                >
                   Sign Up
                 </Link>
               </>
