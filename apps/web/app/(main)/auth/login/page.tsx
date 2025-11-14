@@ -3,7 +3,7 @@ import { signIn } from "next-auth/react";
 import { useState } from "react";
 
 export default function Login() {
-  const [form, setForm] = useState({ username: "", password: "" });
+  const [form, setForm] = useState({ identifier: "", password: "" });
   const [error, setError] = useState("");
 
   async function handleSubmit(e: React.FormEvent) {
@@ -11,9 +11,11 @@ export default function Login() {
     setError("");
     const res = await signIn("credentials", {
       redirect: false,
-      username: form.username,
+      username: form.identifier, // send as username
+      email: form.identifier, // send as email
       password: form.password,
     });
+    console.log({ res });
     if (res?.error) setError(res.error);
     if (res?.ok) window.location.href = "/";
   }
@@ -26,9 +28,9 @@ export default function Login() {
       <h2 className="text-2xl font-bold mb-4">Login</h2>
       <input
         type="text"
-        placeholder="Username"
-        value={form.username}
-        onChange={(e) => setForm({ ...form, username: e.target.value })}
+        placeholder="Username or Email"
+        value={form.identifier}
+        onChange={(e) => setForm({ ...form, identifier: e.target.value })}
         className="w-full mb-2 p-2 border rounded"
         required
       />

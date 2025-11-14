@@ -6,6 +6,7 @@ import bcrypt from "bcryptjs";
 
 // NextAuth configuration
 export const authOptions: NextAuthOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
   adapter: MongoDBAdapter(clientPromise, {
     databaseName: process.env.DB_NAME,
   }),
@@ -22,13 +23,18 @@ export const authOptions: NextAuthOptions = {
         const client = await clientPromise;
         const db = client.db(process.env.DB_NAME);
         const usersCollection = db.collection("users");
+
+        // Case-insensitive search for username or email
         const user = await usersCollection.findOne({
           $or: [
-            { username: credentials?.username },
-            { email: credentials?.email },
+            {
+              username: {
+                $regex: new RegExp(`^${credentials?.username}$`, "i"),
+              },
+            },
+            { email: { $regex: new RegExp(`^${credentials?.email}$`, "i") } },
           ],
         });
-
         if (!user) return null;
         if (!credentials?.password) return null;
 
@@ -36,6 +42,7 @@ export const authOptions: NextAuthOptions = {
           credentials.password,
           user.password
         );
+        console.log({ isValid });
         if (!isValid) return null;
 
         return {
