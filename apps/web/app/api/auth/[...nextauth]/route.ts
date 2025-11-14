@@ -18,6 +18,7 @@ export const authOptions: NextAuthOptions = {
         name: { label: "Name", type: "text" },
         email: { label: "Gmail", type: "email" },
         password: { label: "Password", type: "password" },
+        role: { label: "Role", type: "text" },
       },
       async authorize(credentials) {
         const client = await clientPromise;
@@ -50,6 +51,7 @@ export const authOptions: NextAuthOptions = {
           name: user.name,
           email: user.email,
           username: user.username,
+          role: user.role,
         };
       },
     }),
@@ -63,6 +65,7 @@ export const authOptions: NextAuthOptions = {
         token.username = user.username ?? null;
         token.name = user.name ?? null;
         token.email = user.email ?? null;
+        token.role = user.role ?? null;
       }
       return token;
     },
@@ -71,6 +74,7 @@ export const authOptions: NextAuthOptions = {
         session.user.username = token.username ?? null;
         session.user.name = token.name ?? null;
         session.user.email = token.email ?? null;
+        session.user.role = token.role ?? null;
       }
       return session;
     },
