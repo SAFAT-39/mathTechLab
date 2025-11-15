@@ -105,6 +105,24 @@ const Page = async ({ searchParams }: PageProps) => {
   };
 
   const puzzleId = params.id ? decodePuzzleIndex(params.id) : undefined;
+
+  const baseUrl = process.env.NEXT_PUBLIC_HOST || "http://localhost:3000";
+
+  const competitionsRes = await fetch(`${baseUrl}/api/24-game/competitions`, {
+    method: "GET",
+    cache: "no-store", // ensures SSR fresh data
+  });
+
+  const competitionData = await competitionsRes.json();
+
+  const leaderBoardRes = await fetch(`${baseUrl}/api/24-game/leaderboard`, {
+    method: "GET",
+    cache: "no-store", // ensures SSR fresh data
+  });
+
+  const leaderBoardData = await leaderBoardRes.json();
+  console.log(leaderBoardData);
+
   return (
     <>
       <div className="flex flex-col justify-center items-center gap-2">
@@ -115,7 +133,11 @@ const Page = async ({ searchParams }: PageProps) => {
           your problem-solving skills and see how fast you can find a solution!
         </h2>
       </div>
-      <GameArea initialPuzzleId={puzzleId} />
+      <GameArea
+        initialPuzzleId={puzzleId}
+        competitionData={competitionData}
+        leaderboardData={leaderBoardData}
+      />
       <section className="max-w-3xl mx-auto p-6 space-y-6 text-gray-800">
         {/* How to Play Section */}
         <script

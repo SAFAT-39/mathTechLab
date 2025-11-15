@@ -12,6 +12,14 @@ export interface Competition {
   participantCount?: number;
 }
 
+export interface CompetitionData {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+  competitions: Competition[];
+}
+
 type CompetitionStatus = "active" | "upcoming" | "ended";
 
 function getCompetitionStatus(competition: Competition): CompetitionStatus {
@@ -29,14 +37,14 @@ function getCompetitionStatus(competition: Competition): CompetitionStatus {
 }
 
 interface CompetitionListProps {
-  competitions: Competition[];
+  competitionData: CompetitionData;
   selectedCompetitionId: string | null;
   onSelectCompetition: (competitionId: string) => void;
   onStartCompetition?: (competitionId: string) => void;
 }
 
 export default function CompetitionList({
-  competitions,
+  competitionData,
   selectedCompetitionId,
   onSelectCompetition,
   onStartCompetition,
@@ -53,11 +61,13 @@ export default function CompetitionList({
   return (
     <div className="bg-white rounded-lg shadow-md p-4 max-h-[600px] overflow-y-auto">
       <h3 className="text-xl font-bold mb-4 text-gray-800">Competitions</h3>
-      {competitions.length === 0 ? (
-        <p className="text-gray-500 text-center py-8">No competitions available</p>
+      {competitionData.competitions.length === 0 ? (
+        <p className="text-gray-500 text-center py-8">
+          No competitions available
+        </p>
       ) : (
         <div className="space-y-3">
-          {competitions.map((competition) => {
+          {competitionData.competitions.map((competition) => {
             const status = getCompetitionStatus(competition);
             const isSelected = selectedCompetitionId === competition.id;
             const startDate = new Date(competition.startDate);
@@ -160,4 +170,3 @@ export default function CompetitionList({
     </div>
   );
 }
-

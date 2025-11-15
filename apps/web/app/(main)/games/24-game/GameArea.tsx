@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Game from "./Game";
 import GameModeSelector from "./GameModeSelector";
-import CompetitionList, { Competition } from "./CompetitionList";
+import CompetitionList, { CompetitionData } from "./CompetitionList";
 import Leaderboard, { LeaderboardEntry } from "./Leaderboard";
 import CompetitionStats from "./CompetitionStats";
 import CompetitionCountdown from "./CompetitionCountdown";
@@ -11,8 +11,17 @@ import { data } from "./Game/data";
 import { updateGlobalLeaderboard } from "./updateLeaderboard";
 import { useSession } from "next-auth/react";
 
+interface LeaderboardData {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+  leaderboard: LeaderboardEntry[];
+}
 interface GameAreaProps {
   initialPuzzleId?: number;
+  competitionData: CompetitionData;
+  leaderboardData: LeaderboardData;
 }
 
 // Generate 10 random puzzle IDs
@@ -32,9 +41,12 @@ const generateRandomPuzzleIds = (count: number = 10): number[] => {
   return ids;
 };
 
-export default function GameArea({ initialPuzzleId }: GameAreaProps) {
+export default function GameArea({
+  initialPuzzleId,
+  competitionData,
+  leaderboardData,
+}: GameAreaProps) {
   const [mode, setMode] = useState<"puzzle" | "competition">("puzzle");
-  const [competitions, setCompetitions] = useState<Competition[]>([]);
   const [selectedCompetitionId, setSelectedCompetitionId] = useState<
     string | null
   >(null);
@@ -56,48 +68,48 @@ export default function GameArea({ initialPuzzleId }: GameAreaProps) {
   const timeElapsedRef = useRef<number>(0);
   const [globalLeaderboard, setGlobalLeaderboard] = useState<
     LeaderboardEntry[]
-  >([]);
+  >(leaderboardData.leaderboard);
   const [competitionLeaderboard, setCompetitionLeaderboard] = useState<
     LeaderboardEntry[]
   >([]);
-  const [isLoadingCompetitions, setIsLoadingCompetitions] = useState(true);
-  const [isLoadingLeaderboard, setIsLoadingLeaderboard] = useState(true);
+  const [isLoadingCompetitions, setIsLoadingCompetitions] = useState(false);
+  const [isLoadingLeaderboard, setIsLoadingLeaderboard] = useState(false);
 
   const { data: session } = useSession();
 
   // Fetch competitions
-  useEffect(() => {
-    const fetchCompetitions = async () => {
-      try {
-        const response = await fetch("/api/24-game/competitions");
-        const data = await response.json();
-        setCompetitions(data.competitions || []);
-      } catch (error) {
-        console.error("Error fetching competitions:", error);
-      } finally {
-        setIsLoadingCompetitions(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchCompetitions = async () => {
+  //     try {
+  //       const response = await fetch("/api/24-game/competitions");
+  //       const data = await response.json();
+  //       setCompetitions(data.competitions || []);
+  //     } catch (error) {
+  //       console.error("Error fetching competitions:", error);
+  //     } finally {
+  //       setIsLoadingCompetitions(false);
+  //     }
+  //   };
 
-    fetchCompetitions();
-  }, []);
+  //   fetchCompetitions();
+  // }, []);
 
   // Fetch global leaderboard
-  useEffect(() => {
-    const fetchGlobalLeaderboard = async () => {
-      try {
-        const response = await fetch("/api/24-game/leaderboard");
-        const data = await response.json();
-        setGlobalLeaderboard(data.leaderboard || []);
-      } catch (error) {
-        console.error("Error fetching global leaderboard:", error);
-      } finally {
-        setIsLoadingLeaderboard(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchGlobalLeaderboard = async () => {
+  //     try {
+  //       const response = await fetch("/api/24-game/leaderboard");
+  //       const data = await response.json();
+  //       setGlobalLeaderboard(data.leaderboard || []);
+  //     } catch (error) {
+  //       console.error("Error fetching global leaderboard:", error);
+  //     } finally {
+  //       setIsLoadingLeaderboard(false);
+  //     }
+  //   };
 
-    fetchGlobalLeaderboard();
-  }, []);
+  //   fetchGlobalLeaderboard();
+  // }, []);
 
   // Fetch competition data when selected
   useEffect(() => {
@@ -159,7 +171,9 @@ export default function GameArea({ initialPuzzleId }: GameAreaProps) {
 
   const handleStartCompetitionFromList = (competitionId: string) => {
     // Check if competition is active
-    const competition = competitions.find((c) => c.id === competitionId);
+    const competition = competitionData.competitions.find(
+      (c) => c.id === competitionId
+    );
     if (!competition) return;
 
     const now = new Date();
@@ -195,7 +209,7 @@ export default function GameArea({ initialPuzzleId }: GameAreaProps) {
     if (mode === "competition") {
       if (selectedCompetitionId) {
         // Check if competition is active
-        const competition = competitions.find(
+        const competition = competitionData.competitions.find(
           (c) => c.id === selectedCompetitionId
         );
         if (competition) {
@@ -346,7 +360,7 @@ export default function GameArea({ initialPuzzleId }: GameAreaProps) {
   const currentLeaderboard =
     mode === "competition" && selectedCompetitionId
       ? competitionLeaderboard
-      : globalLeaderboard;
+      : globalLeaderboard || leaderboardData.leaderboard;
 
   const leaderboardTitle =
     mode === "competition" && selectedCompetitionId
@@ -360,7 +374,7 @@ export default function GameArea({ initialPuzzleId }: GameAreaProps) {
         {/* Left Column: Competitions */}
         <div>
           <CompetitionList
-            competitions={competitions}
+            competitionData={competitionData}
             selectedCompetitionId={selectedCompetitionId}
             onSelectCompetition={handleSelectCompetition}
             onStartCompetition={handleStartCompetitionFromList}
@@ -379,7 +393,7 @@ export default function GameArea({ initialPuzzleId }: GameAreaProps) {
               <div className="flex flex-col items-center gap-4">
                 {selectedCompetitionId ? (
                   (() => {
-                    const competition = competitions.find(
+                    const competition = competitionData.competitions.find(
                       (c) => c.id === selectedCompetitionId
                     );
                     if (competition) {
@@ -446,7 +460,7 @@ export default function GameArea({ initialPuzzleId }: GameAreaProps) {
                 )}
                 {selectedCompetitionId ? (
                   (() => {
-                    const competition = competitions.find(
+                    const competition = competitionData.competitions.find(
                       (c) => c.id === selectedCompetitionId
                     );
                     if (competition) {
