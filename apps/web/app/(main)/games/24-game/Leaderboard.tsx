@@ -44,9 +44,6 @@ export default function Leaderboard({
                 <th className="text-left py-2 px-3 font-semibold text-gray-700">
                   Username
                 </th>
-                <th className="text-right py-2 px-3 font-semibold text-gray-700">
-                  Score
-                </th>
                 {/* Removed Time column */}
                 {entries[0]?.solved !== undefined && (
                   <th className="text-right py-2 px-3 font-semibold text-gray-700">
@@ -73,9 +70,6 @@ export default function Leaderboard({
                   </td>
                   <td className="py-2 px-3 font-medium text-gray-800">
                     {entry.username}
-                  </td>
-                  <td className="py-2 px-3 text-right font-semibold text-gray-800">
-                    {entry.score.toLocaleString()}
                   </td>
                   {/* Removed Time cell */}
                   {entry.solved !== undefined && (

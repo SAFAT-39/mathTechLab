@@ -8,6 +8,8 @@ import Leaderboard, { LeaderboardEntry } from "./Leaderboard";
 import CompetitionStats from "./CompetitionStats";
 import CompetitionCountdown from "./CompetitionCountdown";
 import { data } from "./Game/data";
+import { updateGlobalLeaderboard } from "./updateLeaderboard";
+import { useSession } from "next-auth/react";
 
 interface GameAreaProps {
   initialPuzzleId?: number;
@@ -33,21 +35,35 @@ const generateRandomPuzzleIds = (count: number = 10): number[] => {
 export default function GameArea({ initialPuzzleId }: GameAreaProps) {
   const [mode, setMode] = useState<"puzzle" | "competition">("puzzle");
   const [competitions, setCompetitions] = useState<Competition[]>([]);
-  const [selectedCompetitionId, setSelectedCompetitionId] = useState<string | null>(null);
-  const [competitionPuzzleIds, setCompetitionPuzzleIds] = useState<number[]>([]);
+  const [selectedCompetitionId, setSelectedCompetitionId] = useState<
+    string | null
+  >(null);
+  const [competitionPuzzleIds, setCompetitionPuzzleIds] = useState<number[]>(
+    []
+  );
   const [currentPuzzleIndex, setCurrentPuzzleIndex] = useState(0);
   const [competitionStarted, setCompetitionStarted] = useState(false);
-  const [solvedPuzzleIndices, setSolvedPuzzleIndices] = useState<Set<number>>(new Set());
+  const [solvedPuzzleIndices, setSolvedPuzzleIndices] = useState<Set<number>>(
+    new Set()
+  );
   const [competitionDuration, setCompetitionDuration] = useState<number>(60); // Default 10 minutes
   const [competitionEnded, setCompetitionEnded] = useState(false);
   const competitionEndedRef = useRef(false);
-  const [competitionStartTime, setCompetitionStartTime] = useState<number | null>(null);
+  const [competitionStartTime, setCompetitionStartTime] = useState<
+    number | null
+  >(null);
   const [timeElapsed, setTimeElapsed] = useState<number>(0);
   const timeElapsedRef = useRef<number>(0);
-  const [globalLeaderboard, setGlobalLeaderboard] = useState<LeaderboardEntry[]>([]);
-  const [competitionLeaderboard, setCompetitionLeaderboard] = useState<LeaderboardEntry[]>([]);
+  const [globalLeaderboard, setGlobalLeaderboard] = useState<
+    LeaderboardEntry[]
+  >([]);
+  const [competitionLeaderboard, setCompetitionLeaderboard] = useState<
+    LeaderboardEntry[]
+  >([]);
   const [isLoadingCompetitions, setIsLoadingCompetitions] = useState(true);
   const [isLoadingLeaderboard, setIsLoadingLeaderboard] = useState(true);
+
+  const { data: session } = useSession();
 
   // Fetch competitions
   useEffect(() => {
@@ -88,7 +104,9 @@ export default function GameArea({ initialPuzzleId }: GameAreaProps) {
     if (selectedCompetitionId && mode === "competition") {
       const fetchCompetitionData = async () => {
         try {
-          const response = await fetch(`/api/24-game/competitions/${selectedCompetitionId}`);
+          const response = await fetch(
+            `/api/24-game/competitions/${selectedCompetitionId}`
+          );
           const data = await response.json();
           setCompetitionPuzzleIds(data.competition.puzzleIds || []);
           setCompetitionLeaderboard(data.leaderboard || []);
@@ -165,7 +183,10 @@ export default function GameArea({ initialPuzzleId }: GameAreaProps) {
     // Scroll to game section on mobile
     if (gameSectionRef.current && window.innerWidth < 1024) {
       setTimeout(() => {
-        gameSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        gameSectionRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
       }, 100);
     }
   };
@@ -174,7 +195,9 @@ export default function GameArea({ initialPuzzleId }: GameAreaProps) {
     if (mode === "competition") {
       if (selectedCompetitionId) {
         // Check if competition is active
-        const competition = competitions.find((c) => c.id === selectedCompetitionId);
+        const competition = competitions.find(
+          (c) => c.id === selectedCompetitionId
+        );
         if (competition) {
           const now = new Date();
           const startDate = new Date(competition.startDate);
@@ -231,7 +254,12 @@ export default function GameArea({ initialPuzzleId }: GameAreaProps) {
   }, [competitionStarted, competitionEnded, competitionStartTime]);
 
   const handleTimeUp = () => {
-    if (mode === "competition" && competitionStarted && !competitionEnded && !competitionEndedRef.current) {
+    if (
+      mode === "competition" &&
+      competitionStarted &&
+      !competitionEnded &&
+      !competitionEndedRef.current
+    ) {
       competitionEndedRef.current = true;
       setCompetitionEnded(true);
       setTimeElapsed(timeElapsedRef.current);
@@ -239,7 +267,12 @@ export default function GameArea({ initialPuzzleId }: GameAreaProps) {
   };
 
   const handleAllPuzzlesSolved = () => {
-    if (mode === "competition" && competitionStarted && !competitionEnded && !competitionEndedRef.current) {
+    if (
+      mode === "competition" &&
+      competitionStarted &&
+      !competitionEnded &&
+      !competitionEndedRef.current
+    ) {
       competitionEndedRef.current = true;
       setCompetitionEnded(true);
       setTimeElapsed(timeElapsedRef.current);
@@ -247,7 +280,10 @@ export default function GameArea({ initialPuzzleId }: GameAreaProps) {
   };
 
   // Find next unsolved puzzle in round-robin fashion
-  const findNextUnsolvedPuzzle = (startIndex: number, solvedSet: Set<number>): number => {
+  const findNextUnsolvedPuzzle = (
+    startIndex: number,
+    solvedSet: Set<number>
+  ): number => {
     if (competitionPuzzleIds.length === 0) return -1;
 
     // Check if all are solved
@@ -264,12 +300,16 @@ export default function GameArea({ initialPuzzleId }: GameAreaProps) {
     return -1;
   };
 
-  const handlePuzzleSolved = () => {
+  const handlePuzzleSolved = (puzzleId: number) => {
+    updateGlobalLeaderboard({ username: session?.user?.username, puzzleId });
     if (mode === "competition" && competitionPuzzleIds.length > 0) {
       // Mark current puzzle as solved and find next unsolved puzzle
       setSolvedPuzzleIndices((prev) => {
         const updated = new Set(prev).add(currentPuzzleIndex);
-        const nextUnsolvedIndex = findNextUnsolvedPuzzle(currentPuzzleIndex, updated);
+        const nextUnsolvedIndex = findNextUnsolvedPuzzle(
+          currentPuzzleIndex,
+          updated
+        );
         if (nextUnsolvedIndex !== -1) {
           // Use setTimeout to ensure state update happens after this one
           setTimeout(() => setCurrentPuzzleIndex(nextUnsolvedIndex), 0);
@@ -285,7 +325,10 @@ export default function GameArea({ initialPuzzleId }: GameAreaProps) {
   const handleSkip = () => {
     if (mode === "competition" && competitionPuzzleIds.length > 0) {
       // Don't mark as solved, just move to next unsolved puzzle
-      const nextUnsolvedIndex = findNextUnsolvedPuzzle(currentPuzzleIndex, solvedPuzzleIndices);
+      const nextUnsolvedIndex = findNextUnsolvedPuzzle(
+        currentPuzzleIndex,
+        solvedPuzzleIndices
+      );
       if (nextUnsolvedIndex !== -1) {
         setCurrentPuzzleIndex(nextUnsolvedIndex);
       }
@@ -324,7 +367,10 @@ export default function GameArea({ initialPuzzleId }: GameAreaProps) {
           />
         </div>
         {/* Right Column: Mode Selector + Game Board */}
-        <div ref={gameSectionRef} className="flex flex-col w-full border-l border-gray-300">
+        <div
+          ref={gameSectionRef}
+          className="flex flex-col w-full border-l border-gray-300"
+        >
           <div className="border-b p-2 md:p-4 border-gray-300">
             <GameModeSelector mode={mode} onModeChange={setMode} />
           </div>
@@ -333,7 +379,9 @@ export default function GameArea({ initialPuzzleId }: GameAreaProps) {
               <div className="flex flex-col items-center gap-4">
                 {selectedCompetitionId ? (
                   (() => {
-                    const competition = competitions.find((c) => c.id === selectedCompetitionId);
+                    const competition = competitions.find(
+                      (c) => c.id === selectedCompetitionId
+                    );
                     if (competition) {
                       const now = new Date();
                       const startDate = new Date(competition.startDate);
@@ -346,7 +394,9 @@ export default function GameArea({ initialPuzzleId }: GameAreaProps) {
                               Competition Not Started Yet
                             </p>
                             <p className="text-sm text-gray-600 mb-4">
-                              This competition starts on {startDate.toLocaleDateString()} at {startDate.toLocaleTimeString()}
+                              This competition starts on{" "}
+                              {startDate.toLocaleDateString()} at{" "}
+                              {startDate.toLocaleTimeString()}
                             </p>
                             <CompetitionCountdown
                               targetDate={startDate}
@@ -363,7 +413,8 @@ export default function GameArea({ initialPuzzleId }: GameAreaProps) {
                               Competition Ended
                             </p>
                             <p className="text-sm text-gray-600 mb-4">
-                              This competition ended on {endDate.toLocaleDateString()}
+                              This competition ended on{" "}
+                              {endDate.toLocaleDateString()}
                             </p>
                           </div>
                         );
@@ -376,7 +427,8 @@ export default function GameArea({ initialPuzzleId }: GameAreaProps) {
                           Ready to start the competition?
                         </p>
                         <p className="text-sm text-gray-600 mb-4">
-                          You'll solve {competitionPuzzleIds.length} puzzles. Good luck!
+                          You'll solve {competitionPuzzleIds.length} puzzles.
+                          Good luck!
                         </p>
                       </div>
                     );
@@ -387,13 +439,16 @@ export default function GameArea({ initialPuzzleId }: GameAreaProps) {
                       No competition selected
                     </p>
                     <p className="text-sm text-gray-600 mb-4">
-                      Start with 10 random puzzles or select a competition from the list.
+                      Start with 10 random puzzles or select a competition from
+                      the list.
                     </p>
                   </div>
                 )}
                 {selectedCompetitionId ? (
                   (() => {
-                    const competition = competitions.find((c) => c.id === selectedCompetitionId);
+                    const competition = competitions.find(
+                      (c) => c.id === selectedCompetitionId
+                    );
                     if (competition) {
                       const now = new Date();
                       const startDate = new Date(competition.startDate);
@@ -428,15 +483,27 @@ export default function GameArea({ initialPuzzleId }: GameAreaProps) {
                   onPuzzleSolved={handlePuzzleSolved}
                   mode={mode}
                   competitionTotalPuzzles={
-                    mode === "competition" ? competitionPuzzleIds.length : undefined
+                    mode === "competition"
+                      ? competitionPuzzleIds.length
+                      : undefined
                   }
                   competitionSolvedCount={
-                    mode === "competition" ? solvedPuzzleIndices.size : undefined
+                    mode === "competition"
+                      ? solvedPuzzleIndices.size
+                      : undefined
                   }
                   competitionDuration={
-                    mode === "competition" && competitionStarted && !competitionEnded ? competitionDuration : undefined
+                    mode === "competition" &&
+                    competitionStarted &&
+                    !competitionEnded
+                      ? competitionDuration
+                      : undefined
                   }
-                  onSkip={mode === "competition" && !competitionEnded ? handleSkip : undefined}
+                  onSkip={
+                    mode === "competition" && !competitionEnded
+                      ? handleSkip
+                      : undefined
+                  }
                   onTimeUp={mode === "competition" ? handleTimeUp : undefined}
                 />
               </>

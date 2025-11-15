@@ -3,7 +3,12 @@
 import { useEffect, useState, useRef } from "react";
 import { generateGame } from "./utils";
 import NumberBox from "./NumberBox";
-import { ArrowLeftCircleIcon, ArrowRightCircleIcon, Share2, Download } from "lucide-react";
+import {
+  ArrowLeftCircleIcon,
+  ArrowRightCircleIcon,
+  Share2,
+  Download,
+} from "lucide-react";
 import Fraction from "./Fraction";
 import { useTimer } from "./useTimer";
 import { useCountdownTimer } from "./useCountdownTimer";
@@ -12,7 +17,6 @@ import SolutionDialog from "./SolutionDialog";
 import confetti from "canvas-confetti";
 import { toJpeg } from "html-to-image";
 import GIF from "gif.js";
-
 
 export const infinity = 999999999999999;
 
@@ -24,7 +28,7 @@ interface BoardState {
 interface Math24GameProps {
   initialPuzzleId?: number;
   mode?: "puzzle" | "competition";
-  onPuzzleSolved?: () => void;
+  onPuzzleSolved?: (puzzleId: number) => void;
   competitionTotalPuzzles?: number;
   competitionSolvedCount?: number;
   competitionDuration?: number; // in seconds
@@ -60,15 +64,26 @@ const Math24Game = ({
   const idleCallbackRef = useRef<number | null>(null);
 
   const { time: timerTime, reset: resetTimer } = useTimer();
-  const { time: countdownTime, remainingSeconds, reset: resetCountdown, isFinished } = useCountdownTimer(0);
-  const { game, nextGame, getCurrentPuzzleIndex } = useGameGenerator(initialPuzzleId);
+  const {
+    time: countdownTime,
+    remainingSeconds,
+    reset: resetCountdown,
+    isFinished,
+  } = useCountdownTimer(0);
+  const { game, nextGame, getCurrentPuzzleIndex } =
+    useGameGenerator(initialPuzzleId);
 
   // Use countdown in competition mode, regular timer in puzzle mode
-  const time = mode === "competition" && competitionDuration ? countdownTime : timerTime;
+  const time =
+    mode === "competition" && competitionDuration ? countdownTime : timerTime;
 
   // Initialize and reset countdown when competition starts
   useEffect(() => {
-    if (mode === "competition" && competitionDuration && competitionDuration > 0) {
+    if (
+      mode === "competition" &&
+      competitionDuration &&
+      competitionDuration > 0
+    ) {
       // Reset countdown to the full duration when competition starts
       resetCountdown(competitionDuration);
     } else if (mode !== "competition") {
@@ -81,7 +96,13 @@ const Math24Game = ({
   // Detect when time is up in competition mode
   useEffect(() => {
     // Only trigger if competition is actually running (has duration set) and time is finished
-    if (mode === "competition" && competitionDuration && competitionDuration > 0 && isFinished && onTimeUp) {
+    if (
+      mode === "competition" &&
+      competitionDuration &&
+      competitionDuration > 0 &&
+      isFinished &&
+      onTimeUp
+    ) {
       onTimeUp();
     }
   }, [isFinished, mode, competitionDuration, onTimeUp]);
@@ -93,7 +114,10 @@ const Math24Game = ({
     if (!gameRef.current || typeof window === "undefined") return;
 
     // Cancel any pending capture
-    if (idleCallbackRef.current !== null && typeof cancelIdleCallback !== "undefined") {
+    if (
+      idleCallbackRef.current !== null &&
+      typeof cancelIdleCallback !== "undefined"
+    ) {
       cancelIdleCallback(idleCallbackRef.current);
       idleCallbackRef.current = null;
     }
@@ -134,7 +158,6 @@ const Math24Game = ({
     }
   };
 
-
   useEffect(() => {
     if (!game) return;
     setFrameImages([]);
@@ -157,13 +180,15 @@ const Math24Game = ({
     return () => {
       clearTimeout(timeoutId);
       // Cancel any pending idle callbacks
-      if (idleCallbackRef.current !== null && typeof cancelIdleCallback !== "undefined") {
+      if (
+        idleCallbackRef.current !== null &&
+        typeof cancelIdleCallback !== "undefined"
+      ) {
         cancelIdleCallback(idleCallbackRef.current);
         idleCallbackRef.current = null;
       }
     };
   }, [game]);
-
 
   const calculate = (num1: Fraction, op: string, num2: Fraction) => {
     switch (op) {
@@ -206,12 +231,12 @@ const Math24Game = ({
         origin: { y: 0.6 },
         gravity: 0.5,
         decay: 0.9,
-        ticks: 200
+        ticks: 200,
       });
 
       // Call onPuzzleSolved callback if provided
       if (onPuzzleSolved) {
-        onPuzzleSolved();
+        onPuzzleSolved(getCurrentPuzzleIndex());
       }
     }
   }, [boardStates]);
@@ -400,9 +425,14 @@ const Math24Game = ({
   const arrowDisabled = "black";
 
   return (
-    <div className="flex flex-col justify-center items-center border rounded-lg  bg-gray-200" ref={gameRef}>
+    <div
+      className="flex flex-col justify-center items-center border rounded-lg  bg-gray-200"
+      ref={gameRef}
+    >
       <div className="w-full bg-blue-500 px-2 py-2 flex items-center justify-between rounded-t-lg relative">
-        <p className="text-base md:text-lg font-semibold text-white">Make 24 Using (+ − × ÷)</p>
+        <p className="text-base md:text-lg font-semibold text-white">
+          Make 24 Using (+ − × ÷)
+        </p>
         <div className="flex items-center gap-2">
           <button
             className="bg-blue-500 p-1.5 text-white rounded flex items-center justify-center"
@@ -429,7 +459,6 @@ const Math24Game = ({
         </div>
       </div>
       <div className="flex flex-col justify-center  items-center gap-2 w-[312px] md:w-[340px] px-2 py-2">
-
         <div className="flex w-full justify-between border-b pb-1 mb-1">
           <p className="font-bold">
             Solved:{" "}
@@ -459,10 +488,11 @@ const Math24Game = ({
           {operators.map((op: string, index: number) => (
             <button
               key={index}
-              className={`border-2 border-green-600  h-[50px] w-[50px] flex items-center justify-center text-5xl text-green-600 font-bold leading-none ${selectedOperator === op
-                ? "text-green-800 border-6 border-green-800"
-                : "hover:border-green-800 active:border-green-800"
-                }`}
+              className={`border-2 border-green-600  h-[50px] w-[50px] flex items-center justify-center text-5xl text-green-600 font-bold leading-none ${
+                selectedOperator === op
+                  ? "text-green-800 border-6 border-green-800"
+                  : "hover:border-green-800 active:border-green-800"
+              }`}
               onClick={() => handleOperatorClick(op)}
             >
               {op}
