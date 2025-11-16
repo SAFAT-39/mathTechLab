@@ -10,6 +10,7 @@ import CompetitionCountdown from "./CompetitionCountdown";
 import { data } from "./Game/data";
 import { updateGlobalLeaderboard } from "./updateLeaderboard";
 import { useSession } from "next-auth/react";
+import { createCompetitionLeaderboardEntry } from "./createCompetitionLeaderboardEntry";
 
 interface LeaderboardData {
   page: number;
@@ -77,40 +78,6 @@ export default function GameArea({
 
   const { data: session } = useSession();
 
-  // Fetch competitions
-  // useEffect(() => {
-  //   const fetchCompetitions = async () => {
-  //     try {
-  //       const response = await fetch("/api/24-game/competitions");
-  //       const data = await response.json();
-  //       setCompetitions(data.competitions || []);
-  //     } catch (error) {
-  //       console.error("Error fetching competitions:", error);
-  //     } finally {
-  //       setIsLoadingCompetitions(false);
-  //     }
-  //   };
-
-  //   fetchCompetitions();
-  // }, []);
-
-  // Fetch global leaderboard
-  // useEffect(() => {
-  //   const fetchGlobalLeaderboard = async () => {
-  //     try {
-  //       const response = await fetch("/api/24-game/leaderboard");
-  //       const data = await response.json();
-  //       setGlobalLeaderboard(data.leaderboard || []);
-  //     } catch (error) {
-  //       console.error("Error fetching global leaderboard:", error);
-  //     } finally {
-  //       setIsLoadingLeaderboard(false);
-  //     }
-  //   };
-
-  //   fetchGlobalLeaderboard();
-  // }, []);
-
   // Fetch competition data when selected
   useEffect(() => {
     if (selectedCompetitionId && mode === "competition") {
@@ -161,6 +128,16 @@ export default function GameArea({
       timeElapsedRef.current = 0;
     }
   }, [mode]);
+
+  useEffect(() => {
+    if (competitionEnded) {
+      createCompetitionLeaderboardEntry({
+        competitionId: selectedCompetitionId!,
+        time: timeElapsedRef.current,
+        solvedPuzzleIds: Array.from(solvedPuzzleIndices),
+      });
+    }
+  }, [competitionEnded]);
 
   const gameSectionRef = useRef<HTMLDivElement>(null);
 

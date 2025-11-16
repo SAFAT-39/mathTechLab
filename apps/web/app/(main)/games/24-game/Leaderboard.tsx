@@ -3,9 +3,8 @@
 export interface LeaderboardEntry {
   rank: number;
   username: string;
-  score: number;
   time?: number; // in seconds
-  solved?: number;
+  solved: number;
 }
 
 interface LeaderboardProps {
@@ -45,9 +44,12 @@ export default function Leaderboard({
                   Username
                 </th>
                 {/* Removed Time column */}
-                {entries[0]?.solved !== undefined && (
+                <th className="text-right py-2 px-3 font-semibold text-gray-700">
+                  Solved
+                </th>
+                {entries[0]?.time !== undefined && (
                   <th className="text-right py-2 px-3 font-semibold text-gray-700">
-                    Solved
+                    Time
                   </th>
                 )}
               </tr>
@@ -72,9 +74,12 @@ export default function Leaderboard({
                     {entry.username}
                   </td>
                   {/* Removed Time cell */}
-                  {entry.solved !== undefined && (
+                  <td className="py-2 px-3 text-right text-gray-600">
+                    {entry.solved}
+                  </td>
+                  {entry.time !== undefined && (
                     <td className="py-2 px-3 text-right text-gray-600">
-                      {entry.solved}
+                      {entry.time}
                     </td>
                   )}
                 </tr>
