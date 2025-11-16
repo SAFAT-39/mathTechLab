@@ -130,7 +130,7 @@ export default function GameArea({
   }, [mode]);
 
   useEffect(() => {
-    if (competitionEnded) {
+    if (competitionEnded && selectedCompetitionId) {
       createCompetitionLeaderboardEntry({
         competitionId: selectedCompetitionId!,
         time: timeElapsedRef.current,
