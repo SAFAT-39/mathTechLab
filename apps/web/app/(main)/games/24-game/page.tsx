@@ -114,14 +114,12 @@ const Page = async ({ searchParams }: PageProps) => {
   });
 
   const competitionData = await competitionsRes.json();
-
   const leaderBoardRes = await fetch(`${baseUrl}/api/24-game/leaderboard`, {
     method: "GET",
     cache: "no-store", // ensures SSR fresh data
   });
 
   const leaderBoardData = await leaderBoardRes.json();
-  console.log(leaderBoardData);
 
   return (
     <>

@@ -3,7 +3,7 @@
 import CompetitionCountdown from "./CompetitionCountdown";
 
 export interface Competition {
-  id: string;
+  _id: string;
   name: string;
   description?: string;
   startDate: string;
@@ -51,6 +51,7 @@ export default function CompetitionList({
 }: CompetitionListProps) {
   const handleStartClick = (e: React.MouseEvent, competitionId: string) => {
     e.stopPropagation();
+    console.log({ competitionId });
     if (onStartCompetition) {
       onStartCompetition(competitionId);
     } else {
@@ -69,7 +70,7 @@ export default function CompetitionList({
         <div className="space-y-3">
           {competitionData.competitions.map((competition) => {
             const status = getCompetitionStatus(competition);
-            const isSelected = selectedCompetitionId === competition.id;
+            const isSelected = selectedCompetitionId === competition._id;
             const startDate = new Date(competition.startDate);
             const endDate = new Date(competition.endDate);
 
@@ -98,7 +99,7 @@ export default function CompetitionList({
 
             return (
               <div
-                key={competition.id}
+                key={competition._id}
                 className={`w-full p-3 rounded-lg border-2 transition-all ${
                   isSelected
                     ? "border-blue-600 bg-blue-50"
@@ -156,7 +157,7 @@ export default function CompetitionList({
                   </div>
                 ) : (
                   <button
-                    onClick={(e) => handleStartClick(e, competition.id)}
+                    onClick={(e) => handleStartClick(e, competition._id)}
                     className="w-full mt-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors text-sm"
                   >
                     Start Competition

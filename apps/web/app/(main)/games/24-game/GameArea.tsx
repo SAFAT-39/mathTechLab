@@ -120,6 +120,7 @@ export default function GameArea({
             `/api/24-game/competitions/${selectedCompetitionId}`
           );
           const data = await response.json();
+          console.log({ data });
           setCompetitionPuzzleIds(data.competition.puzzleIds || []);
           setCompetitionLeaderboard(data.leaderboard || []);
           setCurrentPuzzleIndex(0);
@@ -164,6 +165,7 @@ export default function GameArea({
   const gameSectionRef = useRef<HTMLDivElement>(null);
 
   const handleSelectCompetition = (competitionId: string) => {
+    console.log({ competitionId });
     setSelectedCompetitionId(competitionId);
     setMode("competition");
     setCompetitionStarted(false); // Reset start state when selecting a competition
@@ -172,7 +174,7 @@ export default function GameArea({
   const handleStartCompetitionFromList = (competitionId: string) => {
     // Check if competition is active
     const competition = competitionData.competitions.find(
-      (c) => c.id === competitionId
+      (c) => c._id === competitionId
     );
     if (!competition) return;
 
@@ -210,7 +212,7 @@ export default function GameArea({
       if (selectedCompetitionId) {
         // Check if competition is active
         const competition = competitionData.competitions.find(
-          (c) => c.id === selectedCompetitionId
+          (c) => c._id === selectedCompetitionId
         );
         if (competition) {
           const now = new Date();
@@ -394,7 +396,7 @@ export default function GameArea({
                 {selectedCompetitionId ? (
                   (() => {
                     const competition = competitionData.competitions.find(
-                      (c) => c.id === selectedCompetitionId
+                      (c) => c._id === selectedCompetitionId
                     );
                     if (competition) {
                       const now = new Date();
@@ -461,7 +463,7 @@ export default function GameArea({
                 {selectedCompetitionId ? (
                   (() => {
                     const competition = competitionData.competitions.find(
-                      (c) => c.id === selectedCompetitionId
+                      (c) => c._id === selectedCompetitionId
                     );
                     if (competition) {
                       const now = new Date();
