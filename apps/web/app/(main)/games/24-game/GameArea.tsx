@@ -59,7 +59,7 @@ export default function GameArea({
   const [solvedPuzzleIndices, setSolvedPuzzleIndices] = useState<Set<number>>(
     new Set()
   );
-  const [competitionDuration, setCompetitionDuration] = useState<number>(60); // Default 10 minutes
+  const [competitionDuration, setCompetitionDuration] = useState<number>(600); // Default 10 minutes
   const [competitionEnded, setCompetitionEnded] = useState(false);
   const competitionEndedRef = useRef(false);
   const [competitionStartTime, setCompetitionStartTime] = useState<
@@ -94,8 +94,8 @@ export default function GameArea({
           setCompetitionStarted(false); // Reset start state when competition changes
           setSolvedPuzzleIndices(new Set());
           // Set duration from competition data if available, otherwise use default
-          if (data.competition.duration) {
-            setCompetitionDuration(data.competition.duration);
+          if (data.competition.time) {
+            setCompetitionDuration(data.competition.time);
           }
         } catch (error) {
           console.error("Error fetching competition data:", error);
