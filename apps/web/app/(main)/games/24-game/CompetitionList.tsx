@@ -60,7 +60,7 @@ export default function CompetitionList({
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 max-h-[600px] overflow-y-auto">
+    <div className="min-w-[300px] bg-white rounded-lg shadow-md p-4 max-h-[600px] overflow-y-auto">
       <h3 className="text-xl font-bold mb-4 text-gray-800">Competitions</h3>
       {competitionData.competitions.length === 0 ? (
         <p className="text-gray-500 text-center py-8">
@@ -137,8 +137,7 @@ export default function CompetitionList({
                     </div>
                     <div className="flex items-center gap-4 mt-2 text-xs text-gray-500">
                       <span>
-                        {startDate.toLocaleDateString()} -{" "}
-                        {endDate.toLocaleDateString()}
+                        {startDate.toLocaleDateString()} -{" "}{endDate.toLocaleDateString()}
                       </span>
                       {competition.participantCount !== undefined && (
                         <span>{competition.participantCount} participants</span>
