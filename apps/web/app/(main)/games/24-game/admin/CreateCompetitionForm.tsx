@@ -16,6 +16,7 @@ export default function CreateCompetitionForm() {
       puzzleCount: Number(formData.get("puzzleCount")),
       time: Number(formData.get("time")),
       durationDays: Number(formData.get("durationDays")),
+      startDate: formData.get("startDate"),
     };
 
     await fetch("/api/24-game/competitions", {
@@ -65,6 +66,12 @@ export default function CreateCompetitionForm() {
         name="durationDays"
         type="number"
         placeholder="Duration (days)"
+        className="w-full p-2 border rounded"
+        required
+      />
+      <input
+        name="startDate"
+        type="datetime-local"
         className="w-full p-2 border rounded"
         required
       />

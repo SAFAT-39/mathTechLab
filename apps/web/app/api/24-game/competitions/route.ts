@@ -68,9 +68,10 @@ export async function POST(req: NextRequest) {
       puzzleCount,
       time = 10,
       durationDays = 7,
+      startDate,
     } = await req.json();
 
-    if (!name || !description || !puzzleCount) {
+    if (!name || !description || !puzzleCount || !startDate) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -86,19 +87,19 @@ export async function POST(req: NextRequest) {
       puzzleIds.push(Math.floor(Math.random() * 1000) + 1); // Example range: 1–1000
     }
 
-    const now = new Date();
-    const end = new Date(now.getTime() + durationDays * 24 * 60 * 60 * 1000);
+    const start = new Date(startDate);
+    const end = new Date(start.getTime() + durationDays * 24 * 60 * 60 * 1000);
 
     const newCompetition = {
       name,
       description,
       puzzleIds,
-      leaderboard: [], // <-- Added leaderboard array
+      leaderboard: [],
       time,
       durationDays,
-      startDate: now.toISOString(),
+      startDate: start.toISOString(),
       endDate: end.toISOString(),
-      createdAt: now,
+      createdAt: new Date().toISOString(),
     };
 
     const result = await competitions.insertOne(newCompetition);
