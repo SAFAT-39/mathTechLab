@@ -172,7 +172,10 @@ export default function GameArea({
   const gameSectionRef = useRef<HTMLDivElement>(null);
 
   const handleSelectCompetition = (competitionId: string) => {
-    console.log({ competitionId });
+    if (competitionStarted) {
+      setShowExitConfirmation(true);
+      return;
+    }
     setSelectedCompetitionId(competitionId);
     setMode("competition");
     setCompetitionStarted(false); // Reset start state when selecting a competition
