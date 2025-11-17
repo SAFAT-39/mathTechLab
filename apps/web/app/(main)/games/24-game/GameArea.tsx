@@ -77,6 +77,7 @@ export default function GameArea({
   const [isLoadingLeaderboard, setIsLoadingLeaderboard] = useState(false);
   const [showExitConfirmation, setShowExitConfirmation] = useState(false);
   const [pendingMode, setPendingMode] = useState<"puzzle" | "competition">("puzzle");
+  const [isCompetitionActive, setIsCompetitionActive] = useState(true);
 
   const { data: session } = useSession();
 
@@ -156,14 +157,17 @@ export default function GameArea({
   }, [mode]);
 
   useEffect(() => {
-    if (competitionEnded && selectedCompetitionId) {
+    if (competitionEnded && selectedCompetitionId && isCompetitionActive) {
+      // Only update leaderboard if competition is active
       createCompetitionLeaderboardEntry({
         competitionId: selectedCompetitionId!,
         time: timeElapsedRef.current,
         solvedPuzzleIds: Array.from(solvedPuzzleIndices),
       });
+    } else if (competitionEnded && !isCompetitionActive) {
+      console.log('Competition has ended - playing in practice mode. Leaderboard not updated.');
     }
-  }, [competitionEnded]);
+  }, [competitionEnded, isCompetitionActive]);
 
   const gameSectionRef = useRef<HTMLDivElement>(null);
 
@@ -188,11 +192,6 @@ export default function GameArea({
     // Only allow starting if competition is active
     if (now < startDate) {
       // Competition hasn't started yet
-      return;
-    }
-
-    if (now > endDate) {
-      // Competition has ended
       return;
     }
 
@@ -221,19 +220,16 @@ export default function GameArea({
           const now = new Date();
           const startDate = new Date(competition.startDate);
           const endDate = new Date(competition.endDate);
+          
+          // Check if competition is active
+          const isActive = now >= startDate && now <= endDate;
+          setIsCompetitionActive(isActive);
 
-          // Only allow starting if competition is active
-          if (now < startDate) {
-            // Competition hasn't started yet - don't allow starting
-            return;
-          }
-
-          if (now > endDate) {
-            // Competition has ended - don't allow starting
-            return;
+          // Allow starting even if competition is not active, but don't update leaderboard
+          if (!isActive) {
+            console.log('Playing in practice mode - leaderboard will not be updated');
           }
         }
-
         // Competition selected - puzzle IDs already loaded
         setCompetitionStarted(true);
         setCurrentPuzzleIndex(0);
@@ -490,12 +486,11 @@ export default function GameArea({
                     const competition = competitionData.competitions.find(
                       (c) => c._id === selectedCompetitionId
                     );
+                    const now = new Date();
+                    const endDate = new Date(competition?.endDate!);
                     if (competition) {
-                      const now = new Date();
                       const startDate = new Date(competition.startDate);
-                      const endDate = new Date(competition.endDate);
-
-                      if (now < startDate || now > endDate) {
+                      if (now < startDate) {
                         return null; // Don't show start button for upcoming or ended competitions
                       }
                     }
@@ -504,7 +499,7 @@ export default function GameArea({
                         onClick={handleStartCompetition}
                         className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition-colors"
                       >
-                        Start Competition
+                        {now > endDate ? "Practice" : "Start Competition"}
                       </button>
                     );
                   })()

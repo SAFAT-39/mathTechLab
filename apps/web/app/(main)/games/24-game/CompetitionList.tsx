@@ -147,9 +147,12 @@ export default function CompetitionList({
                   {getStatusBadge()}
                 </div>
                 {status === "ended" ? (
-                  <div className="w-full mt-2 px-4 py-2 bg-gray-300 text-gray-600 font-semibold rounded-lg text-sm text-center cursor-not-allowed">
-                    Competition Ended
-                  </div>
+                  <button
+                    onClick={(e) => handleStartClick(e, competition._id)}
+                    className="w-full mt-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors text-sm"
+                  >
+                    Practice
+                  </button>
                 ) : status === "upcoming" ? (
                   <div className="w-full mt-2 px-4 py-2 bg-gray-300 text-gray-600 font-semibold rounded-lg text-sm text-center cursor-not-allowed">
                     Competition Not Started Yet
