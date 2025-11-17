@@ -75,8 +75,34 @@ export default function GameArea({
   >([]);
   const [isLoadingCompetitions, setIsLoadingCompetitions] = useState(false);
   const [isLoadingLeaderboard, setIsLoadingLeaderboard] = useState(false);
+  const [showExitConfirmation, setShowExitConfirmation] = useState(false);
+  const [pendingMode, setPendingMode] = useState<"puzzle" | "competition">("puzzle");
 
   const { data: session } = useSession();
+
+  const handleModeChange = (newMode: "puzzle" | "competition") => {
+    // If trying to switch to puzzle mode while in a competition that has started, show confirmation
+    if (mode === "competition" && competitionStarted && newMode === "puzzle") {
+      setPendingMode(newMode);
+      setShowExitConfirmation(true);
+    } else {
+      setMode(newMode);
+    }
+  };
+
+  const confirmExitCompetition = () => {
+    setMode(pendingMode);
+    setShowExitConfirmation(false);
+    setCompetitionStarted(false);
+    setSelectedCompetitionId(null);
+    setCompetitionPuzzleIds([]);
+    setCurrentPuzzleIndex(0);
+    setSolvedPuzzleIndices(new Set());
+  };
+
+  const cancelExitCompetition = () => {
+    setShowExitConfirmation(false);
+  };
 
   // Fetch competition data when selected
   useEffect(() => {
@@ -365,7 +391,29 @@ export default function GameArea({
           className="flex flex-col w-full border-l border-gray-300"
         >
           <div className="border-b p-2 md:p-4 border-gray-300">
-            <GameModeSelector mode={mode} onModeChange={setMode} />
+            <GameModeSelector mode={mode} onModeChange={handleModeChange} />
+            {showExitConfirmation && (
+              <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                <div className="bg-white p-6 rounded-lg shadow-xl max-w-md w-full mx-4">
+                  <h3 className="text-lg font-semibold mb-4">Exit Competition?</h3>
+                  <p className="mb-6">Are you sure you want to exit the competition? Your progress will be lost.</p>
+                  <div className="flex justify-end space-x-3">
+                    <button
+                      onClick={cancelExitCompetition}
+                      className="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition-colors"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={confirmExitCompetition}
+                      className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
+                    >
+                      Exit Competition
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
           <div className="min-h-[515px] flex flex-col justify-center items-center py-6">
             {mode === "competition" && !competitionStarted ? (
