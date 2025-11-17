@@ -367,7 +367,7 @@ export default function GameArea({
           <div className="border-b p-2 md:p-4 border-gray-300">
             <GameModeSelector mode={mode} onModeChange={setMode} />
           </div>
-          <div className="flex flex-col justify-center items-center py-6">
+          <div className="min-h-[515px] flex flex-col justify-center items-center py-6">
             {mode === "competition" && !competitionStarted ? (
               <div className="flex flex-col items-center gap-4">
                 {selectedCompetitionId ? (
