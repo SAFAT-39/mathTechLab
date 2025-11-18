@@ -1,5 +1,9 @@
 import GameArea from "./GameArea";
-import RelatedGames from "../../components/RelatedGames";
+import RelatedGames from "./components/RelatedGames";
+import HowToUse from "./components/HowToUse";
+import TipsAndStrategies from "./components/TipsAndStrategies";
+import FAQ from "./components/FAQ";
+
 
 interface PageProps {
   searchParams: Promise<{ id?: string }>;
@@ -57,13 +61,13 @@ const Page = async ({ searchParams }: PageProps) => {
       },
       {
         "@type": "HowToStep",
-        name: "Revert an operation",
-        text: "Revert an operation by clicking left arrow button.",
+        name: "Make 24 with arithmetic operations",
+        text: "Use addition, subtraction, multiplication, and division to make 24.",
       },
       {
         "@type": "HowToStep",
-        name: "Make 24 with arithmetic operations",
-        text: "Use addition, subtraction, multiplication, and division to make 24.",
+        name: "Revert an operation",
+        text: "Revert an operation by clicking left arrow button.",
       },
       {
         "@type": "HowToStep",
@@ -123,113 +127,58 @@ const Page = async ({ searchParams }: PageProps) => {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center gap-2">
-        <h1 className="text-2xl text-center">24 Game – A Fun Math Challenge</h1>
-        <h2 className="text-center md:w-[600px] font-semibold">
-          The 24 Game is a fun and challenging math puzzle where you use four
-          numbers and basic arithmetic operations (+, −, ×, ÷) to make 24. Test
-          your problem-solving skills and see how fast you can find a solution!
-        </h2>
+      <div className="w-full bg-white rounded-lg shadow-md py-4">
+        <div className="flex flex-col justify-center items-center gap-2 px-2">
+          <h1 className="text-2xl text-center">24 Game – A Fun Math Challenge</h1>
+          <h2 className="text-center md:w-[600px] font-semibold">
+            The 24 Game is a fun and challenging math puzzle where you use four
+            numbers and basic arithmetic operations (+, −, ×, ÷) to make 24. Test
+            your problem-solving skills and see how fast you can find a solution!
+          </h2>
+        </div>
+        <GameArea
+          initialPuzzleId={puzzleId}
+          competitionData={competitionData}
+          leaderboardData={leaderBoardData}
+        />
       </div>
-      <GameArea
-        initialPuzzleId={puzzleId}
-        competitionData={competitionData}
-        leaderboardData={leaderBoardData}
-      />
-      <section className="max-w-3xl mx-auto p-6 space-y-6 text-gray-800">
+      <section className="w-full mx-auto py-6 space-y-6 text-gray-800 bg-white mt-4 rounded-md">
         {/* How to Play Section */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
         />
-        <div>
-          <h2 className="text-2xl font-bold text-primary">🎮 How to Play</h2>
-          <ol className="list-decimal list-inside space-y-2 mt-2">
-            <li>
-              You will get <strong>four numbers</strong>.
-            </li>
-            <li>
-              Tap or click numbers and operations to form an{" "}
-              <strong>expression</strong>.
-            </li>
-            <li>
-              Two number will be <strong>combined</strong> once an operation is
-              applied.
-            </li>
-            <li>
-              You can <strong>revert</strong> an operation by clicking the left
-              arrow button.
-            </li>
-            <li>
-              Use{" "}
-              <strong>
-                addition, subtraction, multiplication, and division
-              </strong>{" "}
-              to make <strong>24</strong>.
-            </li>
-            <li>
-              If you get <strong>24</strong>, you win! Try to solve it as
-              quickly as possible to get highest score.
-            </li>
-          </ol>
-        </div>
+        <HowToUse steps={howToSchema.step} />
 
         {/* Tips & Strategies Section */}
-        <div>
-          <h2 className="text-2xl font-bold text-primary">
-            💡 Tips & Strategies
-          </h2>
-          <ul className="list-disc list-inside space-y-2 mt-2">
-            <li>
-              Look for <strong>multiples of 24</strong> (e.g., 6 × 4, 8 × 3).
-            </li>
-            <li>
-              Try using <strong>division first</strong> if large numbers are
-              present.
-            </li>
-            <li>
-              Experiment with <strong>different orders of operations</strong>{" "}
-              (PEMDAS).
-            </li>
-            <li>
-              Practice with <strong>common number sets</strong> like (12, 3, 4,
-              1) → <code>(12 ÷ (3 - 1) × 4 = 24)</code>.
-            </li>
-          </ul>
-        </div>
+        <hr  className="border-gray-300"/>
+        <TipsAndStrategies />
 
         {/* FAQ Section */}
-
+        <hr  className="border-gray-300"/>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
-        <div>
-          <h2 className="text-2xl font-bold text-primary">❓ FAQs</h2>
-          <div className="mt-2 space-y-4">
-            <div>
-              <h3 className="font-semibold">Q: Is there always a solution?</h3>
-              <p>A: Yes always! The choosen sets of numbers always form 24.</p>
-            </div>
-            <div>
-              <h3 className="font-semibold">
-                Q: Can I play this game on mobile?
-              </h3>
-              <p>
-                A: Yes! The 2048 game on MathTechLab is fully responsive,
-                mobile-friendly and works on all devices.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold">Q: Can I play with friends?</h3>
-              <p>
-                A: Yes! Challenge your friends to see who can solve it fastest.
-              </p>
-            </div>
-          </div>
-        </div>
+        <FAQ 
+          faqs={[
+            {
+              question: 'Q: Is there always a solution?',
+              answer: 'Yes always! The chosen sets of numbers always form 24.'
+            },
+            {
+              question: 'Q: Can I play this game on mobile?',
+              answer: 'Yes! The 24 Game on MathTechLab is fully responsive, mobile-friendly and works on all devices.'
+            },
+            {
+              question: 'Q: Can I play with friends?',
+              answer: 'Yes! Challenge your friends to see who can solve it fastest.'
+            }
+          ]}
+        />
+        <hr  className="border-gray-300"/>
+        <RelatedGames relatedGames={relatedGames} />
       </section>
-      <RelatedGames relatedGames={relatedGames} />
     </>
   );
 };

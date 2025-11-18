@@ -89,7 +89,7 @@ export default function RootLayout({ children }: LayoutProps) {
         </noscript>
 
         <SessionProviderWrapper>
-          <div className="flex flex-col min-h-screen">
+          {/* <div className="flex flex-col min-h-screen"> */}
             {/* Header */}
             <Header />
 
@@ -98,7 +98,7 @@ export default function RootLayout({ children }: LayoutProps) {
 
             {/* Footer */}
             <Footer />
-          </div>
+          {/* </div> */}
         </SessionProviderWrapper>
       </body>
     </html>

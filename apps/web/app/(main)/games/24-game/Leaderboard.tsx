@@ -20,7 +20,7 @@ export default function Leaderboard({
 }: LeaderboardProps) {
   if (isLoading) {
     return (
-      <div className="bg-white rounded-lg shadow-md p-4">
+      <div className="p-4">
         <h3 className="text-xl font-bold mb-4 text-gray-800">{title}</h3>
         <div className="text-center py-8 text-gray-500">Loading...</div>
       </div>
@@ -28,7 +28,7 @@ export default function Leaderboard({
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-4">
+    <div className="p-4">
       <h3 className="text-xl font-bold mb-4 text-gray-800">{title}</h3>
       {entries.length === 0 ? (
         <div className="text-center py-8 text-gray-500">No entries yet</div>

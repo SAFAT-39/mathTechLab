@@ -372,7 +372,7 @@ export default function GameArea({
       : "Global Leaderboard";
 
   return (
-    <div className="w-full mt-4 bg-white rounded-lg shadow-md">
+    <div className="w-full mt-4 border-t border-gray-300">
       {/* Top Section: Two columns - Competitions | Game Board + Mode Selector */}
       <div className="flex flex-col-reverse lg:flex-row gap-6">
         {/* Left Column: Competitions */}
