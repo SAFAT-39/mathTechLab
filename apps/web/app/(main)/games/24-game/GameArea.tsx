@@ -161,11 +161,15 @@ export default function GameArea({
   useEffect(() => {
     if (competitionEnded && selectedCompetitionId && isCompetitionActive) {
       // Only update leaderboard if competition is active
-      createCompetitionLeaderboardEntry({
-        competitionId: selectedCompetitionId!,
-        time: timeElapsedRef.current,
-        solvedPuzzleIds: Array.from(solvedPuzzleIndices),
-      });
+      try {
+        createCompetitionLeaderboardEntry({
+          competitionId: selectedCompetitionId!,
+          time: timeElapsedRef.current,
+          solvedPuzzleIds: Array.from(solvedPuzzleIndices),
+        });
+      } catch (error) {
+        console.error("Error updating leaderboard:", error);
+      }
     } else if (competitionEnded && !isCompetitionActive) {
       console.log('Competition has ended - playing in practice mode. Leaderboard not updated.');
     }
