@@ -502,12 +502,14 @@ export default function GameArea({
                       }
                     }
                     return (
-                      <button
-                        onClick={handleStartCompetition}
-                        className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition-colors"
-                      >
-                        {now > endDate ? "Practice" : "Start Competition"}
-                      </button>
+                      <>
+                        {(now < endDate && !session?.user) ? (<div>Sign in to start competition</div>) : (<button
+                          onClick={handleStartCompetition}
+                          className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition-colors"
+                        >
+                          {now > endDate ? "Practice" : "Start Competition"}
+                        </button>)}
+                      </>
                     );
                   })()
                 ) : (
