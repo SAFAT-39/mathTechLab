@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getDb } from "../../../../utils/mongodb";
+import { getDb } from "@/utils/mongodb";
 import { ObjectId } from "mongodb";
-import { getServerSession } from "next-auth";
-import { authOptions } from "../../../auth/[...nextauth]/route";
+import { auth } from "@/lib/better-auth";
+import { headers } from "next/headers";
+
 
 export async function GET(
   req: NextRequest,
@@ -12,7 +13,7 @@ export async function GET(
     const { id } = await params;
 
     const db = await getDb();
-    const competitions = db.collection("competitions");
+    const competitions = db.collection("24-game_competition");
 
     // ---- Fetch the competition ----
     const competition = await competitions.findOne({
@@ -31,7 +32,8 @@ export async function GET(
       .sort((a: any, b: any) => b.score - a.score)
       .map((entry: any, index: number) => ({
         rank: index + 1,
-        username: entry.username,
+        userId: entry.userId,
+        name: entry.name,
         score: entry.score,
         time: entry.time,
         solved: entry.solved,
@@ -42,6 +44,7 @@ export async function GET(
         id: competition._id.toString(),
         name: competition.name,
         description: competition.description,
+        time: competition.time,
         startDate: competition.startDate,
         endDate: competition.endDate,
         puzzleIds: competition.puzzleIds,
@@ -62,9 +65,15 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
+    const session = await auth.api.getSession({
+      headers: await headers()
+    });
+    if (!session?.user || session.user.role !== "admin") {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
     const db = await getDb();
     await db
-      .collection("competitions")
+      .collection("24-game_competition")
       .deleteOne({ _id: new ObjectId(params.id) });
 
     return NextResponse.json({ message: "Deleted" });
@@ -78,12 +87,14 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const session = await getServerSession(authOptions);
-    if (!session?.user?.username) {
+    const session = await auth.api.getSession({
+      headers: await headers()
+    });
+    if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const username = session.user.username;
+    const name = session.user.name;
     const { time, solvedPuzzleIds } = await req.json();
     const { id } = await params;
 
@@ -99,7 +110,7 @@ export async function POST(
     }
 
     const db = await getDb();
-    const competitions = db.collection("competitions");
+    const competitions = db.collection("24-game_competition");
 
     const competition = await competitions.findOne({ _id: new ObjectId(id) });
 
@@ -114,7 +125,7 @@ export async function POST(
 
     // --- Check if entry already exists ---
     const exists = leaderboard.some(
-      (entry: any) => entry.username === username
+      (entry: any) => entry.userId === session.user.id
     );
 
     if (exists) {
@@ -126,7 +137,8 @@ export async function POST(
 
     // --- Insert new entry ---
     leaderboard.push({
-      username,
+      name,
+      userId: session.user.id,
       time,
       solvedPuzzleIds: Array.from(new Set(solvedPuzzleIds)), // ensure unique
       createdAt: new Date(),
@@ -144,7 +156,8 @@ export async function POST(
       })
       .map((entry: any, index: number) => ({
         rank: index + 1,
-        username: entry.username,
+        name: entry.name,
+        userId: entry.userId,
         time: entry.time,
         solvedPuzzleIds: entry.solvedPuzzleIds,
         solved: entry.solved,

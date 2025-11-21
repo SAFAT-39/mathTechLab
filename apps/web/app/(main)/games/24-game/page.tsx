@@ -151,16 +151,16 @@ const Page = async ({ searchParams }: PageProps) => {
         <HowToUse steps={howToSchema.step} />
 
         {/* Tips & Strategies Section */}
-        <hr  className="border-gray-300"/>
+        <hr className="border-gray-300" />
         <TipsAndStrategies />
 
         {/* FAQ Section */}
-        <hr  className="border-gray-300"/>
+        <hr className="border-gray-300" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
-        <FAQ 
+        <FAQ
           faqs={[
             {
               question: 'Q: Is there always a solution?',
@@ -176,7 +176,7 @@ const Page = async ({ searchParams }: PageProps) => {
             }
           ]}
         />
-        <hr  className="border-gray-300"/>
+        <hr className="border-gray-300" />
         <RelatedGames relatedGames={relatedGames} />
       </section>
     </>

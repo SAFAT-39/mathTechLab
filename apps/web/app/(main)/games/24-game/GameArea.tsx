@@ -11,6 +11,8 @@ import { data } from "./Game/data";
 import { updateGlobalLeaderboard } from "./updateLeaderboard";
 import { useSession } from "next-auth/react";
 import { createCompetitionLeaderboardEntry } from "./createCompetitionLeaderboardEntry";
+import { authOptions } from "@/api/auth/[...nextauth]/route";
+import { authClient } from "@/lib/auth-client";
 
 interface LeaderboardData {
   page: number;
@@ -79,7 +81,7 @@ export default function GameArea({
   const [pendingMode, setPendingMode] = useState<"puzzle" | "competition">("puzzle");
   const [isCompetitionActive, setIsCompetitionActive] = useState(true);
 
-  const { data: session } = useSession();
+  const { data: session } = authClient.useSession();
 
   const handleModeChange = (newMode: "puzzle" | "competition") => {
     // If trying to switch to puzzle mode while in a competition that has started, show confirmation
@@ -122,7 +124,7 @@ export default function GameArea({
           setSolvedPuzzleIndices(new Set());
           // Set duration from competition data if available, otherwise use default
           if (data.competition.time) {
-            setCompetitionDuration(data.competition.time);
+            setCompetitionDuration(data.competition.time * 60);
           }
         } catch (error) {
           console.error("Error fetching competition data:", error);
@@ -223,7 +225,7 @@ export default function GameArea({
           const now = new Date();
           const startDate = new Date(competition.startDate);
           const endDate = new Date(competition.endDate);
-          
+
           // Check if competition is active
           const isActive = now >= startDate && now <= endDate;
           setIsCompetitionActive(isActive);
@@ -319,7 +321,9 @@ export default function GameArea({
   };
 
   const handlePuzzleSolved = (puzzleId: number) => {
-    updateGlobalLeaderboard({ username: session?.user?.username, puzzleId });
+    if (session?.user) {
+      updateGlobalLeaderboard({ puzzleId });
+    }
     if (mode === "competition" && competitionPuzzleIds.length > 0) {
       // Mark current puzzle as solved and find next unsolved puzzle
       setSolvedPuzzleIndices((prev) => {
@@ -533,8 +537,8 @@ export default function GameArea({
                   }
                   competitionDuration={
                     mode === "competition" &&
-                    competitionStarted &&
-                    !competitionEnded
+                      competitionStarted &&
+                      !competitionEnded
                       ? competitionDuration
                       : undefined
                   }

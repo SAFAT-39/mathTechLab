@@ -6,6 +6,7 @@ import { ReactNode } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import SessionProviderWrapper from "./SessionProviderWrapper";
+import GoogleOneTapWrapper from "@/components/GoogleOneTapWrapper";
 
 export const metadata: Metadata = {
   title: "MathTechLab - Explore Math, Games, and Technology",
@@ -44,6 +45,7 @@ type LayoutProps = {
 };
 
 export default function RootLayout({ children }: LayoutProps) {
+
   return (
     <html lang="en">
       <head>
@@ -75,6 +77,11 @@ export default function RootLayout({ children }: LayoutProps) {
             `,
           }}
         /> */}
+        <script
+          src="https://accounts.google.com/gsi/client"
+          async
+          defer
+        ></script>
       </head>
 
       <body>
@@ -87,19 +94,18 @@ export default function RootLayout({ children }: LayoutProps) {
             style={{ display: "none", visibility: "hidden" }}
           ></iframe>
         </noscript>
+        <GoogleOneTapWrapper />
 
-        <SessionProviderWrapper>
-          {/* <div className="flex flex-col min-h-screen"> */}
-            {/* Header */}
-            <Header />
+        {/* <div className="flex flex-col min-h-screen"> */}
+        {/* Header */}
+        <Header />
 
-            {/* Main Content */}
-            <main className="flex-grow container mx-auto p-4">{children}</main>
+        {/* Main Content */}
+        <main className="flex-grow container mx-auto p-4">{children}</main>
 
-            {/* Footer */}
-            <Footer />
-          {/* </div> */}
-        </SessionProviderWrapper>
+        {/* Footer */}
+        <Footer />
+        {/* </div> */}
       </body>
     </html>
   );

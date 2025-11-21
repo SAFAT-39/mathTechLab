@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getDb } from "../../../utils/mongodb";
-import { authOptions } from "../../auth/[...nextauth]/route";
-import { getServerSession } from "next-auth";
+import { getDb } from "@/utils/mongodb";
+import { auth } from "@/lib/better-auth";
+import { headers } from "next/headers";
 
 /**
  * GET /api/leaderboard?page=1&limit=10
@@ -23,7 +23,8 @@ export async function GET(req: NextRequest) {
       .aggregate([
         {
           $project: {
-            username: 1,
+            userId: 1,
+            name: 1,
             puzzleIds: 1,
             solved: { $size: "$puzzleIds" },
             updatedAt: 1,
@@ -39,7 +40,8 @@ export async function GET(req: NextRequest) {
     let rankOffset = skip + 1;
     const ranked = data.map((entry, i) => ({
       rank: rankOffset + i,
-      username: entry.username,
+      userId: entry.userId,
+      name: entry.name,
       solved: entry.solved,
       puzzleIds: entry.puzzleIds,
       updatedAt: entry.updatedAt,
@@ -67,7 +69,9 @@ export async function GET(req: NextRequest) {
  */
 export async function POST(req: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
+    const session = await auth.api.getSession({
+      headers: await headers() // you need to pass the headers object.
+    })
 
     if (!session || !session.user) {
       return NextResponse.json(
@@ -76,27 +80,22 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const { username, puzzleId } = await req.json();
-    if (!username || puzzleId == null) {
+    const { puzzleId } = await req.json();
+    if (!puzzleId) {
       return NextResponse.json({ error: "Invalid body" }, { status: 400 });
     }
 
-    if (!username || !puzzleId) {
-      return NextResponse.json(
-        { error: "username and puzzleId are required" },
-        { status: 400 }
-      );
-    }
 
     const db = await getDb();
     const leaderboard = db.collection("24-game_leaderboard");
 
     // Update only if puzzleId not already present
     await leaderboard.updateOne(
-      { username },
+      { userId: session.user.id },
       {
         $addToSet: { puzzleIds: puzzleId },
         $set: { updatedAt: new Date() },
+        $setOnInsert: { userId: session.user.id, name: session.user.name },
       },
       { upsert: true }
     );

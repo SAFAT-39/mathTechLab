@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getDb } from "../../../utils/mongodb";
+import { getDb } from "@/utils/mongodb";
 import { ObjectId } from "mongodb";
+import { auth } from "@/lib/better-auth";
+import { headers } from "next/headers";
 
 /**
  * GET /api/competitions?page=&limit=
@@ -9,7 +11,7 @@ import { ObjectId } from "mongodb";
 export async function GET(req: NextRequest) {
   try {
     const db = await getDb();
-    const competitions = db.collection("competitions");
+    const competitions = db.collection("24-game_competition");
 
     // Extract pagination params
     const { searchParams } = new URL(req.url);
@@ -23,7 +25,7 @@ export async function GET(req: NextRequest) {
     // Fetch competitions with leaderboard size
     const data = await competitions
       .aggregate([
-        { $sort: { createdAt: -1 } },
+        { $sort: { startDate: -1 } },
         { $skip: skip },
         { $limit: limit },
         {
@@ -78,8 +80,19 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const session = await auth.api.getSession({
+      headers: await headers() // you need to pass the headers object.
+    })
+
+    if (!session || !session.user || session.user.role === "user") {
+      return NextResponse.json(
+        { error: "Unauthorized: Please login first." },
+        { status: 401 }
+      );
+    }
+
     const db = await getDb();
-    const competitions = db.collection("competitions");
+    const competitions = db.collection("24-game_competition");
 
     // --- Generate Random Puzzle IDs ---
     const puzzleIds = [];
@@ -91,6 +104,7 @@ export async function POST(req: NextRequest) {
     const end = new Date(start.getTime() + durationDays * 24 * 60 * 60 * 1000);
 
     const newCompetition = {
+      userId: session.user.id,
       name,
       description,
       puzzleIds,

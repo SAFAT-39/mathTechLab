@@ -9,12 +9,13 @@ import Calculators from "./components/Calculators";
 import Games from "./components/Games";
 import Blogs from "./components/Blogs";
 import MobileMenu from "./components/MobileMenu";
-import { useSession } from "next-auth/react";
+import { authClient } from "@/lib/auth-client";
+import SignInButton from "./components/SignInButton";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
-  const { data: session, status } = useSession();
+  const { data: session, isPending } = authClient.useSession();
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
@@ -92,20 +93,9 @@ const Header = () => {
               <Blogs />
             </nav>
             {/* Auth/Profile Buttons */}
-            {status === "loading" ? null : !session ? (
+            {isPending ? null : !session ? (
               <>
-                <Link
-                  href="/auth/login"
-                  className="p-1 font-medium rounded-sm border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white transition-colors"
-                >
-                  Sign In
-                </Link>
-                <Link
-                  href="/auth/register"
-                  className="p-1 font-medium rounded-sm border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white transition-colors"
-                >
-                  Sign Up
-                </Link>
+                <SignInButton />
               </>
             ) : (
               <Link href="/profile">

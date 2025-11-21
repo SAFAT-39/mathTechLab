@@ -4,6 +4,11 @@ import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import clientPromise from "../../../utils/mongodb";
 import bcrypt from "bcryptjs";
 
+
+import { auth } from "@/lib/better-auth";
+import { toNextJsHandler } from "better-auth/next-js";
+export const { GET, POST } = toNextJsHandler(auth.handler);
+
 // NextAuth configuration
 export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
@@ -87,5 +92,5 @@ export const authOptions: NextAuthOptions = {
 };
 
 // Named export for all HTTP methods
-export const GET = NextAuth(authOptions);
-export const POST = NextAuth(authOptions);
+// export const GET = NextAuth(authOptions);
+// export const POST = NextAuth(authOptions);

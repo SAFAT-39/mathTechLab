@@ -2,7 +2,8 @@
 
 export interface LeaderboardEntry {
   rank: number;
-  username: string;
+  userId: string;
+  name: string;
   time?: number; // in seconds
   solved: number;
 }
@@ -41,7 +42,7 @@ export default function Leaderboard({
                   Rank
                 </th>
                 <th className="text-left py-2 px-3 font-semibold text-gray-700">
-                  Username
+                  Name
                 </th>
                 {/* Removed Time column */}
                 <th className="text-right py-2 px-3 font-semibold text-gray-700">
@@ -58,9 +59,8 @@ export default function Leaderboard({
               {entries.map((entry, index) => (
                 <tr
                   key={index}
-                  className={`border-b border-gray-100 ${
-                    entry.rank <= 3 ? "bg-yellow-50" : ""
-                  }`}
+                  className={`border-b border-gray-100 ${entry.rank <= 3 ? "bg-yellow-50" : ""
+                    }`}
                 >
                   <td className="py-2 px-3">
                     <span className="font-semibold">
@@ -71,7 +71,7 @@ export default function Leaderboard({
                     </span>
                   </td>
                   <td className="py-2 px-3 font-medium text-gray-800">
-                    {entry.username}
+                    {entry.name}
                   </td>
                   {/* Removed Time cell */}
                   <td className="py-2 px-3 text-right text-gray-600">
