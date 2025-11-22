@@ -16,9 +16,9 @@ export default function HowToUse({ steps }: HowToUseProps) {
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
         {steps.map((step, index) => (
-          <div 
-            key={index} 
-            className="h-full flex flex-col rounded-lg border border-gray-200 bg-purple-100 text-gray-900 shadow-sm hover:shadow-lg transition-shadow duration-300"
+          <div
+            key={index}
+            className="h-full flex flex-col rounded-lg border border-gray-200 bg-blue-50 text-gray-900 shadow-sm hover:shadow-lg transition-shadow duration-300"
           >
             <div className="p-6 pb-2">
               <div className="flex items-center gap-3">

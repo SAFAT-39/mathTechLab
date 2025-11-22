@@ -31,13 +31,13 @@ const TipsAndStrategies = () => {
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-4">
         {tips.map((tip, index) => (
-          <div 
+          <div
             key={index}
-            className="h-full flex flex-col rounded-lg border border-gray-200 bg-purple-100 text-gray-900 shadow-sm hover:shadow-lg transition-shadow duration-300 p-6"
+            className="h-full flex flex-col rounded-lg border border-gray-200 bg-blue-50 text-gray-900 shadow-sm hover:shadow-lg transition-shadow duration-300 p-6"
           >
             <div className="flex items-center gap-2">
-                <div className="text-3xl mb-3">{tip.icon}</div>
-                <h3 className="text-lg font-semibold mb-2">{tip.title}</h3>
+              <div className="text-3xl mb-3">{tip.icon}</div>
+              <h3 className="text-lg font-semibold mb-2">{tip.title}</h3>
             </div>
             <p className="text-gray-900">{tip.description}</p>
           </div>
