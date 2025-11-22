@@ -17,5 +17,5 @@ export default function PopupCallbackPage() {
     window.close();
   }, [session, isPending]);
 
-  return <div>Finishing login…</div>;
+  return <div className="min-h-screen flex justify-center items-center">Finishing login…</div>;
 }
