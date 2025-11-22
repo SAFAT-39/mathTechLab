@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import getGamesPages from "./games/sitemapUtil";
 import getHomePage from "./(home)/sitemapUtil";
 import getTimesTablesPages from "./times-tables/sitemapUtil";
-import getFactorsPages from "./factors/sitemapUtil";
+// import getFactorsPages from "./factors/sitemapUtil";
 import getCalculatorsPages from "./calculators/sitemapUtil";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -11,7 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...getGamesPages(),
     ...getCalculatorsPages(),
     ...getTimesTablesPages(),
-    ...getFactorsPages(),
+    // ...getFactorsPages(),
     ...getExtraPages(),
   ];
 }

@@ -131,7 +131,7 @@ const Footer = () => {
                 <h3 className="text-base font-bold mb-3 text-gray-800">
                   Times Tables
                 </h3>
-                <ul className="space-y-1">
+                <ul className="space-y-1 grid md:grid-cols-2 grid-cols-1 gap-x-4">
                   {timesTables.map((item) => (
                     <li key={item.title}>
                       <Link
@@ -147,7 +147,7 @@ const Footer = () => {
               </div>
 
               {/* Factors */}
-              <div>
+              {/* <div>
                 <h3 className="text-base font-bold mb-3 text-gray-800">
                   Factors
                 </h3>
@@ -164,7 +164,7 @@ const Footer = () => {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
